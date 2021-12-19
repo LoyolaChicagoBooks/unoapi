@@ -1,9 +1,10 @@
 
-Welcome to Distributed Systems
-===============================================
+Welcome to the UnoAPI Systems Modules
+======================================
 
-You have reached the home of Distributed Systems (COMP 339-439) at Loyola University Chicago
-
+.. note::
+   This is a set of modules we are developing around Intel's OneAPI initiative.
+   Nothing here is even remotely ready for prime time!
 
 .. toctree::
    :maxdepth: 2
