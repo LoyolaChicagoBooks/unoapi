@@ -15,7 +15,7 @@ Repository
    `github.com/LoyolaChicagoBooks/unoapi <https://github.com/LoyolaChicagoBooks/unoapi>`_
 
 Releases
-   `github.com/LoyolaChicagoBooks/unoapi/releases <https://github.com/LoyolaChicagoBooks/unoapi/releases>`_
+   `github.com/LoyolaChicagoBooks/unoapi/releases/latest <https://github.com/LoyolaChicagoBooks/unoapi/releases/latest>`_
 
 Topics
 
