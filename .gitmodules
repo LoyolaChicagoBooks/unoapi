@@ -1,0 +1,9 @@
+[submodule "examples/systems-code-examples"]
+	path = examples/systems-code-examples
+	url = https://github.com/SoftwareSystemsLaboratory/systems-code-examples.git
+[submodule "examples/hpjpc"]
+	path = examples/hpjpc
+	url = https://github.com/LoyolaChicagoCode/hpjpc-source-java.git
+[submodule "examples/multicast-java"]
+	path = examples/multicast-java
+	url = https://github.com/gkthiruvathukal/multicast-java.git
