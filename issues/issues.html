@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Issues &mdash; UnoAPI 20 Dec 2021 documentation</title>
+  <title>Issues &mdash; UnoAPI 22 Jan 2022 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -29,7 +29,7 @@
             <a href="../index.html" class="icon icon-home"> UnoAPI
           </a>
               <div class="version">
-                20 Dec 2021
+                22 Jan 2022
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -91,18 +91,18 @@
 <span class="linenos"> 2</span>
 <span class="linenos"> 3</span><span class="n">TAILQ_HEAD</span><span class="p">(</span><span class="n">wordlist_t</span><span class="p">,</span><span class="w"> </span><span class="n">wordentry_t</span><span class="p">);</span><span class="w"></span>
 <span class="linenos"> 4</span>
-<span class="linenos"> 5</span><span class="k">struct</span> <span class="nc">wordentry_t</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="linenos"> 5</span><span class="k">struct</span><span class="w"> </span><span class="nc">wordentry_t</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="linenos"> 6</span><span class="w">  </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">text</span><span class="p">;</span><span class="w"></span>
 <span class="linenos"> 7</span><span class="w">  </span><span class="n">TAILQ_ENTRY</span><span class="p">(</span><span class="n">wordentry_t</span><span class="p">)</span><span class="w"> </span><span class="n">entries</span><span class="p">;</span><span class="w"></span>
 <span class="linenos"> 8</span><span class="p">};</span><span class="w"></span>
 <span class="linenos"> 9</span>
-<span class="linenos">10</span><span class="k">extern</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">wordlist_add</span><span class="p">(</span><span class="k">struct</span> <span class="nc">wordlist_t</span><span class="o">*</span><span class="w"> </span><span class="n">head_ptr</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">word</span><span class="p">);</span><span class="w"></span>
+<span class="linenos">10</span><span class="k">extern</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">wordlist_add</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">wordlist_t</span><span class="o">*</span><span class="w"> </span><span class="n">head_ptr</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">word</span><span class="p">);</span><span class="w"></span>
 <span class="linenos">11</span>
-<span class="linenos">12</span><span class="k">extern</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">wordlist_print</span><span class="p">(</span><span class="k">struct</span> <span class="nc">wordlist_t</span><span class="o">*</span><span class="w"> </span><span class="n">head_ptr</span><span class="p">);</span><span class="w"></span>
+<span class="linenos">12</span><span class="k">extern</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">wordlist_print</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">wordlist_t</span><span class="o">*</span><span class="w"> </span><span class="n">head_ptr</span><span class="p">);</span><span class="w"></span>
 <span class="linenos">13</span>
-<span class="linenos">14</span><span class="k">extern</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">wordlist_delete</span><span class="p">(</span><span class="k">struct</span> <span class="nc">wordlist_t</span><span class="o">*</span><span class="w"> </span><span class="n">head_ptr</span><span class="p">);</span><span class="w"></span>
+<span class="linenos">14</span><span class="k">extern</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">wordlist_delete</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">wordlist_t</span><span class="o">*</span><span class="w"> </span><span class="n">head_ptr</span><span class="p">);</span><span class="w"></span>
 <span class="linenos">15</span>
-<span class="linenos">16</span><span class="k">extern</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">wordlist_init</span><span class="p">(</span><span class="k">struct</span> <span class="nc">wordlist_t</span><span class="o">*</span><span class="w"> </span><span class="n">head_ptr</span><span class="p">);</span><span class="w"></span>
+<span class="linenos">16</span><span class="k">extern</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">wordlist_init</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">wordlist_t</span><span class="o">*</span><span class="w"> </span><span class="n">head_ptr</span><span class="p">);</span><span class="w"></span>
 <span class="linenos">17</span>
 </pre></div>
 </div>
