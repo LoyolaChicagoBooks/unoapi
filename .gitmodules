@@ -7,3 +7,6 @@
 [submodule "examples/multicast-java"]
 	path = examples/multicast-java
 	url = https://github.com/gkthiruvathukal/multicast-java.git
+[submodule "examples/googletest-mva"]
+	path = examples/googletest-mva
+	url = https://github.com/gkthiruvathukal/googletest-mva.git
