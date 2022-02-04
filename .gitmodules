@@ -10,3 +10,6 @@
 [submodule "examples/googletest-mva"]
 	path = examples/googletest-mva
 	url = https://github.com/gkthiruvathukal/googletest-mva.git
+[submodule "examples/processtree-cpp"]
+	path = examples/processtree-cpp
+	url = https://github.com/LoyolaChicagoCode/processtree-cpp.git
