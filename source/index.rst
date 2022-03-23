@@ -10,6 +10,20 @@ Welcome to the UnoAPI Systems Modules
    :maxdepth: 2
 
    issues/issues
+   preliminaries/preliminaries
+   abstraction/abstraction
+   devcloud/devcloud
+   cplusplus-better-c/cplusplus-better-c
+   sycl-buffer/sycl-buffer
+   sycl-tasks/sycl-tasks
+   sycl-shared-memory/sycl-shared-memory
+   sycl-threads/sycl-threads
+   se-and-dpcpp/se-and-dpcpp
+   parallel-for/parallel-for
+   range-operations/range-operations
+   shared-memory-queueing/shared-memory-queueing
+   mpi-dpcpp/mpi-dpcpp
+   sycl-thread-pool/sycl-thread-pool
 
 Repository
    `github.com/LoyolaChicagoBooks/unoapi <https://github.com/LoyolaChicagoBooks/unoapi>`_
