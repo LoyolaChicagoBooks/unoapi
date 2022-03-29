@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>mpi-dpcpp &mdash; UnoAPI 23 Mar 2022 documentation</title>
+  <title>Working with MPI and Data-Parallel C++ &mdash; UnoAPI 29 Mar 2022 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -19,7 +19,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="sycl-thread-pool" href="../sycl-thread-pool/sycl-thread-pool.html" />
-    <link rel="prev" title="shared-memory-queueing" href="../shared-memory-queueing/shared-memory-queueing.html" /> 
+    <link rel="prev" title="Shared Memory / IPC" href="../shared-memory-queueing/shared-memory-queueing.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -30,7 +30,7 @@
             <a href="../index.html" class="icon icon-home"> UnoAPI
           </a>
               <div class="version">
-                23 Mar 2022
+                29 Mar 2022
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -42,19 +42,19 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../issues/issues.html">Issues</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../preliminaries/preliminaries.html">preliminaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../preliminaries/preliminaries.html">Preliminaries</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../abstraction/abstraction.html">Hardware/Device Abstraction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../devcloud/devcloud.html">devcloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devcloud/devcloud.html">Intel DevCloud</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../cplusplus-better-c/cplusplus-better-c.html">C++ as a Better C</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../sycl-buffer/sycl-buffer.html">Working with sycl::buffer</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../sycl-tasks/sycl-tasks.html">sycl-tasks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sycl-buffer/sycl-buffer.html">sycl::buffer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sycl-tasks/sycl-tasks.html">sycl::tasks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../sycl-shared-memory/sycl-shared-memory.html">sycl-shared-memory</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../sycl-threads/sycl-threads.html">sycl-threads</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../se-and-dpcpp/se-and-dpcpp.html">se-and-dpcpp</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../parallel-for/parallel-for.html">parallel-for</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../range-operations/range-operations.html">range-operations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../shared-memory-queueing/shared-memory-queueing.html">shared-memory-queueing</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">mpi-dpcpp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sycl-threads/sycl-threads.html">sycl::thread</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../se-and-dpcpp/se-and-dpcpp.html">SE and DPC++</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../parallel-for/parallel-for.html">Data Parallelism and parallel-for</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../range-operations/range-operations.html">Range Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../shared-memory-queueing/shared-memory-queueing.html">Shared Memory / IPC</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Working with MPI and Data-Parallel C++</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../sycl-thread-pool/sycl-thread-pool.html">sycl-thread-pool</a></li>
 </ul>
 
@@ -72,7 +72,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>mpi-dpcpp</li>
+      <li>Working with MPI and Data-Parallel C++</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/mpi-dpcpp/mpi-dpcpp.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -82,15 +82,15 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="mpi-dpcpp">
-<h1>mpi-dpcpp<a class="headerlink" href="#mpi-dpcpp" title="Permalink to this headline"></a></h1>
+  <section id="working-with-mpi-and-data-parallel-c">
+<h1>Working with MPI and Data-Parallel C++<a class="headerlink" href="#working-with-mpi-and-data-parallel-c" title="Permalink to this headline"></a></h1>
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../shared-memory-queueing/shared-memory-queueing.html" class="btn btn-neutral float-left" title="shared-memory-queueing" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../shared-memory-queueing/shared-memory-queueing.html" class="btn btn-neutral float-left" title="Shared Memory / IPC" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="../sycl-thread-pool/sycl-thread-pool.html" class="btn btn-neutral float-right" title="sycl-thread-pool" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

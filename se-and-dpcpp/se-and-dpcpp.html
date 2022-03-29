@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>se-and-dpcpp &mdash; UnoAPI 23 Mar 2022 documentation</title>
+  <title>SE and DPC++ &mdash; UnoAPI 29 Mar 2022 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -18,8 +18,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="parallel-for" href="../parallel-for/parallel-for.html" />
-    <link rel="prev" title="sycl-threads" href="../sycl-threads/sycl-threads.html" /> 
+    <link rel="next" title="Data Parallelism and parallel-for" href="../parallel-for/parallel-for.html" />
+    <link rel="prev" title="sycl::thread" href="../sycl-threads/sycl-threads.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -30,7 +30,7 @@
             <a href="../index.html" class="icon icon-home"> UnoAPI
           </a>
               <div class="version">
-                23 Mar 2022
+                29 Mar 2022
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -42,19 +42,19 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../issues/issues.html">Issues</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../preliminaries/preliminaries.html">preliminaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../preliminaries/preliminaries.html">Preliminaries</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../abstraction/abstraction.html">Hardware/Device Abstraction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../devcloud/devcloud.html">devcloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devcloud/devcloud.html">Intel DevCloud</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../cplusplus-better-c/cplusplus-better-c.html">C++ as a Better C</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../sycl-buffer/sycl-buffer.html">Working with sycl::buffer</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../sycl-tasks/sycl-tasks.html">sycl-tasks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sycl-buffer/sycl-buffer.html">sycl::buffer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sycl-tasks/sycl-tasks.html">sycl::tasks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../sycl-shared-memory/sycl-shared-memory.html">sycl-shared-memory</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../sycl-threads/sycl-threads.html">sycl-threads</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">se-and-dpcpp</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../parallel-for/parallel-for.html">parallel-for</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../range-operations/range-operations.html">range-operations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../shared-memory-queueing/shared-memory-queueing.html">shared-memory-queueing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../mpi-dpcpp/mpi-dpcpp.html">mpi-dpcpp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sycl-threads/sycl-threads.html">sycl::thread</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">SE and DPC++</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../parallel-for/parallel-for.html">Data Parallelism and parallel-for</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../range-operations/range-operations.html">Range Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../shared-memory-queueing/shared-memory-queueing.html">Shared Memory / IPC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mpi-dpcpp/mpi-dpcpp.html">Working with MPI and Data-Parallel C++</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../sycl-thread-pool/sycl-thread-pool.html">sycl-thread-pool</a></li>
 </ul>
 
@@ -72,7 +72,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>se-and-dpcpp</li>
+      <li>SE and DPC++</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/se-and-dpcpp/se-and-dpcpp.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -82,16 +82,36 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="se-and-dpcpp">
-<h1>se-and-dpcpp<a class="headerlink" href="#se-and-dpcpp" title="Permalink to this headline"></a></h1>
+  <section id="se-and-dpc">
+<h1>SE and DPC++<a class="headerlink" href="#se-and-dpc" title="Permalink to this headline"></a></h1>
+<section id="cmake">
+<h2>CMake<a class="headerlink" href="#cmake" title="Permalink to this headline"></a></h2>
+<ul class="simple">
+<li><p>Brings to the world of C/C++ what Java and other modern language developers have been enjoying for years.</p></li>
+<li><p>Helps with retargeting code in different environments.</p></li>
+<li><p>Support for source-based dependency management using <cite>FetchContent</cite>.</p></li>
+<li><p>Support of viewpathed builds out of box. The latter is really important to supercomputing/HPC, especially in shared environments similar to Argonne and other major supercomputing sites.</p></li>
+<li><p>Minimal configuration and maximal convention. <cite>add_executable()</cite> and <cite>add_library()</cite> are the stuff of software engineering!</p></li>
+</ul>
+</section>
+<section id="viewpath-build">
+<h2>Viewpath build<a class="headerlink" href="#viewpath-build" title="Permalink to this headline"></a></h2>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>cmake -S . -B build/platform/<span class="o">{</span>Release,Debug<span class="o">}</span>
+</pre></div>
+</div>
+<p>This concept may seem trivial but is key to living a sane life.</p>
+</section>
+<section id="release-vs-debug">
+<h2>Release vs. Debug<a class="headerlink" href="#release-vs-debug" title="Permalink to this headline"></a></h2>
+</section>
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../sycl-threads/sycl-threads.html" class="btn btn-neutral float-left" title="sycl-threads" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../parallel-for/parallel-for.html" class="btn btn-neutral float-right" title="parallel-for" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../sycl-threads/sycl-threads.html" class="btn btn-neutral float-left" title="sycl::thread" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../parallel-for/parallel-for.html" class="btn btn-neutral float-right" title="Data Parallelism and parallel-for" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
