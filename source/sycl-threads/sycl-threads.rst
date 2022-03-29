@@ -1,2 +1,2 @@
-sycl-threads
+sycl::thread
 =========================

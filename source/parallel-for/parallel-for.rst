@@ -1,2 +1,2 @@
-parallel-for
-=========================
+Data Parallelism and parallel-for
+===================================
