@@ -35,7 +35,7 @@ C++ 20 draft support for formatted strings (useful feature found in many modern 
 
 Add this to your CMakeFile
 
-.. code-block::
+.. code-block:: cmake
 
    FetchContent_Declare(
            fmt
