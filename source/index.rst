@@ -9,21 +9,15 @@ Welcome to the UnoAPI Systems Modules
 .. toctree::
    :maxdepth: 2
 
-   issues/issues
-   preliminaries/preliminaries
-   abstraction/abstraction
-   devcloud/devcloud
-   cplusplus-better-c/cplusplus-better-c
-   sycl-buffer/sycl-buffer
-   sycl-tasks/sycl-tasks
-   sycl-shared-memory/sycl-shared-memory
-   sycl-threads/sycl-threads
-   se-and-dpcpp/se-and-dpcpp
-   parallel-for/parallel-for
-   range-operations/range-operations
-   shared-memory-queueing/shared-memory-queueing
-   mpi-dpcpp/mpi-dpcpp
-   sycl-thread-pool/sycl-thread-pool
+   00-preliminaries/preliminaries.rst
+   05-parallel/parallel.rst
+   10-software-engineering/software-engineering.rst
+   15-modern-c++/modern-cpp.rst
+   18-dpcpp/dpcpp.rst
+   25-devices/devices.rst
+   30-performance/performance.rst
+   40-going-distributed/distributed.rst
+   99-sandbox/issues.rst
 
 Repository
    `github.com/LoyolaChicagoBooks/unoapi <https://github.com/LoyolaChicagoBooks/unoapi>`_

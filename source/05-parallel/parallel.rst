@@ -1,5 +1,5 @@
-Preliminaries
-=========================
+Parallel Programming Preliminaries
+==================================
 
 Brief History of Data Parallelism
 ----------------------------------
