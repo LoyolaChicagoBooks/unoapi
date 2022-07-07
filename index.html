@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Welcome to the UnoAPI Systems Modules &mdash; UnoAPI 29 Mar 2022 documentation</title>
+  <title>Welcome to the UnoAPI Systems Modules &mdash; UnoAPI 07 Jul 2022 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -14,11 +14,12 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Issues" href="issues/issues.html" /> 
+    <link rel="next" title="Preliminaries" href="00-preliminaries/preliminaries.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -29,7 +30,7 @@
             <a href="#" class="icon icon-home"> UnoAPI
           </a>
               <div class="version">
-                29 Mar 2022
+                07 Jul 2022
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -40,21 +41,15 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="issues/issues.html">Issues</a></li>
-<li class="toctree-l1"><a class="reference internal" href="preliminaries/preliminaries.html">Preliminaries</a></li>
-<li class="toctree-l1"><a class="reference internal" href="abstraction/abstraction.html">Hardware/Device Abstraction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="devcloud/devcloud.html">Intel DevCloud</a></li>
-<li class="toctree-l1"><a class="reference internal" href="cplusplus-better-c/cplusplus-better-c.html">C++ as a Better C</a></li>
-<li class="toctree-l1"><a class="reference internal" href="sycl-buffer/sycl-buffer.html">sycl::buffer</a></li>
-<li class="toctree-l1"><a class="reference internal" href="sycl-tasks/sycl-tasks.html">sycl::tasks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="sycl-shared-memory/sycl-shared-memory.html">sycl-shared-memory</a></li>
-<li class="toctree-l1"><a class="reference internal" href="sycl-threads/sycl-threads.html">sycl::thread</a></li>
-<li class="toctree-l1"><a class="reference internal" href="se-and-dpcpp/se-and-dpcpp.html">SE and DPC++</a></li>
-<li class="toctree-l1"><a class="reference internal" href="parallel-for/parallel-for.html">Data Parallelism and parallel-for</a></li>
-<li class="toctree-l1"><a class="reference internal" href="range-operations/range-operations.html">Range Operations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="shared-memory-queueing/shared-memory-queueing.html">Shared Memory / IPC</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mpi-dpcpp/mpi-dpcpp.html">Working with MPI and Data-Parallel C++</a></li>
-<li class="toctree-l1"><a class="reference internal" href="sycl-thread-pool/sycl-thread-pool.html">sycl-thread-pool</a></li>
+<li class="toctree-l1"><a class="reference internal" href="00-preliminaries/preliminaries.html">Preliminaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05-parallel/parallel.html">Parallel Programming Preliminaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10-software-engineering/software-engineering.html">Software Engineering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="15-modern-c%2B%2B/modern-cpp.html">Modern C++ as a Better C (and C++)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="18-dpcpp/dpcpp.html">Data-Parallel C++</a></li>
+<li class="toctree-l1"><a class="reference internal" href="25-devices/devices.html">Selecting and Using Devices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="30-performance/performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="40-going-distributed/distributed.html">Distributed Computing with OneAPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="99-sandbox/issues.html">Issues</a></li>
 </ul>
 
         </div>
@@ -82,7 +77,7 @@
            <div itemprop="articleBody">
              
   <section id="welcome-to-the-unoapi-systems-modules">
-<h1>Welcome to the UnoAPI Systems Modules<a class="headerlink" href="#welcome-to-the-unoapi-systems-modules" title="Permalink to this headline"></a></h1>
+<h1>Welcome to the UnoAPI Systems Modules<a class="headerlink" href="#welcome-to-the-unoapi-systems-modules" title="Permalink to this heading"></a></h1>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This is a set of modules we are developing around Intel’s OneAPI initiative.
@@ -90,53 +85,28 @@ Nothing here is even remotely ready for prime time!</p>
 </div>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="issues/issues.html">Issues</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="issues/issues.html#heading">Heading</a></li>
-<li class="toctree-l2"><a class="reference internal" href="issues/issues.html#examples">Examples</a></li>
-<li class="toctree-l2"><a class="reference internal" href="issues/issues.html#illustration">Illustration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="00-preliminaries/preliminaries.html">Preliminaries</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="00-preliminaries/preliminaries.html#motivation">Motivation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="00-preliminaries/preliminaries.html#topics">Topics</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="preliminaries/preliminaries.html">Preliminaries</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="preliminaries/preliminaries.html#brief-history-of-data-parallelism">Brief History of Data Parallelism</a></li>
-<li class="toctree-l2"><a class="reference internal" href="preliminaries/preliminaries.html#parallel-concepts-for-humans">Parallel Concepts for Humans</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05-parallel/parallel.html">Parallel Programming Preliminaries</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="05-parallel/parallel.html#brief-history-of-data-parallelism">Brief History of Data Parallelism</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05-parallel/parallel.html#parallel-concepts-for-humans">Parallel Concepts for Humans</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="abstraction/abstraction.html">Hardware/Device Abstraction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="devcloud/devcloud.html">Intel DevCloud</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="devcloud/devcloud.html#joining-devcloud">Joining DevCloud</a></li>
-<li class="toctree-l2"><a class="reference internal" href="devcloud/devcloud.html#accessing-devcloud-ssh">Accessing DevCloud/SSH</a></li>
-<li class="toctree-l2"><a class="reference internal" href="devcloud/devcloud.html#accessing-devcloud-vs-code">Accessing DevCloud/VS Code</a></li>
-<li class="toctree-l2"><a class="reference internal" href="devcloud/devcloud.html#login-node">Login Node</a></li>
-<li class="toctree-l2"><a class="reference internal" href="devcloud/devcloud.html#getting-compute-nodes">Getting Compute Nodes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10-software-engineering/software-engineering.html">Software Engineering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="15-modern-c%2B%2B/modern-cpp.html">Modern C++ as a Better C (and C++)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="18-dpcpp/dpcpp.html">Data-Parallel C++</a></li>
+<li class="toctree-l1"><a class="reference internal" href="25-devices/devices.html">Selecting and Using Devices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="30-performance/performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="40-going-distributed/distributed.html">Distributed Computing with OneAPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="99-sandbox/issues.html">Issues</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="99-sandbox/issues.html#heading">Heading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="99-sandbox/issues.html#examples">Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="99-sandbox/issues.html#illustration">Illustration</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="cplusplus-better-c/cplusplus-better-c.html">C++ as a Better C</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="cplusplus-better-c/cplusplus-better-c.html#auto-variables">auto variables</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cplusplus-better-c/cplusplus-better-c.html#template-functions">Template Functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cplusplus-better-c/cplusplus-better-c.html#lambda-functions">Lambda Functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cplusplus-better-c/cplusplus-better-c.html#error-exception-handling">error/exception handling</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cplusplus-better-c/cplusplus-better-c.html#asynchronousity">asynchronousity</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cplusplus-better-c/cplusplus-better-c.html#logging">logging</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cplusplus-better-c/cplusplus-better-c.html#performance-profiling">performance/profiling</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cplusplus-better-c/cplusplus-better-c.html#enumerations">enumerations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cplusplus-better-c/cplusplus-better-c.html#stl-vector-vs-pointer-array-equivalent">STL vector vs. pointer/array equivalent</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="sycl-buffer/sycl-buffer.html">sycl::buffer</a></li>
-<li class="toctree-l1"><a class="reference internal" href="sycl-tasks/sycl-tasks.html">sycl::tasks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="sycl-shared-memory/sycl-shared-memory.html">sycl-shared-memory</a></li>
-<li class="toctree-l1"><a class="reference internal" href="sycl-threads/sycl-threads.html">sycl::thread</a></li>
-<li class="toctree-l1"><a class="reference internal" href="se-and-dpcpp/se-and-dpcpp.html">SE and DPC++</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="se-and-dpcpp/se-and-dpcpp.html#cmake">CMake</a></li>
-<li class="toctree-l2"><a class="reference internal" href="se-and-dpcpp/se-and-dpcpp.html#viewpath-build">Viewpath build</a></li>
-<li class="toctree-l2"><a class="reference internal" href="se-and-dpcpp/se-and-dpcpp.html#release-vs-debug">Release vs. Debug</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="parallel-for/parallel-for.html">Data Parallelism and parallel-for</a></li>
-<li class="toctree-l1"><a class="reference internal" href="range-operations/range-operations.html">Range Operations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="shared-memory-queueing/shared-memory-queueing.html">Shared Memory / IPC</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mpi-dpcpp/mpi-dpcpp.html">Working with MPI and Data-Parallel C++</a></li>
-<li class="toctree-l1"><a class="reference internal" href="sycl-thread-pool/sycl-thread-pool.html">sycl-thread-pool</a></li>
 </ul>
 </div>
 <dl class="simple">
@@ -147,7 +117,7 @@ Nothing here is even remotely ready for prime time!</p>
 </dl>
 <p>Topics</p>
 <section id="indices-and-tables">
-<h2>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline"></a></h2>
+<h2>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this heading"></a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
 <li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
@@ -160,7 +130,7 @@ Nothing here is even remotely ready for prime time!</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="issues/issues.html" class="btn btn-neutral float-right" title="Issues" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="00-preliminaries/preliminaries.html" class="btn btn-neutral float-right" title="Preliminaries" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
