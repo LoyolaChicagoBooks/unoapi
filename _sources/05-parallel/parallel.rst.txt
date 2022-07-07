@@ -6,47 +6,66 @@ Brief History of Data Parallelism
 
 .. note:: This is an approximate lineage (not finalized)!
 
-- Vector machines (Cray)
+Vector machines (Cray)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-- Connection Machine (Thinking Machines)
+Connection Machine (Thinking Machines)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-- Systolic architectures
+Systolic architectures
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-- Loop parallelism in FORTRAN
+Loop parallelism in FORTRAN
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-- C* and Data-Parallel C efforts
+C* and Data-Parallel C efforts
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-- CUDA
+CUDA
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-- OpenMP
+OpenMP
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-- oneAPI
+oneAPI
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Parallel Concepts for Humans
 ------------------------------
 
 .. note:: The track for this was laid in the Java threads/networking book.
 
-- von Neumann machines and their limits
+von Neumann machines and their limits
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-- Flynn's taxonomy
+Flynn's taxonomy
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-- Control-memory taxonomy
+Control-memory taxonomy
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-- Speedup vs. Efficiency
+Speedup vs. Efficiency
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-- Strong/Weak scaling [new topic]
+Strong/Weak scaling [new topic]
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-- Granularity
+Granularity
+--------------------------------------
 
-- OS challenges of starvation, deadlock
+starvation, deadlock
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-- Flooding/Throttling
+Flooding/Throttling
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-- Latency
+Latency
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-- Scheduling [needed for understanding q.submit()]
+Scheduling [needed for understanding q.submit()]
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-- task graphs / dataflow execution / macro-dataflow concept
+task graphs / dataflow execution / macro-dataflow concept
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 

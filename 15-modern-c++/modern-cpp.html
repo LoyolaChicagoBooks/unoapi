@@ -79,6 +79,58 @@
              
   <section id="modern-c-as-a-better-c-and-c">
 <h1>Modern C++ as a Better C (and C++)<a class="headerlink" href="#modern-c-as-a-better-c-and-c" title="Permalink to this heading"></a></h1>
+<section id="language-features">
+<h2>Language Features<a class="headerlink" href="#language-features" title="Permalink to this heading"></a></h2>
+<p>automatic variables</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">25</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>const and constexpr</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">constexpr</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">DEFAULT_NUMBER_OF_TRAPEZOIDS</span><span class="p">{</span><span class="mi">1</span><span class="p">};</span><span class="w"></span>
+</pre></div>
+</div>
+<p>initializer expressions</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="n">show_function_values</span><span class="p">{</span><span class="nb">false</span><span class="p">};</span><span class="w"></span>
+<span class="kt">bool</span><span class="w"> </span><span class="n">run_sequentially</span><span class="p">{</span><span class="nb">false</span><span class="p">};</span><span class="w"></span>
+<span class="kt">size_t</span><span class="w"> </span><span class="n">number_of_trapezoids</span><span class="p">{</span><span class="n">DEFAULT_NUMBER_OF_TRAPEZOIDS</span><span class="p">};</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+<section id="libraries">
+<h2>Libraries<a class="headerlink" href="#libraries" title="Permalink to this heading"></a></h2>
+<section id="fmt">
+<h3>fmt<a class="headerlink" href="#fmt" title="Permalink to this heading"></a></h3>
+<p>C++ 20 draft support for formatted strings (useful feature found in many modern languages, including Python).</p>
+<p>Add this to your CMakeFile</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">FetchContent_Declare</span><span class="p">(</span>
+        <span class="n">fmt</span>
+        <span class="n">GIT_REPOSITORY</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">fmtlib</span><span class="o">/</span><span class="n">fmt</span><span class="o">.</span><span class="n">git</span>
+        <span class="n">GIT_TAG</span>        <span class="mf">8.1.1</span>
+<span class="p">)</span>
+<span class="n">FetchContent_MakeAvailable</span><span class="p">(</span><span class="n">fmt</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Simple usage</p>
+</section>
+<section id="command-line-argument-handling">
+<h3>command-line argument handling<a class="headerlink" href="#command-line-argument-handling" title="Permalink to this heading"></a></h3>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">CLI</span><span class="o">::</span><span class="n">App</span><span class="w"> </span><span class="n">app</span><span class="p">{</span><span class="s">&quot;Monte Carlo algorithm for estimating pi&quot;</span><span class="p">};</span><span class="w"></span>
+<span class="n">app</span><span class="p">.</span><span class="n">add_option</span><span class="p">(</span><span class="s">&quot;-p,--players&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">number_of_players</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;number of players&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="n">app</span><span class="p">.</span><span class="n">add_option</span><span class="p">(</span><span class="s">&quot;-n,--darts&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">number_of_darts</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;number of darts per player&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="n">app</span><span class="p">.</span><span class="n">add_flag</span><span class="p">(</span><span class="s">&quot;-r,--randomize&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">randomize</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;randomize dart locations&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="n">app</span><span class="p">.</span><span class="n">add_flag</span><span class="p">(</span><span class="s">&quot;-l,--ranlux&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">use_ranlux</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;use ranlux instead of LCG (minstd) for random number generation&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="n">CLI11_PARSE</span><span class="p">(</span><span class="n">app</span><span class="p">,</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+<section id="logging-spdlog">
+<h3>logging - spdlog<a class="headerlink" href="#logging-spdlog" title="Permalink to this heading"></a></h3>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">spdlog</span><span class="o">::</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;{} players are going to throw {} darts each&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">number_of_players</span><span class="p">,</span><span class="w"> </span><span class="n">number_of_darts</span><span class="p">);</span><span class="w"></span>
+<span class="n">spdlog</span><span class="o">::</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;using {} engine with real distribution&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">use_ranlux</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s">&quot;ranlux&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s">&quot;minstd&quot;</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+</section>
 </section>
 
 
