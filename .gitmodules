@@ -13,3 +13,9 @@
 [submodule "examples/processtree-cpp"]
 	path = examples/processtree-cpp
 	url = https://github.com/LoyolaChicagoCode/processtree-cpp.git
+[submodule "examples/unoapi-dpcpp-examples.gkt"]
+	path = examples/unoapi-dpcpp-examples.gkt
+	url = https://github.com/gkthiruvathukal/unoapi-dpcpp-examples
+[submodule "examples/unoapi-dpcpp-examples"]
+	path = examples/unoapi-dpcpp-examples
+	url = https://github.com/LoyolaChicagoCode/unoapi-dpcpp-examples
