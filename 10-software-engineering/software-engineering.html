@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Software Engineering &mdash; UnoAPI 07 Jul 2022 documentation</title>
+  <title>Software Engineering &mdash; UnoAPI 08 Jul 2022 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -31,7 +31,7 @@
             <a href="../index.html" class="icon icon-home"> UnoAPI
           </a>
               <div class="version">
-                07 Jul 2022
+                08 Jul 2022
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -81,6 +81,68 @@
 <h1>Software Engineering<a class="headerlink" href="#software-engineering" title="Permalink to this heading"></a></h1>
 <section id="cmake">
 <h2>Cmake<a class="headerlink" href="#cmake" title="Permalink to this heading"></a></h2>
+<p>The following is our general build script for the examples:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span><span class="w"> </span><span class="s">3.14...3.23</span><span class="p">)</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="nb">project</span><span class="p">(</span>
+<span class="linenos"> 4</span><span class="w">        </span><span class="s">unoapi_dpcpp_examples</span>
+<span class="linenos"> 5</span><span class="w">        </span><span class="s">VERSION</span><span class="w"> </span><span class="s">0.1</span>
+<span class="linenos"> 6</span><span class="w">        </span><span class="s">DESCRIPTION</span><span class="w"> </span><span class="s2">&quot;oneAPI sample projects with CMake&quot;</span>
+<span class="linenos"> 7</span><span class="w">        </span><span class="s">LANGUAGES</span><span class="w"> </span><span class="s">CXX</span>
+<span class="linenos"> 8</span><span class="p">)</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_CXX_STANDARD</span><span class="w"> </span><span class="s">17</span><span class="p">)</span>
+<span class="linenos">11</span><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_CXX_STANDARD_REQUIRED</span><span class="w"> </span><span class="s">ON</span><span class="p">)</span>
+<span class="linenos">12</span><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_CXX_EXTENSIONS</span><span class="w"> </span><span class="s">OFF</span><span class="p">)</span>
+<span class="linenos">13</span>
+<span class="linenos">14</span><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_RUNTIME_OUTPUT_DIRECTORY</span><span class="w"> </span><span class="o">${</span><span class="nv">CMAKE_BINARY_DIR</span><span class="o">}</span><span class="s">/bin</span><span class="p">)</span>
+<span class="linenos">15</span>
+<span class="linenos">16</span><span class="nb">include</span><span class="p">(</span><span class="s">FetchContent</span><span class="p">)</span>
+<span class="linenos">17</span>
+<span class="linenos">18</span><span class="nb">FetchContent_Declare</span><span class="p">(</span>
+<span class="linenos">19</span><span class="w">        </span><span class="s">fmt</span>
+<span class="linenos">20</span><span class="w">        </span><span class="s">GIT_REPOSITORY</span><span class="w"> </span><span class="s">https://github.com/fmtlib/fmt.git</span>
+<span class="linenos">21</span><span class="w">        </span><span class="s">GIT_TAG</span><span class="w">        </span><span class="s">8.1.1</span>
+<span class="linenos">22</span><span class="p">)</span>
+<span class="linenos">23</span><span class="nb">FetchContent_MakeAvailable</span><span class="p">(</span><span class="s">fmt</span><span class="p">)</span>
+<span class="linenos">24</span>
+<span class="linenos">25</span><span class="c"># Lots of compilation errors without this setting</span>
+<span class="linenos">26</span><span class="nb">option</span><span class="p">(</span><span class="s">SPDLOG_FMT_EXTERNAL</span><span class="w"> </span><span class="s2">&quot;Use external fmt library instead of bundled&quot;</span><span class="w"> </span><span class="s">ON</span><span class="p">)</span>
+<span class="linenos">27</span><span class="nb">FetchContent_Declare</span><span class="p">(</span>
+<span class="linenos">28</span><span class="w">        </span><span class="s">spdlog</span>
+<span class="linenos">29</span><span class="w">        </span><span class="s">GIT_REPOSITORY</span><span class="w"> </span><span class="s">https://github.com/gabime/spdlog.git</span>
+<span class="linenos">30</span><span class="w">        </span><span class="s">GIT_TAG</span><span class="w">        </span><span class="s">v1.9.2</span>
+<span class="linenos">31</span><span class="p">)</span>
+<span class="linenos">32</span><span class="nb">FetchContent_MakeAvailable</span><span class="p">(</span><span class="s">spdlog</span><span class="p">)</span>
+<span class="linenos">33</span>
+<span class="linenos">34</span><span class="nb">FetchContent_Declare</span><span class="p">(</span>
+<span class="linenos">35</span><span class="w">        </span><span class="s">scnlib</span>
+<span class="linenos">36</span><span class="w">        </span><span class="s">GIT_REPOSITORY</span><span class="w"> </span><span class="s">https://github.com/eliaskosunen/scnlib.git</span>
+<span class="linenos">37</span><span class="w">        </span><span class="s">GIT_TAG</span><span class="w">        </span><span class="s">v1.1.2</span>
+<span class="linenos">38</span><span class="p">)</span>
+<span class="linenos">39</span><span class="nb">FetchContent_MakeAvailable</span><span class="p">(</span><span class="s">scnlib</span><span class="p">)</span>
+<span class="linenos">40</span>
+<span class="linenos">41</span><span class="nb">FetchContent_Declare</span><span class="p">(</span>
+<span class="linenos">42</span><span class="w">        </span><span class="s">cli11</span>
+<span class="linenos">43</span><span class="w">        </span><span class="s">GIT_REPOSITORY</span><span class="w"> </span><span class="s">https://github.com/CLIUtils/CLI11.git</span>
+<span class="linenos">44</span><span class="w">        </span><span class="s">GIT_TAG</span><span class="w">        </span><span class="s">v2.1.2</span>
+<span class="linenos">45</span><span class="p">)</span>
+<span class="linenos">46</span><span class="nb">FetchContent_MakeAvailable</span><span class="p">(</span><span class="s">cli11</span><span class="p">)</span>
+<span class="linenos">47</span>
+<span class="linenos">48</span><span class="nb">FetchContent_Declare</span><span class="p">(</span>
+<span class="linenos">49</span><span class="w">        </span><span class="s">googletest</span>
+<span class="linenos">50</span><span class="w">        </span><span class="s">GIT_REPOSITORY</span><span class="w"> </span><span class="s">https://github.com/google/googletest.git</span>
+<span class="linenos">51</span><span class="w">        </span><span class="s">GIT_TAG</span><span class="w">        </span><span class="s">release-1.11.0</span>
+<span class="linenos">52</span><span class="p">)</span>
+<span class="linenos">53</span><span class="nb">FetchContent_MakeAvailable</span><span class="p">(</span><span class="s">googletest</span><span class="p">)</span>
+<span class="linenos">54</span>
+<span class="linenos">55</span><span class="nb">add_subdirectory</span><span class="p">(</span><span class="s">integration</span><span class="p">)</span>
+<span class="linenos">56</span><span class="nb">add_subdirectory</span><span class="p">(</span><span class="s">matrix_mul</span><span class="p">)</span>
+<span class="linenos">57</span><span class="nb">add_subdirectory</span><span class="p">(</span><span class="s">montecarlo</span><span class="p">)</span>
+<span class="linenos">58</span><span class="nb">add_subdirectory</span><span class="p">(</span><span class="s">wordcloud</span><span class="p">)</span>
+<span class="linenos">59</span><span class="nb">add_subdirectory</span><span class="p">(</span><span class="s">technical_analysis</span><span class="p">)</span>
+</pre></div>
+</div>
 <section id="basic-organization-of-cmake">
 <h3>Basic organization of CMake<a class="headerlink" href="#basic-organization-of-cmake" title="Permalink to this heading"></a></h3>
 </section>
