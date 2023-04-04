@@ -440,12 +440,78 @@ You can think of a co-routine as a run-to-completion thread.</p>
 </section>
 <section id="command-line-argument-handling">
 <h3>command-line argument handling<a class="headerlink" href="#command-line-argument-handling" title="Permalink to this heading"></a></h3>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">CLI</span><span class="o">::</span><span class="n">App</span><span class="w"> </span><span class="n">app</span><span class="p">{</span><span class="s">&quot;Monte Carlo algorithm for estimating pi&quot;</span><span class="p">};</span>
-<span class="n">app</span><span class="p">.</span><span class="n">add_option</span><span class="p">(</span><span class="s">&quot;-p,--players&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">number_of_players</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;number of players&quot;</span><span class="p">);</span>
-<span class="n">app</span><span class="p">.</span><span class="n">add_option</span><span class="p">(</span><span class="s">&quot;-n,--darts&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">number_of_darts</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;number of darts per player&quot;</span><span class="p">);</span>
-<span class="n">app</span><span class="p">.</span><span class="n">add_flag</span><span class="p">(</span><span class="s">&quot;-r,--randomize&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">randomize</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;randomize dart locations&quot;</span><span class="p">);</span>
-<span class="n">app</span><span class="p">.</span><span class="n">add_flag</span><span class="p">(</span><span class="s">&quot;-l,--ranlux&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">use_ranlux</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;use ranlux instead of LCG (minstd) for random number generation&quot;</span><span class="p">);</span>
-<span class="n">CLI11_PARSE</span><span class="p">(</span><span class="n">app</span><span class="p">,</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">);</span>
+<p>Command-line arguments are a way to make your own code more parametric from a <em>user</em> point of view.
+Because we rely on this in our programming examples for UnoAPI, you need to become familiar with this concept.</p>
+<p>The following shows how to use the well-established CLI11 framework.
+An flag-style argument is created for each data type with a default value that will be set, if not present on the command line.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;CLI/CLI.hpp&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;fmt/format.h&quot;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">argv</span><span class="p">[])</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">CLI</span><span class="o">::</span><span class="n">App</span><span class="w"> </span><span class="n">app</span><span class="p">{</span><span class="s">&quot;Command-line interface example&quot;</span><span class="p">};</span>
+
+<span class="w">    </span><span class="c1">// Add arguments for each built-in data type</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">42</span><span class="p">;</span>
+<span class="w">    </span><span class="n">app</span><span class="p">.</span><span class="n">add_option</span><span class="p">(</span><span class="s">&quot;-i,--int&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Integer argument&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">3.14</span><span class="p">;</span>
+<span class="w">    </span><span class="n">app</span><span class="p">.</span><span class="n">add_option</span><span class="p">(</span><span class="s">&quot;-d,--double&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Double argument&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2.71</span><span class="p">;</span>
+<span class="w">    </span><span class="n">app</span><span class="p">.</span><span class="n">add_option</span><span class="p">(</span><span class="s">&quot;-f,--float&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Float argument&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+<span class="w">    </span><span class="n">app</span><span class="p">.</span><span class="n">add_flag</span><span class="p">(</span><span class="s">&quot;-b,--bool&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Boolean argument&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Hello, world!&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">app</span><span class="p">.</span><span class="n">add_option</span><span class="p">(</span><span class="s">&quot;-s,--string&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;String argument&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Parse the command-line arguments</span>
+<span class="w">    </span><span class="n">CLI11_PARSE</span><span class="p">(</span><span class="n">app</span><span class="p">,</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Print the parsed arguments</span>
+<span class="w">    </span><span class="n">fmt</span><span class="o">::</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;Parsed arguments:</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">fmt</span><span class="o">::</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;  int: {}</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">);</span>
+<span class="w">    </span><span class="n">fmt</span><span class="o">::</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;  double: {}</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="p">);</span>
+<span class="w">    </span><span class="n">fmt</span><span class="o">::</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;  float: {}</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">f</span><span class="p">);</span>
+<span class="w">    </span><span class="n">fmt</span><span class="o">::</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;  bool: {}</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">);</span>
+<span class="w">    </span><span class="n">fmt</span><span class="o">::</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;  string: {}</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In this example, we create a CLI::App object to represent our command-line interface. We then add an argument for each built-in data type using the CLI::App::add_option() and CLI::App::add_flag() functions. Each argument has a default value that is appropriate for that type.</p>
+<p>We then parse the command-line arguments using the CLI11_PARSE macro, which takes the CLI::App object, the argc and argv arguments from the main() function, and parses the arguments.</p>
+<p>Finally, we print the parsed arguments using the fmt::print() function from the fmt library. The fmt::print() function takes a format string and any number of arguments, and prints the formatted string to the console. In this example, we use the {} format specifier to insert the values of the parsed arguments into the format string.</p>
+<p>Overall, this example demonstrates how you can create a command-line interface with arguments that support each of the built-in data types using the CLI11 package and the fmt library, and how you can print the parsed arguments using the fmt library’s fmt::print() function.</p>
+<p>To use the above code, you’ll need to add the following to your CMakeLists.txt file:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span><span class="w"> </span><span class="s">3.16</span><span class="p">)</span>
+
+<span class="nb">project</span><span class="p">(</span><span class="s">CommandLineInterfaceExample</span><span class="p">)</span>
+
+<span class="nb">include</span><span class="p">(</span><span class="s">FetchContent</span><span class="p">)</span>
+
+<span class="c"># Download and configure the CLI11 library</span>
+<span class="nb">FetchContent_Declare</span><span class="p">(</span>
+<span class="w">    </span><span class="s">cli11</span>
+<span class="w">    </span><span class="s">GIT_REPOSITORY</span><span class="w"> </span><span class="s">https://github.com/CLIUtils/CLI11.git</span>
+<span class="w">    </span><span class="s">GIT_TAG</span><span class="w"> </span><span class="s">v1.9.1</span>
+<span class="p">)</span>
+<span class="nb">FetchContent_MakeAvailable</span><span class="p">(</span><span class="s">cli11</span><span class="p">)</span>
+
+<span class="c"># Download and configure the fmt library</span>
+<span class="nb">FetchContent_Declare</span><span class="p">(</span>
+<span class="w">    </span><span class="s">fmt</span>
+<span class="w">    </span><span class="s">GIT_REPOSITORY</span><span class="w"> </span><span class="s">https://github.com/fmtlib/fmt.git</span>
+<span class="w">    </span><span class="s">GIT_TAG</span><span class="w"> </span><span class="s">8.1.0</span>
+<span class="p">)</span>
+<span class="nb">FetchContent_MakeAvailable</span><span class="p">(</span><span class="s">fmt</span><span class="p">)</span>
+
+<span class="nb">add_executable</span><span class="p">(</span><span class="s">CommandLineInterfaceExample</span><span class="w"> </span><span class="s">main.cpp</span><span class="p">)</span>
+<span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">CommandLineInterfaceExample</span><span class="w"> </span><span class="s">PRIVATE</span><span class="w"> </span><span class="s">CLI11::CLI11</span><span class="w"> </span><span class="s">fmt::fmt</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
