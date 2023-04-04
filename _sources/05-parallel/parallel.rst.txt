@@ -102,34 +102,68 @@ We define speedup as
 
    S = \frac{T_1}{T_n}
 
+where :math:`T_1` is defined as the execution time of the sequential algorithm for the problem on a single processor, and :math:`T_n` is the execution time of the parallel algorithm on ``n`` processors. Notice several things:
 
-Linear speedup
+- :math:`T_n` should be smaller than :math:`T_1` , since the parallel algorithm should run faster than the sequential algorithm.
+
+
+- The larger the value of S, the better. This is coherent with a cultural metaphor of bigger is better1 (even though we want the smallest run time possible).
+
+- :math:`T_1` is supposed to be the run time of the best possible sequential algorithm, but in general, the best possible algorithm is an unknown quantity. Thus, it is often the case that :math:``T_1`` is simply a version of the parallel program that is run sequentially.
+
+- We define linear speedup as:
+
+  .. math::
+
+     S = \frac{T_1}{T_n} = n
+
+
+We would expect that speedup cannot be better (larger) than linear, and indeed should be smaller. If the entire work of the sequential program could be evenly divided among the $n$ processors, they could all complete in $1/n$ the time.
+But it is unlikely that the work could be divided evenly; programs tend to have a sequential part, such as initialization or reading data from or writing results to sequential files.
+If the sequential part can only be done on a single machine, then only the rest can be run in parallel.
+We will examine this in more detail when we discuss Amdahl's law.
+Even if the program could be evenly divided among :math:`n` processors, the processors would probably have to coordinate their work with each other, which would require extra instruction executions beyond the sequential program.
+Therefore, :math:`T_n` may be :math:`\frac{1}{n}` of a larger value than :math:`T_1`.
+
+Moreover, :math:`T_1` is supposed to be the best known sequential algorithm.  If the parallel algorithm runs faster on a single machine, it would be a better sequential algorithm, and therefore, you’d use it. So you can expect the algorithm :math:`T_1` to be at least as good as the algorithm for :math:`T_n`. You cannot expect any help from differences in the algorithms in achieving even linear speedup.
+
+However, in practice, super-linear speedup :math:`S \gt n` is sometimes observed. There are several reasons for this:
+
+- The hardware is different. The parallel machine has more processors, and hence more cache memory, for one thing. Better locality and pipelining can also play a role.
+
+- The algorithm is different. For example, a depth-first search on a sequential machine might be translated into a collection of depth-first searches on the nodes of a parallel computer, but the parallel depth-first searches would have an element of a breadth-first search. A single depth-first search might spend a large amount of time on one fruitless branch, whereas with several searches, it is likely that another path might find the solution more quickly.
+
+Efficiency is defined as
 
 .. math::
 
-   S = \frac{T_1}{T_n} = n
+   E = \frac{S}{n} = \frac{T_1}{n T_n} = \frac{T_1 / n}{T_n}
 
+The formula shows two ways to think about efficiency. Suppose you were to run the parallel program on a serial machine. The serial machine would have to execute all the parallel processes. If there are ``n`` processes, then the serial execution shouldn’t take more than about nTn (assuming that the time to swap the processor from one process to another is negligible). Efficiency, then, would measure the ratio of the actual sequential time to the worst expected time to execute the ``n`` processes sequentially.
 
-Efficiency
+Suppose that, on the other hand, you calculate how long you would expect it to take to run the sequential algorithm on ``n`` processors, assuming linear speedup. That gives you ``T_1``/ n.
+
+The efficiency would be the ratio of execution time with linear speedup to observed execution time. If speedup is no greater than linear, efficiency will be less than or equal to 1.
+
+Amdahl’s Law
+^^^^^^^^^^^^
+
+Amdahl’s law does not really deserve the title of law. It is merely a back-of-the-envelope attempt (or conjecture) to prove that there are severe limits to the speedup that can be achieved by a parallel program. Amdahl’s law asserts that there is a serial part of any parallel program that must be executed sequentially, and the time required for this part will be a lower limit on the time the program takes to execute. Consider a serial program that executes in time T. Let’s calculate the best speedup we could achieve if a fraction f of the execution time is taken up by sequential execution. If you divide the parallel execution time into the serial and parallel parts, you get speedup with an upper bound of
 
 .. math::
 
-   S = \frac{S}{n} = \frac{T_1}{n T_n} = \frac{T_1 / n}{T_n}
+   E = \frac{T}{f T + \frac{(1 - f)T}{n}}
 
 
-Divide parallel execution time into sequential and parallel parts to get upper bound on speedup:
+We get this equation by taking the definition of speedup and breaking down Tn into the time taken by the serial fraction (fT) and the time taken by the parallel fraction [(1– f)T]. We divide the parallel fraction by ``n`` to calculate the best we could expect from a linear speedup.
 
-.. math::
-
-   S = \frac{T}{f T + \frac{(1 - f)T}{n}}
-
-Simplify by removing T
+T appears as a factor in both the numerator and the denominator. Thus, it can be removed, which leads to an equation not involving T, or
 
 .. math::
 
    S = \frac{1}{f + \frac{(1 - f)}{n}}
 
-Assuming infinite processors, n, the limit is:
+As ``n`` approaches infinity (i.e., the number of processors is increased), we arrive at the folllowing limit:
 
 .. math::
 
@@ -137,24 +171,34 @@ Assuming infinite processors, n, the limit is:
 
 
 Scalability
+^^^^^^^^^^^^
+
+A flaw in the reasoning behind Amdahl’s law is that it deals with fixed-sized problems and questions how much faster they can be run. This is not, however, the way massively paral- lel processors are used. Take the example of weather forecasting. The calculations are made by superimposing a mesh onto the atmosphere and calculating pressure, tempera- ture, humidity, etc., at each mesh point, repeatedly using the values at the surrounding points at small time intervals. The more numerous the mesh points and the smaller the time intervals, the better is the forecast. But the more calculations that are required, the
+slower the program runs. And for weather forecasting, if the calculation takes too long, it loses all value. When presented with a faster machine, weather forecasters will use more grid points and a smaller step size. They increase the problem size to the largest possible value that allows the answer to be reached in the same amount of time.
+
+Let’s rephrase the calculation, starting with a parallel program with serial fraction g that runs in time R on ``n`` processors. If we ran the calculation on a single processor, how long would it take? The answer is
 
 .. math::
 
    T = g R + n(1 - g)R
 
+This equation follows, since the serial fraction will still take the same time :math:``g R`` and the :math:`n` parts of the parallel fraction :math:`(1-g) R` would have to be interleaved.
 
-Speedup using this equation
+This results in the speedup calculation
 
 .. math::
 
    S = \frac{g R + n(1 - g)R}{R} = g + n(1 - g)
 
-Efficiency
-
+a linear speedup with slope (1 × g). The efficiency is
    
 .. math::
 
    E = 1 - g \frac{n - 1}{n}
+
+which approaches the parallel fraction as the number of processors increases. In this for- mulation, there is no theoretical limit on speedup. As long as we scale the problem size to the size of the machine, we will not run into limits.
+
+Another aspect of this argument against Amdahl’s law is that, as the problem size increases, the serial fraction may decrease. Consider a program that reads in two N-by-N matrices, multiplies them, and writes out the result. The serial I/O time grows as :math:`N^2`, while the multiplication, which is highly parallelizable, grows as :math:`N^3`.
 
 
 Strong/Weak scaling [new topic]
@@ -163,19 +207,147 @@ Strong/Weak scaling [new topic]
 Granularity
 --------------------------------------
 
+Grain size loosely refers to the amount of computation that is done between communications or synchronizations. Too large a grain size can result in an unbalanced load. Too small a grain size can waste too much time on system overhead. Consider eight processors that are to execute 10 independent tasks, each of which takes :math:`t` time units. Suppose the system takes :math:`s` time units to run a task. The schedule looks like this:
+
+Six processors execute one task completing in time :math:`t + s`.
+
+- Two processors execute two tasks completing in time :math:`2t + 2s`.
+- The overall completion time is the maximum of any processor’s completion time: :math:`2t + 2s`.
+
+Suppose we divide each task into 10 independent tasks, giving us 100 tasks for the entire job. Each task now will take :math:`\frac{t}{10}` time units. The schedule now looks like this:
+
+Four processors execute 12 tasks completing at time :math:`\frac{12t}{10} + 12s`.
+- Four processors execute 13 tasks completing at time :math:`\frac{13t}{10} + 13s`.
+- The overall completion time is the maximum of any processor’s completion time: :math:`\frac{13t}{10} + 13s`.
+
+
+How do these compare? If s is negligible compared to t, then schedule (1) will complete in 2t, and schedule (2) in 1.3t. However, 13s is significantly larger than 2s, so system over- head s, being even a small fraction of grain size t, might destroy all of the advantages of load balancing. What is the cutover point? That is, at what fraction of t does s cause sched- ule (2) to take as long as schedule (1)? The answer is
+
+2t + 2s = 1.3t + 13s s = (0.7/11)t = 0.064t
+
+So, if s is even seven percent of t, the version with 100 tasks will be as slow as the version with 10. So how do you choose a good grain size? Folklore suggests that one millisecond of execution between communications is a reasonable amount. Other folklore suggests that processing 300–400 array elements between communications is good on some systems. What you will probably have to do is experiment for yourself to find a good grain size. By parameterizing your actual code, you can enable the possibility to experiment.
+
+
+
 starvation, deadlock
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Starvation results when some user computations do not get adequate processor time. Here’s an example of starvation on a distributed-memory machine: For some distributed computa- tions, it is difficult to determine if they are finished. There are some algorithms that send system probe messages around to inquire about the state of the computation. Starvation can result if the probe messages use up significant processor time, making processor time unavailable to the user computations. On shared-memory machines, processors lock and unlock resources. When a resource is unlocked, one of the processors waiting for it (if any) is allowed to proceed. If the resource allocation mechanism is unfair, some waiting pro- cesses may be long delayed, while other processes acquire the resource repeatedly.
+
+A set of processes is deadlocked if each process is waiting for resources that other pro- cesses in the set hold and none will release until the processes have been granted the other resources that they are waiting for. There are four conditions required for deadlock:
+• Mutual Exclusion: Only a process in possession of a resource may proceed.
+• Hold and Wait: Processes will hold resources and wait for others.
+• No Preemption: A resource may not be removed from one process to give to another.
+• Circular Wait: There exists a cycle of processes holding resources and waiting for resources the next process in the cycle holds.
+
+There are three things you can try to do about deadlock:
+• You can try to detect when deadlock has occurred and then try to do something about it. For example, you may cancel one or more of the processes involved to free the resources they hold.Usually, this requires the presence of a monitor process that effec- tively acts as a proxy for any resource request.
+• You can try to avoid creating a deadlock by checking before each resource allocation to determine whether the allocation might result in a deadlock and then allowing pro- cesses to proceed only if it is safe to do so.
+• You can try to make it impossible for deadlock to occur. The easiest prevention is to eliminate circular waits by numbering the resources and requesting resources in ascending numeric order. That is, never request a resource if you already possess one with a higher number.
+
+
 
 Flooding/Throttling
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Strangely, one of the problems with parallelism is having too much rather than too little. For many parallel algorithms (especially divide and conquer and combinatoric search), a problem is repeatedly broken into smaller parts that can be run in parallel. Once the num- ber of parallel parts significantly exceeds the number of processors available, it is some- times detrimental to create more parallelism: All processors will be kept busy anyway, the
+time to create more parallel tasks will be wasted, and the storage for those task descrip-
+tions will tax the parallel machine’s memory.
+
+Preventing a flood of parallelism typically requires extra programming: The algorithm must be broken down into the code that is executed before enough parallel tasks are cre- ated, which creates more tasks, and the code that is executed after sufficient tasks are available, which does its work within a single task.
+
+Choice of when to switch from creating more tasks to executing within tasks can be made statically, before the algorithm runs, or dynamically, in response to the system load. Dynamic switching requires additional information about the current state of the system, which is oftentimes not available or is highly imprecise.
+
+
+Layout
+^^^^^^^^
+
+The layout of a data structure on a distributed-memory machine can make a significant dif- ference in performance. There are two interacting concerns. First, it is important to balance the load so that all nodes have approximately the same amount of work to do. Secondly, it helps to have most communication between neighboring nodes; there won’t be as many queueing delays as messages contend for communication edges along longer paths.
+Consider, though, a simulation of the cosmos: If you divide space into equally sized cubes and assign one cube to each node of a multicomputer, then communication of gravitation and movements of mass can be done between neighboring nodes on a mesh-connected computer. Unfortunately, there will be vast regions of nearly empty space mapped to some regions of nodes, while those parts of space with clusters of galaxies will be mapped into other nodes; that is, the load will be horribly imbalanced. A way to balance the load is to divide space into a larger number of regions and randomize their mapping onto the nodes, say, by hashing their coordinates to give the node number. Then you can count on the law of large numbers to balance the load, but communication between neighboring regions is no longer between neighboring nodes.
+Suppose we have N rows of an array that must be processed. How can we divide them evenly among P nodes?
+1. We could give floor N ⁄ P rows to each of the first P−1 nodes and the remaining rows to the last node. If N = 15 and P = 4, nodes 0, 1, and 2 get three rows, and node 3 gets six. The load is imbalanced, and the completion time will be dominated by the last node.
+2. We could give ceiling N ⁄ P rows to each of the first P−1 nodes and the remaining rows to the last. If N = 21 and P = 5, we would assign five rows to each of the first four nodes and one row to the last. The last is underutilized, but it’s not as severe as case (1), where the last node was the bottleneck.
+We could try to assign the rows so that no node has more than one row more than any other node. An easy way to do this is to assign node i all rows j such that j mod P = i, assuming rows are numbered zero through N−1 and nodes are numbered zero through P−1. Node i will contain rows i, i + P, i + 2P, i + 3P, ... .
+We can assign blocks of rows to nodes, as in (1) and (2), but guarantee that no node has more than one more row than any other node, as in (3). Assign node i the rows in the range Li to Ui inclusive, where
+
+MATH
+
+Li = floor(N/P) + min(i, N mod P) Ui = Li + 1 − 1
+
+Some algorithms divide arrays into regions that communicate along their edges, so mes- sages will be shorter and faster if the perimeters of regions are smaller: Square regions tend to be better than long, rectangular regions.
+
+
 Latency
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+As machines get larger, physical packaging itself requires that components get further apart. Therefore, it will take longer for information to flow between some components rather than others. This implies that the larger, shared-memory machines will be NUMA (nonuniform memory access). Data layout becomes increasingly important. Algorithms may benefit by being rewritten to fetch remote objects, operate on them locally, and then write them back, rather than just manipulating them in place.
+
+Latency is also one of the considerations in laying out tasks and data on distributed-mem- ory machines. On distributed-memory machines, one has the extra option of using asyn- chronous message passing to allow other computations to be performed while messages are being passed.
+
+
 
 Scheduling [needed for understanding q.submit()]
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Scheduling assigns tasks to processors to be run in a particular order or at particular times. There is a large amount of literature devoted to process scheduling, the major import of which is this: Almost any scheduling of activities on processors is an NP-hard problem. For practical purposes, the meaning of NP-hard is this: The worst-case time to run an NP- hard algorithm grows so rapidly (e.g., doubling when you add one element to the input), that you may not get a solution for a modestly sized problem before the sun burns out. Do not seek perfect solutions to NP-hard problems. Instead, look for ways to quickly get solu- tions that are reasonably good most of the time. Static scheduling of tasks on processors would be done before the tasks are run. Dynamic scheduling assigns tasks during execu- tion. Self-scheduling is a form of dynamic scheduling in which the processors themselves select which task to execute next.
+
+
+The techniques for partitioning rows among nodes that we saw in the discussion of layout are also applicable to processor scheduling on shared-memory machines. For technique (3), an easy way to assign process i all rows j such that j mod P = i is to handle the rows in a loop:
+
+
+::
+
+     for (j = my_id; j<n; j +=P) {
+         process row j
+     }
+     where the rows are numbered 0 through N-1
+     my_id is the node number in the range 0..P-1
+
+
+Rather than assign entire rows or columns to processors, better load balancing can some- times be accomplished by assigning groups of elements. If there are K total elements in an array, we can assign them numbers 0 through K−1, assign ranges of those numbers to pro- cessors, and convert from the element number to the array indices when necessary. For an M × N matrix A with zero origin addressing, element A[i,j] would be given the num- ber i*N+j in row major order. Similarly, the element with number q would correspond to A[i,j], where
+
+::
+
+    i = floor(q/N)
+    j = q mod N
+
+
+A simple form of self-scheduling for K elements is to keep the index C of the next element to be processed and to allocate items by incrementing or decrementing C. The following code is illustrative:
+
+::
+
+    initially, C = K-1
+    i = 0;
+    while (i>=0) {
+       lock C_lock;
+       i = C;
+       C = C-1;
+       unlock C_lock;
+       if (i >= 0) process item i;
+    }
+
+However, if the processing of a single element takes little time, the grain size is too small. Of course the processor could allocate some constant number of elements greater than one at a time. This is clearly better for grain size, but may still have load balance problems. An improved self-scheduling algorithm has each of the P processors allocate ceiling(C/P) elements (i.e., allocate 1/P of the remaining elements):
+
+::
+
+    initially, C = K
+    low = 0;
+    while (low>=0) {
+       lock C_lock;
+       t = ceiling(C/P);
+       if (t == 0)
+          low=-1;
+       else {
+       high = C-1;
+       low = C = C-t; }
+       unlock C_lock;
+       if (low>=0)
+           process items low through high inclusive;
+    }
+
+
+
 task graphs / dataflow execution / macro-dataflow concept
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 
 
