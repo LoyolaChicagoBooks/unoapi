@@ -10,7 +10,6 @@ Welcome to the UnoAPI Systems Modules
    :maxdepth: 3
 
    00-preliminaries/preliminaries.rst
-   05-parallel/parallel.rst
    10-software-engineering/software-engineering.rst
    15-modern-c++/modern-cpp.rst
    18-dpcpp/dpcpp.rst
