@@ -22,11 +22,105 @@ If you already know some Object-Oriented Programming (OOP) concepts and want to 
 
 - **Exception handling**: Exception handling allows you to handle runtime errors in a structured way. You should learn about the try-catch blocks and how to throw and catch exceptions. (That said, we try to avoid them in our tutorial in favor of the systems tradition of using error codes whenever possible.)
 
-By mastering these topics, you can become proficient in modern C++ programming and write efficient, maintainable, and scalable code.
 
+These topics will allow you to become proficient in modern C++ programming and write efficient, maintainable, and scalable code.
 
 Language Features
 ------------------
+
+The Modern C++ Class
+^^^^^^^^^^^^^^^^^^^^^
+
+Even if you programmed with C++ in the past, you need to understand that C++ has changed a great deal since its debut in the late-1980s and early 1990s.
+
+Here's an example implementation of the familiar Point class with x, y, and z parameters in C++, supporting move semantics:
+
+You can assume that this code can be placed in a C++ header file (e.g. Point.h):
+
+.. code-block:: cpp
+
+   class Point {
+   public:
+       Point(double x = 0.0, double y = 0.0, double z = 0.0)
+           : x_{x}, y_{y}, z_{z} {}
+   
+       // Copy constructor
+       Point(const Point& other)
+           : x_{other.x_}, y_{other.y_}, z_{other.z_} {}
+   
+       // Move constructor
+       Point(Point&& other) noexcept
+           : x_{std::exchange(other.x_, 0.0)},
+             y_{std::exchange(other.y_, 0.0)},
+             z_{std::exchange(other.z_, 0.0)} {}
+   
+       // Copy assignment operator
+       Point& operator=(const Point& other) {
+           x_ = other.x_;
+           y_ = other.y_;
+           z_ = other.z_;
+           return *this;
+       }
+
+       // Move assignment operator
+       Point& operator=(Point&& other) noexcept {
+           x_ = std::exchange(other.x_, 0.0);
+           y_ = std::exchange(other.y_, 0.0);
+           z_ = std::exchange(other.z_, 0.0);
+           return *this;
+       }
+   
+       // Accessors
+       double x() const { return x_; }
+       double y() const { return y_; }
+       double z() const { return z_; }
+   
+   private:
+       double x_, y_, z_;
+   };
+
+
+In this implementation, the `Point` class has three private data members `x_`, `y_`, and `z_`, representing the coordinates of the point. The class also provides a default constructor and a constructor that takes the `x`, `y`, and `z` values as parameters.
+
+The class also supports the concept of *move semantics* by providing a constructor and move assignment operators. The move constructor takes an r-value reference to another `Point` object, exchanges its data members with the current object using `std::exchange`, and sets the exchanged data members to zero. The move assignment operator works similarly to the move constructor, but it returns a reference to the current object.
+
+Finally, the class provides accessors for the `x`, `y`, and `z` values, which return the corresponding private data members.
+
+Let's take a look at how to *use* this class:
+
+.. code-block:: cpp
+
+   #include <iostream>
+   #include "Point.h"
+   
+   int main() {
+       // Create a point object with x=1.0, y=2.0, z=3.0
+       Point p1(1.0, 2.0, 3.0);
+   
+       // Copy the point object
+       Point p2 = p1;
+   
+       // Move the point object
+       Point p3 = std::move(p1);
+   
+       // Output the values of the point objects
+       std::cout << "p1: (" << p1.x() << ", " << p1.y() << ", " << p1.z() << ")" << std::endl;
+       std::cout << "p2: (" << p2.x() << ", " << p2.y() << ", " << p2.z() << ")" << std::endl;
+       std::cout << "p3: (" << p3.x() << ", " << p3.y() << ", " << p3.z() << ")" << std::endl;
+   
+       // Update the values of the point objects
+       p2 = Point(4.0, 5.0, 6.0);
+       p3 = std::move(p2);
+   
+       // Output the updated values of the point objects
+       std::cout << "p1: (" << p1.x() << ", " << p1.y() << ", " << p1.z() << ")" << std::endl;
+       std::cout << "p2: (" << p2.x() << ", " << p2.y() << ", " << p2.z() << ")" << std::endl;
+       std::cout << "p3: (" << p3.x() << ", " << p3.y() << ", " << p3.z() << ")" << std::endl;
+   
+       return 0;
+   }
+   
+
 
 automatic variables
 
@@ -37,6 +131,7 @@ automatic variables
 const and constexpr
 
 .. code-block:: cpp
+
 
    constexpr size_t DEFAULT_NUMBER_OF_TRAPEZOIDS{1};
 
