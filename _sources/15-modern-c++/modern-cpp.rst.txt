@@ -14,7 +14,7 @@ If you already know some Object-Oriented Programming (OOP) concepts and want to 
 
 - **Lambda expressions**: Lambda expressions provide a concise way to define anonymous functions, which are functions that have no name. You should learn how to write lambda expressions and how to use them with the Standard Library algorithms. Lambda functions are indispensable when it comes to learning OneAPI and SYCL programming.
 
-- **Move semantics**: Move semantics is a new feature introduced in C++11 that allows you to transfer the resources of an object to another object. This can lead to more efficient code by avoiding unnecessary copying of objects. You should learn about rvalue references, move constructors, and move assignment operators. Move smeantics should be used whenever large (and deep) data structures are involved.
+- **Move semantics**: Move semantics is a new feature introduced in C++11 that allows you to transfer the resources of an object to another object. This can lead to more efficient code by avoiding unnecessary copying of objects. You should learn about r-value references, move constructors, and move assignment operators. Move smeantics should be used whenever large (and deep) data structures are involved.
 
 - **Threading**: Threading allows you to run multiple tasks concurrently. You should learn about the different threading constructs provided by the Standard Library, such as threads, mutexes, and condition variables. Keep in mind, of course, that OneAPI/SYCL are an *alternative* to threading and also allow for code ot be written without assuming a particular threading model.
 
@@ -38,6 +38,9 @@ Here's an example implementation of the familiar Point class with x, y, and z pa
 You can assume that this code can be placed in a C++ header file (e.g. Point.h):
 
 .. code-block:: cpp
+
+   #ifndef POINT_H
+   #define POINT_H
 
    class Point {
    public:
@@ -78,6 +81,7 @@ You can assume that this code can be placed in a C++ header file (e.g. Point.h):
    private:
        double x_, y_, z_;
    };
+   #endif // POINT_H
 
 
 In this implementation, the `Point` class has three private data members `x_`, `y_`, and `z_`, representing the coordinates of the point. The class also provides a default constructor and a constructor that takes the `x`, `y`, and `z` values as parameters.
@@ -120,15 +124,262 @@ Let's take a look at how to *use* this class:
        return 0;
    }
    
+Move Semantics
+^^^^^^^^^^^^^^
+
+So it is natural to wonder: What does std::move() actually do?
+
+std::move is a C++ Standard Library function defined in the <utility> header. It is used to cast an l-value reference to an r-value reference, which enables move semantics.
+
+When an object is moved (using move semantics), its resources (such as dynamically allocated memory) are transferred to the new object instead of being copied. This can lead to more efficient code by avoiding unnecessary copying of objects.
+
+Here's an example of how to use std::move to enable move semantics:
+
+.. code-block:: cpp
+
+   #include <iostream>
+   #include <utility>
+   
+   class MyClass {
+   public:
+       MyClass() {
+           std::cout << "Default constructor" << std::endl;
+           data_ = new int[10];
+       }
+   
+       ~MyClass() {
+           std::cout << "Destructor" << std::endl;
+           delete[] data_;
+       }
+   
+       // Move constructor
+       MyClass(MyClass&& other) noexcept {
+           std::cout << "Move constructor" << std::endl;
+           data_ = other.data_;
+           other.data_ = nullptr;
+       }
+   
+       // Move assignment operator
+       MyClass& operator=(MyClass&& other) noexcept {
+           std::cout << "Move assignment operator" << std::endl;
+           delete[] data_;
+           data_ = other.data_;
+           other.data_ = nullptr;
+           return *this;
+       }
+   
+   private:
+       int* data_;
+   };
+   
+   int main() {
+       MyClass a;
+       MyClass b(std::move(a)); // move a to b
+       MyClass c = std::move(b); // move b to c
+       return 0;
+   }
 
 
-automatic variables
+In this example, we define a class `MyClass` that has a default constructor, a destructor, and move semantics enabled through the move constructor and move assignment operator.
+
+We then create an object a of `MyClass`. We move `a` to create a new object `b` using `std::move(a)`. We then move `b` to create a new object `c` using `std::move(b)`.
+
+In the move constructor and move assignment operator, we use `std::move` to cast the l-value reference to other to an r-value reference, enabling move semantics. This allows us to transfer the resources of the original object to the new object, instead of copying them.
+
+Note that `std::move` does not actually move anything by itself; it simply enables move semantics by casting an l-value reference to an r-value reference. It is up to the move constructor or move assignment operator to actually perform the move operation.
+
+Naming Conventions
+^^^^^^^^^^^^^^^^^^^
+
+What naming convention uses _ at the end of member variable names?
+
+The convention of using an underscore at the end of member variable names is often used to distinguish them from other identifiers in the code, such as local variables or function parameters. This convention is often referred to as "trailing underscore" or "trailing underscore convention".
+
+It is important to note that this naming convention is not part of the C++ language standard, and different coding styles or organizations may have different conventions for naming member variables. Some coding standards discourage the use of trailing underscores altogether, as they can make the code less readable and harder to maintain.
+
+In general, it is a good practice to follow the naming conventions established by the coding style used in your project or organization, or to adopt a widely recognized naming convention such as the Google C++ Style Guide or the LLVM Coding Standards.
+
+
+A possibility for avoiding underscore is to reorganize the member variables with a struct. The struct is a lightweight to create a value object in C++.
+
+.. code-block:: cpp
+
+   class Point {
+   public:
+       Point(double x = 0.0, double y = 0.0, double z = 0.0)
+           : coords{x, y, z} {}
+   
+       // Copy constructor
+       Point(const Point& other)
+           : coords{other.coords} {}
+   
+       // Move constructor
+       Point(Point&& other) noexcept
+           : coords{std::move(other.coords)} {}
+   
+       // Copy assignment operator
+       Point& operator=(const Point& other) {
+           coords = other.coords;
+           return *this;
+       }
+   
+       // Move assignment operator
+       Point& operator=(Point&& other) noexcept {
+           coords = std::move(other.coords);
+           return *this;
+       }
+   
+       // Accessors
+       double x() const { return coords.x; }
+       double y() const { return coords.y; }
+       double z() const { return coords.z; }
+   
+       // Scale the Point by a double factor
+       void scale(double factor) {
+           coords.x *= factor;
+           coords.y *= factor;
+           coords.z *= factor;
+       }
+   
+       // Translate the Point by another Point
+       void operator+=(const Point& other) {
+           coords.x += other.coords.x;
+           coords.y += other.coords.y;
+           coords.z += other.coords.z;
+       }
+   
+   private:
+       struct Coords {
+           double x, y, z;
+       };
+   
+       Coords coords;
+   };
+
+
+Adding this to a CMake folder
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Here is how put the `Point` class (header) in a Cmake project with a folder named point_example and a cmake rule to build it:
+
+.. code-block:: cmake
+
+   cmake_minimum_required(VERSION 3.5)
+   
+   project(point_example)
+   
+   # Create a library for the Point class
+   add_library(Point INTERFACE)
+   target_include_directories(Point INTERFACE ${CMAKE_CURRENT_SOURCE_DIR})
+   
+   # Create an executable for the point_example
+   add_executable(point_example main.cpp)
+   
+   # Link the Point library to the point_example executable
+   target_link_libraries(point_example PRIVATE Point)
+   
+
+In this CMakeLists.txt file, we first set the minimum required version of CMake to 3.5, which is the version that introduced the `target_include_directories` command.
+
+We then create a library for the `Point` class using the `add_library` command with the `INTERFACE` option. The `INTERFACE` option specifies that the library does not have an implementation file, and its headers should be made available to other targets that depend on it. We use the `target_include_directories` command to add the current source directory to the include paths of the `Point` library.
+
+We then create an executable for the point_example using the add_executable command with the source file `main.cpp`. We use the `target_link_libraries` command to link the `Point` library to the `point_example` executable.
+
+To use this `CMakeLists.txt` file, you would create a folder named `point_example` in your project directory, and place the `Point.h` header file and the `main.cpp` source file in that folder.
+
+.. note:: Working to put all of the above into a repo. Focusing on narrative first.
+
+
+Co-routines
+^^^^^^^^^^^^
+
+.. note:: Co-routines are a fairly new C++ feature and may not be supported by your compiler.
+
+Co-routines have become popular in many recent language designs, notably Go, but actually have a lineage at least dating to Hoare's Communicating Sequential Processes (CSP).
+You can think of a co-routine as a run-to-completion thread.
+
+The following shows how to create four co-routines that sleep for random amounts of time and join at the end?
+
+.. code-block:: cpp
+
+   #include <iostream>
+   #include <chrono>
+   #include <random>
+   #include <coroutine>
+   #include <vector>
+   
+   // A simple coroutine that sleeps for a random amount of time
+   // and returns the amount of time slept
+
+   class SleepCoroutine {
+   public:
+       SleepCoroutine() = default;
+   
+       // The coroutine promise type
+       struct promise_type {
+           auto get_return_object() {
+               return SleepCoroutine{handle_type::from_promise(*this)};
+           }
+           std::suspend_never initial_suspend() { return {}; }
+           std::suspend_always final_suspend() noexcept { return {}; }
+           void unhandled_exception() { std::terminate(); }
+           void return_void() {}
+       };
+   
+       // The coroutine handle type
+       using handle_type = std::coroutine_handle<promise_type>;
+   
+       // The coroutine execution function
+       void operator()() {
+           // Generate a random sleep time
+        std::random_device rd;
+        std::mt19937 gen(rd());
+        std::uniform_int_distribution<> distr(1000, 5000);
+        int sleep_time = distr(gen);
+
+        // Sleep for the random time
+        std::this_thread::sleep_for(std::chrono::milliseconds(sleep_time));
+       }
+   
+   private:
+       SleepCoroutine(handle_type h) : handle(h) {}
+       handle_type handle;
+   };
+   
+   // A function that creates and runs four sleep coroutines
+   void run_sleep_coroutines() {
+       // Create a vector to hold the coroutines
+       std::vector<SleepCoroutine::handle_type> coroutines;
+   
+       // Create and start the coroutines
+       for (int i = 0; i < 4; i++) {
+           coroutines.push_back(SleepCoroutine{}());
+       }
+   
+       // Join the coroutines
+       for (auto& coroutine : coroutines) {
+           coroutine.resume();
+           coroutine.destroy();
+       }
+   }
+
+   // The main function
+   int main() {
+       run_sleep_coroutines();
+       std::cout << "All coroutines joined." << std::endl;
+       return 0;
+   }
+
+
+Automatic variables
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: cpp
 
    auto x = 25;
 
 const and constexpr
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: cpp
 
@@ -136,6 +387,7 @@ const and constexpr
    constexpr size_t DEFAULT_NUMBER_OF_TRAPEZOIDS{1};
 
 initializer expressions
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: cpp
 
@@ -144,11 +396,8 @@ initializer expressions
    size_t number_of_trapezoids{DEFAULT_NUMBER_OF_TRAPEZOIDS};
 
 
-Libraries
------------
-
-fmt
-^^^
+Format and fmt
+^^^^^^^^^^^^^^^^^
 
 C++ 20 draft support for formatted strings (useful feature found in many modern languages, including Python).
 

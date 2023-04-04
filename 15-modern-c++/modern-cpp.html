@@ -88,7 +88,7 @@
 <li><p><strong>Templates</strong>: Templates allow you to write generic code that works with any data type. This can save you a lot of time and effort by reducing code duplication. You should learn how to write function templates and class templates. Class templates are already well employed in STL. We often make use of function templates in our examples.</p></li>
 <li><p><strong>Smart Pointers</strong>: Smart pointers are a modern way of managing memory in C++. They automatically manage memory allocation and deallocation, making it less prone to memory leaks and errors. You should learn about the different types of smart pointers, including <cite>unique_ptr</cite>, <cite>shared_ptr</cite>, and <cite>weak_ptr</cite>.</p></li>
 <li><p><strong>Lambda expressions</strong>: Lambda expressions provide a concise way to define anonymous functions, which are functions that have no name. You should learn how to write lambda expressions and how to use them with the Standard Library algorithms. Lambda functions are indispensable when it comes to learning OneAPI and SYCL programming.</p></li>
-<li><p><strong>Move semantics</strong>: Move semantics is a new feature introduced in C++11 that allows you to transfer the resources of an object to another object. This can lead to more efficient code by avoiding unnecessary copying of objects. You should learn about rvalue references, move constructors, and move assignment operators. Move smeantics should be used whenever large (and deep) data structures are involved.</p></li>
+<li><p><strong>Move semantics</strong>: Move semantics is a new feature introduced in C++11 that allows you to transfer the resources of an object to another object. This can lead to more efficient code by avoiding unnecessary copying of objects. You should learn about r-value references, move constructors, and move assignment operators. Move smeantics should be used whenever large (and deep) data structures are involved.</p></li>
 <li><p><strong>Threading</strong>: Threading allows you to run multiple tasks concurrently. You should learn about the different threading constructs provided by the Standard Library, such as threads, mutexes, and condition variables. Keep in mind, of course, that OneAPI/SYCL are an <em>alternative</em> to threading and also allow for code ot be written without assuming a particular threading model.</p></li>
 <li><p><strong>Modern C++ features</strong>: C++ has been evolving rapidly in recent years, and new features are being added all the time. You should learn about modern C++ features such as <cite>auto</cite>, <cite>constexpr</cite>, <cite>consteval</cite>, and <cite>module</cite>, which can help you write more efficient and maintainable code. We greatly value software engineering, so all of these modern features will help to write <em>clean code</em>, especially when used judiciously.</p></li>
 <li><p><strong>Exception handling</strong>: Exception handling allows you to handle runtime errors in a structured way. You should learn about the try-catch blocks and how to throw and catch exceptions. (That said, we try to avoid them in our tutorial in favor of the systems tradition of using error codes whenever possible.)</p></li>
@@ -102,7 +102,10 @@
 <p>Even if you programmed with C++ in the past, you need to understand that C++ has changed a great deal since its debut in the late-1980s and early 1990s.</p>
 <p>Here’s an example implementation of the familiar Point class with x, y, and z parameters in C++, supporting move semantics:</p>
 <p>You can assume that this code can be placed in a C++ header file (e.g. Point.h):</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Point</span><span class="w"> </span><span class="p">{</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#ifndef POINT_H</span>
+<span class="cp">#define POINT_H</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Point</span><span class="w"> </span><span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
 <span class="w">    </span><span class="n">Point</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">)</span>
 <span class="w">        </span><span class="o">:</span><span class="w"> </span><span class="n">x_</span><span class="p">{</span><span class="n">x</span><span class="p">},</span><span class="w"> </span><span class="n">y_</span><span class="p">{</span><span class="n">y</span><span class="p">},</span><span class="w"> </span><span class="n">z_</span><span class="p">{</span><span class="n">z</span><span class="p">}</span><span class="w"> </span><span class="p">{}</span>
@@ -141,6 +144,7 @@
 <span class="k">private</span><span class="o">:</span>
 <span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">x_</span><span class="p">,</span><span class="w"> </span><span class="n">y_</span><span class="p">,</span><span class="w"> </span><span class="n">z_</span><span class="p">;</span>
 <span class="p">};</span>
+<span class="cp">#endif </span><span class="c1">// POINT_H</span>
 </pre></div>
 </div>
 <p>In this implementation, the <cite>Point</cite> class has three private data members <cite>x_</cite>, <cite>y_</cite>, and <cite>z_</cite>, representing the coordinates of the point. The class also provides a default constructor and a constructor that takes the <cite>x</cite>, <cite>y</cite>, and <cite>z</cite> values as parameters.</p>
@@ -178,26 +182,250 @@
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>automatic variables</p>
+</section>
+<section id="move-semantics">
+<h3>Move Semantics<a class="headerlink" href="#move-semantics" title="Permalink to this heading"></a></h3>
+<p>So it is natural to wonder: What does std::move() actually do?</p>
+<p>std::move is a C++ Standard Library function defined in the &lt;utility&gt; header. It is used to cast an l-value reference to an r-value reference, which enables move semantics.</p>
+<p>When an object is moved (using move semantics), its resources (such as dynamically allocated memory) are transferred to the new object instead of being copied. This can lead to more efficient code by avoiding unnecessary copying of objects.</p>
+<p>Here’s an example of how to use std::move to enable move semantics:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;utility&gt;</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">MyClass</span><span class="w"> </span><span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="n">MyClass</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Default constructor&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">        </span><span class="n">data_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="o">~</span><span class="n">MyClass</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Destructor&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">        </span><span class="k">delete</span><span class="p">[]</span><span class="w"> </span><span class="n">data_</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Move constructor</span>
+<span class="w">    </span><span class="n">MyClass</span><span class="p">(</span><span class="n">MyClass</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">other</span><span class="p">)</span><span class="w"> </span><span class="k">noexcept</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Move constructor&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">        </span><span class="n">data_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">other</span><span class="p">.</span><span class="n">data_</span><span class="p">;</span>
+<span class="w">        </span><span class="n">other</span><span class="p">.</span><span class="n">data_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Move assignment operator</span>
+<span class="w">    </span><span class="n">MyClass</span><span class="o">&amp;</span><span class="w"> </span><span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="n">MyClass</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">other</span><span class="p">)</span><span class="w"> </span><span class="k">noexcept</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Move assignment operator&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">        </span><span class="k">delete</span><span class="p">[]</span><span class="w"> </span><span class="n">data_</span><span class="p">;</span>
+<span class="w">        </span><span class="n">data_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">other</span><span class="p">.</span><span class="n">data_</span><span class="p">;</span>
+<span class="w">        </span><span class="n">other</span><span class="p">.</span><span class="n">data_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">;</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="o">*</span><span class="k">this</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="k">private</span><span class="o">:</span>
+<span class="w">    </span><span class="kt">int</span><span class="o">*</span><span class="w"> </span><span class="n">data_</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">MyClass</span><span class="w"> </span><span class="n">a</span><span class="p">;</span>
+<span class="w">    </span><span class="n">MyClass</span><span class="w"> </span><span class="n">b</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">a</span><span class="p">));</span><span class="w"> </span><span class="c1">// move a to b</span>
+<span class="w">    </span><span class="n">MyClass</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">b</span><span class="p">);</span><span class="w"> </span><span class="c1">// move b to c</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In this example, we define a class <cite>MyClass</cite> that has a default constructor, a destructor, and move semantics enabled through the move constructor and move assignment operator.</p>
+<p>We then create an object a of <cite>MyClass</cite>. We move <cite>a</cite> to create a new object <cite>b</cite> using <cite>std::move(a)</cite>. We then move <cite>b</cite> to create a new object <cite>c</cite> using <cite>std::move(b)</cite>.</p>
+<p>In the move constructor and move assignment operator, we use <cite>std::move</cite> to cast the l-value reference to other to an r-value reference, enabling move semantics. This allows us to transfer the resources of the original object to the new object, instead of copying them.</p>
+<p>Note that <cite>std::move</cite> does not actually move anything by itself; it simply enables move semantics by casting an l-value reference to an r-value reference. It is up to the move constructor or move assignment operator to actually perform the move operation.</p>
+</section>
+<section id="naming-conventions">
+<h3>Naming Conventions<a class="headerlink" href="#naming-conventions" title="Permalink to this heading"></a></h3>
+<p>What naming convention uses _ at the end of member variable names?</p>
+<p>The convention of using an underscore at the end of member variable names is often used to distinguish them from other identifiers in the code, such as local variables or function parameters. This convention is often referred to as “trailing underscore” or “trailing underscore convention”.</p>
+<p>It is important to note that this naming convention is not part of the C++ language standard, and different coding styles or organizations may have different conventions for naming member variables. Some coding standards discourage the use of trailing underscores altogether, as they can make the code less readable and harder to maintain.</p>
+<p>In general, it is a good practice to follow the naming conventions established by the coding style used in your project or organization, or to adopt a widely recognized naming convention such as the Google C++ Style Guide or the LLVM Coding Standards.</p>
+<p>A possibility for avoiding underscore is to reorganize the member variables with a struct. The struct is a lightweight to create a value object in C++.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Point</span><span class="w"> </span><span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="n">Point</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">)</span>
+<span class="w">        </span><span class="o">:</span><span class="w"> </span><span class="n">coords</span><span class="p">{</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">z</span><span class="p">}</span><span class="w"> </span><span class="p">{}</span>
+
+<span class="w">    </span><span class="c1">// Copy constructor</span>
+<span class="w">    </span><span class="n">Point</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Point</span><span class="o">&amp;</span><span class="w"> </span><span class="n">other</span><span class="p">)</span>
+<span class="w">        </span><span class="o">:</span><span class="w"> </span><span class="n">coords</span><span class="p">{</span><span class="n">other</span><span class="p">.</span><span class="n">coords</span><span class="p">}</span><span class="w"> </span><span class="p">{}</span>
+
+<span class="w">    </span><span class="c1">// Move constructor</span>
+<span class="w">    </span><span class="n">Point</span><span class="p">(</span><span class="n">Point</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">other</span><span class="p">)</span><span class="w"> </span><span class="k">noexcept</span>
+<span class="w">        </span><span class="o">:</span><span class="w"> </span><span class="n">coords</span><span class="p">{</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="n">coords</span><span class="p">)}</span><span class="w"> </span><span class="p">{}</span>
+
+<span class="w">    </span><span class="c1">// Copy assignment operator</span>
+<span class="w">    </span><span class="n">Point</span><span class="o">&amp;</span><span class="w"> </span><span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Point</span><span class="o">&amp;</span><span class="w"> </span><span class="n">other</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">coords</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">other</span><span class="p">.</span><span class="n">coords</span><span class="p">;</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="o">*</span><span class="k">this</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Move assignment operator</span>
+<span class="w">    </span><span class="n">Point</span><span class="o">&amp;</span><span class="w"> </span><span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="n">Point</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">other</span><span class="p">)</span><span class="w"> </span><span class="k">noexcept</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">coords</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="n">coords</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="o">*</span><span class="k">this</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Accessors</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">coords</span><span class="p">.</span><span class="n">x</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">y</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">coords</span><span class="p">.</span><span class="n">y</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">z</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">coords</span><span class="p">.</span><span class="n">z</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Scale the Point by a double factor</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">scale</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">factor</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">coords</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="n">factor</span><span class="p">;</span>
+<span class="w">        </span><span class="n">coords</span><span class="p">.</span><span class="n">y</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="n">factor</span><span class="p">;</span>
+<span class="w">        </span><span class="n">coords</span><span class="p">.</span><span class="n">z</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="n">factor</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Translate the Point by another Point</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="k">operator</span><span class="o">+=</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Point</span><span class="o">&amp;</span><span class="w"> </span><span class="n">other</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">coords</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">other</span><span class="p">.</span><span class="n">coords</span><span class="p">.</span><span class="n">x</span><span class="p">;</span>
+<span class="w">        </span><span class="n">coords</span><span class="p">.</span><span class="n">y</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">other</span><span class="p">.</span><span class="n">coords</span><span class="p">.</span><span class="n">y</span><span class="p">;</span>
+<span class="w">        </span><span class="n">coords</span><span class="p">.</span><span class="n">z</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">other</span><span class="p">.</span><span class="n">coords</span><span class="p">.</span><span class="n">z</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="k">private</span><span class="o">:</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">Coords</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">z</span><span class="p">;</span>
+<span class="w">    </span><span class="p">};</span>
+
+<span class="w">    </span><span class="n">Coords</span><span class="w"> </span><span class="n">coords</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</section>
+<section id="adding-this-to-a-cmake-folder">
+<h3>Adding this to a CMake folder<a class="headerlink" href="#adding-this-to-a-cmake-folder" title="Permalink to this heading"></a></h3>
+<p>Here is how put the <cite>Point</cite> class (header) in a Cmake project with a folder named point_example and a cmake rule to build it:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span><span class="w"> </span><span class="s">3.5</span><span class="p">)</span>
+
+<span class="nb">project</span><span class="p">(</span><span class="s">point_example</span><span class="p">)</span>
+
+<span class="c"># Create a library for the Point class</span>
+<span class="nb">add_library</span><span class="p">(</span><span class="s">Point</span><span class="w"> </span><span class="s">INTERFACE</span><span class="p">)</span>
+<span class="nb">target_include_directories</span><span class="p">(</span><span class="s">Point</span><span class="w"> </span><span class="s">INTERFACE</span><span class="w"> </span><span class="o">${</span><span class="nv">CMAKE_CURRENT_SOURCE_DIR</span><span class="o">}</span><span class="p">)</span>
+
+<span class="c"># Create an executable for the point_example</span>
+<span class="nb">add_executable</span><span class="p">(</span><span class="s">point_example</span><span class="w"> </span><span class="s">main.cpp</span><span class="p">)</span>
+
+<span class="c"># Link the Point library to the point_example executable</span>
+<span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">point_example</span><span class="w"> </span><span class="s">PRIVATE</span><span class="w"> </span><span class="s">Point</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In this CMakeLists.txt file, we first set the minimum required version of CMake to 3.5, which is the version that introduced the <cite>target_include_directories</cite> command.</p>
+<p>We then create a library for the <cite>Point</cite> class using the <cite>add_library</cite> command with the <cite>INTERFACE</cite> option. The <cite>INTERFACE</cite> option specifies that the library does not have an implementation file, and its headers should be made available to other targets that depend on it. We use the <cite>target_include_directories</cite> command to add the current source directory to the include paths of the <cite>Point</cite> library.</p>
+<p>We then create an executable for the point_example using the add_executable command with the source file <cite>main.cpp</cite>. We use the <cite>target_link_libraries</cite> command to link the <cite>Point</cite> library to the <cite>point_example</cite> executable.</p>
+<p>To use this <cite>CMakeLists.txt</cite> file, you would create a folder named <cite>point_example</cite> in your project directory, and place the <cite>Point.h</cite> header file and the <cite>main.cpp</cite> source file in that folder.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Working to put all of the above into a repo. Focusing on narrative first.</p>
+</div>
+</section>
+<section id="co-routines">
+<h3>Co-routines<a class="headerlink" href="#co-routines" title="Permalink to this heading"></a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Co-routines are a fairly new C++ feature and may not be supported by your compiler.</p>
+</div>
+<p>Co-routines have become popular in many recent language designs, notably Go, but actually have a lineage at least dating to Hoare’s Communicating Sequential Processes (CSP).
+You can think of a co-routine as a run-to-completion thread.</p>
+<p>The following shows how to create four co-routines that sleep for random amounts of time and join at the end?</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;chrono&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;random&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;coroutine&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span>
+
+<span class="c1">// A simple coroutine that sleeps for a random amount of time</span>
+<span class="c1">// and returns the amount of time slept</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">SleepCoroutine</span><span class="w"> </span><span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="n">SleepCoroutine</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// The coroutine promise type</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">promise_type</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">get_return_object</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">SleepCoroutine</span><span class="p">{</span><span class="n">handle_type</span><span class="o">::</span><span class="n">from_promise</span><span class="p">(</span><span class="o">*</span><span class="k">this</span><span class="p">)};</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">suspend_never</span><span class="w"> </span><span class="n">initial_suspend</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="p">{};</span><span class="w"> </span><span class="p">}</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">suspend_always</span><span class="w"> </span><span class="n">final_suspend</span><span class="p">()</span><span class="w"> </span><span class="k">noexcept</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="p">{};</span><span class="w"> </span><span class="p">}</span>
+<span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="n">unhandled_exception</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">terminate</span><span class="p">();</span><span class="w"> </span><span class="p">}</span>
+<span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="n">return_void</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span>
+<span class="w">    </span><span class="p">};</span>
+
+<span class="w">    </span><span class="c1">// The coroutine handle type</span>
+<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">handle_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">coroutine_handle</span><span class="o">&lt;</span><span class="n">promise_type</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// The coroutine execution function</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">operator</span><span class="p">()()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Generate a random sleep time</span>
+<span class="w">     </span><span class="n">std</span><span class="o">::</span><span class="n">random_device</span><span class="w"> </span><span class="n">rd</span><span class="p">;</span>
+<span class="w">     </span><span class="n">std</span><span class="o">::</span><span class="n">mt19937</span><span class="w"> </span><span class="n">gen</span><span class="p">(</span><span class="n">rd</span><span class="p">());</span>
+<span class="w">     </span><span class="n">std</span><span class="o">::</span><span class="n">uniform_int_distribution</span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="n">distr</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span><span class="w"> </span><span class="mi">5000</span><span class="p">);</span>
+<span class="w">     </span><span class="kt">int</span><span class="w"> </span><span class="n">sleep_time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">distr</span><span class="p">(</span><span class="n">gen</span><span class="p">);</span>
+
+<span class="w">     </span><span class="c1">// Sleep for the random time</span>
+<span class="w">     </span><span class="n">std</span><span class="o">::</span><span class="n">this_thread</span><span class="o">::</span><span class="n">sleep_for</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">milliseconds</span><span class="p">(</span><span class="n">sleep_time</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="k">private</span><span class="o">:</span>
+<span class="w">    </span><span class="n">SleepCoroutine</span><span class="p">(</span><span class="n">handle_type</span><span class="w"> </span><span class="n">h</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">handle</span><span class="p">(</span><span class="n">h</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
+<span class="w">    </span><span class="n">handle_type</span><span class="w"> </span><span class="n">handle</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="c1">// A function that creates and runs four sleep coroutines</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">run_sleep_coroutines</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Create a vector to hold the coroutines</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">SleepCoroutine</span><span class="o">::</span><span class="n">handle_type</span><span class="o">&gt;</span><span class="w"> </span><span class="n">coroutines</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Create and start the coroutines</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">coroutines</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">SleepCoroutine</span><span class="p">{}());</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Join the coroutines</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">coroutine</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">coroutines</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">coroutine</span><span class="p">.</span><span class="n">resume</span><span class="p">();</span>
+<span class="w">        </span><span class="n">coroutine</span><span class="p">.</span><span class="n">destroy</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// The main function</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">run_sleep_coroutines</span><span class="p">();</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;All coroutines joined.&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="automatic-variables">
+<h3>Automatic variables<a class="headerlink" href="#automatic-variables" title="Permalink to this heading"></a></h3>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">25</span><span class="p">;</span>
 </pre></div>
 </div>
-<p>const and constexpr</p>
+</section>
+<section id="const-and-constexpr">
+<h3>const and constexpr<a class="headerlink" href="#const-and-constexpr" title="Permalink to this heading"></a></h3>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">constexpr</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">DEFAULT_NUMBER_OF_TRAPEZOIDS</span><span class="p">{</span><span class="mi">1</span><span class="p">};</span>
 </pre></div>
 </div>
-<p>initializer expressions</p>
+</section>
+<section id="initializer-expressions">
+<h3>initializer expressions<a class="headerlink" href="#initializer-expressions" title="Permalink to this heading"></a></h3>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="n">show_function_values</span><span class="p">{</span><span class="nb">false</span><span class="p">};</span>
 <span class="kt">bool</span><span class="w"> </span><span class="n">run_sequentially</span><span class="p">{</span><span class="nb">false</span><span class="p">};</span>
 <span class="kt">size_t</span><span class="w"> </span><span class="n">number_of_trapezoids</span><span class="p">{</span><span class="n">DEFAULT_NUMBER_OF_TRAPEZOIDS</span><span class="p">};</span>
 </pre></div>
 </div>
 </section>
-</section>
-<section id="libraries">
-<h2>Libraries<a class="headerlink" href="#libraries" title="Permalink to this heading"></a></h2>
-<section id="fmt">
-<h3>fmt<a class="headerlink" href="#fmt" title="Permalink to this heading"></a></h3>
+<section id="format-and-fmt">
+<h3>Format and fmt<a class="headerlink" href="#format-and-fmt" title="Permalink to this heading"></a></h3>
 <p>C++ 20 draft support for formatted strings (useful feature found in many modern languages, including Python).</p>
 <p>Add this to your CMakeFile</p>
 <div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">FetchContent_Declare</span><span class="p">(</span>
