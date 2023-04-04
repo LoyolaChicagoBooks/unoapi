@@ -423,15 +423,92 @@ Simple usage
 command-line argument handling
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Command-line arguments are a way to make your own code more parametric from a *user* point of view. 
+Because we rely on this in our programming examples for UnoAPI, you need to become familiar with this concept.
+
+The following shows how to use the well-established CLI11 framework.
+An flag-style argument is created for each data type with a default value that will be set, if not present on the command line.
+
 .. code-block:: cpp
 
-   CLI::App app{"Monte Carlo algorithm for estimating pi"};
-   app.add_option("-p,--players", number_of_players, "number of players");
-   app.add_option("-n,--darts", number_of_darts, "number of darts per player");
-   app.add_flag("-r,--randomize", randomize, "randomize dart locations");
-   app.add_flag("-l,--ranlux", use_ranlux, "use ranlux instead of LCG (minstd) for random number generation");
-   CLI11_PARSE(app, argc, argv);
+   #include <iostream>
+   #include <string>
+   #include "CLI/CLI.hpp"
+   #include "fmt/format.h"
+   
+   int main(int argc, char* argv[]) {
+       CLI::App app{"Command-line interface example"};
+   
+       // Add arguments for each built-in data type
+       int i = 42;
+       app.add_option("-i,--int", i, "Integer argument");
+   
+       double d = 3.14;
+       app.add_option("-d,--double", d, "Double argument");
+   
+       float f = 2.71;
+       app.add_option("-f,--float", f, "Float argument");
+   
+       bool b = true;
+       app.add_flag("-b,--bool", b, "Boolean argument");
+   
+       std::string s = "Hello, world!";
+       app.add_option("-s,--string", s, "String argument");
+   
+       // Parse the command-line arguments
+       CLI11_PARSE(app, argc, argv);
+   
+       // Print the parsed arguments
+       fmt::print("Parsed arguments:\n");
+       fmt::print("  int: {}\n", i);
+       fmt::print("  double: {}\n", d);
+       fmt::print("  float: {}\n", f);
+       fmt::print("  bool: {}\n", b);
+       fmt::print("  string: {}\n", s);
+   
+       return 0;
+   }
+   
 
+In this example, we create a CLI::App object to represent our command-line interface. We then add an argument for each built-in data type using the CLI::App::add_option() and CLI::App::add_flag() functions. Each argument has a default value that is appropriate for that type.
+
+We then parse the command-line arguments using the CLI11_PARSE macro, which takes the CLI::App object, the argc and argv arguments from the main() function, and parses the arguments.
+
+Finally, we print the parsed arguments using the fmt::print() function from the fmt library. The fmt::print() function takes a format string and any number of arguments, and prints the formatted string to the console. In this example, we use the {} format specifier to insert the values of the parsed arguments into the format string.
+
+Overall, this example demonstrates how you can create a command-line interface with arguments that support each of the built-in data types using the CLI11 package and the fmt library, and how you can print the parsed arguments using the fmt library's fmt::print() function.
+
+
+To use the above code, you'll need to add the following to your CMakeLists.txt file:
+
+.. code-block:: cmake
+
+   cmake_minimum_required(VERSION 3.16)
+   
+   project(CommandLineInterfaceExample)
+   
+   include(FetchContent)
+   
+   # Download and configure the CLI11 library
+   FetchContent_Declare(
+       cli11
+       GIT_REPOSITORY https://github.com/CLIUtils/CLI11.git
+       GIT_TAG v1.9.1
+   )
+   FetchContent_MakeAvailable(cli11)
+   
+   # Download and configure the fmt library
+   FetchContent_Declare(
+       fmt
+       GIT_REPOSITORY https://github.com/fmtlib/fmt.git
+       GIT_TAG 8.1.0
+   )
+   FetchContent_MakeAvailable(fmt)
+   
+   add_executable(CommandLineInterfaceExample main.cpp)
+   target_link_libraries(CommandLineInterfaceExample PRIVATE CLI11::CLI11 fmt::fmt)
+   
+   
 logging - spdlog
 ^^^^^^^^^^^^^^^^^^
 
