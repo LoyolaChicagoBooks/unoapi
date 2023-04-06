@@ -374,27 +374,145 @@ The following shows how to create four co-routines that sleep for random amounts
 Automatic variables
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
+The auto keyword was introduced in C++11 as part of the language's support for type inference.
+auto is used to declare a variable whose type is automatically inferred from its initializer (the right hand side of the assignment).
+auto can simplify the syntax of variable declarations and make code more concise and readable.
+auto is especially useful when working with complex or nested types that may be difficult to express explicitly in code.
+In our book, SYCL/OneAPI code is greatly simplified by not having to write the actual data type over and over again.
+Code that uses auto is more resilient to changes, since the type of a variable can be changed without needing to update the code that uses it, subject to the compiler checking it, of course.
+auto is a useful feature that can simplify code, improve readability, and reduce the likelihood of type errors.
+
+The following shows how auto can be used to initialize some variables of primitive types, e.g. int, double, float, bool, and char.
+We also demonstrate how to initialize more complex structures such as an STL generic type (class).
+
+.. code-block:: cpp
+   
+   #include <iostream>
+   #include <vector>
+   #include <list>
+   #include <map>
+   #include <set>
+   #include <string>
+   #include <fmt/core.h>
+   
+   int main() {
+       int i = 42;
+       double d1 = 1.23, d2 = 4.56;
+       float f1 = 0.123f, f2 = 6.789f;
+       bool b1 = true, b2 = false;
+       char c1 = 'c', c2 = 'd';
+   
+       auto v1 = std::vector<int>{1, 2, 3, 4, 5};
+       auto l1 = std::list<double>{d1, d2, d1, d2, d1};
+       auto m1 = std::map<float, bool>{{f1, b1}, {f2, b2}, {f1, b2}};
+       auto s1 = std::set<char>{c1, c2, c1, c2};
+       auto str1 = std::string{"Hello, world!"};
+   
+       fmt::print("i = {}\n", i);
+       fmt::print("d1 = {}\n", d1);
+       fmt::print("d2 = {}\n", d2);
+       fmt::print("f1 = {}\n", f1);
+       fmt::print("f2 = {}\n", f2);
+       fmt::print("b1 = {}\n", b1);
+       fmt::print("b2 = {}\n", b2);
+       fmt::print("c1 = '{}'\n", c1);
+       fmt::print("c2 = '{}'\n", c2);
+       fmt::print("v1 = {}\n", fmt::join(v1, ", "));
+       fmt::print("l1 = {}\n", fmt::join(l1, ", "));
+       fmt::print("m1 = {{{}, {}}}\n", m1.begin()->first, m1.begin()->second);
+       fmt::print("s1 = {{{}}}\n", fmt::join(s1, ", "));
+       fmt::print("str1 = \"{}\"\n", str1);
+   
+       return 0;
+   }
+
+Constants and Constant Expressions
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+In this example, we define a pythagorean function using constexpr. The function takes two arguments a and b representing the lengths of the two sides of a right-angled triangle, and calculates the length of the hypotenuse using the Pythagorean theorem.
+
+We then define two const variables a and b, which have values of 3.0 and 4.0 respectively. Since a and b are const, we cannot change their values once they have been initialized.
+
+Finally, we initialize a constexpr variable c with the value of pythagorean(a, b). Since a, b, and pythagorean are all const or constexpr, we can evaluate pythagorean(a, b) at compile-time and use it to initialize c.
+
+The program then prints the length of the hypotenuse to the console using std::cout.
+
+Overall, this example demonstrates how you can use const and constexpr together to define constants and perform compile-time evaluations of functions, even for more complex calculations such as the Pythagorean theorem.
+
 .. code-block:: cpp
 
-   auto x = 25;
-
-const and constexpr
-^^^^^^^^^^^^^^^^^^^^^^^^
-
-.. code-block:: cpp
-
-
-   constexpr size_t DEFAULT_NUMBER_OF_TRAPEZOIDS{1};
+   #include <iostream>
+   #include <cmath>
+   
+   constexpr double pythagorean(double a, double b) {
+       return std::sqrt(a * a + b * b);
+   }
+   
+   int main() {
+       const double a = 3.0;
+       const double b = 4.0;
+       constexpr double c = pythagorean(a, b);
+   
+       std::cout << "The hypotenuse is " << c << std::endl;
+   
+       return 0;
+   }
+   
 
 initializer expressions
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
+Initializer expressions are a modern C++ feature that is powerful when combined with `auto`.
+You'll probably find yourself making greater use of them, even when initializing the simplest of variables.
+We rely on these extensively in our C++ examples throughout this book.
+
+In this version of the code, we use initializer expressions for each variable declaration.
+The syntax for an initializer expression is {} or = {}, and it can be used to initialize a variable with an explicit value.
+
 .. code-block:: cpp
 
-   bool show_function_values{false};
-   bool run_sequentially{false};
-   size_t number_of_trapezoids{DEFAULT_NUMBER_OF_TRAPEZOIDS};
+   #include <iostream>
+   #include <vector>
+   #include <list>
+   #include <map>
+   #include <set>
+   #include <string>
+   #include <fmt/core.h>
+   
+   int main() {
+       auto i{42};
+       auto d1{1.23}, d2{4.56};
+       auto f1{0.123f}, f2{6.789f};
+       auto b1{true}, b2{false};
+       auto c1{'c'}, c2{'d'};
+   
+       auto v1{std::vector<int>{1, 2, 3, 4, 5}};
+       auto l1{std::list<double>{d1, d2, d1, d2, d1}};
+       auto m1{std::map<float, bool>{{f1, b1}, {f2, b2}, {f1, b2}}};
+       auto s1{std::set<char>{c1, c2, c1, c2}};
+       auto str1{std::string{"Hello, world!"}};
+   
+       fmt::print("i = {}\n", i);
+       fmt::print("d1 = {}\n", d1);
+       fmt::print("d2 = {}\n", d2);
+       fmt::print("f1 = {}\n", f1);
+       fmt::print("f2 = {}\n", f2);
+       fmt::print("b1 = {}\n", b1);
+       fmt::print("b2 = {}\n", b2);
+       fmt::print("c1 = '{}'\n", c1);
+       fmt::print("c2 = '{}'\n", c2);
+       fmt::print("v1 = {}\n", fmt::join(v1, ", "));
+       fmt::print("l1 = {}\n", fmt::join(l1, ", "));
+       fmt::print("m1 = {{{}, {}}}\n", m1.begin()->first, m1.begin()->second);
+       fmt::print("s1 = {{{}}}\n", fmt::join(s1, ", "));
+       fmt::print("str1 = \"{}\"\n", str1);
+   
+       return 0;
+   }
 
+Using initializer expressions can make the code more concise and improve readability, since each variable is initialized with an explicit value. Additionally, initializer expressions can help prevent bugs caused by uninitialized variables, since each variable is guaranteed to have a value at the point of initialization.
+
+Overall, using initializer expressions is a good practice in C++ programming, and can help make code more concise, readable, and robust.
 
 Format and fmt
 ^^^^^^^^^^^^^^^^^
@@ -420,11 +538,11 @@ Simple usage
    fmt::print("pi = {}\n", pi);
 
 
-command-line argument handling
+Command-line Argument Handling
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Command-line arguments are a way to make your own code more parametric from a *user* point of view. 
-Because we rely on this in our programming examples for UnoAPI, you need to become familiar with this concept.
+It is virtually impossible to do any sort of scaling experiments in parallel computing withou making your applications *parametric*. The Unix tradition is built around the command line as a user interface.
+To this end, thinking about how to make a command-line interface without the drudgery of writing your own command line parser from scratch is essential to making command-line applications and interfaces.
 
 The following shows how to use the well-established CLI11 framework.
 An flag-style argument is created for each data type with a default value that will be set, if not present on the command line.
@@ -509,8 +627,8 @@ To use the above code, you'll need to add the following to your CMakeLists.txt f
    target_link_libraries(CommandLineInterfaceExample PRIVATE CLI11::CLI11 fmt::fmt)
    
    
-logging - spdlog
-^^^^^^^^^^^^^^^^^^
+Logging
+^^^^^^^^
 
 .. code-block:: cpp
 
