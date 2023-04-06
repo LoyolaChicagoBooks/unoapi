@@ -630,8 +630,6 @@ An flag-style argument is created for each data type with a default value that w
 </section>
 <section id="better-generics-for-mathematical-functions">
 <h3>Better Generics for Mathematical Functions<a class="headerlink" href="#better-generics-for-mathematical-functions" title="Permalink to this heading"></a></h3>
-<p>A longstanding pain point in C++ (and others) is the inability to make generic functions that operate properly on primitive types.
-For example, the built-in C <cite>min()</cite> function was not designed to work with all of the primitive types.</p>
 <p>In the following  example, we define a minimum function that takes two generic input parameters <cite>x</cite> and <cite>y</cite> of type <cite>T</cite>. We use <cite>std::enable_if</cite> with the condition <cite>std::is_arithmetic&lt;T&gt;::value</cite> to enable the function only for arithmetic types (i.e., integer and floating point types).</p>
 <p>The second template parameter is a default value for a pointer type that is enabled only when the first condition is met. The default value is set to <cite>nullptr</cite> to allow the function to have a return type, even when <cite>std::enable_if</cite> disables the function.</p>
 <div class="admonition note">
