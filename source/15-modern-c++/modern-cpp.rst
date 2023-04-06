@@ -635,9 +635,6 @@ To use the above code, you'll need to add the following to your CMakeLists.txt f
 Better Generics for Mathematical Functions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-A longstanding pain point in C++ (and others) is the inability to make generic functions that operate properly on primitive types.
-For example, the built-in C `min()` function was not designed to work with all of the primitive types.
-
 In the following  example, we define a minimum function that takes two generic input parameters `x` and `y` of type `T`. We use `std::enable_if` with the condition `std::is_arithmetic<T>::value` to enable the function only for arithmetic types (i.e., integer and floating point types).
 
 The second template parameter is a default value for a pointer type that is enabled only when the first condition is met. The default value is set to `nullptr` to allow the function to have a return type, even when `std::enable_if` disables the function.
