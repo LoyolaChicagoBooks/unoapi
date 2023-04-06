@@ -626,7 +626,33 @@ To use the above code, you'll need to add the following to your CMakeLists.txt f
    add_executable(CommandLineInterfaceExample main.cpp)
    target_link_libraries(CommandLineInterfaceExample PRIVATE CLI11::CLI11 fmt::fmt)
    
+
+Better Generics for Mathematical Functions
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+A longstanding pain point in C++ (and others) is the inability to make generic functions that operate properly on primitive types.
+For example, the built-in C `min()` function was not designed to work with all of the primitive types.
+
+In the following  example, we define a minimum function that takes two generic input parameters `x` and `y` of type `T`. We use `std::enable_if` with the condition `std::is_arithmetic<T>::value` to enable the function only for arithmetic types (i.e., integer and floating point types).
+
+The second template parameter is a default value for a pointer type that is enabled only when the first condition is met. The default value is set to `nullptr` to allow the function to have a return type, even when `std::enable_if` disables the function.
+
+.. note:: This is known as a "substitution failure is not an error" technique.
+
+Inside the function, we use the ternary operator to return the smaller of the two input parameters `x` and `y`.
+
+This minimum function can be used with any integer or floating point type, including int, double, float, long, long long, etc.
+
+.. code-block:: cpp
+
+   #include <type_traits>
    
+   template<typename T, typename std::enable_if<std::is_arithmetic<T>::value, T>::type* = nullptr>
+   T minimum(T x, T y) {
+       return x < y ? x : y;
+   }
+   
+
 Logging
 ^^^^^^^^
 
