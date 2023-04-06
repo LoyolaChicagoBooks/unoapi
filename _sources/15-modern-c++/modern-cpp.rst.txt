@@ -1,6 +1,11 @@
 Modern C++ as a Better C (and C++)
 ==================================
 
+If you want to learn SYCL and OneAPI *properly*  you will need to come up to speed with Modern C++.  In our experience, we know many people who say they "know" C++.  C++ has undergone numerous changes since it was introduced in the 1980s and 1990s.  While the original syntax remains intact, if you have not kept up with the changes since then (notably, C++ 11), you should take steps to refresh your knowlege of the language, since many of its recent features make it virtually *unrecognizable* from its earlier incarnations.
+
+.. note:: We are particularly impressed with how C++ has incorporated features from modern object-functional languages.  Please let us know if you think other features are worthy of inclusion. As this section is still in draft status, we realize our list may not be exhaustive.
+
+
 Overview of Modern C++
 -----------------------
 
