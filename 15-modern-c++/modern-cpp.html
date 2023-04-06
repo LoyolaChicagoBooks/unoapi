@@ -623,6 +623,27 @@ An flag-style argument is created for each data type with a default value that w
 </pre></div>
 </div>
 </section>
+<section id="better-generics-for-mathematical-functions">
+<h3>Better Generics for Mathematical Functions<a class="headerlink" href="#better-generics-for-mathematical-functions" title="Permalink to this heading"></a></h3>
+<p>A longstanding pain point in C++ (and others) is the inability to make generic functions that operate properly on primitive types.
+For example, the built-in C <cite>min()</cite> function was not designed to work with all of the primitive types.</p>
+<p>In the following  example, we define a minimum function that takes two generic input parameters <cite>x</cite> and <cite>y</cite> of type <cite>T</cite>. We use <cite>std::enable_if</cite> with the condition <cite>std::is_arithmetic&lt;T&gt;::value</cite> to enable the function only for arithmetic types (i.e., integer and floating point types).</p>
+<p>The second template parameter is a default value for a pointer type that is enabled only when the first condition is met. The default value is set to <cite>nullptr</cite> to allow the function to have a return type, even when <cite>std::enable_if</cite> disables the function.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This is known as a “substitution failure is not an error” technique.</p>
+</div>
+<p>Inside the function, we use the ternary operator to return the smaller of the two input parameters <cite>x</cite> and <cite>y</cite>.</p>
+<p>This minimum function can be used with any integer or floating point type, including int, double, float, long, long long, etc.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;type_traits&gt;</span>
+
+<span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="p">,</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">std</span><span class="o">::</span><span class="n">enable_if</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">is_arithmetic</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;::</span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="o">&gt;::</span><span class="n">type</span><span class="o">*</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">nullptr</span><span class="o">&gt;</span>
+<span class="n">T</span><span class="w"> </span><span class="n">minimum</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">y</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
 <section id="logging">
 <h3>Logging<a class="headerlink" href="#logging" title="Permalink to this heading"></a></h3>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">spdlog</span><span class="o">::</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;{} players are going to throw {} darts each&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">number_of_players</span><span class="p">,</span><span class="w"> </span><span class="n">number_of_darts</span><span class="p">);</span>
