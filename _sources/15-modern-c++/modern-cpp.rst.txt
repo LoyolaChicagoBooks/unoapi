@@ -767,10 +767,91 @@ This minimum function can be used with any integer or floating point type, inclu
 Logging
 ^^^^^^^^
 
+The use of named logging levels can be traced back to the early days of UNIX, specifically to the syslog system, which was first introduced in the 1970s.
+Syslog was a logging mechanism that allowed different programs to send log messages to a central system log, which could then be analyzed and monitored by system administrators.
+Syslog introduced the concept of different logging levels, which were initially represented as numeric values from 0 to 7, with 0 being the most severe and 7 being the least severe.
+Over time, these numeric values were replaced by named levels, which were easier to read and understand.
+The tradition of using named logging levels has since been adopted by many logging frameworks and libraries, and is now a standard convention in the field of software engineering.
+
+One of the most popular logging frameworks for C++ is called "spdlog", which stands for "super fast C++ logging library".
+It is an open-source, header-only library that provides fast and flexible logging capabilities for C++ applications.
+It supports various logging backends, such as console, file, and syslog, and provides features such as log rotation, thread-safety, and customizable formatting.
+Spdlog has gained popularity in the C++ community due to its ease of use, performance, and compatibility with other libraries and frameworks.
+
+The common logging levels, in increasing order of severity, are:
+
+**TRACE**: Fine-grained informational events that are most useful to debug an application.
+
+**DEBUG**: Detailed debug information that can be useful to diagnose an application.
+
+**INFO**: Informational messages that highlight the progress of the application at a high level.
+
+**WARN**: Potentially harmful situations or unexpected events that do not prevent the application from working, but might require attention.
+
+**ERROR**: Error events that might still allow the application to continue running.
+
+**FATAL**: Severe error events that might cause the application to terminate.
+
+The following code shows how to use the logging levels in **spdlog**.
+By default, a message is sent to *all* of the logging levels.
+You can override the message by using one of the levels, e.g. ``--debug "This is some debug text."``
+In addition, you can specify the default level to show. In this case, the default level is set to "info" (corresponding to **INFO** above).
+Only log messages written to this level or higher will actulaly be displayed.
+
 .. code-block:: cpp
 
-   spdlog::info("{} players are going to throw {} darts each", number_of_players, number_of_darts);
-   spdlog::info("using {} engine with real distribution", use_ranlux ? "ranlux" : "minstd");
+   #include <iostream>
+   #include <string>
+   #include "CLI/CLI.hpp"
+   #include "spdlog/spdlog.h"
+   
+   int main(int argc, char** argv) {
+   
+       CLI::App app("CLI11 Logging Example");
+       
+       std::string message;
+       std::string logLevel;
+       
+       // add options for each logging level
+       app.add_option("--trace", message, "Log a trace message");
+       app.add_option("--debug", message, "Log a debug message");
+       app.add_option("--info", message, "Log an info message");
+       app.add_option("--warn", message, "Log a warn message");
+       app.add_option("--error", message, "Log an error message");
+       app.add_option("--fatal", message, "Log a fatal message");
+   
+       // add option to set the log level
+       std::vector<std::string> allowedLogLevels = {"trace", "debug", "info", "warn", "error", "fatal"};
+       app.add_option("--log-level", logLevel, "Set the log level")->check(CLI::IsMember(allowedLogLevels))->default_val("info");
+   
+       // parse the command line arguments
+       CLI11_PARSE(app, argc, argv);
+   
+       // configure the logger
+       auto logger = spdlog::stdout_color_mt("console");
+       logger->set_level(spdlog::level::from_str(logLevel));
+   
+       // log the message at the appropriate level
+       if (!message.empty()) {
+           if (app.got("--trace")) {
+               SPDLOG_TRACE(logger, message);
+           } else if (app.got("--debug")) {
+               SPDLOG_DEBUG(logger, message);
+           } else if (app.got("--info")) {
+               SPDLOG_INFO(logger, message);
+           } else if (app.got("--warn")) {
+               SPDLOG_WARN(logger, message);
+           } else if (app.got("--error")) {
+               SPDLOG_ERROR(logger, message);
+           } else if (app.got("--fatal")) {
+               SPDLOG_CRITICAL(logger, message);
+           }
+       }
+   
+       return 0;
+   }
+
+
 
 Templates and STL
 ^^^^^^^^^^^^^^^^^^

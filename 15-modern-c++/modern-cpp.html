@@ -44,21 +44,8 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../00-preliminaries/preliminaries.html">Preliminaries</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../00-preliminaries/preliminaries.html#download">Download</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../00-preliminaries/preliminaries.html#motivation">Motivation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../00-preliminaries/preliminaries.html#topics">Topics</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../10-software-engineering/software-engineering.html">Software Engineering</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../10-software-engineering/software-engineering.html#testing">Testing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../10-software-engineering/software-engineering.html#version-control">Version Control</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../10-software-engineering/software-engineering.html#documentation">Documentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../10-software-engineering/software-engineering.html#security-privacy">Security/Privacy</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../10-software-engineering/software-engineering.html#professionalism-ethics">Professionalism/Ethics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../10-software-engineering/software-engineering.html#for-more-information">For More Information</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../00-preliminaries/preliminaries.html">Preliminaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10-software-engineering/software-engineering.html">Software Engineering</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Modern C++ as a Better C (and C++)</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#standard-library">Standard Library</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#overview-of-modern-c">Overview of Modern C++</a></li>
@@ -92,12 +79,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../25-devices/devices.html">Selecting and Using Devices</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../30-performance/performance.html">Performance</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../40-going-distributed/distributed.html">Distributed Computing with OneAPI</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../99-sandbox/issues.html">Issues</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../99-sandbox/issues.html#heading">Heading</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../99-sandbox/issues.html#examples">Examples</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../99-sandbox/issues.html#illustration">Illustration</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../99-sandbox/issues.html">Issues</a></li>
 </ul>
 
         </div>
@@ -794,8 +776,77 @@ An flag-style argument is created for each data type with a default value that w
 </section>
 <section id="logging">
 <h3>Logging<a class="headerlink" href="#logging" title="Permalink to this heading"></a></h3>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">spdlog</span><span class="o">::</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;{} players are going to throw {} darts each&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">number_of_players</span><span class="p">,</span><span class="w"> </span><span class="n">number_of_darts</span><span class="p">);</span>
-<span class="n">spdlog</span><span class="o">::</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;using {} engine with real distribution&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">use_ranlux</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s">&quot;ranlux&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s">&quot;minstd&quot;</span><span class="p">);</span>
+<p>The use of named logging levels can be traced back to the early days of UNIX, specifically to the syslog system, which was first introduced in the 1970s.
+Syslog was a logging mechanism that allowed different programs to send log messages to a central system log, which could then be analyzed and monitored by system administrators.
+Syslog introduced the concept of different logging levels, which were initially represented as numeric values from 0 to 7, with 0 being the most severe and 7 being the least severe.
+Over time, these numeric values were replaced by named levels, which were easier to read and understand.
+The tradition of using named logging levels has since been adopted by many logging frameworks and libraries, and is now a standard convention in the field of software engineering.</p>
+<p>One of the most popular logging frameworks for C++ is called “spdlog”, which stands for “super fast C++ logging library”.
+It is an open-source, header-only library that provides fast and flexible logging capabilities for C++ applications.
+It supports various logging backends, such as console, file, and syslog, and provides features such as log rotation, thread-safety, and customizable formatting.
+Spdlog has gained popularity in the C++ community due to its ease of use, performance, and compatibility with other libraries and frameworks.</p>
+<p>The common logging levels, in increasing order of severity, are:</p>
+<p><strong>TRACE</strong>: Fine-grained informational events that are most useful to debug an application.</p>
+<p><strong>DEBUG</strong>: Detailed debug information that can be useful to diagnose an application.</p>
+<p><strong>INFO</strong>: Informational messages that highlight the progress of the application at a high level.</p>
+<p><strong>WARN</strong>: Potentially harmful situations or unexpected events that do not prevent the application from working, but might require attention.</p>
+<p><strong>ERROR</strong>: Error events that might still allow the application to continue running.</p>
+<p><strong>FATAL</strong>: Severe error events that might cause the application to terminate.</p>
+<p>The following code shows how to use the logging levels in <strong>spdlog</strong>.
+By default, a message is sent to <em>all</em> of the logging levels.
+You can override the message by using one of the levels, e.g. <code class="docutils literal notranslate"><span class="pre">--debug</span> <span class="pre">&quot;This</span> <span class="pre">is</span> <span class="pre">some</span> <span class="pre">debug</span> <span class="pre">text.&quot;</span></code>
+In addition, you can specify the default level to show. In this case, the default level is set to “info” (corresponding to <strong>INFO</strong> above).
+Only log messages written to this level or higher will actulaly be displayed.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;CLI/CLI.hpp&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;spdlog/spdlog.h&quot;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">**</span><span class="w"> </span><span class="n">argv</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="n">CLI</span><span class="o">::</span><span class="n">App</span><span class="w"> </span><span class="n">app</span><span class="p">(</span><span class="s">&quot;CLI11 Logging Example&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">message</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">logLevel</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// add options for each logging level</span>
+<span class="w">    </span><span class="n">app</span><span class="p">.</span><span class="n">add_option</span><span class="p">(</span><span class="s">&quot;--trace&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Log a trace message&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">app</span><span class="p">.</span><span class="n">add_option</span><span class="p">(</span><span class="s">&quot;--debug&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Log a debug message&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">app</span><span class="p">.</span><span class="n">add_option</span><span class="p">(</span><span class="s">&quot;--info&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Log an info message&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">app</span><span class="p">.</span><span class="n">add_option</span><span class="p">(</span><span class="s">&quot;--warn&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Log a warn message&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">app</span><span class="p">.</span><span class="n">add_option</span><span class="p">(</span><span class="s">&quot;--error&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Log an error message&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">app</span><span class="p">.</span><span class="n">add_option</span><span class="p">(</span><span class="s">&quot;--fatal&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Log a fatal message&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// add option to set the log level</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">allowedLogLevels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="s">&quot;trace&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;debug&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;info&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;warn&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;error&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;fatal&quot;</span><span class="p">};</span>
+<span class="w">    </span><span class="n">app</span><span class="p">.</span><span class="n">add_option</span><span class="p">(</span><span class="s">&quot;--log-level&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">logLevel</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Set the log level&quot;</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">check</span><span class="p">(</span><span class="n">CLI</span><span class="o">::</span><span class="n">IsMember</span><span class="p">(</span><span class="n">allowedLogLevels</span><span class="p">))</span><span class="o">-&gt;</span><span class="n">default_val</span><span class="p">(</span><span class="s">&quot;info&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// parse the command line arguments</span>
+<span class="w">    </span><span class="n">CLI11_PARSE</span><span class="p">(</span><span class="n">app</span><span class="p">,</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// configure the logger</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">logger</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">spdlog</span><span class="o">::</span><span class="n">stdout_color_mt</span><span class="p">(</span><span class="s">&quot;console&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">logger</span><span class="o">-&gt;</span><span class="n">set_level</span><span class="p">(</span><span class="n">spdlog</span><span class="o">::</span><span class="n">level</span><span class="o">::</span><span class="n">from_str</span><span class="p">(</span><span class="n">logLevel</span><span class="p">));</span>
+
+<span class="w">    </span><span class="c1">// log the message at the appropriate level</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">message</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">app</span><span class="p">.</span><span class="n">got</span><span class="p">(</span><span class="s">&quot;--trace&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">SPDLOG_TRACE</span><span class="p">(</span><span class="n">logger</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">app</span><span class="p">.</span><span class="n">got</span><span class="p">(</span><span class="s">&quot;--debug&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">SPDLOG_DEBUG</span><span class="p">(</span><span class="n">logger</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">app</span><span class="p">.</span><span class="n">got</span><span class="p">(</span><span class="s">&quot;--info&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">SPDLOG_INFO</span><span class="p">(</span><span class="n">logger</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">app</span><span class="p">.</span><span class="n">got</span><span class="p">(</span><span class="s">&quot;--warn&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">SPDLOG_WARN</span><span class="p">(</span><span class="n">logger</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">app</span><span class="p">.</span><span class="n">got</span><span class="p">(</span><span class="s">&quot;--error&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">SPDLOG_ERROR</span><span class="p">(</span><span class="n">logger</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">app</span><span class="p">.</span><span class="n">got</span><span class="p">(</span><span class="s">&quot;--fatal&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">SPDLOG_CRITICAL</span><span class="p">(</span><span class="n">logger</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </section>
