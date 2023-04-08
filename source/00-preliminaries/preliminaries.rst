@@ -5,6 +5,15 @@ Preliminaries
 
    This is an "about the book" chapter.
 
+Download
+---------
+
+The HTML version is available at https://unoapi.cs.luc.edu.
+
+The PDF version is availabel at https://github.com/LoyolaChicagoBooks/unoapi/releases/latest/download/UnoAPI.pdf.
+
+You can build these yourself at any time. These links are provided as a convenience. We host everything on GitHub and GitHub Pages.
+
 Motivation
 -----------
 
