@@ -51,20 +51,12 @@
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Software Engineering</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#cmake">Cmake</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#basic-organization-of-cmake">Basic organization of CMake</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#variables-that-affect-working-with-dpc-tooling">Variables that affect working with DPC++ tooling</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#separating-build-from-source-viewpathed-building">Separating build from source (viewpathed building)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#fetching-external-dependencies">Fetching external dependencies</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#important-external-dependencies-for-c-17-20-and-beyond">Important external dependencies for C++ 17, 20, and beyond</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#unit-testing-with-googletest">Unit Testing with GoogleTest</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#continuous-integration">Continuous Integration</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#github-actions">GitHub Actions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#gitlab">GitLab?</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="#testing">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#version-control">Version Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#documentation">Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#security-privacy">Security/Privacy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#professionalism-ethics">Professionalism/Ethics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#for-more-information">For More Information</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../15-modern-c%2B%2B/modern-cpp.html">Modern C++ as a Better C (and C++)</a><ul>
@@ -134,39 +126,44 @@
              
   <section id="software-engineering">
 <h1>Software Engineering<a class="headerlink" href="#software-engineering" title="Permalink to this heading"></a></h1>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Not started on this yet.</p>
-</div>
-<section id="cmake">
-<h2>Cmake<a class="headerlink" href="#cmake" title="Permalink to this heading"></a></h2>
-<section id="basic-organization-of-cmake">
-<h3>Basic organization of CMake<a class="headerlink" href="#basic-organization-of-cmake" title="Permalink to this heading"></a></h3>
+<p>Software engineering (SE) is and remains vital to success as a professional software developer / research software engineer.
+While SE principles evoke a wide range of responses, it is possible to embrace many princples from software engineering and ensure impact on your projects without distracting you (entirely) from your day-to-day work. We encourage readers to consult <a class="reference external" href="https://ecommons.luc.edu/cs_facpubs/75/">https://ecommons.luc.edu/cs_facpubs/75/</a> to see how software engineering need not be difficult to apply to your work.</p>
+<p>We maintain that there are many software engineering principles that matter in day-to-day life among professional programmers. Here are some of the key ones:</p>
+<ul class="simple">
+<li><p><strong>Agile and iterative development</strong>: Adopting an agile and iterative development methodology can help teams quickly respond to changing requirements, customer needs, and market trends, while minimizing risks and maximizing value. This includes using techniques such as user stories, sprints, retrospectives, and continuous improvement.</p></li>
+<li><p><strong>Code quality and maintainability</strong>: Writing code that is easy to understand, modify, and extend is essential for the long-term success of any software project. This includes using consistent coding style and conventions, writing clean and concise code, and applying best practices such as modularization, encapsulation, and abstraction.</p></li>
+<li><p><strong>Testing and quality assurance</strong>: Ensuring that the software meets the expected quality and functionality requirements is critical to avoiding bugs and defects that can cause system failures, data loss, or security breaches. This includes developing automated tests, performing manual tests, and applying quality assurance processes such as code reviews, continuous integration, and continuous delivery.</p></li>
+<li><p><strong>Documentation and knowledge sharing</strong>: Documenting the code, architecture, design decisions, and project requirements is essential for enabling effective communication, collaboration, and knowledge sharing among team members and stakeholders. This includes writing clear and concise comments, documentation, and user manuals, and applying knowledge management processes such as code reviews, wikis, and project wikis.</p></li>
+<li><p><strong>Version control and collaboration</strong>: Using a version control system and collaborating effectively with team members and external contributors is essential for managing code changes, resolving conflicts, and ensuring that the project progresses smoothly. This includes using a distributed version control system such as Git, following good branching and merging practices, and using collaboration tools such as pull requests, issue trackers, and chat applications.</p></li>
+<li><p><strong>Security and privacy</strong>: Ensuring that the software is secure and protects user privacy is becoming increasingly important in today’s interconnected world. This includes applying security and privacy best practices such as encryption, authentication, and authorization, following security standards such as OWASP, and regularly testing for vulnerabilities and threats.</p></li>
+<li><p><strong>Professionalism and ethics</strong>: Behaving ethically and professionally, and following industry standards and regulations, is essential for building trust with clients, customers, and the wider community. This includes following ethical principles such as honesty, integrity, and respect, complying with regulations such as GDPR and HIPAA, and adopting industry standards such as ISO 9001 and CMMI.</p></li>
+<li><p><strong>Automatic Compilation</strong>: Makefile vs. CMake</p></li>
+<li><p><strong>Continuous Integration</strong>: Using GitHub Actions (at least for the non-GPU specific stuff)</p></li>
+</ul>
+<p>While there are other practices that give the <em>full</em> software engineering experience, we think these can be a helpful starting point to ensure success in developing research software (the kind of software you are likely doing if you’re reading about SYCL and OneAPI).</p>
+<p>We are going to take a look at some of the more <em>technical</em> aspects of software engineering: testing, documentation, version control, security/privacy (by discouraging unsafe practices, e.g. explicit pointer usage), and professionalism/ethics. As scientific computing is something used to drive scientific progress, we need to write software that users can trust (“trust science”), which results, in part, from taking all possible steps to ensure reliability and reproducibility.</p>
+<section id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this heading"></a></h2>
 </section>
-<section id="variables-that-affect-working-with-dpc-tooling">
-<h3>Variables that affect working with DPC++ tooling<a class="headerlink" href="#variables-that-affect-working-with-dpc-tooling" title="Permalink to this heading"></a></h3>
+<section id="version-control">
+<h2>Version Control<a class="headerlink" href="#version-control" title="Permalink to this heading"></a></h2>
 </section>
-<section id="separating-build-from-source-viewpathed-building">
-<h3>Separating build from source (viewpathed building)<a class="headerlink" href="#separating-build-from-source-viewpathed-building" title="Permalink to this heading"></a></h3>
+<section id="documentation">
+<h2>Documentation<a class="headerlink" href="#documentation" title="Permalink to this heading"></a></h2>
 </section>
-<section id="fetching-external-dependencies">
-<h3>Fetching external dependencies<a class="headerlink" href="#fetching-external-dependencies" title="Permalink to this heading"></a></h3>
+<section id="security-privacy">
+<h2>Security/Privacy<a class="headerlink" href="#security-privacy" title="Permalink to this heading"></a></h2>
 </section>
-<section id="important-external-dependencies-for-c-17-20-and-beyond">
-<h3>Important external dependencies for C++ 17, 20, and beyond<a class="headerlink" href="#important-external-dependencies-for-c-17-20-and-beyond" title="Permalink to this heading"></a></h3>
+<section id="professionalism-ethics">
+<h2>Professionalism/Ethics<a class="headerlink" href="#professionalism-ethics" title="Permalink to this heading"></a></h2>
 </section>
-</section>
-<section id="unit-testing-with-googletest">
-<h2>Unit Testing with GoogleTest<a class="headerlink" href="#unit-testing-with-googletest" title="Permalink to this heading"></a></h2>
-</section>
-<section id="continuous-integration">
-<h2>Continuous Integration<a class="headerlink" href="#continuous-integration" title="Permalink to this heading"></a></h2>
-<section id="github-actions">
-<h3>GitHub Actions<a class="headerlink" href="#github-actions" title="Permalink to this heading"></a></h3>
-</section>
-<section id="gitlab">
-<h3>GitLab?<a class="headerlink" href="#gitlab" title="Permalink to this heading"></a></h3>
-</section>
+<section id="for-more-information">
+<h2>For More Information<a class="headerlink" href="#for-more-information" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>SWEBOK</p></li>
+<li><p>ACM Ethics/Code of Conduct</p></li>
+<li><p>IEEE Ethics/Code of Conduct</p></li>
+</ul>
 </section>
 </section>
 
