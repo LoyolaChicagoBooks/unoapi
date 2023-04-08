@@ -307,9 +307,110 @@ Co-routines
 
 .. note:: Co-routines are a fairly new C++ feature and may not be supported by your compiler.
 
-Co-routines have become popular in many recent language designs, notably Go, but actually have a lineage at least dating to Hoare's Communicating Sequential Processes (CSP).
-You can think of a co-routine as a run-to-completion thread.
+Co-routines are an important concept that is relevant to our discussion of SYCL and OneAPI.
 
+A coroutine is a allows for the execution of multiple, independent, and cooperative subroutines or functions that can be paused and resumed at certain points to enable asynchronous or concurrent programming, without the overhead of creating multiple threads or processes.
+
+Historically, the concept of coroutines was first introduced in the programming language Simula 67 -- the language that introduced object-oriented programming -- developed by Ole-Johan Dahl and Kristen Nygaard at the Norwegian Computing Center in Oslo, Norway in the mid-1960s.
+The implementation of coroutines in Simula 67 was a bit different from the modern concept of coroutines, and the term "coroutine" itself was not used at that time.
+The first programming language to use the term "coroutine" and to implement coroutines in a way that is closer to the modern concept was the programming language Modula-2, developed by Niklaus Wirth in the late 1970s.
+After Modula-2, the next programming language to introduce support for coroutines was Ada, which added support for coroutines in the Ada 95 version of the language.
+
+.. code-block:: ada
+
+   with Ada.Text_IO; use Ada.Text_IO;
+   with Ada.Numerics.Float_Random; use Ada.Numerics.Float_Random;
+   
+   procedure Coroutine_Example is
+   
+      type Coroutine is access procedure; -- define a type for a coroutine
+      
+      task type Coroutine_Task is -- define a task type for a coroutine
+         entry Start(C : in Coroutine); -- an entry to start the coroutine
+      end Coroutine_Task;
+   
+      Sum : Float := 0.0; -- shared variable to accumulate the sum
+      Num_Coroutines : constant Integer := 10; -- number of coroutines
+      
+      -- define the coroutine procedure
+      procedure My_Coroutine is
+         R : Float_Random.Generator; -- random number generator
+         X : constant Float := Float_Random.Random(R); -- compute a random number
+      begin
+         Put_Line("Coroutine started, X = " & Float'Image(X));
+         Sum := Sum + X; -- add X to the sum
+      end My_Coroutine;
+   
+      -- array of coroutines
+      Coroutines : array (1..Num_Coroutines) of Coroutine;
+   
+      -- array of coroutine tasks
+      Tasks : array (1..Num_Coroutines) of Coroutine_Task;
+   
+   begin
+   
+      -- create the coroutines and their tasks
+      for I in 1..Num_Coroutines loop
+         Coroutines(I) := My_Coroutine'Access; -- create a coroutine
+         Tasks(I) := new Coroutine_Task; -- create a task for the coroutine
+         Tasks(I).Start(Coroutines(I)); -- start the task, passing the coroutine as parameter
+      end loop;
+   
+      -- wait for all tasks to complete
+      for I in 1..Num_Coroutines loop
+         null;
+      end loop;
+   
+      -- print the final result
+      Put_Line("Sum = " & Float'Image(Sum));
+   
+   end Coroutine_Example;
+   
+
+Co-routines have become popular in many recent language designs, notably Go. Here is what a co-routine looks like in Go.
+
+.. code-block:: go
+
+   package main
+   
+   import (
+       "fmt"
+       "math/rand"
+       "time"
+   )
+   
+   func coroutine(ch chan<- float64) {
+       r := rand.New(rand.NewSource(time.Now().UnixNano())) // create a random number generator
+       x := r.Float64() // compute a random number
+       fmt.Printf("Coroutine started, x = %f\n", x)
+       ch <- x // send the result back to the main program
+   }
+   
+   func main() {
+       sum := 0.0 // shared variable to accumulate the sum
+       numCoroutines := 10 // number of coroutines
+       ch := make(chan float64) // create a channel for communication
+   
+       // start the coroutines
+       for i := 0; i < numCoroutines; i++ {
+           go coroutine(ch)
+       }
+   
+       // wait for all coroutines to complete and accumulate the results
+       for i := 0; i < numCoroutines; i++ {
+           sum += <-ch
+       }
+   
+       // print the final result
+       fmt.Printf("Sum = %f\n", sum)
+   }
+   
+While our course is about C++, it is important to realize that many modern C++ features are greatly influenced by the other modern languages (and forms of expression) around them.
+The ability to write co-routines and use *blocking* channels to exchange results between the co-routine and the main program demonstrate a high level of awareness that allows programmers to express concurrency clearly and concisely.
+
+Modern co-routines, therefore, allow not only for the expression of concurrency but also for the elegant transmission of data to and from the co-routine. There are some similarities with how SYCL supports these concepts using *accessors*. We'll speak to this again when introducing SYCL.
+   
+Let's take a look at how C++ introduces co-routines.
 The following shows how to create four co-routines that sleep for random amounts of time and join at the end?
 
 .. code-block:: cpp
@@ -382,6 +483,7 @@ The following shows how to create four co-routines that sleep for random amounts
        return 0;
    }
 
+.. todo:: May redo this example to mirror the Ada/Go versions.
 
 Automatic variables
 ^^^^^^^^^^^^^^^^^^^^^^^^

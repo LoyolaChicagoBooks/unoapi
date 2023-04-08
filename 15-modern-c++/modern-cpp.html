@@ -391,9 +391,102 @@
 <p class="admonition-title">Note</p>
 <p>Co-routines are a fairly new C++ feature and may not be supported by your compiler.</p>
 </div>
-<p>Co-routines have become popular in many recent language designs, notably Go, but actually have a lineage at least dating to Hoare’s Communicating Sequential Processes (CSP).
-You can think of a co-routine as a run-to-completion thread.</p>
-<p>The following shows how to create four co-routines that sleep for random amounts of time and join at the end?</p>
+<p>Co-routines are an important concept that is relevant to our discussion of SYCL and OneAPI.</p>
+<p>A coroutine is a allows for the execution of multiple, independent, and cooperative subroutines or functions that can be paused and resumed at certain points to enable asynchronous or concurrent programming, without the overhead of creating multiple threads or processes.</p>
+<p>Historically, the concept of coroutines was first introduced in the programming language Simula 67 – the language that introduced object-oriented programming – developed by Ole-Johan Dahl and Kristen Nygaard at the Norwegian Computing Center in Oslo, Norway in the mid-1960s.
+The implementation of coroutines in Simula 67 was a bit different from the modern concept of coroutines, and the term “coroutine” itself was not used at that time.
+The first programming language to use the term “coroutine” and to implement coroutines in a way that is closer to the modern concept was the programming language Modula-2, developed by Niklaus Wirth in the late 1970s.
+After Modula-2, the next programming language to introduce support for coroutines was Ada, which added support for coroutines in the Ada 95 version of the language.</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="kn">with</span> <span class="n">Ada.Text_IO</span><span class="p">;</span> <span class="kn">use</span> <span class="n">Ada.Text_IO</span><span class="p">;</span>
+<span class="kn">with</span> <span class="n">Ada.Numerics.Float_Random</span><span class="p">;</span> <span class="kn">use</span> <span class="n">Ada.Numerics.Float_Random</span><span class="p">;</span>
+
+<span class="kd">procedure</span> <span class="nf">Coroutine_Example</span> <span class="kr">is</span>
+
+   <span class="kd">type</span> <span class="kt">Coroutine</span> <span class="kr">is</span> <span class="kr">access</span> <span class="kd">procedure</span><span class="p">;</span> <span class="c1">-- define a type for a coroutine</span>
+
+   <span class="kd">task</span> <span class="kd">type</span> <span class="kt">Coroutine_Task</span> <span class="kr">is</span> <span class="c1">-- define a task type for a coroutine</span>
+      <span class="kd">entry</span> <span class="nf">Start</span><span class="p">(</span><span class="nv">C</span> <span class="p">: </span><span class="nv">in</span> <span class="nv">Coroutine</span><span class="p">);</span> <span class="c1">-- an entry to start the coroutine</span>
+   <span class="kr">end</span> <span class="nf">Coroutine_Task</span><span class="p">;</span>
+
+   <span class="n">Sum</span> <span class="p">:</span> <span class="kt">Float</span> <span class="p">:=</span> <span class="mf">0.0</span><span class="p">;</span> <span class="c1">-- shared variable to accumulate the sum</span>
+   <span class="no">Num_Coroutines</span> <span class="p">:</span> <span class="kr">constant</span> <span class="kt">Integer</span> <span class="p">:=</span> <span class="mi">10</span><span class="p">;</span> <span class="c1">-- number of coroutines</span>
+
+   <span class="c1">-- define the coroutine procedure</span>
+   <span class="kd">procedure</span> <span class="nf">My_Coroutine</span> <span class="kr">is</span>
+      <span class="n">R</span> <span class="p">:</span> <span class="n">Float_Random</span><span class="p">.</span><span class="kt">Generator</span><span class="p">;</span> <span class="c1">-- random number generator</span>
+      <span class="no">X</span> <span class="p">:</span> <span class="kr">constant</span> <span class="kt">Float</span> <span class="p">:=</span> <span class="n">Float_Random</span><span class="p">.</span><span class="n">Random</span><span class="p">(</span><span class="n">R</span><span class="p">);</span> <span class="c1">-- compute a random number</span>
+   <span class="kr">begin</span>
+      <span class="n">Put_Line</span><span class="p">(</span><span class="s">&quot;Coroutine started, X = &quot;</span> <span class="o">&amp;</span> <span class="kt">Float</span><span class="p">&#39;</span><span class="na">Image</span><span class="p">(</span><span class="n">X</span><span class="p">));</span>
+      <span class="n">Sum</span> <span class="p">:=</span> <span class="n">Sum</span> <span class="o">+</span> <span class="n">X</span><span class="p">;</span> <span class="c1">-- add X to the sum</span>
+   <span class="kr">end</span> <span class="nf">My_Coroutine</span><span class="p">;</span>
+
+   <span class="c1">-- array of coroutines</span>
+   <span class="n">Coroutines</span> <span class="p">:</span> <span class="kr">array</span> <span class="p">(</span><span class="mf">1.</span><span class="p">.</span><span class="n">Num_Coroutines</span><span class="p">)</span> <span class="kr">of</span> <span class="n">Coroutine</span><span class="p">;</span>
+
+   <span class="c1">-- array of coroutine tasks</span>
+   <span class="kd">Task</span><span class="n">s</span> <span class="p">:</span> <span class="kr">array</span> <span class="p">(</span><span class="mf">1.</span><span class="p">.</span><span class="n">Num_Coroutines</span><span class="p">)</span> <span class="kr">of</span> <span class="n">Coroutine_Task</span><span class="p">;</span>
+
+<span class="kr">begin</span>
+
+   <span class="c1">-- create the coroutines and their tasks</span>
+   <span class="kr">for</span> <span class="n">I</span> <span class="ow">in</span> <span class="mf">1.</span><span class="p">.</span><span class="n">Num_Coroutines</span> <span class="kr">loop</span>
+      <span class="n">Coroutines</span><span class="p">(</span><span class="n">I</span><span class="p">)</span> <span class="p">:=</span> <span class="n">My_Coroutine</span><span class="p">&#39;</span><span class="na">Access</span><span class="p">;</span> <span class="c1">-- create a coroutine</span>
+      <span class="kd">Task</span><span class="n">s</span><span class="p">(</span><span class="n">I</span><span class="p">)</span> <span class="p">:=</span> <span class="kr">new</span> <span class="n">Coroutine_Task</span><span class="p">;</span> <span class="c1">-- create a task for the coroutine</span>
+      <span class="kd">Task</span><span class="n">s</span><span class="p">(</span><span class="n">I</span><span class="p">).</span><span class="n">Start</span><span class="p">(</span><span class="n">Coroutines</span><span class="p">(</span><span class="n">I</span><span class="p">));</span> <span class="c1">-- start the task, passing the coroutine as parameter</span>
+   <span class="kr">end</span> <span class="kr">loop</span><span class="p">;</span>
+
+   <span class="c1">-- wait for all tasks to complete</span>
+   <span class="kr">for</span> <span class="n">I</span> <span class="ow">in</span> <span class="mf">1.</span><span class="p">.</span><span class="n">Num_Coroutines</span> <span class="kr">loop</span>
+      <span class="kc">null</span><span class="p">;</span>
+   <span class="kr">end</span> <span class="kr">loop</span><span class="p">;</span>
+
+   <span class="c1">-- print the final result</span>
+   <span class="n">Put_Line</span><span class="p">(</span><span class="s">&quot;Sum = &quot;</span> <span class="o">&amp;</span> <span class="kt">Float</span><span class="p">&#39;</span><span class="na">Image</span><span class="p">(</span><span class="n">Sum</span><span class="p">));</span>
+
+<span class="kr">end</span> <span class="nf">Coroutine_Example</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Co-routines have become popular in many recent language designs, notably Go. Here is what a co-routine looks like in Go.</p>
+<div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;fmt&quot;</span>
+<span class="w">    </span><span class="s">&quot;math/rand&quot;</span>
+<span class="w">    </span><span class="s">&quot;time&quot;</span>
+<span class="p">)</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="nx">coroutine</span><span class="p">(</span><span class="nx">ch</span><span class="w"> </span><span class="kd">chan</span><span class="o">&lt;-</span><span class="w"> </span><span class="kt">float64</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">r</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">rand</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="nx">rand</span><span class="p">.</span><span class="nx">NewSource</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Now</span><span class="p">().</span><span class="nx">UnixNano</span><span class="p">()))</span><span class="w"> </span><span class="c1">// create a random number generator</span>
+<span class="w">    </span><span class="nx">x</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">r</span><span class="p">.</span><span class="nx">Float64</span><span class="p">()</span><span class="w"> </span><span class="c1">// compute a random number</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;Coroutine started, x = %f\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">ch</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nx">x</span><span class="w"> </span><span class="c1">// send the result back to the main program</span>
+<span class="p">}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">sum</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mf">0.0</span><span class="w"> </span><span class="c1">// shared variable to accumulate the sum</span>
+<span class="w">    </span><span class="nx">numCoroutines</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="c1">// number of coroutines</span>
+<span class="w">    </span><span class="nx">ch</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="kd">chan</span><span class="w"> </span><span class="kt">float64</span><span class="p">)</span><span class="w"> </span><span class="c1">// create a channel for communication</span>
+
+<span class="w">    </span><span class="c1">// start the coroutines</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="nx">numCoroutines</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">go</span><span class="w"> </span><span class="nx">coroutine</span><span class="p">(</span><span class="nx">ch</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// wait for all coroutines to complete and accumulate the results</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="nx">numCoroutines</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">sum</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="o">&lt;-</span><span class="nx">ch</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// print the final result</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;Sum = %f\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">sum</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>While our course is about C++, it is important to realize that many modern C++ features are greatly influenced by the other modern languages (and forms of expression) around them.
+The ability to write co-routines and use <em>blocking</em> channels to exchange results between the co-routine and the main program demonstrate a high level of awareness that allows programmers to express concurrency clearly and concisely.</p>
+<p>Modern co-routines, therefore, allow not only for the expression of concurrency but also for the elegant transmission of data to and from the co-routine. There are some similarities with how SYCL supports these concepts using <em>accessors</em>. We’ll speak to this again when introducing SYCL.</p>
+<p>Let’s take a look at how C++ introduces co-routines.
+The following shows how to create four co-routines that sleep for random amounts of time and join at the end?</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;chrono&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;random&gt;</span>
