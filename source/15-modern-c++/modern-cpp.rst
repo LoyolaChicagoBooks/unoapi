@@ -788,6 +788,101 @@ Your output may look like the following:
    0.958176 0.334128 0.031727 0.228955 0.983797 0.0328053 0.788841 0.462369 0.557134
 
 
+Testing using "print" statements is not ideal. Here is how to rewrite the above using unit tests:
+
+.. code-block:: cpp
+
+   #include <gtest/gtest.h>
+   #include <vector>
+   #include <random>
+   
+   TEST(VectorTest, PushBack) {
+       std::vector<double> v;
+       v.push_back(1.2);
+       v.push_back(3.4);
+       v.push_back(5.6);
+       ASSERT_EQ(3, v.size());
+   }
+   
+   TEST(VectorTest, Size) {
+       std::vector<double> v;
+       v.push_back(1.2);
+       v.push_back(3.4);
+       v.push_back(5.6);
+       ASSERT_EQ(3, v.size());
+   }
+   
+   TEST(VectorTest, Empty) {
+       std::vector<double> v;
+       ASSERT_TRUE(v.empty());
+       v.push_back(1.2);
+       ASSERT_FALSE(v.empty());
+   }
+   
+   TEST(VectorTest, Index) {
+       std::vector<double> v;
+       v.push_back(1.2);
+       v.push_back(3.4);
+       v.push_back(5.6);
+       ASSERT_EQ(3.4, v[1]);
+   }
+
+   TEST(VectorTest, At) {
+       std::vector<double> v;
+       v.push_back(1.2);
+       v.push_back(3.4);
+       v.push_back(5.6);
+       ASSERT_EQ(5.6, v.at(2));
+       ASSERT_THROW(v.at(3), std::out_of_range);
+   }
+
+   TEST(VectorTest, Iterator) {
+       std::vector<double> v;
+       v.push_back(1.2);
+       v.push_back(3.4);
+       v.push_back(5.6);
+       int count = 0;
+       for (auto it = v.begin(); it != v.end(); it++) {
+           if (*it == 3.4) {
+               ASSERT_EQ(1, count);
+           }
+           count++;
+       }
+       ASSERT_EQ(3, count);
+   }
+   
+   TEST(VectorTest, Resize) {
+       std::vector<double> v;
+       v.push_back(1.2);
+       v.push_back(3.4);
+       v.push_back(5.6);
+       v.resize(5);
+       ASSERT_EQ(5, v.size());
+       ASSERT_EQ(0, v[3]);
+   }
+   
+   TEST(VectorTest, PopBack) {
+       std::vector<double> v;
+       v.push_back(1.2);
+       v.push_back(3.4);
+       v.push_back(5.6);
+       v.pop_back();
+       ASSERT_EQ(2, v.size());
+       ASSERT_EQ(3.4, v.back());
+   }
+   
+   TEST(VectorTest, Shuffle) {
+       std::vector<double> v;
+       std::random_device rd;
+       std::mt19937 g(rd());
+       for (int i = 1; i <= 10; i++) {
+           v.push_back(i);
+       }
+       std::shuffle(v.begin(), v.end(), g);
+       ASSERT_NE(1.0, v[0]);
+   }
+   
+   
 std::map
 """"""""""""
 
@@ -881,6 +976,108 @@ Your output may look like the following:
    one => 3
    three => 75
    two => 37
+
+Testing using "print" statements is not ideal. Here is how to rewrite the above using unit tests:
+
+.. note:: output will be available soon
+
+.. code-block:: cpp
+
+   #include <gtest/gtest.h>
+   #include <map>
+   
+   TEST(MapTest, Insert) {
+       std::map<std::string, int> m;
+       m.insert(std::make_pair("one", 1));
+       m.insert(std::make_pair("two", 2));
+       m.insert(std::make_pair("three", 3));
+       ASSERT_EQ(3, m.size());
+   }
+   
+   TEST(MapTest, Size) {
+       std::map<std::string, int> m;
+       m.insert(std::make_pair("one", 1));
+       m.insert(std::make_pair("two", 2));
+       m.insert(std::make_pair("three", 3));
+       ASSERT_EQ(3, m.size());
+   }
+   
+   TEST(MapTest, Empty) {
+       std::map<std::string, int> m;
+       ASSERT_TRUE(m.empty());
+       m.insert(std::make_pair("one", 1));
+       ASSERT_FALSE(m.empty());
+   }
+   
+   TEST(MapTest, Find) {
+       std::map<std::string, int> m;
+       m.insert(std::make_pair("one", 1));
+       m.insert(std::make_pair("two", 2));
+       m.insert(std::make_pair("three", 3));
+       auto it = m.find("two");
+       ASSERT_NE(m.end(), it);
+       ASSERT_EQ(2, it->second);
+   }
+   
+   TEST(MapTest, Operator) {
+       std::map<std::string, int> m;
+       m.insert(std::make_pair("one", 1));
+       m.insert(std::make_pair("two", 2));
+       m.insert(std::make_pair("three", 3));
+       ASSERT_EQ(3, m["three"]);
+       ASSERT_EQ(4, m["four"]);
+       ASSERT_EQ(4, m.size());
+   }
+   
+   TEST(MapTest, Erase) {
+       std::map<std::string, int> m;
+       m.insert(std::make_pair("one", 1));
+       m.insert(std::make_pair("two", 2));
+       m.insert(std::make_pair("three", 3));
+       m.erase("one");
+       ASSERT_EQ(2, m.size());
+       ASSERT_EQ(0, m.count("one"));
+   }
+   
+   TEST(MapTest, Count) {
+       std::map<std::string, int> m;
+       m.insert(std::make_pair("one", 1));
+       m.insert(std::make_pair("two", 2));
+       m.insert(std::make_pair("three", 3));
+       ASSERT_EQ(1, m.count("two"));
+       ASSERT_EQ(0, m.count("four"));
+   }
+   
+   TEST(MapTest, Clear) {
+       std::map<std::string, int> m;
+       m.insert(std::make_pair("one", 1));
+       m.insert(std::make_pair("two", 2));
+       m.insert(std::make_pair("three", 3));
+       m.clear();
+       ASSERT_EQ(0, m.size());
+       ASSERT_TRUE(m.empty());
+   }
+   
+   TEST(MapTest, Iteration) {
+       std::map<std::string, int> m;
+       m.insert(std::make_pair("one", 1));
+       m.insert(std::make_pair("two", 2));
+       m.insert(std::make_pair("three", 3));
+       int count = 0;
+       for (auto it = m.begin(); it != m.end(); it++) {
+           if (it->first == "one") {
+               ASSERT_EQ(1, it->second);
+           } else if (it->first == "two") {
+               ASSERT_EQ(2, it->second);
+           }
+           else if (it->first == "three") {
+               ASSERT_EQ(3, it->second);
+           }
+           count++;
+       }
+       ASSERT_EQ(3, count);
+   }
+   
 
 Smart Pointers
 ^^^^^^^^^^^^^^^
