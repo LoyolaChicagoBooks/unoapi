@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Modern C++ as a Better C (and C++) &mdash; UnoAPI 06 Apr 2023 documentation</title>
+  <title>Modern C++ as a Better C (and C++) &mdash; UnoAPI 08 Apr 2023 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -33,7 +33,7 @@
             UnoAPI
           </a>
               <div class="version">
-                06 Apr 2023
+                08 Apr 2023
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -85,6 +85,9 @@
 <p class="admonition-title">Note</p>
 <p>We are particularly impressed with how C++ has incorporated features from modern object-functional languages.  Please let us know if you think other features are worthy of inclusion. As this section is still in draft status, we realize our list may not be exhaustive.</p>
 </div>
+<section id="standard-library">
+<h2>Standard Library<a class="headerlink" href="#standard-library" title="Permalink to this heading"></a></h2>
+</section>
 <section id="overview-of-modern-c">
 <h2>Overview of Modern C++<a class="headerlink" href="#overview-of-modern-c" title="Permalink to this heading"></a></h2>
 <p>If you already know some Object-Oriented Programming (OOP) concepts and want to learn modern C++, here are some topics that are worthy of exploration:</p>
@@ -187,6 +190,9 @@
 <span class="p">}</span>
 </pre></div>
 </div>
+</section>
+<section id="lambda-expressions">
+<h3>Lambda Expressions<a class="headerlink" href="#lambda-expressions" title="Permalink to this heading"></a></h3>
 </section>
 <section id="move-semantics">
 <h3>Move Semantics<a class="headerlink" href="#move-semantics" title="Permalink to this heading"></a></h3>
@@ -653,6 +659,201 @@ An flag-style argument is created for each data type with a default value that w
 <span class="n">spdlog</span><span class="o">::</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;using {} engine with real distribution&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">use_ranlux</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s">&quot;ranlux&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s">&quot;minstd&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
+</section>
+<section id="templates-and-stl">
+<h3>Templates and STL<a class="headerlink" href="#templates-and-stl" title="Permalink to this heading"></a></h3>
+<section id="std-vector">
+<h4>std::vector<a class="headerlink" href="#std-vector" title="Permalink to this heading"></a></h4>
+<p><cite>std::vector</cite> is a dynamic array data structure in C++ that provides efficient memory management and flexible storage of elements, and it is important in scientific computing for its ability to handle large amounts of data efficiently.</p>
+<p>Using <cite>std::vector</cite> is preferable to using a C pointer based equivalent array because it provides automatic memory management, better safety and convenience, and improved performance for dynamic resizing and storage of elements.</p>
+<p>The advantages of using <cite>std::vector</cite> therefore outweigh any disadvantages, especially if you care about the balance of performance and safety as we do.</p>
+<p>The top 10 operations include:</p>
+<ul class="simple">
+<li><p><cite>push_back()</cite>: This function adds an element to the end of the vector.</p></li>
+<li><p><cite>pop_back()</cite>: This function removes the last element from the vector.</p></li>
+<li><p><cite>size()</cite>: This function returns the current number of elements in the vector.</p></li>
+<li><p><cite>resize()</cite>: This function resizes the vector to the specified number of elements. If the new size is larger than the current size, new elements are added with their default values. If the new size is smaller than the current size, excess elements are removed.</p></li>
+<li><p><cite>clear()</cite>: This function removes all elements from the vector.</p></li>
+<li><p><cite>empty()</cite>: This function returns true if the vector is empty, i.e., if it has no elements.</p></li>
+<li><p><cite>reserve()</cite>: This function reserves space in the vector for a certain number of elements. This can be useful when you know the approximate size of the vector in advance and want to avoid frequent reallocations.</p></li>
+<li><p><cite>begin()</cite> and end(): These functions return iterators that point to the first and one-past-the-last elements of the vector, respectively. You can use these iterators to traverse the elements of the vector.</p></li>
+<li><p><cite>at()</cite>: This function provides bounds checking when accessing elements of the vector. It throws an exception if the index is out of range.</p></li>
+<li><p><cite>operator[]</cite>: This function provides direct access to the elements of the vector using the square bracket notation. It does not perform bounds checking, so you need to be careful not to access elements out of range.</p></li>
+</ul>
+<p>In the following exmaple, we demonsrate the use of these most popular methods and use simple print statements to show that each method works as expected.</p>
+<p>We make use of the built-in support for random number generation. Uniform random numbers are generated between 0.0 and 1.0.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;random&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;fmt/core.h&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">random_device</span><span class="w"> </span><span class="n">rd</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">mt19937</span><span class="w"> </span><span class="n">gen</span><span class="p">(</span><span class="n">rd</span><span class="p">());</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">uniform_real_distribution</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">dist</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">v</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// push_back()</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">v</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">dist</span><span class="p">(</span><span class="n">gen</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// size()</span>
+<span class="w">    </span><span class="n">fmt</span><span class="o">::</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;size: {}</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
+
+<span class="w">    </span><span class="c1">// resize()</span>
+<span class="w">    </span><span class="n">v</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">);</span>
+<span class="w">    </span><span class="n">fmt</span><span class="o">::</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;size after resize: {}</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
+
+<span class="w">    </span><span class="c1">// reserve()</span>
+<span class="w">    </span><span class="n">v</span><span class="p">.</span><span class="n">reserve</span><span class="p">(</span><span class="mi">20</span><span class="p">);</span>
+<span class="w">    </span><span class="n">fmt</span><span class="o">::</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;capacity after reserve: {}</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">capacity</span><span class="p">());</span>
+
+<span class="w">    </span><span class="c1">// clear()</span>
+<span class="w">    </span><span class="n">v</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
+<span class="w">    </span><span class="n">fmt</span><span class="o">::</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;size after clear: {}</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
+
+<span class="w">    </span><span class="c1">// empty()</span>
+<span class="w">    </span><span class="n">fmt</span><span class="o">::</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;vector is {}</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s">&quot;empty&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s">&quot;not empty&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// pop_back()</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">v</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">dist</span><span class="p">(</span><span class="n">gen</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">v</span><span class="p">.</span><span class="n">pop_back</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// at()</span>
+<span class="w">    </span><span class="n">fmt</span><span class="o">::</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;first element: {}</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="mi">0</span><span class="p">));</span>
+<span class="w">    </span><span class="n">fmt</span><span class="o">::</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;last element: {}</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="n">v</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="mi">-1</span><span class="p">));</span>
+
+<span class="w">    </span><span class="c1">// operator[]</span>
+<span class="w">    </span><span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dist</span><span class="p">(</span><span class="n">gen</span><span class="p">);</span>
+<span class="w">    </span><span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dist</span><span class="p">(</span><span class="n">gen</span><span class="p">);</span>
+<span class="w">    </span><span class="n">v</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dist</span><span class="p">(</span><span class="n">gen</span><span class="p">);</span>
+<span class="w">    </span><span class="n">fmt</span><span class="o">::</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;first element: {}</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+<span class="w">    </span><span class="n">fmt</span><span class="o">::</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;last element: {}</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="p">[</span><span class="n">v</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="mi">-1</span><span class="p">]);</span>
+
+<span class="w">    </span><span class="c1">// iterators</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">end</span><span class="p">();</span><span class="w"> </span><span class="n">it</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">fmt</span><span class="o">::</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;{} &quot;</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="n">it</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">fmt</span><span class="o">::</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Your output may look like the following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">size</span><span class="p">:</span> <span class="mi">10</span>
+<span class="n">size</span> <span class="n">after</span> <span class="n">resize</span><span class="p">:</span> <span class="mi">5</span>
+<span class="n">capacity</span> <span class="n">after</span> <span class="n">reserve</span><span class="p">:</span> <span class="mi">20</span>
+<span class="n">size</span> <span class="n">after</span> <span class="n">clear</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">vector</span> <span class="ow">is</span> <span class="n">empty</span>
+<span class="n">first</span> <span class="n">element</span><span class="p">:</span> <span class="mf">0.492471</span>
+<span class="n">last</span> <span class="n">element</span><span class="p">:</span> <span class="mf">0.557134</span>
+<span class="n">first</span> <span class="n">element</span><span class="p">:</span> <span class="mf">0.958176</span>
+<span class="n">last</span> <span class="n">element</span><span class="p">:</span> <span class="mf">0.557134</span>
+<span class="mf">0.958176</span> <span class="mf">0.334128</span> <span class="mf">0.031727</span> <span class="mf">0.228955</span> <span class="mf">0.983797</span> <span class="mf">0.0328053</span> <span class="mf">0.788841</span> <span class="mf">0.462369</span> <span class="mf">0.557134</span>
+</pre></div>
+</div>
+</section>
+<section id="std-map">
+<h4>std::map<a class="headerlink" href="#std-map" title="Permalink to this heading"></a></h4>
+<p>Here are the top 10 most common std::map methods and a brief explanation of their functionality:</p>
+<ul class="simple">
+<li><p><cite>insert()</cite>: Inserts an element into the map with the specified key-value pair.</p></li>
+<li><p><cite>size()</cite>: Returns the number of elements in the map.</p></li>
+<li><p><cite>empty()</cite>: Checks whether the map is empty.</p></li>
+<li><p><cite>find()</cite>: Searches the map for an element with the specified key and returns an iterator to it, or returns end() if not found.</p></li>
+<li><p><cite>operator[]</cite>: Accesses the element with the specified key, or inserts a new element with the default value if not found.</p></li>
+<li><p><cite>erase()</cite>: Removes an element from the map with the specified key.</p></li>
+<li><p><cite>count()</cite>: Counts the number of elements in the map with the specified key.</p></li>
+<li><p><cite>clear()</cite>: Removes all elements from the map.</p></li>
+<li><p><cite>begin()</cite>: Returns an iterator to the first element in the map.</p></li>
+<li><p><cite>end()</cite>: Returns an iterator past the last element in the map.</p></li>
+</ul>
+<p>These methods provide essential functionality for managing key-value pairs in a map, and are widely used in various domains of programming, such as data processing, game development, and system programming, among others.</p>
+<p>In the following exmaple, we demonsrate the use of these most popular methods and use simple print statements to show that each method works as expected.</p>
+<p>We make use of the built-in support for random number generation. Uniform random numbers are generated between 0.0 and 1.0.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;map&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;random&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">random_device</span><span class="w"> </span><span class="n">rd</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">mt19937</span><span class="w"> </span><span class="n">gen</span><span class="p">(</span><span class="n">rd</span><span class="p">());</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">uniform_int_distribution</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">dist</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">m</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// insert</span>
+<span class="w">    </span><span class="n">m</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">make_pair</span><span class="p">(</span><span class="s">&quot;one&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">dist</span><span class="p">(</span><span class="n">gen</span><span class="p">)));</span>
+<span class="w">    </span><span class="n">m</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">make_pair</span><span class="p">(</span><span class="s">&quot;two&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">dist</span><span class="p">(</span><span class="n">gen</span><span class="p">)));</span>
+<span class="w">    </span><span class="n">m</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">make_pair</span><span class="p">(</span><span class="s">&quot;three&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">dist</span><span class="p">(</span><span class="n">gen</span><span class="p">)));</span>
+
+<span class="w">    </span><span class="c1">// size</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;size: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">m</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// empty</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;map is &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="p">(</span><span class="n">m</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s">&quot;empty&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s">&quot;not empty&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// find</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">m</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;two&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">it</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">m</span><span class="p">.</span><span class="n">end</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;value of key &#39;two&#39;: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">it</span><span class="o">-&gt;</span><span class="n">second</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;key &#39;two&#39; not found&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// operator[]</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;value of key &#39;three&#39;: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">m</span><span class="p">[</span><span class="s">&quot;three&quot;</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// erase</span>
+<span class="w">    </span><span class="n">m</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="s">&quot;one&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// count</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">m</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="s">&quot;one&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;count of key &#39;one&#39;: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// clear</span>
+<span class="w">    </span><span class="n">m</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;size after clear: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">m</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// iteration</span>
+<span class="w">    </span><span class="n">m</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">make_pair</span><span class="p">(</span><span class="s">&quot;one&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">dist</span><span class="p">(</span><span class="n">gen</span><span class="p">)));</span>
+<span class="w">    </span><span class="n">m</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">make_pair</span><span class="p">(</span><span class="s">&quot;two&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">dist</span><span class="p">(</span><span class="n">gen</span><span class="p">)));</span>
+<span class="w">    </span><span class="n">m</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">make_pair</span><span class="p">(</span><span class="s">&quot;three&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">dist</span><span class="p">(</span><span class="n">gen</span><span class="p">)));</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">m</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">m</span><span class="p">.</span><span class="n">end</span><span class="p">();</span><span class="w"> </span><span class="n">it</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">it</span><span class="o">-&gt;</span><span class="n">first</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; =&gt; &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">it</span><span class="o">-&gt;</span><span class="n">second</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Your output may look like the following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">size</span><span class="p">:</span> <span class="mi">3</span>
+<span class="nb">map</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">empty</span>
+<span class="n">value</span> <span class="n">of</span> <span class="n">key</span> <span class="s1">&#39;two&#39;</span><span class="p">:</span> <span class="mi">78</span>
+<span class="n">value</span> <span class="n">of</span> <span class="n">key</span> <span class="s1">&#39;three&#39;</span><span class="p">:</span> <span class="mi">34</span>
+<span class="n">count</span> <span class="n">of</span> <span class="n">key</span> <span class="s1">&#39;one&#39;</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">size</span> <span class="n">after</span> <span class="n">clear</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">one</span> <span class="o">=&gt;</span> <span class="mi">3</span>
+<span class="n">three</span> <span class="o">=&gt;</span> <span class="mi">75</span>
+<span class="n">two</span> <span class="o">=&gt;</span> <span class="mi">37</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="smart-pointers">
+<h3>Smart Pointers<a class="headerlink" href="#smart-pointers" title="Permalink to this heading"></a></h3>
+</section>
+<section id="threading">
+<h3>Threading<a class="headerlink" href="#threading" title="Permalink to this heading"></a></h3>
+</section>
+<section id="exception-handling">
+<h3>Exception Handling<a class="headerlink" href="#exception-handling" title="Permalink to this heading"></a></h3>
 </section>
 </section>
 </section>

@@ -5,6 +5,8 @@ If you want to learn SYCL and OneAPI *properly*  you will need to come up to spe
 
 .. note:: We are particularly impressed with how C++ has incorporated features from modern object-functional languages.  Please let us know if you think other features are worthy of inclusion. As this section is still in draft status, we realize our list may not be exhaustive.
 
+Standard Library
+-----------------
 
 Overview of Modern C++
 -----------------------
@@ -129,6 +131,11 @@ Let's take a look at how to *use* this class:
        return 0;
    }
    
+Lambda Expressions
+^^^^^^^^^^^^^^^^^^^
+
+
+
 Move Semantics
 ^^^^^^^^^^^^^^
 
@@ -662,4 +669,225 @@ Logging
 
    spdlog::info("{} players are going to throw {} darts each", number_of_players, number_of_darts);
    spdlog::info("using {} engine with real distribution", use_ranlux ? "ranlux" : "minstd");
+
+Templates and STL
+^^^^^^^^^^^^^^^^^^
+
+std::vector
+""""""""""""
+
+`std::vector` is a dynamic array data structure in C++ that provides efficient memory management and flexible storage of elements, and it is important in scientific computing for its ability to handle large amounts of data efficiently.
+
+Using `std::vector` is preferable to using a C pointer based equivalent array because it provides automatic memory management, better safety and convenience, and improved performance for dynamic resizing and storage of elements.
+
+The advantages of using `std::vector` therefore outweigh any disadvantages, especially if you care about the balance of performance and safety as we do.
+
+The top 10 operations include:
+
+- `push_back()`: This function adds an element to the end of the vector.
+ 
+- `pop_back()`: This function removes the last element from the vector.
+ 
+- `size()`: This function returns the current number of elements in the vector.
+ 
+- `resize()`: This function resizes the vector to the specified number of elements. If the new size is larger than the current size, new elements are added with their default values. If the new size is smaller than the current size, excess elements are removed.
+ 
+- `clear()`: This function removes all elements from the vector.
+ 
+- `empty()`: This function returns true if the vector is empty, i.e., if it has no elements.
+ 
+- `reserve()`: This function reserves space in the vector for a certain number of elements. This can be useful when you know the approximate size of the vector in advance and want to avoid frequent reallocations.
+ 
+- `begin()` and end(): These functions return iterators that point to the first and one-past-the-last elements of the vector, respectively. You can use these iterators to traverse the elements of the vector.
+ 
+- `at()`: This function provides bounds checking when accessing elements of the vector. It throws an exception if the index is out of range.
+ 
+- `operator[]`: This function provides direct access to the elements of the vector using the square bracket notation. It does not perform bounds checking, so you need to be careful not to access elements out of range.
+ 
+
+In the following exmaple, we demonsrate the use of these most popular methods and use simple print statements to show that each method works as expected.
+
+We make use of the built-in support for random number generation. Uniform random numbers are generated between 0.0 and 1.0.
+
+.. code-block:: cpp
+
+   #include <iostream>
+   #include <vector>
+   #include <random>
+   #include <fmt/core.h>
+   
+   int main() {
+       std::random_device rd;
+       std::mt19937 gen(rd());
+       std::uniform_real_distribution<double> dist(0.0, 1.0);
+   
+       std::vector<double> v;
+   
+       // push_back()
+       for (int i = 0; i < 10; i++) {
+           v.push_back(dist(gen));
+       }
+   
+       // size()
+       fmt::print("size: {}\n", v.size());
+   
+       // resize()
+       v.resize(5, 0.0);
+       fmt::print("size after resize: {}\n", v.size());
+   
+       // reserve()
+       v.reserve(20);
+       fmt::print("capacity after reserve: {}\n", v.capacity());
+   
+       // clear()
+       v.clear();
+       fmt::print("size after clear: {}\n", v.size());
+   
+       // empty()
+       fmt::print("vector is {}\n", v.empty() ? "empty" : "not empty");
+   
+       // pop_back()
+       for (int i = 0; i < 10; i++) {
+           v.push_back(dist(gen));
+       }
+       v.pop_back();
+   
+       // at()
+       fmt::print("first element: {}\n", v.at(0));
+       fmt::print("last element: {}\n", v.at(v.size()-1));
+   
+       // operator[]
+       v[0] = dist(gen);
+       v[1] = dist(gen);
+       v[2] = dist(gen);
+       fmt::print("first element: {}\n", v[0]);
+       fmt::print("last element: {}\n", v[v.size()-1]);
+   
+       // iterators
+       for (auto it = v.begin(); it != v.end(); it++) {
+           fmt::print("{} ", *it);
+       }
+       fmt::print("\n");
+   
+       return 0;
+   }
+   
+Your output may look like the following:
+
+::
+
+   size: 10
+   size after resize: 5
+   capacity after reserve: 20
+   size after clear: 0
+   vector is empty
+   first element: 0.492471
+   last element: 0.557134
+   first element: 0.958176
+   last element: 0.557134
+   0.958176 0.334128 0.031727 0.228955 0.983797 0.0328053 0.788841 0.462369 0.557134
+
+
+std::map
+""""""""""""
+
+Here are the top 10 most common std::map methods and a brief explanation of their functionality:
+
+- `insert()`: Inserts an element into the map with the specified key-value pair.
+- `size()`: Returns the number of elements in the map.
+- `empty()`: Checks whether the map is empty.
+- `find()`: Searches the map for an element with the specified key and returns an iterator to it, or returns end() if not found.
+- `operator[]`: Accesses the element with the specified key, or inserts a new element with the default value if not found.
+- `erase()`: Removes an element from the map with the specified key.
+- `count()`: Counts the number of elements in the map with the specified key.
+- `clear()`: Removes all elements from the map.
+- `begin()`: Returns an iterator to the first element in the map.
+- `end()`: Returns an iterator past the last element in the map.
+
+These methods provide essential functionality for managing key-value pairs in a map, and are widely used in various domains of programming, such as data processing, game development, and system programming, among others.
+
+
+In the following exmaple, we demonsrate the use of these most popular methods and use simple print statements to show that each method works as expected.
+
+We make use of the built-in support for random number generation. Uniform random numbers are generated between 0.0 and 1.0.
+
+.. code-block:: cpp
+
+   #include <iostream>
+   #include <map>
+   #include <random>
+   
+   int main() {
+       std::random_device rd;
+       std::mt19937 gen(rd());
+       std::uniform_int_distribution<int> dist(1, 100);
+   
+       std::map<std::string, int> m;
+   
+       // insert
+       m.insert(std::make_pair("one", dist(gen)));
+       m.insert(std::make_pair("two", dist(gen)));
+       m.insert(std::make_pair("three", dist(gen)));
+   
+       // size
+       std::cout << "size: " << m.size() << std::endl;
+   
+       // empty
+       std::cout << "map is " << (m.empty() ? "empty" : "not empty") << std::endl;
+   
+       // find
+       auto it = m.find("two");
+       if (it != m.end()) {
+           std::cout << "value of key 'two': " << it->second << std::endl;
+       } else {
+           std::cout << "key 'two' not found" << std::endl;
+       }
+   
+       // operator[]
+       std::cout << "value of key 'three': " << m["three"] << std::endl;
+   
+       // erase
+       m.erase("one");
+   
+       // count
+       int n = m.count("one");
+       std::cout << "count of key 'one': " << n << std::endl;
+   
+       // clear
+       m.clear();
+       std::cout << "size after clear: " << m.size() << std::endl;
+   
+       // iteration
+       m.insert(std::make_pair("one", dist(gen)));
+       m.insert(std::make_pair("two", dist(gen)));
+       m.insert(std::make_pair("three", dist(gen)));
+       for (auto it = m.begin(); it != m.end(); it++) {
+           std::cout << it->first << " => " << it->second << std::endl;
+       }
+   
+       return 0;
+   }
+   
+Your output may look like the following:
+   
+::
+
+   size: 3
+   map is not empty
+   value of key 'two': 78
+   value of key 'three': 34
+   count of key 'one': 0
+   size after clear: 0
+   one => 3
+   three => 75
+   two => 37
+
+Smart Pointers
+^^^^^^^^^^^^^^^
+
+Threading
+^^^^^^^^^^^^^^^
+
+Exception Handling
+^^^^^^^^^^^^^^^^^^^
 
