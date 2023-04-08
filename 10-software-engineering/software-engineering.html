@@ -44,14 +44,63 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../00-preliminaries/preliminaries.html">Preliminaries</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Software Engineering</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../15-modern-c%2B%2B/modern-cpp.html">Modern C++ as a Better C (and C++)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../00-preliminaries/preliminaries.html">Preliminaries</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../00-preliminaries/preliminaries.html#motivation">Motivation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../00-preliminaries/preliminaries.html#topics">Topics</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Software Engineering</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#cmake">Cmake</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#basic-organization-of-cmake">Basic organization of CMake</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#variables-that-affect-working-with-dpc-tooling">Variables that affect working with DPC++ tooling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#separating-build-from-source-viewpathed-building">Separating build from source (viewpathed building)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#fetching-external-dependencies">Fetching external dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#important-external-dependencies-for-c-17-20-and-beyond">Important external dependencies for C++ 17, 20, and beyond</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#unit-testing-with-googletest">Unit Testing with GoogleTest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#continuous-integration">Continuous Integration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#github-actions">GitHub Actions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gitlab">GitLab?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../15-modern-c%2B%2B/modern-cpp.html">Modern C++ as a Better C (and C++)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../15-modern-c%2B%2B/modern-cpp.html#standard-library">Standard Library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../15-modern-c%2B%2B/modern-cpp.html#overview-of-modern-c">Overview of Modern C++</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../15-modern-c%2B%2B/modern-cpp.html#language-features">Language Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../15-modern-c%2B%2B/modern-cpp.html#the-modern-c-class">The Modern C++ Class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../15-modern-c%2B%2B/modern-cpp.html#lambda-expressions">Lambda Expressions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../15-modern-c%2B%2B/modern-cpp.html#move-semantics">Move Semantics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../15-modern-c%2B%2B/modern-cpp.html#naming-conventions">Naming Conventions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../15-modern-c%2B%2B/modern-cpp.html#adding-this-to-a-cmake-folder">Adding this to a CMake folder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../15-modern-c%2B%2B/modern-cpp.html#co-routines">Co-routines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../15-modern-c%2B%2B/modern-cpp.html#automatic-variables">Automatic variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../15-modern-c%2B%2B/modern-cpp.html#constants-and-constant-expressions">Constants and Constant Expressions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../15-modern-c%2B%2B/modern-cpp.html#initializer-expressions">initializer expressions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../15-modern-c%2B%2B/modern-cpp.html#format-and-fmt">Format and fmt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../15-modern-c%2B%2B/modern-cpp.html#command-line-argument-handling">Command-line Argument Handling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../15-modern-c%2B%2B/modern-cpp.html#better-generics-for-mathematical-functions">Better Generics for Mathematical Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../15-modern-c%2B%2B/modern-cpp.html#logging">Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../15-modern-c%2B%2B/modern-cpp.html#templates-and-stl">Templates and STL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../15-modern-c%2B%2B/modern-cpp.html#smart-pointers">Smart Pointers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../15-modern-c%2B%2B/modern-cpp.html#threading">Threading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../15-modern-c%2B%2B/modern-cpp.html#exception-handling">Exception Handling</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../18-dpcpp/dpcpp.html">Data-Parallel C++</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../25-devices/devices.html">Selecting and Using Devices</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../30-performance/performance.html">Performance</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../40-going-distributed/distributed.html">Distributed Computing with OneAPI</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../99-sandbox/issues.html">Issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../99-sandbox/issues.html">Issues</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../99-sandbox/issues.html#heading">Heading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../99-sandbox/issues.html#examples">Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../99-sandbox/issues.html#illustration">Illustration</a></li>
+</ul>
+</li>
 </ul>
 
         </div>
