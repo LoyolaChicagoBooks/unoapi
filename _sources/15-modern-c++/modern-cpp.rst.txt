@@ -835,15 +835,20 @@ Only log messages written to this level or higher will actulaly be displayed.
        if (!message.empty()) {
            if (app.got("--trace")) {
                SPDLOG_TRACE(logger, message);
-           } else if (app.got("--debug")) {
+           }
+           if (app.got("--debug")) {
                SPDLOG_DEBUG(logger, message);
-           } else if (app.got("--info")) {
+           }
+           if (app.got("--info")) {
                SPDLOG_INFO(logger, message);
-           } else if (app.got("--warn")) {
+           }
+           if (app.got("--warn")) {
                SPDLOG_WARN(logger, message);
-           } else if (app.got("--error")) {
+           }
+           if (app.got("--error")) {
                SPDLOG_ERROR(logger, message);
-           } else if (app.got("--fatal")) {
+           }
+           if (app.got("--fatal")) {
                SPDLOG_CRITICAL(logger, message);
            }
        }
@@ -851,8 +856,7 @@ Only log messages written to this level or higher will actulaly be displayed.
        return 0;
    }
 
-
-
+   
 Templates and STL
 ^^^^^^^^^^^^^^^^^^
 
