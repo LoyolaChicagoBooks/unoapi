@@ -44,21 +44,8 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../00-preliminaries/preliminaries.html">Preliminaries</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../00-preliminaries/preliminaries.html#download">Download</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../00-preliminaries/preliminaries.html#motivation">Motivation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../00-preliminaries/preliminaries.html#topics">Topics</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../10-software-engineering/software-engineering.html">Software Engineering</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../10-software-engineering/software-engineering.html#testing">Testing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../10-software-engineering/software-engineering.html#version-control">Version Control</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../10-software-engineering/software-engineering.html#documentation">Documentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../10-software-engineering/software-engineering.html#security-privacy">Security/Privacy</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../10-software-engineering/software-engineering.html#professionalism-ethics">Professionalism/Ethics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../10-software-engineering/software-engineering.html#for-more-information">For More Information</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../00-preliminaries/preliminaries.html">Preliminaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10-software-engineering/software-engineering.html">Software Engineering</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Modern C++ as a Better C (and C++)</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#standard-library">Standard Library</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#overview-of-modern-c">Overview of Modern C++</a></li>
@@ -92,12 +79,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../25-devices/devices.html">Selecting and Using Devices</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../30-performance/performance.html">Performance</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../40-going-distributed/distributed.html">Distributed Computing with OneAPI</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../99-sandbox/issues.html">Issues</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../99-sandbox/issues.html#heading">Heading</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../99-sandbox/issues.html#examples">Examples</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../99-sandbox/issues.html#illustration">Illustration</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../99-sandbox/issues.html">Issues</a></li>
 </ul>
 
         </div>
@@ -116,7 +98,7 @@
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
       <li class="breadcrumb-item active">Modern C++ as a Better C (and C++)</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/15-modern-c++/modern-cpp.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/15-modern-cpp/modern-cpp.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -824,48 +806,51 @@ Only log messages written to this level or higher will actulaly be displayed.</p
 
 <span class="w">    </span><span class="n">CLI</span><span class="o">::</span><span class="n">App</span><span class="w"> </span><span class="n">app</span><span class="p">(</span><span class="s">&quot;CLI11 Logging Example&quot;</span><span class="p">);</span>
 
-<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">message</span><span class="p">;</span>
-<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">logLevel</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">trace_message</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">debug_message</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">info_message</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">warn_message</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">error_message</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">fatal_message</span><span class="p">;</span>
 
 <span class="w">    </span><span class="c1">// add options for each logging level</span>
-<span class="w">    </span><span class="n">app</span><span class="p">.</span><span class="n">add_option</span><span class="p">(</span><span class="s">&quot;--trace&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Log a trace message&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="n">app</span><span class="p">.</span><span class="n">add_option</span><span class="p">(</span><span class="s">&quot;--debug&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Log a debug message&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="n">app</span><span class="p">.</span><span class="n">add_option</span><span class="p">(</span><span class="s">&quot;--info&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Log an info message&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="n">app</span><span class="p">.</span><span class="n">add_option</span><span class="p">(</span><span class="s">&quot;--warn&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Log a warn message&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="n">app</span><span class="p">.</span><span class="n">add_option</span><span class="p">(</span><span class="s">&quot;--error&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Log an error message&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="n">app</span><span class="p">.</span><span class="n">add_option</span><span class="p">(</span><span class="s">&quot;--fatal&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Log a fatal message&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">app</span><span class="p">.</span><span class="n">add_option</span><span class="p">(</span><span class="s">&quot;--trace&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">trace_message</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Log a trace message&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">app</span><span class="p">.</span><span class="n">add_option</span><span class="p">(</span><span class="s">&quot;--debug&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">debug_message</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Log a debug message&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">app</span><span class="p">.</span><span class="n">add_option</span><span class="p">(</span><span class="s">&quot;--info&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">info_message</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Log an info message&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">app</span><span class="p">.</span><span class="n">add_option</span><span class="p">(</span><span class="s">&quot;--warn&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">warn_message</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Log a warn message&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">app</span><span class="p">.</span><span class="n">add_option</span><span class="p">(</span><span class="s">&quot;--error&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">error_message</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Log an error message&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">app</span><span class="p">.</span><span class="n">add_option</span><span class="p">(</span><span class="s">&quot;--fatal&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">fatal_message</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Log a fatal message&quot;</span><span class="p">);</span>
 
 <span class="w">    </span><span class="c1">// add option to set the log level</span>
-<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">allowedLogLevels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="s">&quot;trace&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;debug&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;info&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;warn&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;error&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;fatal&quot;</span><span class="p">};</span>
-<span class="w">    </span><span class="n">app</span><span class="p">.</span><span class="n">add_option</span><span class="p">(</span><span class="s">&quot;--log-level&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">logLevel</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Set the log level&quot;</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">check</span><span class="p">(</span><span class="n">CLI</span><span class="o">::</span><span class="n">IsMember</span><span class="p">(</span><span class="n">allowedLogLevels</span><span class="p">))</span><span class="o">-&gt;</span><span class="n">default_val</span><span class="p">(</span><span class="s">&quot;info&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">allowed_log_levels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="s">&quot;trace&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;debug&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;info&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;warn&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;error&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;fatal&quot;</span><span class="p">};</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">log_level</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;info&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">app</span><span class="p">.</span><span class="n">add_option</span><span class="p">(</span><span class="s">&quot;--log-level&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">log_level</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Set the log level&quot;</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">check</span><span class="p">(</span><span class="n">CLI</span><span class="o">::</span><span class="n">IsMember</span><span class="p">(</span><span class="n">allowed_log_levels</span><span class="p">))</span><span class="o">-&gt;</span><span class="n">default_val</span><span class="p">(</span><span class="n">log_level</span><span class="p">);</span>
 
 <span class="w">    </span><span class="c1">// parse the command line arguments</span>
 <span class="w">    </span><span class="n">CLI11_PARSE</span><span class="p">(</span><span class="n">app</span><span class="p">,</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">);</span>
 
 <span class="w">    </span><span class="c1">// configure the logger</span>
 <span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">logger</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">spdlog</span><span class="o">::</span><span class="n">stdout_color_mt</span><span class="p">(</span><span class="s">&quot;console&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="n">logger</span><span class="o">-&gt;</span><span class="n">set_level</span><span class="p">(</span><span class="n">spdlog</span><span class="o">::</span><span class="n">level</span><span class="o">::</span><span class="n">from_str</span><span class="p">(</span><span class="n">logLevel</span><span class="p">));</span>
+<span class="w">    </span><span class="n">logger</span><span class="o">-&gt;</span><span class="n">set_level</span><span class="p">(</span><span class="n">spdlog</span><span class="o">::</span><span class="n">level</span><span class="o">::</span><span class="n">from_str</span><span class="p">(</span><span class="n">log_level</span><span class="p">));</span>
 
 <span class="w">    </span><span class="c1">// log the message at the appropriate level</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">message</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">app</span><span class="p">.</span><span class="n">got</span><span class="p">(</span><span class="s">&quot;--trace&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="n">SPDLOG_TRACE</span><span class="p">(</span><span class="n">logger</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">);</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">app</span><span class="p">.</span><span class="n">got</span><span class="p">(</span><span class="s">&quot;--debug&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="n">SPDLOG_DEBUG</span><span class="p">(</span><span class="n">logger</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">);</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">app</span><span class="p">.</span><span class="n">got</span><span class="p">(</span><span class="s">&quot;--info&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="n">SPDLOG_INFO</span><span class="p">(</span><span class="n">logger</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">);</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">app</span><span class="p">.</span><span class="n">got</span><span class="p">(</span><span class="s">&quot;--warn&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="n">SPDLOG_WARN</span><span class="p">(</span><span class="n">logger</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">);</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">app</span><span class="p">.</span><span class="n">got</span><span class="p">(</span><span class="s">&quot;--error&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="n">SPDLOG_ERROR</span><span class="p">(</span><span class="n">logger</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">);</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">app</span><span class="p">.</span><span class="n">got</span><span class="p">(</span><span class="s">&quot;--fatal&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="n">SPDLOG_CRITICAL</span><span class="p">(</span><span class="n">logger</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">);</span>
-<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">trace_message</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">SPDLOG_TRACE</span><span class="p">(</span><span class="n">logger</span><span class="p">,</span><span class="w"> </span><span class="n">trace_message</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">debug_message</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">SPDLOG_DEBUG</span><span class="p">(</span><span class="n">logger</span><span class="p">,</span><span class="w"> </span><span class="n">debug_message</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">info_message</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">SPDLOG_INFO</span><span class="p">(</span><span class="n">logger</span><span class="p">,</span><span class="w"> </span><span class="n">info_message</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">warn_message</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">SPDLOG_WARN</span><span class="p">(</span><span class="n">logger</span><span class="p">,</span><span class="w"> </span><span class="n">warn_message</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">error_message</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">SPDLOG_ERROR</span><span class="p">(</span><span class="n">logger</span><span class="p">,</span><span class="w"> </span><span class="n">error_message</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">fatal_message</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">SPDLOG_CRITICAL</span><span class="p">(</span><span class="n">logger</span><span class="p">,</span><span class="w"> </span><span class="n">fatal_message</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>

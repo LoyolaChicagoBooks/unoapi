@@ -11,7 +11,7 @@ Welcome to the UnoAPI Systems Modules
 
    00-preliminaries/preliminaries.rst
    10-software-engineering/software-engineering.rst
-   15-modern-c++/modern-cpp.rst
+   15-modern-cpp/modern-cpp.rst
    18-dpcpp/dpcpp.rst
    25-devices/devices.rst
    30-performance/performance.rst
