@@ -47,10 +47,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../00-preliminaries/preliminaries.html">Preliminaries</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../10-software-engineering/software-engineering.html">Software Engineering</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Modern C++ as a Better C (and C++)</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#standard-library">Standard Library</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#overview-of-modern-c">Overview of Modern C++</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#language-features">Language Features</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#the-modern-c-class">The Modern C++ Class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#standard-library">Standard Library</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#lambda-expressions">Lambda Expressions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#move-semantics">Move Semantics</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#naming-conventions">Naming Conventions</a></li>
@@ -108,14 +108,15 @@
              
   <section id="modern-c-as-a-better-c-and-c">
 <h1>Modern C++ as a Better C (and C++)<a class="headerlink" href="#modern-c-as-a-better-c-and-c" title="Permalink to this heading"></a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This text contains a mix of original writing and strategic use of Chat-GPT4. All examples will be available in our repository with an appropriate <strong>cmake</strong> build file and tests. We will also make our prompts and analysis available, similar to what we have done for our recent ongoing study of Chat-GPT4 and Systems Programming. See <a class="reference external" href="https://doi.org/10.6084/m9.figshare.22257274">https://doi.org/10.6084/m9.figshare.22257274</a>.</p>
+</div>
 <p>If you want to learn SYCL and OneAPI <em>properly</em>  you will need to come up to speed with Modern C++.  In our experience, we know many people who say they “know” C++.  C++ has undergone numerous changes since it was introduced in the 1980s and 1990s.  While the original syntax remains intact, if you have not kept up with the changes since then (notably, C++ 11), you should take steps to refresh your knowlege of the language, since many of its recent features make it virtually <em>unrecognizable</em> from its earlier incarnations.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>We are particularly impressed with how C++ has incorporated features from modern object-functional languages.  Please let us know if you think other features are worthy of inclusion. As this section is still in draft status, we realize our list may not be exhaustive.</p>
 </div>
-<section id="standard-library">
-<h2>Standard Library<a class="headerlink" href="#standard-library" title="Permalink to this heading"></a></h2>
-</section>
 <section id="overview-of-modern-c">
 <h2>Overview of Modern C++<a class="headerlink" href="#overview-of-modern-c" title="Permalink to this heading"></a></h2>
 <p>If you already know some Object-Oriented Programming (OOP) concepts and want to learn modern C++, here are some topics that are worthy of exploration:</p>
@@ -136,8 +137,8 @@
 <section id="the-modern-c-class">
 <h3>The Modern C++ Class<a class="headerlink" href="#the-modern-c-class" title="Permalink to this heading"></a></h3>
 <p>Even if you programmed with C++ in the past, you need to understand that C++ has changed a great deal since its debut in the late-1980s and early 1990s.</p>
-<p>Here’s an example implementation of the familiar Point class with x, y, and z parameters in C++, supporting move semantics:</p>
-<p>You can assume that this code can be placed in a C++ header file (e.g. Point.h):</p>
+<p>Here’s an example implementation of the familiar Point class with <code class="docutils literal notranslate"><span class="pre">x</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code>, and <code class="docutils literal notranslate"><span class="pre">z</span></code> parameters in modern C++ with support for move semantics:</p>
+<p>You can assume that this code can be placed in a C++ header file (e.g. Point.h) as a header-only solution:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#ifndef POINT_H</span>
 <span class="cp">#define POINT_H</span>
 
@@ -183,9 +184,9 @@
 <span class="cp">#endif </span><span class="c1">// POINT_H</span>
 </pre></div>
 </div>
-<p>In this implementation, the <cite>Point</cite> class has three private data members <cite>x_</cite>, <cite>y_</cite>, and <cite>z_</cite>, representing the coordinates of the point. The class also provides a default constructor and a constructor that takes the <cite>x</cite>, <cite>y</cite>, and <cite>z</cite> values as parameters.</p>
-<p>The class also supports the concept of <em>move semantics</em> by providing a constructor and move assignment operators. The move constructor takes an r-value reference to another <cite>Point</cite> object, exchanges its data members with the current object using <cite>std::exchange</cite>, and sets the exchanged data members to zero. The move assignment operator works similarly to the move constructor, but it returns a reference to the current object.</p>
-<p>Finally, the class provides accessors for the <cite>x</cite>, <cite>y</cite>, and <cite>z</cite> values, which return the corresponding private data members.</p>
+<p>In this implementation, the <code class="docutils literal notranslate"><span class="pre">Point</span></code> class has three private data members <code class="docutils literal notranslate"><span class="pre">x_</span></code>, <code class="docutils literal notranslate"><span class="pre">y_</span></code>, and <code class="docutils literal notranslate"><span class="pre">z_</span></code>, representing the coordinates of the point. The class also provides a default constructor and a constructor that takes the <code class="docutils literal notranslate"><span class="pre">x</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code>, and <code class="docutils literal notranslate"><span class="pre">z</span></code> values as parameters.</p>
+<p>The class also demonstrates the concept of <em>move semantics</em> by providing a constructor and move assignment operators. The move constructor takes an r-value reference to another <code class="docutils literal notranslate"><span class="pre">Point</span></code> object, exchanges its data members with the current object using <code class="docutils literal notranslate"><span class="pre">std::exchange</span></code>, and sets the exchanged data members to zero. The move assignment operator works similarly to the move constructor, but it returns a reference to the current object.</p>
+<p>Finally, the class provides accessors for the <code class="docutils literal notranslate"><span class="pre">x</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code>, and <code class="docutils literal notranslate"><span class="pre">z</span></code> values, which return the corresponding private data members.</p>
 <p>Let’s take a look at how to <em>use</em> this class:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;Point.h&quot;</span>
@@ -219,8 +220,19 @@
 </pre></div>
 </div>
 </section>
+<section id="standard-library">
+<h3>Standard Library<a class="headerlink" href="#standard-library" title="Permalink to this heading"></a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Coming soon.  Short version: The standard library is much more than I/O.</p>
+</div>
+</section>
 <section id="lambda-expressions">
 <h3>Lambda Expressions<a class="headerlink" href="#lambda-expressions" title="Permalink to this heading"></a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Coming soon. I have put together some nice science focused examples of this.</p>
+</div>
 </section>
 <section id="move-semantics">
 <h3>Move Semantics<a class="headerlink" href="#move-semantics" title="Permalink to this heading"></a></h3>
