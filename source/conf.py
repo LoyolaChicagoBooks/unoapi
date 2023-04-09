@@ -107,7 +107,7 @@ html_theme_options = {
     "vcs_pageview_mode": "edit",
     'style_nav_header_background': '#922247',
     # Toc options
-    'collapse_navigation': False,
+    'collapse_navigation': True,
     'sticky_navigation': True,
     'navigation_depth': -1,
     'includehidden': True,

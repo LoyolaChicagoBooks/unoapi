@@ -809,53 +809,56 @@ Only log messages written to this level or higher will actulaly be displayed.
    
        CLI::App app("CLI11 Logging Example");
        
-       std::string message;
-       std::string logLevel;
+       std::string trace_message;
+       std::string debug_message;
+       std::string info_message;
+       std::string warn_message;
+       std::string error_message;
+       std::string fatal_message;
        
        // add options for each logging level
-       app.add_option("--trace", message, "Log a trace message");
-       app.add_option("--debug", message, "Log a debug message");
-       app.add_option("--info", message, "Log an info message");
-       app.add_option("--warn", message, "Log a warn message");
-       app.add_option("--error", message, "Log an error message");
-       app.add_option("--fatal", message, "Log a fatal message");
+       app.add_option("--trace", trace_message, "Log a trace message");
+       app.add_option("--debug", debug_message, "Log a debug message");
+       app.add_option("--info", info_message, "Log an info message");
+       app.add_option("--warn", warn_message, "Log a warn message");
+       app.add_option("--error", error_message, "Log an error message");
+       app.add_option("--fatal", fatal_message, "Log a fatal message");
    
        // add option to set the log level
-       std::vector<std::string> allowedLogLevels = {"trace", "debug", "info", "warn", "error", "fatal"};
-       app.add_option("--log-level", logLevel, "Set the log level")->check(CLI::IsMember(allowedLogLevels))->default_val("info");
+       std::vector<std::string> allowed_log_levels = {"trace", "debug", "info", "warn", "error", "fatal"};
+       std::string log_level = "info";
+       app.add_option("--log-level", log_level, "Set the log level")->check(CLI::IsMember(allowed_log_levels))->default_val(log_level);
    
        // parse the command line arguments
        CLI11_PARSE(app, argc, argv);
    
        // configure the logger
        auto logger = spdlog::stdout_color_mt("console");
-       logger->set_level(spdlog::level::from_str(logLevel));
+       logger->set_level(spdlog::level::from_str(log_level));
    
        // log the message at the appropriate level
-       if (!message.empty()) {
-           if (app.got("--trace")) {
-               SPDLOG_TRACE(logger, message);
-           }
-           if (app.got("--debug")) {
-               SPDLOG_DEBUG(logger, message);
-           }
-           if (app.got("--info")) {
-               SPDLOG_INFO(logger, message);
-           }
-           if (app.got("--warn")) {
-               SPDLOG_WARN(logger, message);
-           }
-           if (app.got("--error")) {
-               SPDLOG_ERROR(logger, message);
-           }
-           if (app.got("--fatal")) {
-               SPDLOG_CRITICAL(logger, message);
-           }
+       if (!trace_message.empty()) {
+           SPDLOG_TRACE(logger, trace_message);
+       }
+       if (!debug_message.empty()) {
+           SPDLOG_DEBUG(logger, debug_message);
+       }
+       if (!info_message.empty()) {
+           SPDLOG_INFO(logger, info_message);
+       }
+       if (!warn_message.empty()) {
+           SPDLOG_WARN(logger, warn_message);
+       }
+       if (!error_message.empty()) {
+           SPDLOG_ERROR(logger, error_message);
+       }
+       if (!fatal_message.empty()) {
+           SPDLOG_CRITICAL(logger, fatal_message);
        }
    
        return 0;
    }
-
+   
    
 Templates and STL
 ^^^^^^^^^^^^^^^^^^
