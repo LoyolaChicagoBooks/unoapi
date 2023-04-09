@@ -1,12 +1,11 @@
 Modern C++ as a Better C (and C++)
 ==================================
 
+.. note:: This text contains a mix of original writing and strategic use of Chat-GPT4. All examples will be available in our repository with an appropriate **cmake** build file and tests. We will also make our prompts and analysis available, similar to what we have done for our recent ongoing study of Chat-GPT4 and Systems Programming. See https://doi.org/10.6084/m9.figshare.22257274.
+
 If you want to learn SYCL and OneAPI *properly*  you will need to come up to speed with Modern C++.  In our experience, we know many people who say they "know" C++.  C++ has undergone numerous changes since it was introduced in the 1980s and 1990s.  While the original syntax remains intact, if you have not kept up with the changes since then (notably, C++ 11), you should take steps to refresh your knowlege of the language, since many of its recent features make it virtually *unrecognizable* from its earlier incarnations.
 
 .. note:: We are particularly impressed with how C++ has incorporated features from modern object-functional languages.  Please let us know if you think other features are worthy of inclusion. As this section is still in draft status, we realize our list may not be exhaustive.
-
-Standard Library
------------------
 
 Overview of Modern C++
 -----------------------
@@ -40,9 +39,9 @@ The Modern C++ Class
 
 Even if you programmed with C++ in the past, you need to understand that C++ has changed a great deal since its debut in the late-1980s and early 1990s.
 
-Here's an example implementation of the familiar Point class with x, y, and z parameters in C++, supporting move semantics:
+Here's an example implementation of the familiar Point class with ``x``, ``y``, and ``z`` parameters in modern C++ with support for move semantics:
 
-You can assume that this code can be placed in a C++ header file (e.g. Point.h):
+You can assume that this code can be placed in a C++ header file (e.g. Point.h) as a header-only solution:
 
 .. code-block:: cpp
 
@@ -91,11 +90,11 @@ You can assume that this code can be placed in a C++ header file (e.g. Point.h):
    #endif // POINT_H
 
 
-In this implementation, the `Point` class has three private data members `x_`, `y_`, and `z_`, representing the coordinates of the point. The class also provides a default constructor and a constructor that takes the `x`, `y`, and `z` values as parameters.
+In this implementation, the ``Point`` class has three private data members ``x_``, ``y_``, and ``z_``, representing the coordinates of the point. The class also provides a default constructor and a constructor that takes the ``x``, ``y``, and ``z`` values as parameters.
 
-The class also supports the concept of *move semantics* by providing a constructor and move assignment operators. The move constructor takes an r-value reference to another `Point` object, exchanges its data members with the current object using `std::exchange`, and sets the exchanged data members to zero. The move assignment operator works similarly to the move constructor, but it returns a reference to the current object.
+The class also demonstrates the concept of *move semantics* by providing a constructor and move assignment operators. The move constructor takes an r-value reference to another ``Point`` object, exchanges its data members with the current object using ``std::exchange``, and sets the exchanged data members to zero. The move assignment operator works similarly to the move constructor, but it returns a reference to the current object.
 
-Finally, the class provides accessors for the `x`, `y`, and `z` values, which return the corresponding private data members.
+Finally, the class provides accessors for the ``x``, ``y``, and ``z`` values, which return the corresponding private data members.
 
 Let's take a look at how to *use* this class:
 
@@ -131,9 +130,16 @@ Let's take a look at how to *use* this class:
        return 0;
    }
    
+Standard Library
+^^^^^^^^^^^^^^^^^
+
+.. note:: Coming soon.  Short version: The standard library is much more than I/O.
+
 Lambda Expressions
 ^^^^^^^^^^^^^^^^^^^
 
+
+.. note:: Coming soon. I have put together some nice science focused examples of this.
 
 
 Move Semantics
