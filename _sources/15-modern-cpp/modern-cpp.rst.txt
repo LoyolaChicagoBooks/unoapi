@@ -1275,6 +1275,133 @@ Testing using "print" statements is not ideal. Here is how to rewrite the above 
    }
    
 
+Random Number Generation
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Scientific computing depends on random number generation in many domains.
+We use it in a number of our programming examples.
+
+``std::mt19937`` is one of the many built-in random number generators provided by the C++ standard library. Here are some of the other commonly used random number generators in the standard library.
+
+``std::default_random_engine``: This is a typedef that represents the default random number generator used by the standard library. Its exact implementation may vary between different implementations of the library.
+
+``std::minstd_rand0``: This is a simple linear congruential generator with a short period. It's not recommended for serious use, but it's provided for backwards compatibility with older code. We do not recommend using this one unless you have really good reasons for doing so.
+
+``std::minstd_rand``: This is a variant of std::minstd_rand0 with a longer period and better statistical properties.
+
+``std::mersenne_twister_engine``: This is the same generator as std::mt19937, but with a larger state size and a longer period. It's generally considered to be one of the best random number generators available. This is what we use in our examples.
+
+``std::ranlux24_base``, ``std::ranlux48_base``, ``std::ranlux24``, ``std::ranlux48``: These are a family of generators that use a lagged Fibonacci algorithm with a guaranteed long period. The 24 and 48 variants refer to the number of bits used for each number, and the _base variants use a simpler algorithm that's faster but has a shorter period.
+
+Each of these generators has its own strengths and weaknesses, so the choice of which one to use will depend on the specific needs of your program.
+
+The following is an example of how to use random number generation to generate Point instances in all quandrants. 
+We use CLI11 to select the random number strategy.
+We use lambda expressions to select points in each quadrant, subject to what the user specifies on the command line.
+
+.. code-block:: cpp
+
+   #include <iostream>
+   #include <vector>
+   #include <algorithm>
+   #include <random>
+   #include "point.h"
+   #include "CLI11.hpp"
+   
+   // Define a helper function to filter the Points based on a predicate
+   template<typename T, typename Predicate>
+   std::vector<Point<T>> filterPoints(const std::vector<Point<T>>& points, Predicate pred) {
+       std::vector<Point<T>> filteredPoints;
+       std::copy_if(points.begin(), points.end(), std::back_inserter(filteredPoints), pred);
+       return filteredPoints;
+   }
+   
+   // Define a helper function to print the Points in a vector
+   template<typename T>
+   void printPoints(const std::vector<Point<T>>& points, const std::string& message) {
+       std::cout << message << ":" << std::endl;
+       for (const auto& p : points) {
+           std::cout << "(" << p.getX() << ", " << p.getY() << ")" << std::endl;
+       }
+   }
+   
+   int main(int argc, char** argv) {
+       // Define command line options for showing points in each quadrant.
+       // An additional option, --rng, allows you to select the random number generator from two good choices.
+       CLI::App app{"Quadrant filter"};
+       std::size_t numPoints = 10;
+       app.add_option("-n,--num-points", numPoints, "Number of random points to generate");
+       bool showUpperRight = false;
+       bool showUpperLeft = false;
+       bool showLowerRight = false;
+       bool showLowerLeft = false;
+       app.add_flag("-ur,--upper-right", showUpperRight, "Show points in upper right quadrant");
+       app.add_flag("-ul,--upper-left", showUpperLeft, "Show points in upper left quadrant");
+       app.add_flag("-lr,--lower-right", showLowerRight, "Show points in lower right quadrant");
+       app.add_flag("-ll,--lower-left", showLowerLeft, "Show points in lower left quadrant");
+       std::string rngName = "mt19937";
+       app.add_option("--rng", rngName, "Random number generator to use (mt19937 or minstd_rand)")->check([](const std::string& name) {
+           return (name == "mt19937" || name == "minstd_rand") ? "" : "Invalid random number generator";
+       });
+       CLI11_PARSE(app, argc, argv);
+   
+       // Generate a random number of Points with double coordinates
+       // Note that randFunc is set to the random number generator selected, allowing us to switch the random number 
+       // generator easily. Others can be added without having to do major code changes.
+       std::vector<Point<double>> points;
+       std::random_device rd;
+       std::function<double()> randFunc;
+       if (rngName == "minstd_rand") {
+           std::minstd_rand gen(rd());
+           std::uniform_real_distribution<double> dis(-10.0, 10.0);
+           randFunc = std::bind(dis, gen);
+       } else {
+           std::mt19937 gen(rd());
+           std::uniform_real_distribution<double> dis(-10.0, 10.0);
+           randFunc = std::bind(dis, gen);
+       }
+       for (std::size_t i = 0; i < numPoints; ++i) {
+           points.emplace_back(randFunc(), randFunc());
+       }
+   
+       // Filter the Points that are in each quadrant using lambda expressions and helper functions
+
+       if (showUpperRight) {
+           auto isUpperRight = [](const Point<double>& p) {
+               return p.getX() >= 0.0 && p.getY() >= 0.0;
+           };
+           auto upperRightPoints = filterPoints(points, isUpperRight);
+           printPoints(upperRightPoints, "Points in upper right quadrant");
+       }
+   
+       if (showUpperLeft) {
+           auto isUpperLeft = [](const Point<double>& p) {
+               return p.getX() < 0.0 && p.getY() >= 0.0;
+           };
+           auto upperLeftPoints = filterPoints(points, isUpperLeft);
+           printPoints(upperLeftPoints, "Points in upper left quadrant");
+       }
+   
+       if (showLowerRight) {
+           auto isLowerRight = [](const Point<double>& p) {
+               return p.getX() >= 0.0 && p.getY() < 0.0;
+           };
+           auto lowerRightPoints = filterPoints(points, isLowerRight);
+           printPoints(lowerRightPoints, "Points in lower right quadrant");
+       }
+   
+       if (showLowerLeft) {
+           auto isLowerLeft = [](const Point<double>& p) {
+               return p.getX() < 0.0 && p.getY() < 0.0;
+           };
+           auto lowerLeftPoints = filterPoints(points, isLowerLeft);
+           printPoints(lowerLeftPoints, "Points in lower left quadrant");
+       }
+   
+       return 0;
+   }
+   
+
 Smart Pointers
 ^^^^^^^^^^^^^^^
 
