@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Welcome to the UnoAPI Systems Modules &mdash; UnoAPI 09 Apr 2023 documentation</title>
+  <title>Welcome to the UnoAPI Systems Modules &mdash; UnoAPI 10 Apr 2023 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -32,7 +32,7 @@
             UnoAPI
           </a>
               <div class="version">
-                09 Apr 2023
+                10 Apr 2023
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -44,6 +44,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="00-preliminaries/preliminaries.html">Preliminaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05-parallel/parallel.html">Parallel Programming Preliminaries</a></li>
 <li class="toctree-l1"><a class="reference internal" href="10-software-engineering/software-engineering.html">Software Engineering</a></li>
 <li class="toctree-l1"><a class="reference internal" href="15-modern-cpp/modern-cpp.html">Modern C++ as a Better C (and C++)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="18-dpcpp/dpcpp.html">Data-Parallel C++</a></li>
@@ -92,6 +93,39 @@ Nothing here is even remotely ready for prime time!</p>
 <li class="toctree-l2"><a class="reference internal" href="00-preliminaries/preliminaries.html#topics">Topics</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="05-parallel/parallel.html">Parallel Programming Preliminaries</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="05-parallel/parallel.html#brief-history-of-data-parallelism">Brief History of Data Parallelism</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="05-parallel/parallel.html#vector-machines-cray">Vector machines (Cray)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="05-parallel/parallel.html#connection-machine-thinking-machines">Connection Machine (Thinking Machines)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="05-parallel/parallel.html#systolic-architectures">Systolic architectures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="05-parallel/parallel.html#loop-parallelism-in-fortran">Loop parallelism in FORTRAN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="05-parallel/parallel.html#c-and-data-parallel-c-efforts">C* and Data-Parallel C efforts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="05-parallel/parallel.html#cuda">CUDA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="05-parallel/parallel.html#openmp">OpenMP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="05-parallel/parallel.html#oneapi">oneAPI</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="05-parallel/parallel.html#parallel-concepts-for-humans">Parallel Concepts for Humans</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="05-parallel/parallel.html#von-neumann-machines-and-their-limits">von Neumann machines and their limits</a></li>
+<li class="toctree-l3"><a class="reference internal" href="05-parallel/parallel.html#flynn-s-taxonomy">Flynn’s taxonomy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="05-parallel/parallel.html#control-memory-taxonomy">Control-memory taxonomy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="05-parallel/parallel.html#speedup-vs-efficiency">Speedup vs. Efficiency</a></li>
+<li class="toctree-l3"><a class="reference internal" href="05-parallel/parallel.html#amdahls-law">Amdahl’s Law</a></li>
+<li class="toctree-l3"><a class="reference internal" href="05-parallel/parallel.html#scalability">Scalability</a></li>
+<li class="toctree-l3"><a class="reference internal" href="05-parallel/parallel.html#strong-weak-scaling-new-topic">Strong/Weak scaling [new topic]</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="05-parallel/parallel.html#granularity">Granularity</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="05-parallel/parallel.html#starvation-deadlock">starvation, deadlock</a></li>
+<li class="toctree-l3"><a class="reference internal" href="05-parallel/parallel.html#flooding-throttling">Flooding/Throttling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="05-parallel/parallel.html#layout">Layout</a></li>
+<li class="toctree-l3"><a class="reference internal" href="05-parallel/parallel.html#latency">Latency</a></li>
+<li class="toctree-l3"><a class="reference internal" href="05-parallel/parallel.html#scheduling-needed-for-understanding-q-submit">Scheduling [needed for understanding q.submit()]</a></li>
+<li class="toctree-l3"><a class="reference internal" href="05-parallel/parallel.html#task-graphs-dataflow-execution-macro-dataflow-concept">task graphs / dataflow execution / macro-dataflow concept</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="10-software-engineering/software-engineering.html">Software Engineering</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="10-software-engineering/software-engineering.html#testing">Testing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="10-software-engineering/software-engineering.html#version-control">Version Control</a></li>
@@ -118,7 +152,11 @@ Nothing here is even remotely ready for prime time!</p>
 <li class="toctree-l3"><a class="reference internal" href="15-modern-cpp/modern-cpp.html#command-line-argument-handling">Command-line Argument Handling</a></li>
 <li class="toctree-l3"><a class="reference internal" href="15-modern-cpp/modern-cpp.html#better-generics-for-mathematical-functions">Better Generics for Mathematical Functions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="15-modern-cpp/modern-cpp.html#logging">Logging</a></li>
-<li class="toctree-l3"><a class="reference internal" href="15-modern-cpp/modern-cpp.html#templates-and-stl">Templates and STL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="15-modern-cpp/modern-cpp.html#templates-and-stl">Templates and STL</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="15-modern-cpp/modern-cpp.html#std-vector">std::vector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="15-modern-cpp/modern-cpp.html#std-map">std::map</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="15-modern-cpp/modern-cpp.html#random-number-generation">Random Number Generation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="15-modern-cpp/modern-cpp.html#smart-pointers">Smart Pointers</a></li>
 <li class="toctree-l3"><a class="reference internal" href="15-modern-cpp/modern-cpp.html#threading">Threading</a></li>

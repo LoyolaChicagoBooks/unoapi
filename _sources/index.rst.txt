@@ -7,9 +7,10 @@ Welcome to the UnoAPI Systems Modules
    Nothing here is even remotely ready for prime time!
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 4
 
    00-preliminaries/preliminaries.rst
+   05-parallel/parallel.rst
    10-software-engineering/software-engineering.rst
    15-modern-cpp/modern-cpp.rst
    18-dpcpp/dpcpp.rst

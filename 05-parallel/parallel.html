@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Parallel Programming Preliminaries &mdash; UnoAPI 09 Apr 2023 documentation</title>
+  <title>Parallel Programming Preliminaries &mdash; UnoAPI 10 Apr 2023 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -17,7 +17,9 @@
         <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" /> 
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Software Engineering" href="../10-software-engineering/software-engineering.html" />
+    <link rel="prev" title="Preliminaries" href="../00-preliminaries/preliminaries.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -32,7 +34,7 @@
             UnoAPI
           </a>
               <div class="version">
-                09 Apr 2023
+                10 Apr 2023
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -42,8 +44,41 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul>
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../00-preliminaries/preliminaries.html">Preliminaries</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Parallel Programming Preliminaries</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#brief-history-of-data-parallelism">Brief History of Data Parallelism</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#vector-machines-cray">Vector machines (Cray)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#connection-machine-thinking-machines">Connection Machine (Thinking Machines)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#systolic-architectures">Systolic architectures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#loop-parallelism-in-fortran">Loop parallelism in FORTRAN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c-and-data-parallel-c-efforts">C* and Data-Parallel C efforts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cuda">CUDA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#openmp">OpenMP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#oneapi">oneAPI</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#parallel-concepts-for-humans">Parallel Concepts for Humans</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#von-neumann-machines-and-their-limits">von Neumann machines and their limits</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#flynn-s-taxonomy">Flynn’s taxonomy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#control-memory-taxonomy">Control-memory taxonomy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#speedup-vs-efficiency">Speedup vs. Efficiency</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#amdahls-law">Amdahl’s Law</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#scalability">Scalability</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#strong-weak-scaling-new-topic">Strong/Weak scaling [new topic]</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#granularity">Granularity</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#starvation-deadlock">starvation, deadlock</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#flooding-throttling">Flooding/Throttling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#layout">Layout</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#latency">Latency</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#scheduling-needed-for-understanding-q-submit">Scheduling [needed for understanding q.submit()]</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#task-graphs-dataflow-execution-macro-dataflow-concept">task graphs / dataflow execution / macro-dataflow concept</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../10-software-engineering/software-engineering.html">Software Engineering</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../15-modern-cpp/modern-cpp.html">Modern C++ as a Better C (and C++)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../18-dpcpp/dpcpp.html">Data-Parallel C++</a></li>
@@ -176,7 +211,9 @@ We will examine this in more detail when we discuss Amdahl’s law.
 Even if the program could be evenly divided among <span class="math notranslate nohighlight">\(n\)</span> processors, the processors would probably have to coordinate their work with each other, which would require extra instruction executions beyond the sequential program.
 Therefore, <span class="math notranslate nohighlight">\(T_n\)</span> may be <span class="math notranslate nohighlight">\(\frac{1}{n}\)</span> of a larger value than <span class="math notranslate nohighlight">\(T_1\)</span>.</p>
 <p>Moreover, <span class="math notranslate nohighlight">\(T_1\)</span> is supposed to be the best known sequential algorithm.  If the parallel algorithm runs faster on a single machine, it would be a better sequential algorithm, and therefore, you’d use it. So you can expect the algorithm <span class="math notranslate nohighlight">\(T_1\)</span> to be at least as good as the algorithm for <span class="math notranslate nohighlight">\(T_n\)</span>. You cannot expect any help from differences in the algorithms in achieving even linear speedup.</p>
-<p>However, in practice, super-linear speedup <span class="math notranslate nohighlight">\(S \gt n\)</span> is sometimes observed. There are several reasons for this:</p>
+<p>However, in practice, super-linear speedup is sometimes observed. There are several reasons for this:</p>
+<div class="math notranslate nohighlight">
+\[S &gt; n\]</div>
 <ul class="simple">
 <li><p>The hardware is different. The parallel machine has more processors, and hence more cache memory, for one thing. Better locality and pipelining can also play a role.</p></li>
 <li><p>The algorithm is different. For example, a depth-first search on a sequential machine might be translated into a collection of depth-first searches on the nodes of a parallel computer, but the parallel depth-first searches would have an element of a breadth-first search. A single depth-first search might spend a large amount of time on one fruitless branch, whereas with several searches, it is likely that another path might find the solution more quickly.</p></li>
@@ -262,13 +299,13 @@ tions will tax the parallel machine’s memory.</p>
 <h3>Layout<a class="headerlink" href="#layout" title="Permalink to this heading"></a></h3>
 <p>The layout of a data structure on a distributed-memory machine can make a significant dif- ference in performance. There are two interacting concerns. First, it is important to balance the load so that all nodes have approximately the same amount of work to do. Secondly, it helps to have most communication between neighboring nodes; there won’t be as many queueing delays as messages contend for communication edges along longer paths.
 Consider, though, a simulation of the cosmos: If you divide space into equally sized cubes and assign one cube to each node of a multicomputer, then communication of gravitation and movements of mass can be done between neighboring nodes on a mesh-connected computer. Unfortunately, there will be vast regions of nearly empty space mapped to some regions of nodes, while those parts of space with clusters of galaxies will be mapped into other nodes; that is, the load will be horribly imbalanced. A way to balance the load is to divide space into a larger number of regions and randomize their mapping onto the nodes, say, by hashing their coordinates to give the node number. Then you can count on the law of large numbers to balance the load, but communication between neighboring regions is no longer between neighboring nodes.
-Suppose we have N rows of an array that must be processed. How can we divide them evenly among P nodes?
-1. We could give floor N ⁄ P rows to each of the first P−1 nodes and the remaining rows to the last node. If N = 15 and P = 4, nodes 0, 1, and 2 get three rows, and node 3 gets six. The load is imbalanced, and the completion time will be dominated by the last node.
-2. We could give ceiling N ⁄ P rows to each of the first P−1 nodes and the remaining rows to the last. If N = 21 and P = 5, we would assign five rows to each of the first four nodes and one row to the last. The last is underutilized, but it’s not as severe as case (1), where the last node was the bottleneck.
-We could try to assign the rows so that no node has more than one row more than any other node. An easy way to do this is to assign node i all rows j such that j mod P = i, assuming rows are numbered zero through N−1 and nodes are numbered zero through P−1. Node i will contain rows i, i + P, i + 2P, i + 3P, … .
+Suppose we have N rows of an array that must be processed. How can we divide them evenly among P nodes?</p>
+<ol class="arabic simple">
+<li><p>We could give floor <span class="math notranslate nohighlight">\(N ⁄ P\)</span> rows to each of the first <span class="math notranslate nohighlight">\(P - 1\)</span> nodes and the remaining rows to the last node. If N = 15 and P = 4, nodes 0, 1, and 2 get three rows, and node 3 gets six. The load is imbalanced, and the completion time will be dominated by the last node.</p></li>
+<li><p>We could give ceiling <span class="math notranslate nohighlight">\(N ⁄ P\)</span> rows to each of the first <span class="math notranslate nohighlight">\(P - 1\)</span> nodes and the remaining rows to the last. If N = 21 and P = 5, we would assign five rows to each of the first four nodes and one row to the last. The last is underutilized, but it’s not as severe as case (1), where the last node was the bottleneck.</p></li>
+</ol>
+<p>We could try to assign the rows so that no node has more than one row more than any other node. An easy way to do this is to assign node i all rows j such that j mod P = i, assuming rows are numbered zero through <span class="math notranslate nohighlight">\(N - 1\)</span> and nodes are numbered zero through <span class="math notranslate nohighlight">\(P - 1\)</span>. Node i will contain rows i, i + P, i + 2P, i + 3P, … .
 We can assign blocks of rows to nodes, as in (1) and (2), but guarantee that no node has more than one more row than any other node, as in (3). Assign node i the rows in the range Li to Ui inclusive, where</p>
-<p>MATH</p>
-<p>Li = floor(N/P) + min(i, N mod P) Ui = Li + 1 − 1</p>
 <p>Some algorithms divide arrays into regions that communicate along their edges, so mes- sages will be shorter and faster if the perimeters of regions are smaller: Square regions tend to be better than long, rectangular regions.</p>
 </section>
 <section id="latency">
@@ -287,7 +324,7 @@ We can assign blocks of rows to nodes, as in (1) and (2), but guarantee that no 
 <span class="n">my_id</span> <span class="ow">is</span> <span class="n">the</span> <span class="n">node</span> <span class="n">number</span> <span class="ow">in</span> <span class="n">the</span> <span class="nb">range</span> <span class="mf">0.</span><span class="o">.</span><span class="n">P</span><span class="o">-</span><span class="mi">1</span>
 </pre></div>
 </div>
-<p>Rather than assign entire rows or columns to processors, better load balancing can some- times be accomplished by assigning groups of elements. If there are K total elements in an array, we can assign them numbers 0 through K−1, assign ranges of those numbers to pro- cessors, and convert from the element number to the array indices when necessary. For an M × N matrix A with zero origin addressing, element A[i,j] would be given the num- ber i*N+j in row major order. Similarly, the element with number q would correspond to A[i,j], where</p>
+<p>Rather than assign entire rows or columns to processors, better load balancing can some- times be accomplished by assigning groups of elements. If there are K total elements in an array, we can assign them numbers 0 through <span class="math notranslate nohighlight">\(K - 1\)</span>, assign ranges of those numbers to processors, and convert from the element number to the array indices when necessary. For an M × N matrix A with zero origin addressing, element A[i,j] would be given the num- ber i*N+j in row major order. Similarly, the element with number q would correspond to A[i,j], where</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">i</span> <span class="o">=</span> <span class="n">floor</span><span class="p">(</span><span class="n">q</span><span class="o">/</span><span class="n">N</span><span class="p">)</span>
 <span class="n">j</span> <span class="o">=</span> <span class="n">q</span> <span class="n">mod</span> <span class="n">N</span>
 </pre></div>
@@ -331,7 +368,10 @@ We can assign blocks of rows to nodes, as in (1) and (2), but guarantee that no 
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../00-preliminaries/preliminaries.html" class="btn btn-neutral float-left" title="Preliminaries" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../10-software-engineering/software-engineering.html" class="btn btn-neutral float-right" title="Software Engineering" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 
