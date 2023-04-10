@@ -3,10 +3,42 @@ Parallel Programming Preliminaries
 
 .. note:: This chapter is being drafted now. Set expectations accordingly!
 
-Brief History of Data Parallelism
-----------------------------------
 
-.. note:: This is an approximate lineage (not finalized)!
+Notable Parallel Computing Systems
+--------------------------------------------
+
+Here is a timeline of some key developments in parallel computing.  Here we focus on computers that were designed for parallel/scientific computing.  We also focus on those that had "on chip" parallelism.
+
+.. note:: George still curating this.
+
+ENIAC (1945): The first general-purpose electronic computer, designed to perform a wide range of calculations for military and scientific applications. This wasn't actually a parallel computer but is widely recognized as the first computer with general-purpose computing capabilities. (The EDVAC introduced full support for stored program computing.)
+
+ILLIAC I (1952): One of the first computers designed specifically for scientific and engineering calculations, featuring a high-speed magnetic drum memory and a custom-built floating-point unit.
+
+ILLIAC II (1957): An early example of a parallel computing system, featuring multiple processors that could be used to perform parallel computations on a single problem.
+
+ILLIAC III (1962): A highly parallel computer designed for scientific and engineering calculations, featuring up to 256 processors that could be used to perform parallel computations on large datasets.
+
+ILLIAC IV (1966): A highly parallel supercomputer that could have up to 64 processing nodes, each of which had its own memory and could execute instructions independently of the others.
+
+Convex C1 (1985): The first commercial parallel computer, designed for scientific and engineering applications, and based on a custom-designed parallel processing architecture that included multiple processors and memory banks connected by a high-speed interconnect network.
+
+Cray X-MP (1985): A massively parallel supercomputer that used vector processing and parallelism to achieve high performance on scientific and engineering applications.
+
+Thinking Machines CM-5 (1991): A massively parallel supercomputer that used a custom-designed interconnect network and vector processors to achieve high performance on a wide range of scientific and engineering applications.
+
+IBM SP (1993): A massively parallel supercomputer that used a distributed-memory architecture and high-speed interconnect network to achieve high performance on scientific and engineering applications.
+
+Intel Paragon
+
+Beyond 1993, parallel computing becomes more of a commodity. We provide separate coverage in the next section about clusters, accelerators, and other special-purpose parallel hardware.
+
+
+Cluster Computing
+^^^^^^^^^^^^^^^^^^
+
+Accelerators
+^^^^^^^^^^^^^
 
 Vector machines (Cray)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
