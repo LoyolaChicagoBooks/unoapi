@@ -127,7 +127,13 @@ Therefore, :math:`T_n` may be :math:`\frac{1}{n}` of a larger value than :math:`
 
 Moreover, :math:`T_1` is supposed to be the best known sequential algorithm.  If the parallel algorithm runs faster on a single machine, it would be a better sequential algorithm, and therefore, you’d use it. So you can expect the algorithm :math:`T_1` to be at least as good as the algorithm for :math:`T_n`. You cannot expect any help from differences in the algorithms in achieving even linear speedup.
 
-However, in practice, super-linear speedup :math:`S \gt n` is sometimes observed. There are several reasons for this:
+However, in practice, super-linear speedup is sometimes observed. There are several reasons for this:
+
+.. math::
+
+   S > n
+
+
 
 - The hardware is different. The parallel machine has more processors, and hence more cache memory, for one thing. Better locality and pipelining can also play a role.
 
@@ -264,14 +270,15 @@ Layout
 The layout of a data structure on a distributed-memory machine can make a significant dif- ference in performance. There are two interacting concerns. First, it is important to balance the load so that all nodes have approximately the same amount of work to do. Secondly, it helps to have most communication between neighboring nodes; there won’t be as many queueing delays as messages contend for communication edges along longer paths.
 Consider, though, a simulation of the cosmos: If you divide space into equally sized cubes and assign one cube to each node of a multicomputer, then communication of gravitation and movements of mass can be done between neighboring nodes on a mesh-connected computer. Unfortunately, there will be vast regions of nearly empty space mapped to some regions of nodes, while those parts of space with clusters of galaxies will be mapped into other nodes; that is, the load will be horribly imbalanced. A way to balance the load is to divide space into a larger number of regions and randomize their mapping onto the nodes, say, by hashing their coordinates to give the node number. Then you can count on the law of large numbers to balance the load, but communication between neighboring regions is no longer between neighboring nodes.
 Suppose we have N rows of an array that must be processed. How can we divide them evenly among P nodes?
-1. We could give floor N ⁄ P rows to each of the first P−1 nodes and the remaining rows to the last node. If N = 15 and P = 4, nodes 0, 1, and 2 get three rows, and node 3 gets six. The load is imbalanced, and the completion time will be dominated by the last node.
-2. We could give ceiling N ⁄ P rows to each of the first P−1 nodes and the remaining rows to the last. If N = 21 and P = 5, we would assign five rows to each of the first four nodes and one row to the last. The last is underutilized, but it’s not as severe as case (1), where the last node was the bottleneck.
-We could try to assign the rows so that no node has more than one row more than any other node. An easy way to do this is to assign node i all rows j such that j mod P = i, assuming rows are numbered zero through N−1 and nodes are numbered zero through P−1. Node i will contain rows i, i + P, i + 2P, i + 3P, ... .
+
+1. We could give floor :math:`N ⁄ P` rows to each of the first :math:`P - 1` nodes and the remaining rows to the last node. If N = 15 and P = 4, nodes 0, 1, and 2 get three rows, and node 3 gets six. The load is imbalanced, and the completion time will be dominated by the last node.
+
+2. We could give ceiling :math:`N ⁄ P` rows to each of the first :math:`P - 1` nodes and the remaining rows to the last. If N = 21 and P = 5, we would assign five rows to each of the first four nodes and one row to the last. The last is underutilized, but it’s not as severe as case (1), where the last node was the bottleneck.
+
+We could try to assign the rows so that no node has more than one row more than any other node. An easy way to do this is to assign node i all rows j such that j mod P = i, assuming rows are numbered zero through :math:`N - 1` and nodes are numbered zero through :math:`P - 1`. Node i will contain rows i, i + P, i + 2P, i + 3P, ... .
 We can assign blocks of rows to nodes, as in (1) and (2), but guarantee that no node has more than one more row than any other node, as in (3). Assign node i the rows in the range Li to Ui inclusive, where
 
-MATH
-
-Li = floor(N/P) + min(i, N mod P) Ui = Li + 1 − 1
+.. Li = floor(N/P) + min(i, N mod P) Ui = Li + 1 − 1
 
 Some algorithms divide arrays into regions that communicate along their edges, so mes- sages will be shorter and faster if the perimeters of regions are smaller: Square regions tend to be better than long, rectangular regions.
 
@@ -303,7 +310,7 @@ The techniques for partitioning rows among nodes that we saw in the discussion o
      my_id is the node number in the range 0..P-1
 
 
-Rather than assign entire rows or columns to processors, better load balancing can some- times be accomplished by assigning groups of elements. If there are K total elements in an array, we can assign them numbers 0 through K−1, assign ranges of those numbers to pro- cessors, and convert from the element number to the array indices when necessary. For an M × N matrix A with zero origin addressing, element A[i,j] would be given the num- ber i*N+j in row major order. Similarly, the element with number q would correspond to A[i,j], where
+Rather than assign entire rows or columns to processors, better load balancing can some- times be accomplished by assigning groups of elements. If there are K total elements in an array, we can assign them numbers 0 through :math:`K - 1`, assign ranges of those numbers to processors, and convert from the element number to the array indices when necessary. For an M × N matrix A with zero origin addressing, element A[i,j] would be given the num- ber i*N+j in row major order. Similarly, the element with number q would correspond to A[i,j], where
 
 ::
 
