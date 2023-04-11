@@ -8,9 +8,17 @@ Although a work in progress, key chapters and examples are beginning to be avail
 Build Status
 --------------
 
-.. image:: https://github.com/LoyolaChicagoBooks/unoapi/actions/workflows/main.yml/badge.svg
-   :target: https://github.com/LoyolaChicagoBooks/unoapi/actions/workflows/main.yml
-   :alt: GitHub Pages and Release PDF
+.. only:: html
+
+      .. image:: https://github.com/LoyolaChicagoBooks/unoapi/actions/workflows/main.yml/badge.svg
+         :target: https://github.com/LoyolaChicagoBooks/unoapi/actions/workflows/main.yml
+         :alt: GitHub Pages and Release PDF
+
+
+GitHub Actions
+   See https://github.com/LoyolaChicagoBooks/unoapi/actions
+
+
 
 Download
 ---------
@@ -27,13 +35,13 @@ Code Examples
 Citation
 ---------
 
-Cite - if you wish
+Cite [completely optional but appreciated]
    Konstantin Läufer and George K. Thiruvathukal, *UnoAPI: Balancing Performance, Portability, and Productivity (P3) in HPC Education*, 2022 IEEE/ACM International Workshop on Education for High Performance Computing (EduHPC), Dallas, TX, USA, 2022, pp. 1-10, doi: 10.1109/EduHPC56719.2022.00006.
 
-IEEE Xplore - if you have IEEE/ACM digital library subscription
+IEEE Xplore [if you have IEEE/ACM digital library subscription]
    https://ieeexplore.ieee.org/document/10027537
 
-Figshare - if you do not have IEEE/ACM digital library  subscription
+Figshare [if you cannot access the IEEE/ACM version for *any* reason]
    https://doi.org/10.6084/m9.figshare.21200464.
 
 If you find our work useful, we hope you will cite the above paper.
