@@ -43,51 +43,10 @@ Here's an example implementation of the familiar Point class with ``x``, ``y``, 
 
 You can assume that this code can be placed in a C++ header file (e.g. Point.h) as a header-only solution:
 
-.. code-block:: cpp
+Include version
 
-   #ifndef POINT_H
-   #define POINT_H
-
-   class Point {
-   public:
-       Point(double x = 0.0, double y = 0.0, double z = 0.0)
-           : x_{x}, y_{y}, z_{z} {}
-   
-       // Copy constructor
-       Point(const Point& other)
-           : x_{other.x_}, y_{other.y_}, z_{other.z_} {}
-   
-       // Move constructor
-       Point(Point&& other) noexcept
-           : x_{std::exchange(other.x_, 0.0)},
-             y_{std::exchange(other.y_, 0.0)},
-             z_{std::exchange(other.z_, 0.0)} {}
-   
-       // Copy assignment operator
-       Point& operator=(const Point& other) {
-           x_ = other.x_;
-           y_ = other.y_;
-           z_ = other.z_;
-           return *this;
-       }
-
-       // Move assignment operator
-       Point& operator=(Point&& other) noexcept {
-           x_ = std::exchange(other.x_, 0.0);
-           y_ = std::exchange(other.y_, 0.0);
-           z_ = std::exchange(other.z_, 0.0);
-           return *this;
-       }
-   
-       // Accessors
-       double x() const { return x_; }
-       double y() const { return y_; }
-       double z() const { return z_; }
-   
-   private:
-       double x_, y_, z_;
-   };
-   #endif // POINT_H
+.. literalinclude:: ../../examples/unoapi-dpcpp-examples/modern-cpp/point.h
+   :language: cpp
 
 
 In this implementation, the ``Point`` class has three private data members ``x_``, ``y_``, and ``z_``, representing the coordinates of the point. The class also provides a default constructor and a constructor that takes the ``x``, ``y``, and ``z`` values as parameters.
@@ -98,38 +57,9 @@ Finally, the class provides accessors for the ``x``, ``y``, and ``z`` values, wh
 
 Let's take a look at how to *use* this class:
 
-.. code-block:: cpp
+.. literalinclude:: ../../examples/unoapi-dpcpp-examples/modern-cpp/point_demo.cpp
+   :language: cpp
 
-   #include <iostream>
-   #include "Point.h"
-   
-   int main() {
-       // Create a point object with x=1.0, y=2.0, z=3.0
-       Point p1(1.0, 2.0, 3.0);
-   
-       // Copy the point object
-       Point p2 = p1;
-   
-       // Move the point object
-       Point p3 = std::move(p1);
-   
-       // Output the values of the point objects
-       std::cout << "p1: (" << p1.x() << ", " << p1.y() << ", " << p1.z() << ")" << std::endl;
-       std::cout << "p2: (" << p2.x() << ", " << p2.y() << ", " << p2.z() << ")" << std::endl;
-       std::cout << "p3: (" << p3.x() << ", " << p3.y() << ", " << p3.z() << ")" << std::endl;
-   
-       // Update the values of the point objects
-       p2 = Point(4.0, 5.0, 6.0);
-       p3 = std::move(p2);
-   
-       // Output the updated values of the point objects
-       std::cout << "p1: (" << p1.x() << ", " << p1.y() << ", " << p1.z() << ")" << std::endl;
-       std::cout << "p2: (" << p2.x() << ", " << p2.y() << ", " << p2.z() << ")" << std::endl;
-       std::cout << "p3: (" << p3.x() << ", " << p3.y() << ", " << p3.z() << ")" << std::endl;
-   
-       return 0;
-   }
-   
 Standard Library
 ^^^^^^^^^^^^^^^^^
 
@@ -153,49 +83,9 @@ When an object is moved (using move semantics), its resources (such as dynamical
 
 Here's an example of how to use std::move to enable move semantics:
 
-.. code-block:: cpp
-
-   #include <iostream>
-   #include <utility>
-   
-   class MyClass {
-   public:
-       MyClass() {
-           std::cout << "Default constructor" << std::endl;
-           data_ = new int[10];
-       }
-   
-       ~MyClass() {
-           std::cout << "Destructor" << std::endl;
-           delete[] data_;
-       }
-   
-       // Move constructor
-       MyClass(MyClass&& other) noexcept {
-           std::cout << "Move constructor" << std::endl;
-           data_ = other.data_;
-           other.data_ = nullptr;
-       }
-   
-       // Move assignment operator
-       MyClass& operator=(MyClass&& other) noexcept {
-           std::cout << "Move assignment operator" << std::endl;
-           delete[] data_;
-           data_ = other.data_;
-           other.data_ = nullptr;
-           return *this;
-       }
-   
-   private:
-       int* data_;
-   };
-   
-   int main() {
-       MyClass a;
-       MyClass b(std::move(a)); // move a to b
-       MyClass c = std::move(b); // move b to c
-       return 0;
-   }
+ 
+.. literalinclude:: ../../examples/unoapi-dpcpp-examples/modern-cpp/move-mvp.cpp
+   :language: cp
 
 
 In this example, we define a class `MyClass` that has a default constructor, a destructor, and move semantics enabled through the move constructor and move assignment operator.

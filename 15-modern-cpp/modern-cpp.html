@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Modern C++ as a Better C (and C++) &mdash; UnoAPI 10 Apr 2023 documentation</title>
+  <title>Modern C++ as a Better C (and C++) &mdash; UnoAPI 11 Apr 2023 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -33,7 +33,7 @@
             UnoAPI
           </a>
               <div class="version">
-                10 Apr 2023
+                11 Apr 2023
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -141,6 +141,7 @@
 <p>Even if you programmed with C++ in the past, you need to understand that C++ has changed a great deal since its debut in the late-1980s and early 1990s.</p>
 <p>Here’s an example implementation of the familiar Point class with <code class="docutils literal notranslate"><span class="pre">x</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code>, and <code class="docutils literal notranslate"><span class="pre">z</span></code> parameters in modern C++ with support for move semantics:</p>
 <p>You can assume that this code can be placed in a C++ header file (e.g. Point.h) as a header-only solution:</p>
+<p>Include version</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#ifndef POINT_H</span>
 <span class="cp">#define POINT_H</span>
 
@@ -184,6 +185,7 @@
 <span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">x_</span><span class="p">,</span><span class="w"> </span><span class="n">y_</span><span class="p">,</span><span class="w"> </span><span class="n">z_</span><span class="p">;</span>
 <span class="p">};</span>
 <span class="cp">#endif </span><span class="c1">// POINT_H</span>
+<span class="w"> </span>
 </pre></div>
 </div>
 <p>In this implementation, the <code class="docutils literal notranslate"><span class="pre">Point</span></code> class has three private data members <code class="docutils literal notranslate"><span class="pre">x_</span></code>, <code class="docutils literal notranslate"><span class="pre">y_</span></code>, and <code class="docutils literal notranslate"><span class="pre">z_</span></code>, representing the coordinates of the point. The class also provides a default constructor and a constructor that takes the <code class="docutils literal notranslate"><span class="pre">x</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code>, and <code class="docutils literal notranslate"><span class="pre">z</span></code> values as parameters.</p>
@@ -191,7 +193,7 @@
 <p>Finally, the class provides accessors for the <code class="docutils literal notranslate"><span class="pre">x</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code>, and <code class="docutils literal notranslate"><span class="pre">z</span></code> values, which return the corresponding private data members.</p>
 <p>Let’s take a look at how to <em>use</em> this class:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;Point.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;point.h&quot;</span>
 
 <span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// Create a point object with x=1.0, y=2.0, z=3.0</span>
@@ -242,46 +244,46 @@
 <p>std::move is a C++ Standard Library function defined in the &lt;utility&gt; header. It is used to cast an l-value reference to an r-value reference, which enables move semantics.</p>
 <p>When an object is moved (using move semantics), its resources (such as dynamically allocated memory) are transferred to the new object instead of being copied. This can lead to more efficient code by avoiding unnecessary copying of objects.</p>
 <p>Here’s an example of how to use std::move to enable move semantics:</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;utility&gt;</span>
+<div class="highlight-cp notranslate"><div class="highlight"><pre><span></span><span class="o">#</span><span class="n">include</span> <span class="o">&lt;</span><span class="n">iostream</span><span class="o">&gt;</span>
+<span class="o">#</span><span class="n">include</span> <span class="o">&lt;</span><span class="n">utility</span><span class="o">&gt;</span>
 
-<span class="k">class</span><span class="w"> </span><span class="nc">MyClass</span><span class="w"> </span><span class="p">{</span>
-<span class="k">public</span><span class="o">:</span>
-<span class="w">    </span><span class="n">MyClass</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Default constructor&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-<span class="w">        </span><span class="n">data_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
-<span class="w">    </span><span class="p">}</span>
+<span class="n">class</span> <span class="n">MyClass</span> <span class="p">{</span>
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">MyClass</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">std</span><span class="p">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Default constructor&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="p">::</span><span class="n">endl</span><span class="p">;</span>
+        <span class="n">data_</span> <span class="o">=</span> <span class="n">new</span> <span class="n">int</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
+    <span class="p">}</span>
 
-<span class="w">    </span><span class="o">~</span><span class="n">MyClass</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Destructor&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-<span class="w">        </span><span class="k">delete</span><span class="p">[]</span><span class="w"> </span><span class="n">data_</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
+    <span class="o">~</span><span class="n">MyClass</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">std</span><span class="p">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Destructor&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="p">::</span><span class="n">endl</span><span class="p">;</span>
+        <span class="n">delete</span><span class="p">[]</span> <span class="n">data_</span><span class="p">;</span>
+    <span class="p">}</span>
 
-<span class="w">    </span><span class="c1">// Move constructor</span>
-<span class="w">    </span><span class="n">MyClass</span><span class="p">(</span><span class="n">MyClass</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">other</span><span class="p">)</span><span class="w"> </span><span class="k">noexcept</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Move constructor&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-<span class="w">        </span><span class="n">data_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">other</span><span class="p">.</span><span class="n">data_</span><span class="p">;</span>
-<span class="w">        </span><span class="n">other</span><span class="p">.</span><span class="n">data_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
+    <span class="o">//</span> <span class="n">Move</span> <span class="n">constructor</span>
+    <span class="n">MyClass</span><span class="p">(</span><span class="n">MyClass</span><span class="o">&amp;&amp;</span> <span class="n">other</span><span class="p">)</span> <span class="n">noexcept</span> <span class="p">{</span>
+        <span class="n">std</span><span class="p">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Move constructor&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="p">::</span><span class="n">endl</span><span class="p">;</span>
+        <span class="n">data_</span> <span class="o">=</span> <span class="n">other</span><span class="p">.</span><span class="n">data_</span><span class="p">;</span>
+        <span class="n">other</span><span class="p">.</span><span class="n">data_</span> <span class="o">=</span> <span class="n">nullptr</span><span class="p">;</span>
+    <span class="p">}</span>
 
-<span class="w">    </span><span class="c1">// Move assignment operator</span>
-<span class="w">    </span><span class="n">MyClass</span><span class="o">&amp;</span><span class="w"> </span><span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="n">MyClass</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">other</span><span class="p">)</span><span class="w"> </span><span class="k">noexcept</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Move assignment operator&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-<span class="w">        </span><span class="k">delete</span><span class="p">[]</span><span class="w"> </span><span class="n">data_</span><span class="p">;</span>
-<span class="w">        </span><span class="n">data_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">other</span><span class="p">.</span><span class="n">data_</span><span class="p">;</span>
-<span class="w">        </span><span class="n">other</span><span class="p">.</span><span class="n">data_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">;</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="o">*</span><span class="k">this</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
+    <span class="o">//</span> <span class="n">Move</span> <span class="n">assignment</span> <span class="n">operator</span>
+    <span class="n">MyClass</span><span class="o">&amp;</span> <span class="n">operator</span><span class="o">=</span><span class="p">(</span><span class="n">MyClass</span><span class="o">&amp;&amp;</span> <span class="n">other</span><span class="p">)</span> <span class="n">noexcept</span> <span class="p">{</span>
+        <span class="n">std</span><span class="p">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Move assignment operator&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="p">::</span><span class="n">endl</span><span class="p">;</span>
+        <span class="n">delete</span><span class="p">[]</span> <span class="n">data_</span><span class="p">;</span>
+        <span class="n">data_</span> <span class="o">=</span> <span class="n">other</span><span class="p">.</span><span class="n">data_</span><span class="p">;</span>
+        <span class="n">other</span><span class="p">.</span><span class="n">data_</span> <span class="o">=</span> <span class="n">nullptr</span><span class="p">;</span>
+        <span class="n">return</span> <span class="o">*</span><span class="n">this</span><span class="p">;</span>
+    <span class="p">}</span>
 
-<span class="k">private</span><span class="o">:</span>
-<span class="w">    </span><span class="kt">int</span><span class="o">*</span><span class="w"> </span><span class="n">data_</span><span class="p">;</span>
+<span class="n">private</span><span class="p">:</span>
+    <span class="n">int</span><span class="o">*</span> <span class="n">data_</span><span class="p">;</span>
 <span class="p">};</span>
 
-<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">MyClass</span><span class="w"> </span><span class="n">a</span><span class="p">;</span>
-<span class="w">    </span><span class="n">MyClass</span><span class="w"> </span><span class="n">b</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">a</span><span class="p">));</span><span class="w"> </span><span class="c1">// move a to b</span>
-<span class="w">    </span><span class="n">MyClass</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">b</span><span class="p">);</span><span class="w"> </span><span class="c1">// move b to c</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="n">int</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">MyClass</span> <span class="n">a</span><span class="p">;</span>
+    <span class="n">MyClass</span> <span class="n">b</span><span class="p">(</span><span class="n">std</span><span class="p">::</span><span class="n">move</span><span class="p">(</span><span class="n">a</span><span class="p">));</span> <span class="o">//</span> <span class="n">move</span> <span class="n">a</span> <span class="n">to</span> <span class="n">b</span>
+    <span class="n">MyClass</span> <span class="n">c</span> <span class="o">=</span> <span class="n">std</span><span class="p">::</span><span class="n">move</span><span class="p">(</span><span class="n">b</span><span class="p">);</span> <span class="o">//</span> <span class="n">move</span> <span class="n">b</span> <span class="n">to</span> <span class="n">c</span>
+    <span class="n">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
