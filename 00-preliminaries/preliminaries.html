@@ -45,8 +45,12 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Preliminaries</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#build-status">Build Status</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#download">Download</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#motivation">Motivation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#citation">Citation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#motivation-for-our-work">Motivation for Our Work</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#contributors">Contributors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#acknowledgements">Acknowledgements</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#topics">Topics</a></li>
 </ul>
 </li>
@@ -86,18 +90,42 @@
              
   <section id="preliminaries">
 <h1>Preliminaries<a class="headerlink" href="#preliminaries" title="Permalink to this heading"></a></h1>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This is an “about the book” chapter.</p>
-</div>
+<p>This is tutorial on Modern C++ and OneAPI/SYCL.
+Although a work in progress, key chapters and examples are beginning to be available.</p>
+<section id="build-status">
+<h2>Build Status<a class="headerlink" href="#build-status" title="Permalink to this heading"></a></h2>
+<a class="reference external image-reference" href="https://github.com/LoyolaChicagoBooks/unoapi/actions/workflows/main.yml"><img alt="GitHub Pages and Release PDF" src="https://github.com/LoyolaChicagoBooks/unoapi/actions/workflows/main.yml/badge.svg" /></a>
+<dl class="simple">
+<dt>GitHub Actions</dt><dd><p>See <a class="reference external" href="https://github.com/LoyolaChicagoBooks/unoapi/actions">https://github.com/LoyolaChicagoBooks/unoapi/actions</a></p>
+</dd>
+</dl>
+</section>
 <section id="download">
 <h2>Download<a class="headerlink" href="#download" title="Permalink to this heading"></a></h2>
-<p>The HTML version is available at <a class="reference external" href="https://unoapi.cs.luc.edu">https://unoapi.cs.luc.edu</a>.</p>
-<p>The PDF version is availabel at <a class="reference external" href="https://github.com/LoyolaChicagoBooks/unoapi/releases/latest/download/UnoAPI.pdf">https://github.com/LoyolaChicagoBooks/unoapi/releases/latest/download/UnoAPI.pdf</a>.</p>
-<p>You can build these yourself at any time. These links are provided as a convenience. We host everything on GitHub and GitHub Pages.</p>
+<dl class="simple">
+<dt>HTML [this page]</dt><dd><p>See <a class="reference external" href="https://unoapi.cs.luc.edu">https://unoapi.cs.luc.edu</a>.</p>
+</dd>
+<dt>PDF</dt><dd><p>See <a class="reference external" href="https://github.com/LoyolaChicagoBooks/unoapi/releases/latest/download/UnoAPI.pdf">https://github.com/LoyolaChicagoBooks/unoapi/releases/latest/download/UnoAPI.pdf</a>.</p>
+</dd>
+<dt>Code Examples</dt><dd><p>See <a class="reference external" href="https://github.com/LoyolaChicagoCode/unoapi-dpcpp-examples">https://github.com/LoyolaChicagoCode/unoapi-dpcpp-examples</a></p>
+</dd>
+</dl>
 </section>
-<section id="motivation">
-<h2>Motivation<a class="headerlink" href="#motivation" title="Permalink to this heading"></a></h2>
+<section id="citation">
+<h2>Citation<a class="headerlink" href="#citation" title="Permalink to this heading"></a></h2>
+<dl class="simple">
+<dt>Cite [completely optional but appreciated]</dt><dd><p>Konstantin Läufer and George K. Thiruvathukal, <em>UnoAPI: Balancing Performance, Portability, and Productivity (P3) in HPC Education</em>, 2022 IEEE/ACM International Workshop on Education for High Performance Computing (EduHPC), Dallas, TX, USA, 2022, pp. 1-10, doi: 10.1109/EduHPC56719.2022.00006.</p>
+</dd>
+<dt>IEEE Xplore [if you have IEEE/ACM digital library subscription]</dt><dd><p><a class="reference external" href="https://ieeexplore.ieee.org/document/10027537">https://ieeexplore.ieee.org/document/10027537</a></p>
+</dd>
+<dt>Figshare [if you cannot access the IEEE/ACM version for <em>any</em> reason]</dt><dd><p><a class="reference external" href="https://doi.org/10.6084/m9.figshare.21200464">https://doi.org/10.6084/m9.figshare.21200464</a>.</p>
+</dd>
+</dl>
+<p>If you find our work useful, we hope you will cite the above paper.
+Please do not hesitate to contact us with any questions.</p>
+</section>
+<section id="motivation-for-our-work">
+<h2>Motivation for Our Work<a class="headerlink" href="#motivation-for-our-work" title="Permalink to this heading"></a></h2>
 <p>This is not all-inclusive.</p>
 <p>Tenets:</p>
 <ul class="simple">
@@ -112,6 +140,17 @@
 <li><p>The most modern languages still <em>punt to C</em> to provide acceleration.</p></li>
 <li><p>Research software engineers who know about <em>computer systems</em> and <em>software engineering</em> are most likely to progress by embracing these two areas (computer systems and SE)</p></li>
 </ul>
+</section>
+<section id="contributors">
+<h2>Contributors<a class="headerlink" href="#contributors" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://gkt.sh">George K. Thiruvathukal (project lead)</a></p></li>
+<li><p><a class="reference external" href="https://laufer.cs.luc.edu">Konstantin Läufer</a></p></li>
+</ul>
+</section>
+<section id="acknowledgements">
+<h2>Acknowledgements<a class="headerlink" href="#acknowledgements" title="Permalink to this heading"></a></h2>
+<p>Thanks to Intel Corporation for their support of our work (George Silva, Omar Toral, Ben Odom).</p>
 </section>
 <section id="topics">
 <h2>Topics<a class="headerlink" href="#topics" title="Permalink to this heading"></a></h2>
