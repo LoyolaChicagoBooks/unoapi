@@ -29,8 +29,12 @@ HTML [this page]
 PDF
    See https://github.com/LoyolaChicagoBooks/unoapi/releases/latest/download/UnoAPI.pdf.
 
-Code Examples
-   See https://github.com/LoyolaChicagoCode/unoapi-dpcpp-examples
+Source Code
+
+- `UnoAPI Data-Parallel C++ Examples <https://github.com/LoyolaChicagoCode/unoapi-dpcpp-examples>`__
+- `COMP 310 Systems Code Examples in C <https://github.com/SoftwareSystemsLaboratory/systems-code-examples>`__
+- `Process Tree in C++ <https://github.com/LoyolaChicagoCode/processtree-cpp>`__
+
 
 Citation
 ---------
@@ -44,8 +48,9 @@ IEEE Xplore [if you have IEEE/ACM digital library subscription]
 Figshare [if you cannot access the IEEE/ACM version for *any* reason]
    https://doi.org/10.6084/m9.figshare.21200464.
 
-If you find our work useful, we hope you will cite the above paper.
-Please do not hesitate to contact us with any questions.
+If you find our work useful, please consider citing the above paper.
+If you don't find our work useful, please consider citing the above paper.
+Please do not hesitate to contact us with any questions, regardless of whether you find us useful or not.
 
 Motivation for Our Work
 -------------------------
