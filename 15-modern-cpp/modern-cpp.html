@@ -70,6 +70,7 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#random-number-generation">Random Number Generation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ranges">Ranges</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#smart-pointers">Smart Pointers</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#threading">Threading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#exception-handling">Exception Handling</a></li>
@@ -131,6 +132,7 @@
 <li><p><strong>Threading</strong>: Threading allows you to run multiple tasks concurrently. You should learn about the different threading constructs provided by the Standard Library, such as threads, mutexes, and condition variables. Keep in mind, of course, that OneAPI/SYCL are an <em>alternative</em> to threading and also allow for code ot be written without assuming a particular threading model.</p></li>
 <li><p><strong>Modern C++ features</strong>: C++ has been evolving rapidly in recent years, and new features are being added all the time. You should learn about modern C++ features such as <cite>auto</cite>, <cite>constexpr</cite>, <cite>consteval</cite>, and <cite>module</cite>, which can help you write more efficient and maintainable code. We greatly value software engineering, so all of these modern features will help to write <em>clean code</em>, especially when used judiciously.</p></li>
 <li><p><strong>Exception handling</strong>: Exception handling allows you to handle runtime errors in a structured way. You should learn about the try-catch blocks and how to throw and catch exceptions. (That said, we try to avoid them in our tutorial in favor of the systems tradition of using error codes whenever possible.)</p></li>
+<li><p><strong>Ranges</strong>: Ranges in C++ are a new library feature introduced in C++20 that provide a unified and composable way to work with sequences of values, including arrays, containers, and generators. Ranges allow you to express operations on sequences as composable, functional transformations, and can greatly simplify and improve the readability of code that works with sequences.</p></li>
 </ul>
 <p>These topics will allow you to become proficient in modern C++ programming and write efficient, maintainable, and scalable code.</p>
 </section>
@@ -1363,6 +1365,46 @@ We use lambda expressions to select points in each quadrant, subject to what the
 <span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">lowerLeftPoints</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">filterPoints</span><span class="p">(</span><span class="n">points</span><span class="p">,</span><span class="w"> </span><span class="n">isLowerLeft</span><span class="p">);</span>
 <span class="w">        </span><span class="n">printPoints</span><span class="p">(</span><span class="n">lowerLeftPoints</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Points in lower left quadrant&quot;</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="ranges">
+<h3>Ranges<a class="headerlink" href="#ranges" title="Permalink to this heading"></a></h3>
+<p>In this example, we use the <code class="docutils literal notranslate"><span class="pre">std::views::iota</span></code> function to create a range of integers from 1 to 10. We then use a range-based for loop to iterate over the range and print each value.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;ranges&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">my_range</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">views</span><span class="o">::</span><span class="n">iota</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">11</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">my_range</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Ranges do not use any storage in the sense that they do not create a container to hold the elements of the range. Instead, ranges are defined as a pair of iterators or as a view that transforms or filters elements from an existing range.</p>
+<p>Ranges operate lazily, which means that they do not compute the elements of the range until they are actually needed. This can make ranges more efficient than containers for certain operations, because the elements are computed on-the-fly rather than being stored in memory.</p>
+<p>However, some range operations may require temporary storage to hold intermediate results or to cache the elements of the range. In such cases, the range may allocate memory to store these temporary results, but this is typically done behind the scenes and is not visible to the user.</p>
+<p>In this example, we use the <code class="docutils literal notranslate"><span class="pre">std::views::filter</span></code> function to create a new view that filters the original range to include only the even numbers. We then use a range-based for loop to iterate over the filtered range and print each even number.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;ranges&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">my_range</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">views</span><span class="o">::</span><span class="n">iota</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">11</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">even_numbers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">my_range</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">views</span><span class="o">::</span><span class="n">filter</span><span class="p">([](</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="p">});</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">even_numbers</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>

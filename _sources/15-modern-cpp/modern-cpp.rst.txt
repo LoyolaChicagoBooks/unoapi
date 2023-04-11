@@ -28,6 +28,7 @@ If you already know some Object-Oriented Programming (OOP) concepts and want to 
 
 - **Exception handling**: Exception handling allows you to handle runtime errors in a structured way. You should learn about the try-catch blocks and how to throw and catch exceptions. (That said, we try to avoid them in our tutorial in favor of the systems tradition of using error codes whenever possible.)
 
+- **Ranges**: Ranges in C++ are a new library feature introduced in C++20 that provide a unified and composable way to work with sequences of values, including arrays, containers, and generators. Ranges allow you to express operations on sequences as composable, functional transformations, and can greatly simplify and improve the readability of code that works with sequences.
 
 These topics will allow you to become proficient in modern C++ programming and write efficient, maintainable, and scalable code.
 
@@ -1291,6 +1292,55 @@ We use lambda expressions to select points in each quadrant, subject to what the
        return 0;
    }
    
+
+Ranges
+^^^^^^^^^^^^^^^
+
+In this example, we use the ``std::views::iota`` function to create a range of integers from 1 to 10. We then use a range-based for loop to iterate over the range and print each value.
+
+.. code-block:: cpp
+
+   #include <iostream>
+   #include <ranges>
+   
+   int main() {
+       auto my_range = std::views::iota(1, 11);
+   
+       for (int i : my_range) {
+           std::cout << i << " ";
+       }
+       std::cout << std::endl;
+   
+       return 0;
+   }
+
+
+Ranges do not use any storage in the sense that they do not create a container to hold the elements of the range. Instead, ranges are defined as a pair of iterators or as a view that transforms or filters elements from an existing range.
+
+Ranges operate lazily, which means that they do not compute the elements of the range until they are actually needed. This can make ranges more efficient than containers for certain operations, because the elements are computed on-the-fly rather than being stored in memory.
+
+However, some range operations may require temporary storage to hold intermediate results or to cache the elements of the range. In such cases, the range may allocate memory to store these temporary results, but this is typically done behind the scenes and is not visible to the user.
+
+In this example, we use the ``std::views::filter`` function to create a new view that filters the original range to include only the even numbers. We then use a range-based for loop to iterate over the filtered range and print each even number.
+
+.. code-block:: cpp
+
+   #include <iostream>
+   #include <ranges>
+   
+   int main() {
+       auto my_range = std::views::iota(1, 11);
+   
+       auto even_numbers = my_range | std::views::filter([](int x) { return x % 2 == 0; });
+   
+       for (int i : even_numbers) {
+           std::cout << i << " ";
+       }
+       std::cout << std::endl;
+   
+       return 0;
+   }
+
 
 Smart Pointers
 ^^^^^^^^^^^^^^^
