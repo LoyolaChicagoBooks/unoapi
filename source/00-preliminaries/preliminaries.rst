@@ -1,21 +1,46 @@
 Preliminaries
 ================
 
-.. note::
+This is tutorial on Modern C++ and OneAPI/SYCL.
+Although a work in progress, key chapters and examples are beginning to be available.
 
-   This is an "about the book" chapter.
+
+Build Status
+--------------
+
+.. image:: https://github.com/LoyolaChicagoBooks/unoapi/actions/workflows/main.yml/badge.svg
+   :target: https://github.com/LoyolaChicagoBooks/unoapi/actions/workflows/main.yml
+   :alt: GitHub Pages and Release PDF
 
 Download
 ---------
 
-The HTML version is available at https://unoapi.cs.luc.edu.
+HTML [this page]
+   See https://unoapi.cs.luc.edu.
 
-The PDF version is availabel at https://github.com/LoyolaChicagoBooks/unoapi/releases/latest/download/UnoAPI.pdf.
+PDF
+   See https://github.com/LoyolaChicagoBooks/unoapi/releases/latest/download/UnoAPI.pdf.
 
-You can build these yourself at any time. These links are provided as a convenience. We host everything on GitHub and GitHub Pages.
+Code Examples
+   See https://github.com/LoyolaChicagoCode/unoapi-dpcpp-examples
 
-Motivation
------------
+Citation
+---------
+
+Cite - if you wish
+   Konstantin Läufer and George K. Thiruvathukal, *UnoAPI: Balancing Performance, Portability, and Productivity (P3) in HPC Education*, 2022 IEEE/ACM International Workshop on Education for High Performance Computing (EduHPC), Dallas, TX, USA, 2022, pp. 1-10, doi: 10.1109/EduHPC56719.2022.00006.
+
+IEEE Xplore - if you have IEEE/ACM digital library subscription
+   https://ieeexplore.ieee.org/document/10027537
+
+Figshare - if you do not have IEEE/ACM digital library  subscription
+   https://doi.org/10.6084/m9.figshare.21200464.
+
+If you find our work useful, we hope you will cite the above paper.
+Please do not hesitate to contact us with any questions.
+
+Motivation for Our Work
+-------------------------
 
 This is not all-inclusive.
 
@@ -32,8 +57,16 @@ But...
 - The most modern languages still *punt to C* to provide acceleration.
 - Research software engineers who know about *computer systems* and *software engineering* are most likely to progress by embracing these two areas (computer systems and SE)
 
+Contributors
+--------------
 
+- `George K. Thiruvathukal (project lead) <https://gkt.sh>`__
+- `Konstantin Läufer <https://laufer.cs.luc.edu>`__
 
+Acknowledgements
+-----------------
+
+Thanks to Intel Corporation for their support of our work (George Silva, Omar Toral, Ben Odom).
 
 Topics
 -----------
