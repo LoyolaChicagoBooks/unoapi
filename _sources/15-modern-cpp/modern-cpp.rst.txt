@@ -46,7 +46,7 @@ You can assume that this code can be placed in a C++ header file (e.g. Point.h) 
 
 Include version
 
-.. literalinclude:: ../../examples/unoapi-dpcpp-examples/modern-cpp/point.h
+.. literalinclude:: ../../examples/modern-cpp-examples/modern-cpp/point.h
    :language: cpp
 
 
@@ -58,7 +58,7 @@ Finally, the class provides accessors for the ``x``, ``y``, and ``z`` values, wh
 
 Let's take a look at how to *use* this class:
 
-.. literalinclude:: ../../examples/unoapi-dpcpp-examples/modern-cpp/point_demo.cpp
+.. literalinclude:: ../../examples/modern-cpp-examples/modern-cpp/point_demo.cpp
    :language: cpp
 
 Standard Library
@@ -85,7 +85,7 @@ When an object is moved (using move semantics), its resources (such as dynamical
 Here's an example of how to use std::move to enable move semantics:
 
  
-.. literalinclude:: ../../examples/unoapi-dpcpp-examples/modern-cpp/move-mvp.cpp
+.. literalinclude:: ../../examples/modern-cpp-examples/modern-cpp/move-mvp.cpp
    :language: cp
 
 
