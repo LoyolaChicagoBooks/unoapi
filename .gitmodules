@@ -19,3 +19,6 @@
 [submodule "examples/unoapi-dpcpp-examples"]
 	path = examples/unoapi-dpcpp-examples
 	url = https://github.com/LoyolaChicagoCode/unoapi-dpcpp-examples
+[submodule "examples/modern-cpp-examples"]
+	path = examples/modern-cpp-examples
+	url = https://github.com/LoyolaChicagoCode/modern-cpp-examples
