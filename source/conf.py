@@ -94,7 +94,7 @@ pygments_style = 'sphinx'
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-html_theme = 'sphinx_rtd_theme'
+html_theme = 'sphinxawesome_theme'
 
 
 html_theme_options = {
@@ -103,15 +103,15 @@ html_theme_options = {
     #'logo_only': False,
     #'display_version': True,
     #'prev_next_buttons_location': 'bottom',
-    "style_external_links": True,
-    "vcs_pageview_mode": "edit",
-    'style_nav_header_background': '#922247',
+    #"style_external_links": True,
+    #"vcs_pageview_mode": "edit",
+    #'style_nav_header_background': '#922247',
     # Toc options
-    'collapse_navigation': True,
-    'sticky_navigation': True,
-    'navigation_depth': -1,
-    'includehidden': True,
-    'titles_only': False
+    #'collapse_navigation': True,
+    #'sticky_navigation': True,
+    #'navigation_depth': -1,
+    #'includehidden': True,
+    #'titles_only': False
 }
 
 
