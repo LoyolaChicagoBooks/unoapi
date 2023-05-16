@@ -1,86 +1,83 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+
+<html :class="{'dark': darkMode === 'dark' || (darkMode === 'system' &amp;&amp; window.matchMedia('(prefers-color-scheme: dark)').matches)}" class="scroll-smooth" lang="en" x-data="{ darkMode: localStorage.getItem('darkMode') || localStorage.setItem('darkMode', 'system'), activeSection: '' }" x-init="$watch('darkMode', val =&gt; localStorage.setItem('darkMode', val))">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Parallel Programming Preliminaries &mdash; UnoAPI 21 Apr 2023 documentation</title>
-      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/sphinx_highlight.js"></script>
-        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script src="../_static/js/theme.js"></script>
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Software Engineering" href="../10-software-engineering/software-engineering.html" />
-    <link rel="prev" title="Preliminaries" href="../00-preliminaries/preliminaries.html" /> 
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta charset="utf-8"/>
+<meta content="white" media="(prefers-color-scheme: light)" name="theme-color"/>
+<meta content="black" metia="(prefers-color-scheme: dark)" name="theme-color"/>
+<meta content="Docutils 0.18.1: http://docutils.sourceforge.net/" name="generator"/>
+<title>Parallel Programming Preliminaries | UnoAPI 16 May 2023 documentation</title>
+<meta content="Parallel Programming Preliminaries | UnoAPI 16 May 2023 documentation" property="og:title"/>
+<meta content="Parallel Programming Preliminaries | UnoAPI 16 May 2023 documentation" name="twitter:title"/>
+<link href="../_static/pygments.css" rel="stylesheet"/>
+<link href="../_static/theme.a16405b310edf0713aee.css" rel="stylesheet"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../10-software-engineering/software-engineering.html" rel="next" title="Software Engineering"/>
+<link href="../00-preliminaries/preliminaries.html" rel="prev" title="Preliminaries"/>
+<script>
+    <!-- Prevent Flash of wrong theme -->
+      const userPreference = localStorage.getItem('darkMode');
+      let mode;
+      if (userPreference === 'dark' || window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        mode = 'dark';
+        document.documentElement.classList.add('dark');
+      } else {
+        mode = 'light';
+      }
+      if (!userPreference) {localStorage.setItem('darkMode', mode)}
+    </script>
+<script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+<script src="../_static/doctools.js"></script>
+<script src="../_static/sphinx_highlight.js"></script>
+<script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script defer="" src="../_static/theme.ad172c0f1249198ea036.js"></script>
 </head>
-
-<body class="wy-body-for-nav"> 
-  <div class="wy-grid-for-nav">
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-scroll">
-        <div class="wy-side-nav-search"  style="background: #922247" >
-
-          
-          
-          <a href="../index.html" class="icon icon-home">
-            UnoAPI
-          </a>
-              <div class="version">
-                21 Apr 2023
-              </div>
-<div role="search">
-  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
-    <input type="hidden" name="check_keywords" value="yes" />
-    <input type="hidden" name="area" value="default" />
-  </form>
+<body :class="{ 'overflow-hidden': showSidebar }" class="min-h-screen font-sans antialiased bg-background text-foreground" x-data="{ showSidebar: false }">
+<div @click.self="showSidebar = false" class="fixed inset-0 z-50 overflow-hidden bg-background/80 backdrop-blur-sm" x-cloak="" x-show="showSidebar"></div><div class="relative flex flex-col min-h-screen" id="page"><a class="absolute top-0 left-0 z-[100] block bg-background p-4 text-xl transition -translate-x-full opacity-0 focus:translate-x-0 focus:opacity-100" href="#content">
+      Skip to content
+    </a>
+<header class="sticky top-0 z-40 w-full border-b shadow-sm border-border supports-backdrop-blur:bg-background/60 bg-background/95 backdrop-blur"><div class="container flex items-center h-14">
+<div class="hidden mr-4 md:flex">
+<a class="flex items-center mr-6" href="../index.html"><span class="hidden font-bold sm:inline-block text-clip whitespace-nowrap">UnoAPI 16 May 2023 documentation</span>
+</a></div><button @click="showSidebar = true" class="inline-flex items-center justify-center h-10 px-0 py-2 mr-2 text-base font-medium transition-colors rounded-md hover:text-accent-foreground hover:bg-transparent md:hidden" type="button">
+<svg aria-hidden="true" fill="currentColor" height="24" viewbox="0 96 960 960" width="24" xmlns="http://www.w3.org/2000/svg">
+<path d="M152.587 825.087q-19.152 0-32.326-13.174t-13.174-32.326q0-19.152 13.174-32.326t32.326-13.174h440q19.152 0 32.326 13.174t13.174 32.326q0 19.152-13.174 32.326t-32.326 13.174h-440Zm0-203.587q-19.152 0-32.326-13.174T107.087 576q0-19.152 13.174-32.326t32.326-13.174h320q19.152 0 32.326 13.174T518.087 576q0 19.152-13.174 32.326T472.587 621.5h-320Zm0-203.587q-19.152 0-32.326-13.174t-13.174-32.326q0-19.152 13.174-32.326t32.326-13.174h440q19.152 0 32.326 13.174t13.174 32.326q0 19.152-13.174 32.326t-32.326 13.174h-440ZM708.913 576l112.174 112.174q12.674 12.674 12.674 31.826t-12.674 31.826Q808.413 764.5 789.261 764.5t-31.826-12.674l-144-144Q600 594.391 600 576t13.435-31.826l144-144q12.674-12.674 31.826-12.674t31.826 12.674q12.674 12.674 12.674 31.826t-12.674 31.826L708.913 576Z"></path>
+</svg>
+<span class="sr-only">Toggle navigation menu</span>
+</button>
+<div class="flex items-center justify-between flex-1 space-x-2 sm:space-x-4 md:justify-end">
+<div class="flex-1 w-full md:w-auto md:flex-none">
+<form @keydown.k.window.meta="$refs.search.focus()" action="../search.html" class="relative flex items-center group" id="searchbox" method="get">
+<input aria-label="Search the docs" class="inline-flex items-center font-medium transition-colors bg-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background border border-input hover:bg-accent focus:bg-accent hover:text-accent-foreground focus:text-accent-foreground hover:placeholder-accent-foreground py-2 px-4 relative h-9 w-full justify-start rounded-[0.5rem] text-sm text-muted-foreground sm:pr-12 md:w-40 lg:w-64" id="search-input" name="q" placeholder="Search ..." type="search" x-ref="search"/>
+<kbd class="pointer-events-none absolute right-1.5 top-2 hidden h-5 select-none text-muted-foreground items-center gap-1 rounded border border-border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex group-hover:bg-accent group-hover:text-accent-foreground">
+<span class="text-xs">⌘</span>
+      K
+    </kbd>
+</form>
 </div>
-        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul class="current">
+<nav class="flex items-center space-x-1">
+<button @click="darkMode = darkMode === 'light' ? 'dark' : 'light'" class="relative inline-flex items-center justify-center px-0 text-sm font-medium transition-colors rounded-md hover:bg-accent hover:text-accent-foreground h-9 w-9" type="button">
+<svg class="absolute transition-all scale-100 rotate-0 dark:-rotate-90 dark:scale-0" fill="currentColor" height="24" viewbox="0 96 960 960" width="24" xmlns="http://www.w3.org/2000/svg">
+<path d="M480 685q45.456 0 77.228-31.772Q589 621.456 589 576q0-45.456-31.772-77.228Q525.456 467 480 467q-45.456 0-77.228 31.772Q371 530.544 371 576q0 45.456 31.772 77.228Q434.544 685 480 685Zm0 91q-83 0-141.5-58.5T280 576q0-83 58.5-141.5T480 376q83 0 141.5 58.5T680 576q0 83-58.5 141.5T480 776ZM80 621.5q-19.152 0-32.326-13.174T34.5 576q0-19.152 13.174-32.326T80 530.5h80q19.152 0 32.326 13.174T205.5 576q0 19.152-13.174 32.326T160 621.5H80Zm720 0q-19.152 0-32.326-13.174T754.5 576q0-19.152 13.174-32.326T800 530.5h80q19.152 0 32.326 13.174T925.5 576q0 19.152-13.174 32.326T880 621.5h-80Zm-320-320q-19.152 0-32.326-13.174T434.5 256v-80q0-19.152 13.174-32.326T480 130.5q19.152 0 32.326 13.174T525.5 176v80q0 19.152-13.174 32.326T480 301.5Zm0 720q-19.152 0-32.326-13.17Q434.5 995.152 434.5 976v-80q0-19.152 13.174-32.326T480 850.5q19.152 0 32.326 13.174T525.5 896v80q0 19.152-13.174 32.33-13.174 13.17-32.326 13.17ZM222.174 382.065l-43-42Q165.5 327.391 166 308.239t13.174-33.065q13.435-13.674 32.587-13.674t32.065 13.674l42.239 43q12.674 13.435 12.555 31.706-.12 18.272-12.555 31.946-12.674 13.674-31.445 13.413-18.772-.261-32.446-13.174Zm494 494.761-42.239-43q-12.674-13.435-12.674-32.087t12.674-31.565Q686.609 756.5 705.38 757q18.772.5 32.446 13.174l43 41.761Q794.5 824.609 794 843.761t-13.174 33.065Q767.391 890.5 748.239 890.5t-32.065-13.674Zm-42-494.761Q660.5 369.391 661 350.62q.5-18.772 13.174-32.446l41.761-43Q728.609 261.5 747.761 262t33.065 13.174q13.674 13.435 13.674 32.587t-13.674 32.065l-43 42.239q-13.435 12.674-31.706 12.555-18.272-.12-31.946-12.555Zm-495 494.761Q165.5 863.391 165.5 844.239t13.674-32.065l43-42.239q13.435-12.674 32.087-12.674t31.565 12.674Q299.5 782.609 299 801.38q-.5 18.772-13.174 32.446l-41.761 43Q231.391 890.5 212.239 890t-33.065-13.174ZM480 576Z"></path>
+</svg>
+<svg class="absolute transition-all scale-0 rotate-90 dark:rotate-0 dark:scale-100" fill="currentColor" height="24" viewbox="0 96 960 960" width="24" xmlns="http://www.w3.org/2000/svg">
+<path d="M480 936q-151 0-255.5-104.5T120 576q0-138 90-239.5T440 218q25-3 39 18t-1 44q-17 26-25.5 55t-8.5 61q0 90 63 153t153 63q31 0 61.5-9t54.5-25q21-14 43-1.5t19 39.5q-14 138-117.5 229T480 936Zm0-80q88 0 158-48.5T740 681q-20 5-40 8t-40 3q-123 0-209.5-86.5T364 396q0-20 3-40t8-40q-78 32-126.5 102T200 576q0 116 82 198t198 82Zm-10-270Z"></path>
+</svg>
+</button>
+</nav>
+</div>
+</div>
+</header>
+<div class="flex-1"><div class="container flex-1 items-start md:grid md:grid-cols-[220px_minmax(0,1fr)] md:gap-6 lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-10"><aside :aria-hidden="!showSidebar" :class="{ 'translate-x-0': showSidebar }" class="fixed inset-y-0 left-0 md:top-14 z-50 md:z-30 bg-background md:bg-transparent transition-all duration-100 -translate-x-full md:translate-x-0 ml-0 p-6 md:p-0 md:-ml-2 md:h-[calc(100vh-3.5rem)] w-5/6 md:w-full shrink-0 overflow-y-auto border-r border-border md:sticky" id="left-sidebar">
+<a class="!justify-start text-sm md:!hidden bg-background" href="../index.html"><span class="font-bold text-clip whitespace-nowrap">UnoAPI 16 May 2023 documentation</span>
+</a>
+<div class="relative overflow-hidden md:overflow-auto my-4 md:my-0 h-[calc(100vh-8rem)] md:h-auto">
+<div class="overflow-y-auto h-full w-full relative pr-6"><nav class="table w-full min-w-full my-6 lg:my-8">
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../00-preliminaries/preliminaries.html">Preliminaries</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Parallel Programming Preliminaries</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#notable-parallel-computing-systems">Notable Parallel Computing Systems</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#cluster-computing">Cluster Computing</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#accelerators">Accelerators</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#vector-machines-cray">Vector machines (Cray)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#connection-machine-thinking-machines">Connection Machine (Thinking Machines)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#systolic-architectures">Systolic architectures</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#loop-parallelism-in-fortran">Loop parallelism in FORTRAN</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#c-and-data-parallel-c-efforts">C* and Data-Parallel C efforts</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#cuda">CUDA</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#openmp">OpenMP</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#oneapi">oneAPI</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#parallel-concepts-for-humans">Parallel Concepts for Humans</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#von-neumann-machines-and-their-limits">von Neumann machines and their limits</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#flynn-s-taxonomy">Flynn’s taxonomy</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#control-memory-taxonomy">Control-memory taxonomy</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#speedup-vs-efficiency">Speedup vs. Efficiency</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#amdahls-law">Amdahl’s Law</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#scalability">Scalability</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#strong-weak-scaling-new-topic">Strong/Weak scaling [new topic]</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#granularity">Granularity</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#starvation-deadlock">starvation, deadlock</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#flooding-throttling">Flooding/Throttling</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#layout">Layout</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#latency">Latency</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#scheduling-needed-for-understanding-q-submit">Scheduling [needed for understanding q.submit()]</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#task-graphs-dataflow-execution-macro-dataflow-concept">task graphs / dataflow execution / macro-dataflow concept</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Parallel Programming Preliminaries</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../10-software-engineering/software-engineering.html">Software Engineering</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../15-modern-cpp/modern-cpp.html">Modern C++ as a Better C (and C++)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../18-dpcpp/dpcpp.html">Data-Parallel C++</a></li>
@@ -89,39 +86,35 @@
 <li class="toctree-l1"><a class="reference internal" href="../40-going-distributed/distributed.html">Distributed Computing with OneAPI</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../99-sandbox/issues.html">Issues</a></li>
 </ul>
-
-        </div>
-      </div>
-    </nav>
-
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #922247" >
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">UnoAPI</a>
-      </nav>
-
-      <div class="wy-nav-content">
-        <div class="rst-content style-external-links">
-          <div role="navigation" aria-label="Page navigation">
-  <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Parallel Programming Preliminaries</li>
-      <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/05-parallel/parallel.rst.txt" rel="nofollow"> View page source</a>
-      </li>
-  </ul>
-  <hr/>
+</nav>
 </div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-           <div itemprop="articleBody">
-             
-  <section id="parallel-programming-preliminaries">
-<h1>Parallel Programming Preliminaries<a class="headerlink" href="#parallel-programming-preliminaries" title="Permalink to this heading"></a></h1>
+</div>
+<button @click="showSidebar = false" class="absolute md:hidden right-4 top-4 rounded-sm opacity-70 transition-opacity hover:opacity-100" type="button">
+<svg class="h-4 w-4" fill="currentColor" height="24" stroke="none" viewbox="0 96 960 960" width="24" xmlns="http://www.w3.org/2000/svg">
+<path d="M480 632 284 828q-11 11-28 11t-28-11q-11-11-11-28t11-28l196-196-196-196q-11-11-11-28t11-28q11-11 28-11t28 11l196 196 196-196q11-11 28-11t28 11q11 11 11 28t-11 28L536 576l196 196q11 11 11 28t-11 28q-11 11-28 11t-28-11L480 632Z"></path>
+</svg>
+</button>
+</aside>
+<main class="relative py-6 lg:gap-10 lg:py-8 xl:grid xl:grid-cols-[1fr_300px]">
+<div class="w-full min-w-0 mx-auto">
+<nav aria-label="breadcrumbs" class="flex items-center mb-4 space-x-1 text-sm text-muted-foreground">
+<a class="overflow-hidden text-ellipsis whitespace-nowrap hover:text-foreground" href="../index.html">
+<span class="hidden md:inline">UnoAPI 16 May 2023 documentation</span>
+<svg aria-label="Home" class="md:hidden" fill="currentColor" height="18" stroke="none" viewbox="0 96 960 960" width="18" xmlns="http://www.w3.org/2000/svg">
+<path d="M240 856h120V616h240v240h120V496L480 316 240 496v360Zm-80 80V456l320-240 320 240v480H520V696h-80v240H160Zm320-350Z"></path>
+</svg>
+</a>
+<div class="mr-1">/</div><span aria-current="page" class="font-medium text-foreground overflow-hidden text-ellipsis whitespace-nowrap">Parallel Programming Preliminaries</span>
+</nav>
+<div id="content" role="main">
+<section id="parallel-programming-preliminaries">
+<h1>Parallel Programming Preliminaries<a class="headerlink" href="#parallel-programming-preliminaries" title="Permalink to this heading">¶</a></h1>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This chapter is being drafted now. Set expectations accordingly!</p>
 </div>
 <section id="notable-parallel-computing-systems">
-<h2>Notable Parallel Computing Systems<a class="headerlink" href="#notable-parallel-computing-systems" title="Permalink to this heading"></a></h2>
+<h2>Notable Parallel Computing Systems<a class="headerlink" href="#notable-parallel-computing-systems" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#notable-parallel-computing-systems'">¶</a></h2>
 <p>Here is a timeline of some key developments in parallel computing.  Here we focus on computers that were designed for parallel/scientific computing.  We also focus on those that had “on chip” parallelism.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -139,50 +132,50 @@
 <p>Intel Paragon</p>
 <p>Beyond 1993, parallel computing becomes more of a commodity. We provide separate coverage in the next section about clusters, accelerators, and other special-purpose parallel hardware.</p>
 <section id="cluster-computing">
-<h3>Cluster Computing<a class="headerlink" href="#cluster-computing" title="Permalink to this heading"></a></h3>
+<h3>Cluster Computing<a class="headerlink" href="#cluster-computing" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#cluster-computing'">¶</a></h3>
 </section>
 <section id="accelerators">
-<h3>Accelerators<a class="headerlink" href="#accelerators" title="Permalink to this heading"></a></h3>
+<h3>Accelerators<a class="headerlink" href="#accelerators" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#accelerators'">¶</a></h3>
 </section>
 <section id="vector-machines-cray">
-<h3>Vector machines (Cray)<a class="headerlink" href="#vector-machines-cray" title="Permalink to this heading"></a></h3>
+<h3>Vector machines (Cray)<a class="headerlink" href="#vector-machines-cray" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#vector-machines-cray'">¶</a></h3>
 </section>
 <section id="connection-machine-thinking-machines">
-<h3>Connection Machine (Thinking Machines)<a class="headerlink" href="#connection-machine-thinking-machines" title="Permalink to this heading"></a></h3>
+<h3>Connection Machine (Thinking Machines)<a class="headerlink" href="#connection-machine-thinking-machines" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#connection-machine-thinking-machines'">¶</a></h3>
 </section>
 <section id="systolic-architectures">
-<h3>Systolic architectures<a class="headerlink" href="#systolic-architectures" title="Permalink to this heading"></a></h3>
+<h3>Systolic architectures<a class="headerlink" href="#systolic-architectures" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#systolic-architectures'">¶</a></h3>
 </section>
 <section id="loop-parallelism-in-fortran">
-<h3>Loop parallelism in FORTRAN<a class="headerlink" href="#loop-parallelism-in-fortran" title="Permalink to this heading"></a></h3>
+<h3>Loop parallelism in FORTRAN<a class="headerlink" href="#loop-parallelism-in-fortran" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#loop-parallelism-in-fortran'">¶</a></h3>
 </section>
 <section id="c-and-data-parallel-c-efforts">
-<h3>C* and Data-Parallel C efforts<a class="headerlink" href="#c-and-data-parallel-c-efforts" title="Permalink to this heading"></a></h3>
+<h3>C* and Data-Parallel C efforts<a class="headerlink" href="#c-and-data-parallel-c-efforts" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#c-and-data-parallel-c-efforts'">¶</a></h3>
 </section>
 <section id="cuda">
-<h3>CUDA<a class="headerlink" href="#cuda" title="Permalink to this heading"></a></h3>
+<h3>CUDA<a class="headerlink" href="#cuda" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#cuda'">¶</a></h3>
 </section>
 <section id="openmp">
-<h3>OpenMP<a class="headerlink" href="#openmp" title="Permalink to this heading"></a></h3>
+<h3>OpenMP<a class="headerlink" href="#openmp" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#openmp'">¶</a></h3>
 </section>
 <section id="oneapi">
-<h3>oneAPI<a class="headerlink" href="#oneapi" title="Permalink to this heading"></a></h3>
+<h3>oneAPI<a class="headerlink" href="#oneapi" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#oneapi'">¶</a></h3>
 </section>
 </section>
 <section id="parallel-concepts-for-humans">
-<h2>Parallel Concepts for Humans<a class="headerlink" href="#parallel-concepts-for-humans" title="Permalink to this heading"></a></h2>
+<h2>Parallel Concepts for Humans<a class="headerlink" href="#parallel-concepts-for-humans" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#parallel-concepts-for-humans'">¶</a></h2>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The track for this was laid in the Java threads/networking book.</p>
 </div>
 <section id="von-neumann-machines-and-their-limits">
-<h3>von Neumann machines and their limits<a class="headerlink" href="#von-neumann-machines-and-their-limits" title="Permalink to this heading"></a></h3>
+<h3>von Neumann machines and their limits<a class="headerlink" href="#von-neumann-machines-and-their-limits" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#von-neumann-machines-and-their-limits'">¶</a></h3>
 <p>A discussion of parallel computing must begin with a discussion of sequential computing and the von Neumann machine—our sequential computer. The von Neumann machine is one of the computer designs of John von Neumann. A processor fetches instructions and data from a memory, operates on the data, and writes the results back into memory. Computation is accomplished by making small incremental changes in the global memory.</p>
 <p>The problem with the von Neumann machine is that the design relies on making a sequence of small changes, a highly sequential process. Note that current programming languages are designed assuming that the von Neumann machine will be used. The assignment statement fetches data from memory on the right hand side, performs computations, and writes results back into the memory for the left-hand-side variable. The statements are executed sequentially, with control accomplished by branches. In the language, the branches are given the syntactic sugar of if statements, while statements, and so on.</p>
 <p>There is a problem in trying to speed up von Neumann machines. They are inherently sequential in principle. Attempts may be made to execute several instructions at once (super-scalar execution), but that gives only a few times the speedup. Similarly, it is difficult to gain high speedup from a program written in a von Neumann language without doing an extensive rewrite of the program.</p>
 </section>
 <section id="flynn-s-taxonomy">
-<h3>Flynn’s taxonomy<a class="headerlink" href="#flynn-s-taxonomy" title="Permalink to this heading"></a></h3>
+<h3>Flynn’s taxonomy<a class="headerlink" href="#flynn-s-taxonomy" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#flynn-s-taxonomy'">¶</a></h3>
 <p>Flynn produced a taxonomy of parallel machines that is widely used. He classified computers with respect to how many different instruction streams they are fetching and executing at the same time, and by how many data sets (data streams) they are fetching and processing. His taxonomy is as follows:</p>
 <ul class="simple">
 <li><p>SISD—single instruction stream–single data stream: the familiar von Neumann machine. Fetching one sequence of instructions and fetching the data and the instructions address from one memory.</p></li>
@@ -200,7 +193,7 @@
 <p>It is arguable that the change from shared-memory to distributed-memory machines is a radical shift; it goes to the root of how one thinks about computations. On the von Neumann machine, the most important entity is the process, the program in execution. The process fetches instructions and manipulates data, thereby embodying both control and data. On a shared-memory machine, the process is still the most important entity, although there are now multiple threads of execution within the data space. But at the global level, on a distributed-memory machine, messages convey data across the machine and the arrival of messages enables computations. At the global level of distributed-memory machines, it is the messages that embody control and data. Hence, the messages are more important than the processes that are running on the nodes.</p>
 </section>
 <section id="control-memory-taxonomy">
-<h3>Control-memory taxonomy<a class="headerlink" href="#control-memory-taxonomy" title="Permalink to this heading"></a></h3>
+<h3>Control-memory taxonomy<a class="headerlink" href="#control-memory-taxonomy" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#control-memory-taxonomy'">¶</a></h3>
 <p>Flynn’s taxonomy is usually applied to machines with von Neumann processors. Further insight may be gained by considering other control mechanisms. The von Neumann machines may be characterized as “control driven”; it is the flow of control represented by the program counter that schedules operations for execution.</p>
 <p>“Data-driven” processors schedule operations for execution when their operands become available. In the paradigmatic variety of data-driven machines, scalar data values flow in
 tokens over an interconnection network to the instructions that work upon them (hence the term “data flow”). When a token arrives, the hardware checks that all operands are present and, if they are, schedules the instruction for execution. Data-flow machines are easily built distributed memory.</p>
@@ -209,7 +202,7 @@ tokens over an interconnection network to the instructions that work upon them (
 <p>A “demand-driven” processor performs computations when values are demanded. For example, when the value of a binary operator is demanded, the operator, in turn, demands the values of its operands. A common implementation of demand-driven processors is based on “reductions,” which occur when a functional program is repeatedly rewritten until the solution is computed. The rewritings include replacing an operator applied to data values with its result and replacing a function call with the function body, with the actual parameters substituted for the formal. Reductions are performed on an internal representation of the program. Two common representations are graphs and strings. Graphs consist of nodes linked together with pointers and hence work best with shared memory. Strings can be spread across a chain of processors so that an individual processor can reduce sub-expressions contained entirely in its memory and neighboring processors can shift expressions falling across their boundary into one of them.“Pattern-driven” computation is typically done without specialized hardware and is implemented atop von Neumann machines. Shared-memory, pattern-driven programming usually means parallel-logic programming. Distributed-memory, pattern-driven programming is represented in this book by Active Messages and Concurrent Aggregates.</p>
 </section>
 <section id="speedup-vs-efficiency">
-<h3>Speedup vs. Efficiency<a class="headerlink" href="#speedup-vs-efficiency" title="Permalink to this heading"></a></h3>
+<h3>Speedup vs. Efficiency<a class="headerlink" href="#speedup-vs-efficiency" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#speedup-vs-efficiency'">¶</a></h3>
 <p>We want to use parallelism to compute answers more quickly. How much more quickly?</p>
 <p>We define speedup as</p>
 <div class="math notranslate nohighlight">
@@ -246,7 +239,7 @@ Therefore, <span class="math notranslate nohighlight">\(T_n\)</span> may be <spa
 <p>The efficiency would be the ratio of execution time with linear speedup to observed execution time. If speedup is no greater than linear, efficiency will be less than or equal to 1.</p>
 </section>
 <section id="amdahls-law">
-<h3>Amdahl’s Law<a class="headerlink" href="#amdahls-law" title="Permalink to this heading"></a></h3>
+<h3>Amdahl’s Law<a class="headerlink" href="#amdahls-law" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#amdahls-law'">¶</a></h3>
 <p>Amdahl’s law does not really deserve the title of law. It is merely a back-of-the-envelope attempt (or conjecture) to prove that there are severe limits to the speedup that can be achieved by a parallel program. Amdahl’s law asserts that there is a serial part of any parallel program that must be executed sequentially, and the time required for this part will be a lower limit on the time the program takes to execute. Consider a serial program that executes in time T. Let’s calculate the best speedup we could achieve if a fraction f of the execution time is taken up by sequential execution. If you divide the parallel execution time into the serial and parallel parts, you get speedup with an upper bound of</p>
 <div class="math notranslate nohighlight">
 \[E = \frac{T}{f T + \frac{(1 - f)T}{n}}\]</div>
@@ -259,7 +252,7 @@ Therefore, <span class="math notranslate nohighlight">\(T_n\)</span> may be <spa
 \[\lim_{x\to\infty} S = \lim_{x\to\infty} \frac{1}{f + \frac{(1 - f)}{n}} = \frac{1}{f}\]</div>
 </section>
 <section id="scalability">
-<h3>Scalability<a class="headerlink" href="#scalability" title="Permalink to this heading"></a></h3>
+<h3>Scalability<a class="headerlink" href="#scalability" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#scalability'">¶</a></h3>
 <p>A flaw in the reasoning behind Amdahl’s law is that it deals with fixed-sized problems and questions how much faster they can be run. This is not, however, the way massively paral- lel processors are used. Take the example of weather forecasting. The calculations are made by superimposing a mesh onto the atmosphere and calculating pressure, tempera- ture, humidity, etc., at each mesh point, repeatedly using the values at the surrounding points at small time intervals. The more numerous the mesh points and the smaller the time intervals, the better is the forecast. But the more calculations that are required, the
 slower the program runs. And for weather forecasting, if the calculation takes too long, it loses all value. When presented with a faster machine, weather forecasters will use more grid points and a smaller step size. They increase the problem size to the largest possible value that allows the answer to be reached in the same amount of time.</p>
 <p>Let’s rephrase the calculation, starting with a parallel program with serial fraction g that runs in time R on <code class="docutils literal notranslate"><span class="pre">n</span></code> processors. If we ran the calculation on a single processor, how long would it take? The answer is</p>
@@ -276,11 +269,11 @@ slower the program runs. And for weather forecasting, if the calculation takes t
 <p>Another aspect of this argument against Amdahl’s law is that, as the problem size increases, the serial fraction may decrease. Consider a program that reads in two N-by-N matrices, multiplies them, and writes out the result. The serial I/O time grows as <span class="math notranslate nohighlight">\(N^2\)</span>, while the multiplication, which is highly parallelizable, grows as <span class="math notranslate nohighlight">\(N^3\)</span>.</p>
 </section>
 <section id="strong-weak-scaling-new-topic">
-<h3>Strong/Weak scaling [new topic]<a class="headerlink" href="#strong-weak-scaling-new-topic" title="Permalink to this heading"></a></h3>
+<h3>Strong/Weak scaling [new topic]<a class="headerlink" href="#strong-weak-scaling-new-topic" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#strong-weak-scaling-new-topic'">¶</a></h3>
 </section>
 </section>
 <section id="granularity">
-<h2>Granularity<a class="headerlink" href="#granularity" title="Permalink to this heading"></a></h2>
+<h2>Granularity<a class="headerlink" href="#granularity" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#granularity'">¶</a></h2>
 <p>Grain size loosely refers to the amount of computation that is done between communications or synchronizations. Too large a grain size can result in an unbalanced load. Too small a grain size can waste too much time on system overhead. Consider eight processors that are to execute 10 independent tasks, each of which takes <span class="math notranslate nohighlight">\(t\)</span> time units. Suppose the system takes <span class="math notranslate nohighlight">\(s\)</span> time units to run a task. The schedule looks like this:</p>
 <p>Six processors execute one task completing in time <span class="math notranslate nohighlight">\(t + s\)</span>.</p>
 <ul class="simple">
@@ -295,7 +288,7 @@ slower the program runs. And for weather forecasting, if the calculation takes t
 <p>2t + 2s = 1.3t + 13s s = (0.7/11)t = 0.064t</p>
 <p>So, if s is even seven percent of t, the version with 100 tasks will be as slow as the version with 10. So how do you choose a good grain size? Folklore suggests that one millisecond of execution between communications is a reasonable amount. Other folklore suggests that processing 300–400 array elements between communications is good on some systems. What you will probably have to do is experiment for yourself to find a good grain size. By parameterizing your actual code, you can enable the possibility to experiment.</p>
 <section id="starvation-deadlock">
-<h3>starvation, deadlock<a class="headerlink" href="#starvation-deadlock" title="Permalink to this heading"></a></h3>
+<h3>starvation, deadlock<a class="headerlink" href="#starvation-deadlock" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#starvation-deadlock'">¶</a></h3>
 <p>Starvation results when some user computations do not get adequate processor time. Here’s an example of starvation on a distributed-memory machine: For some distributed computa- tions, it is difficult to determine if they are finished. There are some algorithms that send system probe messages around to inquire about the state of the computation. Starvation can result if the probe messages use up significant processor time, making processor time unavailable to the user computations. On shared-memory machines, processors lock and unlock resources. When a resource is unlocked, one of the processors waiting for it (if any) is allowed to proceed. If the resource allocation mechanism is unfair, some waiting pro- cesses may be long delayed, while other processes acquire the resource repeatedly.</p>
 <p>A set of processes is deadlocked if each process is waiting for resources that other pro- cesses in the set hold and none will release until the processes have been granted the other resources that they are waiting for. There are four conditions required for deadlock:
 • Mutual Exclusion: Only a process in possession of a resource may proceed.
@@ -308,7 +301,7 @@ slower the program runs. And for weather forecasting, if the calculation takes t
 • You can try to make it impossible for deadlock to occur. The easiest prevention is to eliminate circular waits by numbering the resources and requesting resources in ascending numeric order. That is, never request a resource if you already possess one with a higher number.</p>
 </section>
 <section id="flooding-throttling">
-<h3>Flooding/Throttling<a class="headerlink" href="#flooding-throttling" title="Permalink to this heading"></a></h3>
+<h3>Flooding/Throttling<a class="headerlink" href="#flooding-throttling" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#flooding-throttling'">¶</a></h3>
 <p>Strangely, one of the problems with parallelism is having too much rather than too little. For many parallel algorithms (especially divide and conquer and combinatoric search), a problem is repeatedly broken into smaller parts that can be run in parallel. Once the num- ber of parallel parts significantly exceeds the number of processors available, it is some- times detrimental to create more parallelism: All processors will be kept busy anyway, the
 time to create more parallel tasks will be wasted, and the storage for those task descrip-
 tions will tax the parallel machine’s memory.</p>
@@ -316,7 +309,7 @@ tions will tax the parallel machine’s memory.</p>
 <p>Choice of when to switch from creating more tasks to executing within tasks can be made statically, before the algorithm runs, or dynamically, in response to the system load. Dynamic switching requires additional information about the current state of the system, which is oftentimes not available or is highly imprecise.</p>
 </section>
 <section id="layout">
-<h3>Layout<a class="headerlink" href="#layout" title="Permalink to this heading"></a></h3>
+<h3>Layout<a class="headerlink" href="#layout" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#layout'">¶</a></h3>
 <p>The layout of a data structure on a distributed-memory machine can make a significant dif- ference in performance. There are two interacting concerns. First, it is important to balance the load so that all nodes have approximately the same amount of work to do. Secondly, it helps to have most communication between neighboring nodes; there won’t be as many queueing delays as messages contend for communication edges along longer paths.
 Consider, though, a simulation of the cosmos: If you divide space into equally sized cubes and assign one cube to each node of a multicomputer, then communication of gravitation and movements of mass can be done between neighboring nodes on a mesh-connected computer. Unfortunately, there will be vast regions of nearly empty space mapped to some regions of nodes, while those parts of space with clusters of galaxies will be mapped into other nodes; that is, the load will be horribly imbalanced. A way to balance the load is to divide space into a larger number of regions and randomize their mapping onto the nodes, say, by hashing their coordinates to give the node number. Then you can count on the law of large numbers to balance the load, but communication between neighboring regions is no longer between neighboring nodes.
 Suppose we have N rows of an array that must be processed. How can we divide them evenly among P nodes?</p>
@@ -329,12 +322,12 @@ We can assign blocks of rows to nodes, as in (1) and (2), but guarantee that no 
 <p>Some algorithms divide arrays into regions that communicate along their edges, so mes- sages will be shorter and faster if the perimeters of regions are smaller: Square regions tend to be better than long, rectangular regions.</p>
 </section>
 <section id="latency">
-<h3>Latency<a class="headerlink" href="#latency" title="Permalink to this heading"></a></h3>
+<h3>Latency<a class="headerlink" href="#latency" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#latency'">¶</a></h3>
 <p>As machines get larger, physical packaging itself requires that components get further apart. Therefore, it will take longer for information to flow between some components rather than others. This implies that the larger, shared-memory machines will be NUMA (nonuniform memory access). Data layout becomes increasingly important. Algorithms may benefit by being rewritten to fetch remote objects, operate on them locally, and then write them back, rather than just manipulating them in place.</p>
 <p>Latency is also one of the considerations in laying out tasks and data on distributed-mem- ory machines. On distributed-memory machines, one has the extra option of using asyn- chronous message passing to allow other computations to be performed while messages are being passed.</p>
 </section>
 <section id="scheduling-needed-for-understanding-q-submit">
-<h3>Scheduling [needed for understanding q.submit()]<a class="headerlink" href="#scheduling-needed-for-understanding-q-submit" title="Permalink to this heading"></a></h3>
+<h3>Scheduling [needed for understanding q.submit()]<a class="headerlink" href="#scheduling-needed-for-understanding-q-submit" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#scheduling-needed-for-understanding-q-submit'">¶</a></h3>
 <p>Scheduling assigns tasks to processors to be run in a particular order or at particular times. There is a large amount of literature devoted to process scheduling, the major import of which is this: Almost any scheduling of activities on processors is an NP-hard problem. For practical purposes, the meaning of NP-hard is this: The worst-case time to run an NP- hard algorithm grows so rapidly (e.g., doubling when you add one element to the input), that you may not get a solution for a modestly sized problem before the sun burns out. Do not seek perfect solutions to NP-hard problems. Instead, look for ways to quickly get solu- tions that are reasonably good most of the time. Static scheduling of tasks on processors would be done before the tasks are run. Dynamic scheduling assigns tasks during execu- tion. Self-scheduling is a form of dynamic scheduling in which the processors themselves select which task to execute next.</p>
 <p>The techniques for partitioning rows among nodes that we saw in the discussion of layout are also applicable to processor scheduling on shared-memory machines. For technique (3), an easy way to assign process i all rows j such that j mod P = i is to handle the rows in a loop:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="n">my_id</span><span class="p">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span> <span class="n">j</span> <span class="o">+=</span><span class="n">P</span><span class="p">)</span> <span class="p">{</span>
@@ -380,40 +373,57 @@ We can assign blocks of rows to nodes, as in (1) and (2), but guarantee that no 
 </div>
 </section>
 <section id="task-graphs-dataflow-execution-macro-dataflow-concept">
-<h3>task graphs / dataflow execution / macro-dataflow concept<a class="headerlink" href="#task-graphs-dataflow-execution-macro-dataflow-concept" title="Permalink to this heading"></a></h3>
+<h3>task graphs / dataflow execution / macro-dataflow concept<a class="headerlink" href="#task-graphs-dataflow-execution-macro-dataflow-concept" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#task-graphs-dataflow-execution-macro-dataflow-concept'">¶</a></h3>
 </section>
 </section>
 </section>
-
-
-           </div>
-          </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../00-preliminaries/preliminaries.html" class="btn btn-neutral float-left" title="Preliminaries" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../10-software-engineering/software-engineering.html" class="btn btn-neutral float-right" title="Software Engineering" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-    </div>
-
-  <hr/>
-
-  <div role="contentinfo">
-    <p>&#169; Copyright 2013-2019, UnoAPI Software Systems Laboratory.</p>
-  </div>
-
-  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    provided by <a href="https://readthedocs.org">Read the Docs</a>.
-   
-
+</div></div><aside class="hidden text-sm xl:block" id="right-sidebar">
+<div class="sticky top-16 -mt-10 max-h-[calc(var(--vh)-4rem)] overflow-y-auto pt-6 space-y-2"><p class="font-medium">On this page</p>
+<ul>
+<li><a :data-current="activeSection === '#notable-parallel-computing-systems'" class="reference internal" href="#notable-parallel-computing-systems">Notable Parallel Computing Systems</a><ul>
+<li><a :data-current="activeSection === '#cluster-computing'" class="reference internal" href="#cluster-computing">Cluster Computing</a></li>
+<li><a :data-current="activeSection === '#accelerators'" class="reference internal" href="#accelerators">Accelerators</a></li>
+<li><a :data-current="activeSection === '#vector-machines-cray'" class="reference internal" href="#vector-machines-cray">Vector machines (Cray)</a></li>
+<li><a :data-current="activeSection === '#connection-machine-thinking-machines'" class="reference internal" href="#connection-machine-thinking-machines">Connection Machine (Thinking Machines)</a></li>
+<li><a :data-current="activeSection === '#systolic-architectures'" class="reference internal" href="#systolic-architectures">Systolic architectures</a></li>
+<li><a :data-current="activeSection === '#loop-parallelism-in-fortran'" class="reference internal" href="#loop-parallelism-in-fortran">Loop parallelism in FORTRAN</a></li>
+<li><a :data-current="activeSection === '#c-and-data-parallel-c-efforts'" class="reference internal" href="#c-and-data-parallel-c-efforts">C* and Data-Parallel C efforts</a></li>
+<li><a :data-current="activeSection === '#cuda'" class="reference internal" href="#cuda">CUDA</a></li>
+<li><a :data-current="activeSection === '#openmp'" class="reference internal" href="#openmp">OpenMP</a></li>
+<li><a :data-current="activeSection === '#oneapi'" class="reference internal" href="#oneapi">oneAPI</a></li>
+</ul>
+</li>
+<li><a :data-current="activeSection === '#parallel-concepts-for-humans'" class="reference internal" href="#parallel-concepts-for-humans">Parallel Concepts for Humans</a><ul>
+<li><a :data-current="activeSection === '#von-neumann-machines-and-their-limits'" class="reference internal" href="#von-neumann-machines-and-their-limits">von Neumann machines and their limits</a></li>
+<li><a :data-current="activeSection === '#flynn-s-taxonomy'" class="reference internal" href="#flynn-s-taxonomy">Flynn’s taxonomy</a></li>
+<li><a :data-current="activeSection === '#control-memory-taxonomy'" class="reference internal" href="#control-memory-taxonomy">Control-memory taxonomy</a></li>
+<li><a :data-current="activeSection === '#speedup-vs-efficiency'" class="reference internal" href="#speedup-vs-efficiency">Speedup vs. Efficiency</a></li>
+<li><a :data-current="activeSection === '#amdahls-law'" class="reference internal" href="#amdahls-law">Amdahl’s Law</a></li>
+<li><a :data-current="activeSection === '#scalability'" class="reference internal" href="#scalability">Scalability</a></li>
+<li><a :data-current="activeSection === '#strong-weak-scaling-new-topic'" class="reference internal" href="#strong-weak-scaling-new-topic">Strong/Weak scaling [new topic]</a></li>
+</ul>
+</li>
+<li><a :data-current="activeSection === '#granularity'" class="reference internal" href="#granularity">Granularity</a><ul>
+<li><a :data-current="activeSection === '#starvation-deadlock'" class="reference internal" href="#starvation-deadlock">starvation, deadlock</a></li>
+<li><a :data-current="activeSection === '#flooding-throttling'" class="reference internal" href="#flooding-throttling">Flooding/Throttling</a></li>
+<li><a :data-current="activeSection === '#layout'" class="reference internal" href="#layout">Layout</a></li>
+<li><a :data-current="activeSection === '#latency'" class="reference internal" href="#latency">Latency</a></li>
+<li><a :data-current="activeSection === '#scheduling-needed-for-understanding-q-submit'" class="reference internal" href="#scheduling-needed-for-understanding-q-submit">Scheduling [needed for understanding q.submit()]</a></li>
+<li><a :data-current="activeSection === '#task-graphs-dataflow-execution-macro-dataflow-concept'" class="reference internal" href="#task-graphs-dataflow-execution-macro-dataflow-concept">task graphs / dataflow execution / macro-dataflow concept</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</aside>
+</main>
+</div>
+</div><footer class="py-6 border-t border-border md:py-0">
+<div class="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
+<div class="flex flex-col items-center gap-4 px-8 md:flex-row md:gap-2 md:px-0">
+<p class="text-sm leading-loose text-center text-muted-foreground md:text-left">© 2013-2019, UnoAPI Software Systems Laboratory Built with <a class="font-medium underline underline-offset-4" href="https://www.sphinx-doc.org" rel="noreferrer">Sphinx 6.2.1</a></p>
+</div>
+</div>
 </footer>
-        </div>
-      </div>
-    </section>
-  </div>
-  <script>
-      jQuery(function () {
-          SphinxRtdTheme.Navigation.enable(true);
-      });
-  </script> 
-
+</div>
 </body>
 </html>
