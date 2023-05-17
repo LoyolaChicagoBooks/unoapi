@@ -1,15 +1,13 @@
 Parallel Programming Preliminaries
 ==================================
 
-.. note:: This chapter is being drafted now. Set expectations accordingly!
-
 
 Notable Parallel Computing Systems
 --------------------------------------------
 
-Here is a timeline of some key developments in parallel computing.  Here we focus on computers that were designed for parallel/scientific computing.  We also focus on those that had "on chip" parallelism.
+.. note:: This chapter is being drafted now. Set expectations accordingly! This is a combination of notes from George's HOC efforts with David Dennis and ChatGPT.
 
-.. note:: George still curating this.
+Here is a timeline of some key developments in parallel computing.  Here we focus on computers that were designed for parallel/scientific computing.  We also focus on those that had "on chip" parallelism.
 
 ENIAC (1945): The first general-purpose electronic computer, designed to perform a wide range of calculations for military and scientific applications. This wasn't actually a parallel computer but is widely recognized as the first computer with general-purpose computing capabilities. (The EDVAC introduced full support for stored program computing.)
 
@@ -37,20 +35,132 @@ Beyond 1993, parallel computing becomes more of a commodity. We provide separate
 Cluster Computing
 ^^^^^^^^^^^^^^^^^^
 
+Cluster computing, also known as high-performance computing (HPC), has its origins in the early days of computing when it became clear that solving complex computational problems required more processing power than a single machine could provide.
+The concept of connecting multiple computers together to work in parallel emerged as a solution.
+In the 1960s and 1970s, research institutions and government agencies began experimenting with cluster-like architectures, such as the Control Data Corporation's CDC 6600 system, which employed multiple processors to tackle scientific calculations.
+However, it was not until the 1990s that cluster computing gained widespread recognition with the advent of inexpensive, commodity hardware, and the development of networking technologies that allowed computers to communicate efficiently.
+The Beowulf project, initiated by NASA in the mid-1990s, played a crucial role in popularizing cluster computing by demonstrating that a cluster of interconnected off-the-shelf computers could deliver impressive computing power at a fraction of the cost of traditional supercomputers.
+Since then, cluster computing has evolved significantly, becoming a dominant paradigm for high-performance computing, enabling breakthroughs in fields such as weather modeling, drug discovery, and data analysis.
+
+
 Accelerators
 ^^^^^^^^^^^^^
+
+Accelerators and co-processors play a crucial role in enhancing the computational capabilities of central processing units (CPUs). These specialized hardware components are designed to offload specific tasks or types of computations from the CPU, thereby accelerating the overall performance of a system. By leveraging parallel processing techniques and tailored architectures, accelerators such as graphics processing units (GPUs), field-programmable gate arrays (FPGAs), and application-specific integrated circuits (ASICs) excel at performing repetitive and data-intensive operations. GPUs, originally developed for rendering graphics, have found widespread use in areas such as scientific simulations, machine learning, and cryptocurrency mining. FPGAs offer reconfigurability and low power consumption, making them suitable for prototyping and custom logic implementation. ASICs, on the other hand, are highly optimized for specific applications and deliver exceptional performance and efficiency. Incorporating accelerators and co-processors alongside CPUs enables a heterogeneous computing environment, allowing for more efficient and specialized processing tailored to the demands of modern workloads.
+
+Among the most common accelerators are the following:
+
+1. Graphics Processing Units (GPUs): Originally designed for rendering graphics, GPUs have become immensely popular for their parallel computing capabilities. They excel in tasks such as scientific computing, deep learning, data analytics, and image processing.
+
+2. Tensor Processing Units (TPUs): Developed by Google, TPUs are specialized hardware accelerators designed specifically for machine learning workloads. They offer high-speed matrix operations and optimized support for neural networks, making them ideal for AI-related tasks.
+
+3. Field-Programmable Gate Arrays (FPGAs): FPGAs provide customizable hardware acceleration, allowing users to design and implement custom logic circuits to accelerate specific workloads. They are used in various domains, including high-frequency trading, network processing, and real-time data analysis.
+
+4. Application-Specific Integrated Circuits (ASICs): ASICs are custom-built chips tailored for specific applications. They deliver exceptional performance and power efficiency by optimizing hardware for a particular task. Examples include Bitmain's ASICs for cryptocurrency mining and Google's custom ASICs for artificial intelligence.
+
+5. Intel Xeon Phi: The Intel Xeon Phi, based on the Many Integrated Core (MIC) architecture, is designed for highly parallel workloads. It provides a large number of cores and high memory bandwidth, making it suitable for scientific simulations, molecular dynamics, and other computationally intensive tasks.
+
+6. Dataflow Processing Units (DPUs): DPUs are emerging accelerators focused on accelerating data-intensive workloads such as networking, security, and storage. They offload tasks related to packet processing, encryption, and compression, improving overall system performance and efficiency.
+
+It's worth noting that the field of accelerators is rapidly evolving, and new innovations and technologies continue to emerge, catering to specific application domains and computing needs.
+
+The first historical examples of accelerators can be traced back to the early days of computing when specialized hardware components were developed to enhance the performance of computer systems. Here are a few notable examples:
+
+1. Floating-Point Units (FPUs): In the 1970s, separate floating-point units were introduced as co-processors to CPUs. These dedicated units were designed to handle floating-point arithmetic operations more efficiently, improving the computational capabilities of the system. They played a significant role in scientific and engineering applications that required extensive floating-point calculations.
+
+2. Math Co-processors: In the 1980s, math co-processors emerged as additional chips that could be added to the CPU to offload mathematical computations. Intel's 8087 math co-processor, for example, provided hardware acceleration for floating-point arithmetic, enabling faster and more precise mathematical calculations on compatible systems.
+
+3. Graphics Co-processors: The development of graphics co-processors in the 1980s marked a milestone in accelerating graphical computations. Companies like IBM and Texas Instruments introduced graphics co-processors that worked alongside CPUs to offload the processing required for displaying graphics, resulting in smoother and faster graphical user interfaces.
+
+4. Sound Blaster Cards: Sound Blaster cards, introduced by Creative Labs in the late 1980s and early 1990s, acted as accelerators for audio processing in personal computers. They provided dedicated hardware for sound synthesis, audio playback, and enhanced sound effects, freeing up the CPU from intensive audio processing tasks.
+
+These early accelerators paved the way for the development of more specialized and powerful hardware accelerators that emerged later, such as GPUs, FPGAs, and ASICs, to address the growing demands of specific computational tasks and domains.
 
 Vector machines (Cray)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Cray, a renowned supercomputer company founded by Seymour Cray, played a pivotal role in advancing the field of vector processing. Vector processing is a technique that allows a single instruction to operate on multiple data elements simultaneously, enabling efficient execution of computationally intensive tasks. Cray supercomputers, starting with the Cray-1 in the 1970s, were among the first to incorporate vector processing architecture. By leveraging specialized vector registers and instructions, Cray systems achieved remarkable performance gains in scientific simulations, weather forecasting, and other applications that required large-scale numerical computations. The Cray-1, with its distinctive "C" shape design and liquid cooling system, became an iconic symbol of supercomputing prowess. Subsequent generations of Cray systems, including the Cray-2, Cray X-MP, and Cray Y-MP, continued to refine and enhance vector processing capabilities, pushing the boundaries of computational performance. Even though modern supercomputers have evolved beyond pure vector processing, Cray's contributions to this field were instrumental in establishing the foundation for high-performance computing and shaping the development of future supercomputer architectures.
+
 Connection Machine (Thinking Machines)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The Connection Machine, developed by Danny Hillis and his team at Thinking Machines Corporation in the 1980s, was a highly influential supercomputer known for its parallel processing capabilities. The name "Connection Machine" derived from its unique architectural design, inspired by the concept of massively parallel processing. Instead of relying on a small number of powerful processors, the Connection Machine employed a large number of simpler processors called "nodes" that communicated and coordinated their activities through a high-speed network. Each node had its own local memory, and computations were performed in parallel across multiple nodes, enabling the machine to tackle complex problems through distributed processing. The Connection Machine gained attention for its ability to handle massive amounts of data and execute tasks in parallel, making it suitable for applications like artificial intelligence, pattern recognition, and scientific simulations. This innovative approach to parallel computing made the Connection Machine a groundbreaking contribution to the field of supercomputing.
 
 Systolic architectures
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Systolic array architectures are a type of parallel computing design inspired by the human heart's rhythmic pumping action. In systolic arrays, data flows through a network of specialized processing elements arranged in a regular grid-like pattern. Each processing element performs a simple computation and passes the results to its neighboring elements. This design facilitates the efficient execution of iterative computations and allows for a high degree of parallelism. However, despite their promising potential, systolic array architectures did not experience widespread adoption. Several factors contributed to this. Firstly, systolic arrays require highly regular data access patterns, making them less suitable for irregular or unpredictable computations. Secondly, the complexity of designing and programming systolic arrays posed significant challenges for developers. Lastly, the advent of other parallel computing architectures, such as SIMD (Single Instruction, Multiple Data) and MIMD (Multiple Instruction, Multiple Data), provided more flexibility and better suited the diverse range of applications. However, it's worth noting that the spirit of systolic arrays lives on in various forms. Modern incarnations include specialized hardware accelerators, such as TPUs and FPGAs, which employ array-like structures and dataflow architectures to achieve high-performance computing for specific workloads. Additionally, some parallel programming frameworks and languages incorporate systolic-like concepts to optimize data movement and parallel execution in distributed systems.
+
 Loop parallelism in FORTRAN
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Loop parallelism techniques, including the use of compiler directives like OpenMP, began to appear in the late 1990s and early 2000s. OpenMP, for example, was first introduced in 1997 as an application programming interface (API) specification for shared-memory parallel programming. The initial versions of OpenMP were primarily targeted at Fortran and C/C++ languages. Over the years, OpenMP has evolved and gained wider adoption, becoming a popular choice for parallel programming in scientific and high-performance computing domains. However, it's important to note that specific implementations and support for loop parallelism may have varied among different compilers and versions during that time.
+
+In early versions of Fortran, loop parallelism was typically achieved through manual techniques and compiler directives. Here's an example that demonstrates the computation of the area under a curve and the vector dot product using loop parallelism in Fortran:
+
+.. code-block:: fortran
+
+   ! Computation of the area under a curve using loop parallelism
+   program AreaUnderCurve
+     implicit none
+     integer :: i, n
+     real :: a, b, dx, x, area
+
+     n = 1000  ! Number of intervals
+     a = 0.0   ! Lower limit of integration
+     b = 1.0   ! Upper limit of integration
+     dx = (b - a) / n  ! Width of each interval
+
+     area = 0.0
+
+     !$OMP PARALLEL DO DEFAULT(NONE) PRIVATE(x) SHARED(a, dx, n, area)
+     do i = 1, n
+       x = a + (i - 0.5) * dx  ! Midpoint of the interval
+       area = area + f(x) * dx
+     end do
+     !$OMP END PARALLEL DO
+
+     print *, "The area under the curve is:", area
+
+   contains
+
+     ! Function representing the curve
+     function f(x)
+       real, intent(in) :: x
+       real :: f
+
+       f = x**2  ! Example function: x^2
+     end function f
+
+   end program AreaUnderCurve
+
+
+   ! Computation of the dot product of two vectors using loop parallelism
+   program VectorDotProduct
+     implicit none
+     integer :: i, n
+     real :: dot_product
+     real, dimension(:), allocatable :: vector1, vector2
+
+     n = 10000  ! Number of elements in the vectors
+     allocate(vector1(n), vector2(n))
+
+     ! Initialize the vectors (example values)
+     vector1 = 1.0
+     vector2 = 2.0
+
+     dot_product = 0.0
+
+     !$OMP PARALLEL DO DEFAULT(NONE) PRIVATE(i) SHARED(n, vector1, vector2, dot_product)
+     do i = 1, n
+       dot_product = dot_product + vector1(i) * vector2(i)
+     end do
+     !$OMP END PARALLEL DO
+
+     print *, "The dot product is:", dot_product
+
+   end program VectorDotProduct
+
 
 C* and Data-Parallel C efforts
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
