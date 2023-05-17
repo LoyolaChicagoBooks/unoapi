@@ -168,6 +168,77 @@ C* and Data-Parallel C efforts
 CUDA
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+CUDA (Compute Unified Device Architecture) is a parallel computing platform and programming model developed by NVIDIA. It allows developers to harness the power of NVIDIA GPUs (Graphics Processing Units) to accelerate computationally intensive tasks. By utilizing CUDA, developers can write code that offloads parallel computations to the GPU, enabling significant speedups and performance improvements in a wide range of applications, such as scientific simulations, data analysis, machine learning, and more.
+
+CUDA became popular due to several key factors. First, NVIDIA GPUs had already gained a significant market share in graphics rendering, providing a large user base to leverage for parallel computing. Second, CUDA offered substantial performance acceleration by harnessing the massive parallel architecture of GPUs, allowing developers to offload computationally intensive tasks and achieve significant speedups. Third, CUDA provided a developer-friendly programming model, extending the C language with directives and APIs that made it easier to express parallelism and utilize GPU resources. Fourth, NVIDIA's support ecosystem was comprehensive, offering tools, libraries, and documentation to aid CUDA development. The diverse range of application domains, including scientific simulations, data analytics, machine learning, and image processing, further contributed to CUDA's popularity. Lastly, the availability of NVIDIA's powerful GPU hardware across various price points enabled wider accessibility and adoption of CUDA in different industries and research fields.
+
+Here's the CUDA code example for computing the vector dot product in reStructuredText format:
+
+.. code-block:: cuda
+
+   #include <stdio.h>
+
+   #define SIZE 10000
+
+   // CUDA kernel for dot product computation
+   __global__ void dotProduct(float* vector1, float* vector2, float* result, int size) {
+       int tid = blockIdx.x * blockDim.x + threadIdx.x;
+       if (tid < size) {
+           result[tid] = vector1[tid] * vector2[tid];
+       }
+   }
+
+   int main() {
+       float vector1[SIZE];
+       float vector2[SIZE];
+       float result[SIZE];
+
+       // Initialize the vectors (example values)
+       for (int i = 0; i < SIZE; i++) {
+           vector1[i] = 1.0;
+           vector2[i] = 2.0;
+       }
+
+       float* d_vector1;
+       float* d_vector2;
+       float* d_result;
+
+       // Allocate device memory
+       cudaMalloc((void**)&d_vector1, SIZE * sizeof(float));
+       cudaMalloc((void**)&d_vector2, SIZE * sizeof(float));
+       cudaMalloc((void**)&d_result, SIZE * sizeof(float));
+
+       // Copy input vectors from host to device
+       cudaMemcpy(d_vector1, vector1, SIZE * sizeof(float), cudaMemcpyHostToDevice);
+       cudaMemcpy(d_vector2, vector2, SIZE * sizeof(float), cudaMemcpyHostToDevice);
+
+       // Launch the dot product kernel
+       int blockSize = 256;
+       int gridSize = (SIZE + blockSize - 1) / blockSize;
+       dotProduct<<<gridSize, blockSize>>>(d_vector1, d_vector2, d_result, SIZE);
+
+       // Copy result from device to host
+       cudaMemcpy(result, d_result, SIZE * sizeof(float), cudaMemcpyDeviceToHost);
+
+       // Compute the dot product result on the host
+       float dotProductResult = 0.0;
+       for (int i = 0; i < SIZE; i++) {
+           dotProductResult += result[i];
+       }
+
+       printf("The dot product is: %f\n", dotProductResult);
+
+       // Free device memory
+       cudaFree(d_vector1);
+       cudaFree(d_vector2);
+       cudaFree(d_result);
+
+       return 0;
+   }
+
+
+The above CUDA example demonstrates the computation of the dot product of two vectors using GPU parallelism. The code begins by initializing the input vectors with example values on the host. Then, device memory is allocated using ``cudaMalloc``, and the input vectors are copied from the host to the device memory using ``cudaMemcpy``. The dot product computation is performed by launching a CUDA kernel, ``dotProduct``, which runs in parallel on the GPU. Each thread calculates the product of corresponding elements from the input vectors. After the kernel execution, the results are copied back to the host memory using ``cudaMemcpy``, and the dot product is computed on the host. Finally, the dot product result is printed to the console. The example showcases how CUDA leverages the parallel processing capabilities of GPUs to accelerate computations, leading to improved performance compared to traditional CPU-based implementations.
+
 OpenMP
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
