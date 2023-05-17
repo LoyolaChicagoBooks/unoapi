@@ -7,30 +7,8 @@ Notable Parallel Computing Systems
 
 .. note:: This chapter is being drafted now. Set expectations accordingly! This is a combination of notes from George's HOC efforts with David Dennis and ChatGPT.
 
-Here is a timeline of some key developments in parallel computing.  Here we focus on computers that were designed for parallel/scientific computing.  We also focus on those that had "on chip" parallelism.
 
-ENIAC (1945): The first general-purpose electronic computer, designed to perform a wide range of calculations for military and scientific applications. This wasn't actually a parallel computer but is widely recognized as the first computer with general-purpose computing capabilities. (The EDVAC introduced full support for stored program computing.)
-
-ILLIAC I (1952): One of the first computers designed specifically for scientific and engineering calculations, featuring a high-speed magnetic drum memory and a custom-built floating-point unit.
-
-ILLIAC II (1957): An early example of a parallel computing system, featuring multiple processors that could be used to perform parallel computations on a single problem.
-
-ILLIAC III (1962): A highly parallel computer designed for scientific and engineering calculations, featuring up to 256 processors that could be used to perform parallel computations on large datasets.
-
-ILLIAC IV (1966): A highly parallel supercomputer that could have up to 64 processing nodes, each of which had its own memory and could execute instructions independently of the others.
-
-Convex C1 (1985): The first commercial parallel computer, designed for scientific and engineering applications, and based on a custom-designed parallel processing architecture that included multiple processors and memory banks connected by a high-speed interconnect network.
-
-Cray X-MP (1985): A massively parallel supercomputer that used vector processing and parallelism to achieve high performance on scientific and engineering applications.
-
-Thinking Machines CM-5 (1991): A massively parallel supercomputer that used a custom-designed interconnect network and vector processors to achieve high performance on a wide range of scientific and engineering applications.
-
-IBM SP (1993): A massively parallel supercomputer that used a distributed-memory architecture and high-speed interconnect network to achieve high performance on scientific and engineering applications.
-
-Intel Paragon
-
-Beyond 1993, parallel computing becomes more of a commodity. We provide separate coverage in the next section about clusters, accelerators, and other special-purpose parallel hardware.
-
+Here is a timeline of key developments in parallel computing, focusing on computers designed for parallel and scientific computing, with an emphasis on on-chip parallelism. In 1945, ENIAC, the first general-purpose electronic computer, laid the foundation for computing capabilities, though not specifically designed for parallelism. ILLIAC I (1952) and ILLIAC II (1957) were early examples of computers tailored for scientific and engineering calculations, with ILLIAC II introducing parallel computing capabilities. In 1962, ILLIAC III emerged as a highly parallel computer, accommodating up to 256 processors for large-scale parallel computations. ILLIAC IV (1966) continued the trend with a highly parallel supercomputer featuring 64 independent processing nodes. Convex C1 (1985) marked the advent of the first commercial parallel computer, utilizing custom-designed parallel processing architecture for scientific and engineering applications. Cray X-MP (1985) employed vector processing and parallelism to achieve remarkable performance. In 1991, the Thinking Machines CM-5 supercomputer utilized vector processors and a custom interconnect network to deliver high performance across diverse scientific and engineering applications. The IBM SP (1993) featured a distributed-memory architecture and high-speed interconnect network for impressive scientific computing performance. Beyond 1993, parallel computing became more ubiquitous, evolving into a commodity. Clusters, accelerators, and other specialized parallel hardware emerged, which we cover separately in the subsequent section.
 
 Cluster Computing
 ^^^^^^^^^^^^^^^^^^
@@ -164,6 +142,12 @@ In early versions of Fortran, loop parallelism was typically achieved through ma
 
 C* and Data-Parallel C efforts
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. note:: I'm still working on this.
+
+- Language Spec: http://people.csail.mit.edu/bradley/cm5docs/CStarProgrammingGuide.pdf
+
+- Data-Parallel on MIMD Computers: P. J. Hatcher, M. J. Quinn, A. J. Lapadula, B. K. Seevers, R. J. Anderson and R. R. Jones, "Data-parallel programming on MIMD computers," in IEEE Transactions on Parallel and Distributed Systems, vol. 2, no. 3, pp. 377-383, July 1991, doi: 10.1109/71.86112, https://ieeexplore.ieee.org/document/86112
 
 CUDA
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
