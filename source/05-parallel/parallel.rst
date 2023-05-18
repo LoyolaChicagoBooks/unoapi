@@ -226,6 +226,124 @@ The above CUDA example demonstrates the computation of the dot product of two ve
 OpenMP
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+OpenMP (Open Multi-Processing) is a portable API (Application Programming Interface) for shared-memory parallel programming in C, C++, and Fortran. It was developed in the late 1990s by various hardware and software vendors, aiming to create a standardized and user-friendly programming model for shared-memory parallelism. The initial release, OpenMP 1.0, came out in 1997, offering basic parallelism constructs. Subsequent versions, including OpenMP 2.0 (1998) and OpenMP 3.0 (2008), introduced additional features such as task parallelism and nested parallelism. OpenMP gained widespread adoption in high-performance computing due to its simplicity, portability, and compatibility with existing codebases. OpenMP 5.0, released in 2018, brought advanced features like improved accelerator offloading, enhanced tasking capabilities, and SIMD programming support. It remains actively developed and maintained by a consortium of vendors, researchers, and users. OpenMP enables developers to leverage multi-core processors and parallel architectures for enhanced performance and scalability in their applications.
+
+C, C++, and Fortran, are the primary languages directly supported by OpenMP. OpenMP offers language extensions, compiler directives, and runtime libraries specific to each language to facilitate parallel programming and exploit shared-memory parallelism:
+
+1. C: OpenMP directives and runtime library routines can be used directly within C programs to express parallelism and control the execution of parallel regions.
+
+2. C++: OpenMP can be utilized within C++ programs, providing directives and library routines to enable shared-memory parallel programming.
+
+3. Fortran: OpenMP is natively supported in Fortran, allowing Fortran programmers to express parallelism through directives and runtime routines for efficient parallel execution.
+
+Here is an example of an OpenMP program that computes the dot product of two vectors.
+
+.. code-block:: c
+
+   #include <stdio.h>
+   #include <stdlib.h>
+   #include <omp.h>
+
+   #define SIZE 10000
+
+   int main() {
+      float vector1[SIZE];
+      float vector2[SIZE];
+      float dotProduct = 0.0;
+      int i;
+
+      // Initialize the vectors with random numbers
+      #pragma omp parallel for
+      for (i = 0; i < SIZE; i++) {
+         vector1[i] = (float)rand() / RAND_MAX;
+         vector2[i] = (float)rand() / RAND_MAX;
+      }
+
+      // Compute the dot product using OpenMP parallelism
+      #pragma omp parallel for reduction(+:dotProduct)
+      for (i = 0; i < SIZE; i++) {
+         dotProduct += vector1[i] * vector2[i];
+      }
+
+      printf("The dot product is: %f\n", dotProduct);
+
+      return 0;
+   }
+
+Here is how it would look in C++ with ``std::vector``:
+
+.. code-block:: cpp
+
+   #include <iostream>
+   #include <vector>
+   #include <cstdlib>
+   #include <omp.h>
+
+   #define SIZE 10000
+
+   int main() {
+      std::vector<float> vector1(SIZE);
+      std::vector<float> vector2(SIZE);
+      float dotProduct = 0.0;
+
+      // Initialize the vectors with random numbers
+      #pragma omp parallel for
+      for (int i = 0; i < SIZE; i++) {
+         vector1[i] = static_cast<float>(rand()) / RAND_MAX;
+         vector2[i] = static_cast<float>(rand()) / RAND_MAX;
+      }
+
+      // Compute the dot product using OpenMP parallelism
+      #pragma omp parallel for reduction(+:dotProduct)
+      for (int i = 0; i < SIZE; i++) {
+         dotProduct += vector1[i] * vector2[i];
+      }
+
+      std::cout << "The dot product is: " << dotProduct << std::endl;
+
+      return 0;
+   }
+
+And here is a FORTRAN version:
+
+.. code-block:: fortran
+
+   program dot_product
+      use omp_lib
+      implicit none
+
+      integer, parameter :: SIZE = 10000
+      real :: vector1(SIZE), vector2(SIZE), dotProduct
+      integer :: i
+
+      ! Initialize the vectors with random numbers
+      !$OMP PARALLEL DO DEFAULT(NONE) PRIVATE(i) SHARED(vector1, vector2)
+      do i = 1, SIZE
+         vector1(i) = real(rand()) / real(RAND())
+         vector2(i) = real(rand()) / real(RAND())
+      end do
+      !$OMP END PARALLEL DO
+
+      dotProduct = 0.0
+
+      ! Compute the dot product using OpenMP parallelism
+      !$OMP PARALLEL DO DEFAULT(NONE) PRIVATE(i) SHARED(vector1, vector2) REDUCTION(+:dotProduct)
+      do i = 1, SIZE
+         dotProduct = dotProduct + vector1(i) * vector2(i)
+      end do
+      !$OMP END PARALLEL DO
+
+      write(*, "(A, F6.2)") "The dot product is:", dotProduct
+
+   end program dot_product
+
+As you can see, a strength of OpenMP is the ability to write similar code to express parallelism in all three of the languages.
+This legacy is important to frameworks such as OneAPI/SYCL, which aim to provide a similar framework without relying on compiler pramgas.
+
+MPI
+^^^^
+
+
 oneAPI
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
