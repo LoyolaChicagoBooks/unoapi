@@ -1,13 +1,10 @@
 
-Welcome to the UnoAPI Systems Modules
-======================================
-
-.. note::
-   This is a set of modules we are developing around Intel's OneAPI initiative.
-   Nothing here is even remotely ready for prime time!
+Welcome to the UnoAPI Curricular Project
+==========================================
 
 .. toctree::
    :maxdepth: 4
+   :caption: Table of Contents
 
    00-preliminaries/preliminaries.rst
    05-parallel/parallel.rst
