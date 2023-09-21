@@ -1,3 +1,3 @@
-sphinx
+sphinx < 7.2
 sphinx-rtd-theme
-sphinxawesome-theme==5.0.0b1
+sphinxawesome-theme == 5.0.0b3
