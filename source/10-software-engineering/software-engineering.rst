@@ -41,7 +41,7 @@ During the last two decades, this “test-infected” mindset has gradually ente
 We argue that it can benefit and integrate seamlessly with HPC education.
 
 Support for unit testing in C/C++ has improved considerably, and we prefer `GoogleTest <https://google.github.io/googletest/>`_ for this purpose.
- A typical floating-point correctness test looks like this:
+A typical floating-point correctness test looks like this:
 
 .. literalinclude:: ../snippets/snip-UnoAPI-integration-test-simple3.tex
   :language: cpp
