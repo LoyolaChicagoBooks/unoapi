@@ -14,9 +14,19 @@ While oneAPI is not the only alternative, the ability to write largely device-in
 Running Example: Trapezoidal Integration
 ----------------------------------------
 
-We now describe our approach in detail based on our `data-parallel trapezoidal integration exemplar <https://github.com/LoyolaChicagoCode/unoapi-dpcpp-examples/tree/main/integration>`__.
-We choose to present this exemplar from our growing collection—including many examples distributed by Intel as part of their own documentation—here as it is easy to comprehend yet allows us to demonstrate various key aspects of data-parallel C++ programming using Intel’s `oneAPI platform <https://www.intel.com/content/www/us/en/developer/tools/oneapi/overview.html>`_, which is based on the `SYCL <https://www.khronos.org/sycl>`_ cross-platform standard for heterogeneous accelerator-based computing.
-Although the example is embarrassingly parallel, it nevertheless exhibits numerous non-trivial pedagogical challenges that we will discuss in detail.
+Sometimes, a program needs to integrate a function (i.e., calculate the area under a curve).
+It might be able to use a formula for the integral, but doing so isn’t always convenient, or even possible.
+An easy alternative approach, suitable for numeric integration, is to approximate the curve with straight line segments and calculate an estimate of the area from them.
+
+Concretely, to find the area under the curve from a to b, we approximate the function by dividing the domain from a to b into g equally sized segments. Each segment is (b – a) /g long. Let the boundaries of these seg- ments be x0 = a, x1, x2, ... , xg = b. The polyline approximating the curve will have coordinates (x0, f(x0)), (x1,f(x1)), (x2,f(x2)), ..., (xg,f(xg)).
+
+.. figure:: ../images/trapezoidal.png 
+
+Data-Parallel C++ Implementation
+--------------------------------
+
+Our `data-parallel trapezoidal integration exemplar <https://github.com/LoyolaChicagoCode/unoapi-dpcpp-examples/tree/main/integration>`_ example demonstrates various key aspects of data-parallel C++ programming using Intel’s `oneAPI platform <https://www.intel.com/content/www/us/en/developer/tools/oneapi/overview.html>`_, which is based on the `SYCL <https://www.khronos.org/sycl>`_ cross-platform standard for heterogeneous accelerator-based computing.
+Although the example is embarrassingly parallel, it nevertheless exhibits various non-trivial challenges that we will discuss in detail.
 
 The exemplar’s sequential version illustrates the underlying fused-loop map-reduce algorithm, which maps each adjacent pair of function values to a trapezoid area and, in the same loop body, reduces (adds) the area to the cumulative result.
 
@@ -26,21 +36,21 @@ The exemplar’s sequential version illustrates the underlying fused-loop map-re
   :lineno-start: 65
   :lines: 3-15
 
-We’ll see shortly how to write the data-parallel version of this algorithm in DPC.
+We’ll see shortly how to write the data-parallel version of this algorithm in DPC++.
 
 
 The Platform: Intel oneAPI/Khronos SYCL
 ---------------------------------------
 
-The `SYCL standard <https://www.khronos.org/sycl>`_ defines high-level abstractions for parallel computing using modern C, in an effort by Khronos to influence the ISO C standard to support heterogeneous computing.
-`Data-Parallel C(DPC) <https://spec.oneapi.io/versions/1.1-rev-1/elements/dpcpp/source/index.html>`_, a part of Intel’s oneAPI standard, is an implementation of SYCL.
+The `SYCL standard <https://www.khronos.org/sycl>`_ defines high-level abstractions for parallel computing using modern C++, in an effort by Khronos to influence the ISO C standard to support heterogeneous computing.
+`Data-Parallel C++ (DPC++) <https://spec.oneapi.io/versions/1.1-rev-1/elements/dpcpp/source/index.html>`_, a part of Intel’s oneAPI standard, is an implementation of SYCL.
 Intel provides remote access to various types of accelerator hardware, including GPUs and FPGAs, through its `DevCloud program <https://www.intel.com/content/www/us/en/developer/tools/Dev\-Cloud/overview.html>`__.
 
 
 Device Selection and Task Queues
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-A typical DPC program starts with the selection of one or more accelerator devices based on criteria of varying specificity.
+A typical DPC++ program starts with the selection of one or more accelerator devices based on criteria of varying specificity.
  In our exemplar, the user can choose between running the code on the host CPU and an available accelerator:
 
 .. literalinclude:: ../snippets/snip-UnoAPI-main-parallel-devices.tex
@@ -105,7 +115,7 @@ Separate compilation of source files helps us decompose a software system into s
 This has multiple benefits, including separation of concerns, unit testing, easier collaborative development, and the ability to defer certain decisions (e.g., what we’re integrating) until build time.
 
 In our exemplar, we’ll want to unit-test the function to be integrated and defer choosing a specific implementation of that function until build time.
-To be able to separately compile the function and call it inside a DPC kernel, we declare it in this SYCL-specific way:
+To be able to separately compile the function and call it inside a DPC++ kernel, we declare it in this SYCL-specific way:
 
 .. literalinclude:: ../snippets/snip-UnoAPI-sycl-external-interface.tex
   :language: c

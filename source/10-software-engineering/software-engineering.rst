@@ -40,7 +40,7 @@ The main value proposition of `automated unit testing <https://en.wikipedia.org/
 During the last two decades, this “test-infected” mindset has gradually entered the mainstream including introductory computer science courses.
 We argue that it can benefit and integrate seamlessly with HPC education.
 
-Support for unit testing in C/C has improved considerably, and we prefer `GoogleTest <https://google.github.io/googletest/>`__ for this purpose.
+Support for unit testing in C/C++ has improved considerably, and we prefer `GoogleTest <https://google.github.io/googletest/>`__ for this purpose.
  A typical floating-point correctness test looks like this:
 
 .. literalinclude:: ../snippets/snip-UnoAPI-integration-test-simple3.tex
@@ -54,9 +54,9 @@ Build and Configuration Management
 ----------------------------------
 
 A key portability challenge results from differences across users’ development and production environments, such as different versions of operating systems, compilers, libraries, and other tools.
-Among several efforts to abstract away these differences and support building a project on any environment meeting certain minimum criteria, (modern) `CMake <https://cmake.org>`__ has emerged as the most painless choice, especially for C/C-based projects.
+Among several efforts to abstract away these differences and support building a project on any environment meeting certain minimum criteria, (modern) `CMake <https://cmake.org>`__ has emerged as the most painless choice, especially for C/C++-based projects.
 
-CMake enables us to use C/C similar to other languages, such as Java, Scala, Python, JavaScript/Node, by managing external library dependencies declaratively and fetching them dynamically.
+CMake enables us to use C/C++ similar to other languages, such as Java, Scala, Python, JavaScript/Node, by managing external library dependencies declaratively and fetching them dynamically.
 This encourages parametric thinking and makes it possible to develop adaptable HPC codes.
 
 The following settings consistently ensure a specific language standard:
