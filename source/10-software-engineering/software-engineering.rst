@@ -40,7 +40,7 @@ The main value proposition of `automated unit testing <https://en.wikipedia.org/
 During the last two decades, this “test-infected” mindset has gradually entered the mainstream including introductory computer science courses.
 We argue that it can benefit and integrate seamlessly with HPC education.
 
-Support for unit testing in C/C++ has improved considerably, and we prefer `GoogleTest <https://google.github.io/googletest/>`__ for this purpose.
+Support for unit testing in C/C++ has improved considerably, and we prefer `GoogleTest <https://google.github.io/googletest/>`_ for this purpose.
  A typical floating-point correctness test looks like this:
 
 .. literalinclude:: ../snippets/snip-UnoAPI-integration-test-simple3.tex
@@ -54,7 +54,7 @@ Build and Configuration Management
 ----------------------------------
 
 A key portability challenge results from differences across users’ development and production environments, such as different versions of operating systems, compilers, libraries, and other tools.
-Among several efforts to abstract away these differences and support building a project on any environment meeting certain minimum criteria, (modern) `CMake <https://cmake.org>`__ has emerged as the most painless choice, especially for C/C++-based projects.
+Among several efforts to abstract away these differences and support building a project on any environment meeting certain minimum criteria, (modern) `CMake <https://cmake.org>`_ has emerged as the most painless choice, especially for C/C++-based projects.
 
 CMake enables us to use C/C++ similar to other languages, such as Java, Scala, Python, JavaScript/Node, by managing external library dependencies declaratively and fetching them dynamically.
 This encourages parametric thinking and makes it possible to develop adaptable HPC codes.
@@ -108,9 +108,7 @@ Such a build automates the steps one would typically perform manually on one’s
 - running/testing them.
 
 Starting with a vanilla (default) system configuration ensures that all project dependencies (tools, external libraries, etc.) are fully understood and explicit.
-In addition, build automation results in almost immediate feedback on an incorrect commit that “breaks the build” (see `6.1 <#appendix:ArtifactDescription>`__ for the actual scripts).
-
-.. todo:: fix cross-reference
+In addition, build automation results in almost immediate feedback on an incorrect commit that “breaks the build” (see also `the actual script <https://github.com/LoyolaChicagoCode/unoapi-dpcpp-examples/blob/main/.github/workflows/oneapi-cmake.yml>`_).
 
 We argue that continuous integration can make us reproducibility-aware: A researcher wishing to reproduce the work represented by a particular project can “fork” the project into their own account on, say, GitHub.
 The CI workflow then runs on that user’s fork of the project.
