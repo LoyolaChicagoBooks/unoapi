@@ -51,11 +51,29 @@ Running the examples on the Intel DevCloud
 ------------------------------------------
 
 This option requires a (free) account on Intel’s DevCloud for working with oneAPI and provides access to various types of accelerators, such as GPUs based on the gen9 architecture we’ve used for the sample runs shown above; it thereby provides the highest degree of reproducibility.
- Once access to DevCloud has been established, the specific steps are documented in the top-level README file in the GitHub repository.
+Once access to DevCloud has been established, the specific steps are documented in the top-level README file in the GitHub repository.
 The artifact’s main executable is self-documenting using the ``-h`` or ``–help`` CLI option.
 
 
-Running the examples in Gitpod
-------------------------------
+Gitpod is not currently supported
+---------------------------------
 
-.. todo:: todo
+The installation and compilation steps work on Gitpod as intended.
+Nevertheless, because they are based on a virtualized AMD chipset, Gitpod and similar environments don't support the execution of data-parallel code, not even using the CPU itself as an accelerator.
+
+.. code-block::
+
+  Machine:
+    Type: Docker Mobo: Google model: Google Compute Engine serial: <superuser required> BIOS: Google v: Google date: 08/04/2023
+    CPU:
+      Info: 8-core model: AMD EPYC 7B13 bits: 64 type: MT MCP cache: L2: 4 MiB
+
+By contrast, we were able to run data-parallel code on an Intel-based virtual machine, e.g., on Microsoft Azure.
+
+.. code-block::
+
+  Machine:
+    Type: Desktop Mobo: Microsoft model: Virtual Machine v: 7.0 serial: <superuser/root required> BIOS: American Megatrends v: 090008 date: 12/07/2018
+  CPU:
+    Topology: Quad Core model: Intel Xeon Platinum 8171M bits: 64 type: MCP
+
