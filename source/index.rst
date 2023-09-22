@@ -11,9 +11,9 @@ Welcome to the UnoAPI Curricular Project
    10-software-engineering/software-engineering.rst
    15-modern-cpp/modern-cpp.rst
    18-dpcpp/dpcpp.rst
-   25-devices/devices.rst
    30-performance/performance.rst
    40-going-distributed/distributed.rst
+   80-running/running.rst
    99-sandbox/issues.rst
 
 Repository

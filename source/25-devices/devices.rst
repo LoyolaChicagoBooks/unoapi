@@ -1,2 +1,0 @@
-Selecting and Using Devices
-===========================
