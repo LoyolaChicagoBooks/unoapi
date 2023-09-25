@@ -7,9 +7,9 @@
 <meta content="white" media="(prefers-color-scheme: light)" name="theme-color"/>
 <meta content="black" metia="(prefers-color-scheme: dark)" name="theme-color"/>
 <meta content="Docutils 0.18.1: http://docutils.sourceforge.net/" name="generator"/>
-<title>Modern C++ as a Better C (and C++) | UnoAPI: updated 2023.09.21</title>
-<meta content="Modern C++ as a Better C (and C++) | UnoAPI: updated 2023.09.21" property="og:title"/>
-<meta content="Modern C++ as a Better C (and C++) | UnoAPI: updated 2023.09.21" name="twitter:title"/>
+<title>Modern C++ as a Better C (and C++) | UnoAPI: updated 2023.09.25</title>
+<meta content="Modern C++ as a Better C (and C++) | UnoAPI: updated 2023.09.25" property="og:title"/>
+<meta content="Modern C++ as a Better C (and C++) | UnoAPI: updated 2023.09.25" name="twitter:title"/>
 <link href="../_static/pygments.css" rel="stylesheet"/>
 <link href="../_static/theme.d5da1ae72e45df4c5b8e.css" rel="stylesheet"/>
 <link href="../search.html" rel="search" title="Search"/>
@@ -28,7 +28,7 @@
       }
       if (!userPreference) {localStorage.setItem('darkMode', mode)}
     </script>
-<script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=81c99660"></script>
+<script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=7db88cc7"></script>
 <script src="../_static/doctools.js?v=888ff710"></script>
 <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
 <script defer="" src="../_static/theme.83923940ee80f2e3f0bf.js"></script>
@@ -39,7 +39,7 @@
     </a>
 <header class="sticky top-0 z-40 w-full border-b shadow-sm border-border supports-backdrop-blur:bg-background/60 bg-background/95 backdrop-blur"><div class="container flex items-center h-14">
 <div class="hidden mr-4 md:flex">
-<a class="flex items-center mr-6" href="../index.html"><span class="hidden font-bold sm:inline-block text-clip whitespace-nowrap">UnoAPI: updated 2023.09.21</span>
+<a class="flex items-center mr-6" href="../index.html"><span class="hidden font-bold sm:inline-block text-clip whitespace-nowrap">UnoAPI: updated 2023.09.25</span>
 </a></div><button @click="showSidebar = true" class="inline-flex items-center justify-center h-10 px-0 py-2 mr-2 text-base font-medium transition-colors rounded-md hover:text-accent-foreground hover:bg-transparent md:hidden" type="button">
 <svg aria-hidden="true" fill="currentColor" height="24" viewbox="0 96 960 960" width="24" xmlns="http://www.w3.org/2000/svg">
 <path d="M152.587 825.087q-19.152 0-32.326-13.174t-13.174-32.326q0-19.152 13.174-32.326t32.326-13.174h440q19.152 0 32.326 13.174t13.174 32.326q0 19.152-13.174 32.326t-32.326 13.174h-440Zm0-203.587q-19.152 0-32.326-13.174T107.087 576q0-19.152 13.174-32.326t32.326-13.174h320q19.152 0 32.326 13.174T518.087 576q0 19.152-13.174 32.326T472.587 621.5h-320Zm0-203.587q-19.152 0-32.326-13.174t-13.174-32.326q0-19.152 13.174-32.326t32.326-13.174h440q19.152 0 32.326 13.174t13.174 32.326q0 19.152-13.174 32.326t-32.326 13.174h-440ZM708.913 576l112.174 112.174q12.674 12.674 12.674 31.826t-12.674 31.826Q808.413 764.5 789.261 764.5t-31.826-12.674l-144-144Q600 594.391 600 576t13.435-31.826l144-144q12.674-12.674 31.826-12.674t31.826 12.674q12.674 12.674 12.674 31.826t-12.674 31.826L708.913 576Z"></path>
@@ -70,7 +70,7 @@
 </div>
 </header>
 <div class="flex-1"><div class="container flex-1 items-start md:grid md:grid-cols-[220px_minmax(0,1fr)] md:gap-6 lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-10"><aside :aria-hidden="!showSidebar" :class="{ 'translate-x-0': showSidebar }" class="fixed inset-y-0 left-0 md:top-14 z-50 md:z-30 bg-background md:bg-transparent transition-all duration-100 -translate-x-full md:translate-x-0 ml-0 p-6 md:p-0 md:-ml-2 md:h-[calc(100vh-3.5rem)] w-5/6 md:w-full shrink-0 overflow-y-auto border-r border-border md:sticky" id="left-sidebar">
-<a class="!justify-start text-sm md:!hidden bg-background" href="../index.html"><span class="font-bold text-clip whitespace-nowrap">UnoAPI: updated 2023.09.21</span>
+<a class="!justify-start text-sm md:!hidden bg-background" href="../index.html"><span class="font-bold text-clip whitespace-nowrap">UnoAPI: updated 2023.09.25</span>
 </a>
 <div class="relative overflow-hidden md:overflow-auto my-4 md:my-0 h-[calc(100vh-8rem)] md:h-auto">
 <div class="overflow-y-auto h-full w-full relative pr-6"><nav class="table w-full min-w-full my-6 lg:my-8">
@@ -99,7 +99,7 @@
 <div class="w-full min-w-0 mx-auto">
 <nav aria-label="breadcrumbs" class="flex items-center mb-4 space-x-1 text-sm text-muted-foreground">
 <a class="overflow-hidden text-ellipsis whitespace-nowrap hover:text-foreground" href="../index.html">
-<span class="hidden md:inline">UnoAPI: updated 2023.09.21</span>
+<span class="hidden md:inline">UnoAPI: updated 2023.09.25</span>
 <svg aria-label="Home" class="md:hidden" fill="currentColor" height="18" stroke="none" viewbox="0 96 960 960" width="18" xmlns="http://www.w3.org/2000/svg">
 <path d="M240 856h120V616h240v240h120V496L480 316 240 496v360Zm-80 80V456l320-240 320 240v480H520V696h-80v240H160Zm320-350Z"></path>
 </svg>
@@ -111,7 +111,7 @@
 <h1>Modern C++ as a Better C (and C++)<a class="headerlink" href="#modern-c-as-a-better-c-and-c" title="Permalink to this heading">¶</a></h1>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>This text contains a mix of original writing and strategic use of Chat-GPT4. All examples will be available in our repository with an appropriate <strong>cmake</strong> build file and tests. We will also make our prompts and analysis available, similar to what we have done for our recent ongoing study of Chat-GPT4 and Systems Programming. See <a class="reference external" href="https://doi.org/10.6084/m9.figshare.22257274">https://doi.org/10.6084/m9.figshare.22257274</a>.</p>
+<p>This text contains a mix of original writing and programming with strategic use of Chat-GPT4 via intelligent/clever prompting. All examples will be available in our repository with an appropriate <strong>cmake</strong> build file and tests. We will also make our prompts and analysis available, similar to what we have done for our recent ongoing study of Chat-GPT4 and Systems Programming. See <a class="reference external" href="https://doi.org/10.6084/m9.figshare.22257274">https://doi.org/10.6084/m9.figshare.22257274</a>.</p>
 </div>
 <p>If you want to learn SYCL and OneAPI <em>properly</em>  you will need to come up to speed with Modern C++.  In our experience, we know many people who say they “know” C++.  C++ has undergone numerous changes since it was introduced in the 1980s and 1990s.  While the original syntax remains intact, if you have not kept up with the changes since then (notably, C++ 11), you should take steps to refresh your knowlege of the language, since many of its recent features make it virtually <em>unrecognizable</em> from its earlier incarnations.</p>
 <div class="admonition note">
@@ -121,17 +121,15 @@
 <section id="overview-of-modern-c">
 <h2>Overview of Modern C++<a class="headerlink" href="#overview-of-modern-c" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#overview-of-modern-c'">¶</a></h2>
 <p>If you already know some Object-Oriented Programming (OOP) concepts and want to learn modern C++, here are some topics that are worthy of exploration:</p>
-<ul class="simple">
-<li><p><strong>Standard Library</strong>: The C++ Standard Library provides a wide range of pre-built classes and functions that can be used to perform common tasks. You should learn about the different components of the Standard Library, such as containers, algorithms, and iterators, and how to use them effectively. We avoid using C-style pointer-based data structures in favor of STL classes. We also avoid external C++ data structures whenever the STL classes are most appropriate (and they often are).</p></li>
-<li><p><strong>Templates</strong>: Templates allow you to write generic code that works with any data type. This can save you a lot of time and effort by reducing code duplication. You should learn how to write function templates and class templates. Class templates are already well employed in STL. We often make use of function templates in our examples.</p></li>
-<li><p><strong>Smart Pointers</strong>: Smart pointers are a modern way of managing memory in C++. They automatically manage memory allocation and deallocation, making it less prone to memory leaks and errors. You should learn about the different types of smart pointers, including <cite>unique_ptr</cite>, <cite>shared_ptr</cite>, and <cite>weak_ptr</cite>.</p></li>
-<li><p><strong>Lambda expressions</strong>: Lambda expressions provide a concise way to define anonymous functions, which are functions that have no name. You should learn how to write lambda expressions and how to use them with the Standard Library algorithms. Lambda functions are indispensable when it comes to learning OneAPI and SYCL programming.</p></li>
-<li><p><strong>Move semantics</strong>: Move semantics is a new feature introduced in C++11 that allows you to transfer the resources of an object to another object. This can lead to more efficient code by avoiding unnecessary copying of objects. You should learn about r-value references, move constructors, and move assignment operators. Move smeantics should be used whenever large (and deep) data structures are involved.</p></li>
-<li><p><strong>Threading</strong>: Threading allows you to run multiple tasks concurrently. You should learn about the different threading constructs provided by the Standard Library, such as threads, mutexes, and condition variables. Keep in mind, of course, that OneAPI/SYCL are an <em>alternative</em> to threading and also allow for code ot be written without assuming a particular threading model.</p></li>
-<li><p><strong>Modern C++ features</strong>: C++ has been evolving rapidly in recent years, and new features are being added all the time. You should learn about modern C++ features such as <cite>auto</cite>, <cite>constexpr</cite>, <cite>consteval</cite>, and <cite>module</cite>, which can help you write more efficient and maintainable code. We greatly value software engineering, so all of these modern features will help to write <em>clean code</em>, especially when used judiciously.</p></li>
-<li><p><strong>Exception handling</strong>: Exception handling allows you to handle runtime errors in a structured way. You should learn about the try-catch blocks and how to throw and catch exceptions. (That said, we try to avoid them in our tutorial in favor of the systems tradition of using error codes whenever possible.)</p></li>
-<li><p><strong>Ranges</strong>: Ranges in C++ are a new library feature introduced in C++20 that provide a unified and composable way to work with sequences of values, including arrays, containers, and generators. Ranges allow you to express operations on sequences as composable, functional transformations, and can greatly simplify and improve the readability of code that works with sequences.</p></li>
-</ul>
+<p><strong>Standard Library</strong>: The C++ Standard Library provides a wide range of pre-built classes and functions that can be used to perform common tasks. You should learn about the different components of the Standard Library, such as containers, algorithms, and iterators, and how to use them effectively. We avoid using C-style pointer-based data structures in favor of STL classes. We also avoid external C++ data structures whenever the STL classes are most appropriate (and they often are).</p>
+<p><strong>Templates</strong>: Templates allow you to write generic code that works with any data type. This can save you a lot of time and effort by reducing code duplication. You should learn how to write function templates and class templates. Class templates are already well employed in STL. We often make use of function templates in our examples.</p>
+<p><strong>Smart Pointers</strong>: Smart pointers are a modern way of managing memory in C++. They automatically manage memory allocation and deallocation, making it less prone to memory leaks and errors. You should learn about the different types of smart pointers, including <cite>unique_ptr</cite>, <cite>shared_ptr</cite>, and <cite>weak_ptr</cite>.</p>
+<p><strong>Lambda expressions</strong>: Lambda expressions provide a concise way to define anonymous functions, which are functions that have no name. You should learn how to write lambda expressions and how to use them with the Standard Library algorithms. Lambda functions are indispensable when it comes to learning OneAPI and SYCL programming.</p>
+<p><strong>Move semantics</strong>: Move semantics is a new feature introduced in C++11 that allows you to transfer the resources of an object to another object. This can lead to more efficient code by avoiding unnecessary copying of objects. You should learn about r-value references, move constructors, and move assignment operators. Move smeantics should be used whenever large (and deep) data structures are involved.</p>
+<p><strong>Threading</strong>: Threading allows you to run multiple tasks concurrently. You should learn about the different threading constructs provided by the Standard Library, such as threads, mutexes, and condition variables. Keep in mind, of course, that OneAPI/SYCL are an <em>alternative</em> to threading and also allow for code ot be written without assuming a particular threading model.</p>
+<p><strong>Modern C++ features</strong>: C++ has been evolving rapidly in recent years, and new features are being added all the time. You should learn about modern C++ features such as <cite>auto</cite>, <cite>constexpr</cite>, <cite>consteval</cite>, and <cite>module</cite>, which can help you write more efficient and maintainable code. We greatly value software engineering, so all of these modern features will help to write <em>clean code</em>, especially when used judiciously.</p>
+<p><strong>Exception handling</strong>: Exception handling allows you to handle runtime errors in a structured way. You should learn about the try-catch blocks and how to throw and catch exceptions. (That said, we try to avoid them in our tutorial in favor of the systems tradition of using error codes whenever possible.)</p>
+<p><strong>Ranges</strong>: Ranges in C++ are a new library feature introduced in C++20 that provide a unified and composable way to work with sequences of values, including arrays, containers, and generators. Ranges allow you to express operations on sequences as composable, functional transformations, and can greatly simplify and improve the readability of code that works with sequences.</p>
 <p>These topics will allow you to become proficient in modern C++ programming and write efficient, maintainable, and scalable code.</p>
 </section>
 <section id="language-features">
@@ -226,20 +224,6 @@
 </pre></div>
 </div>
 </section>
-<section id="standard-library">
-<h3>Standard Library<a class="headerlink" href="#standard-library" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#standard-library'">¶</a></h3>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Coming soon.  Short version: The standard library is much more than I/O.</p>
-</div>
-</section>
-<section id="lambda-expressions">
-<h3>Lambda Expressions<a class="headerlink" href="#lambda-expressions" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#lambda-expressions'">¶</a></h3>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Coming soon. I have put together some nice science focused examples of this.</p>
-</div>
-</section>
 <section id="move-semantics">
 <h3>Move Semantics<a class="headerlink" href="#move-semantics" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#move-semantics'">¶</a></h3>
 <p>So it is natural to wonder: What does std::move() actually do?</p>
@@ -293,6 +277,112 @@
 <p>We then create an object a of <cite>MyClass</cite>. We move <cite>a</cite> to create a new object <cite>b</cite> using <cite>std::move(a)</cite>. We then move <cite>b</cite> to create a new object <cite>c</cite> using <cite>std::move(b)</cite>.</p>
 <p>In the move constructor and move assignment operator, we use <cite>std::move</cite> to cast the l-value reference to other to an r-value reference, enabling move semantics. This allows us to transfer the resources of the original object to the new object, instead of copying them.</p>
 <p>Note that <cite>std::move</cite> does not actually move anything by itself; it simply enables move semantics by casting an l-value reference to an r-value reference. It is up to the move constructor or move assignment operator to actually perform the move operation.</p>
+</section>
+<section id="lambda-expressions">
+<h3>Lambda Expressions<a class="headerlink" href="#lambda-expressions" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#lambda-expressions'">¶</a></h3>
+<p>Lambda expressions in C++ allow you to define anonymous functions directly within your code.
+Readers familiar with lambda expressions from other functional or object/functional languages should note that C++ lambda functions differ, fundamentally, in how they manage <em>closures</em> and, in particular, how and whether variables from the enclosing scope can be accessed and or modified.</p>
+<section id="basic-lambda-with-no-parameters">
+<h4>Basic Lambda with No Parameters<a class="headerlink" href="#basic-lambda-with-no-parameters" title="Permalink to this heading">¶</a></h4>
+<p>In the following example, <code class="docutils literal notranslate"><span class="pre">sayHello</span></code> is a lambda function with no parameters, and when we call it, it will print “Hello from lambda!”.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">sayHello</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[]()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Hello from lambda!"</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="p">};</span>
+
+<span class="w">    </span><span class="n">sayHello</span><span class="p">();</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="lambda-with-parameters">
+<h4>Lambda with Parameters<a class="headerlink" href="#lambda-with-parameters" title="Permalink to this heading">¶</a></h4>
+<p>In the following example, the <code class="docutils literal notranslate"><span class="pre">add</span></code> lambda takes two integer parameters and returns their sum.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[](</span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+<span class="w">    </span><span class="p">};</span>
+
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"3 + 4 = "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">add</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="lambda-with-explicit-return-type">
+<h4>Lambda with Explicit Return Type<a class="headerlink" href="#lambda-with-explicit-return-type" title="Permalink to this heading">¶</a></h4>
+<p>And in the following, The <code class="docutils literal notranslate"><span class="pre">divide</span></code> lambda has an explicit return type of <code class="docutils literal notranslate"><span class="pre">double</span></code>.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">divide</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[](</span><span class="kt">double</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">b</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mf">0.0</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span><span class="w"> </span><span class="c1">// handle division by zero</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+<span class="w">    </span><span class="p">};</span>
+
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"8.0 / 2.0 = "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">divide</span><span class="p">(</span><span class="mf">8.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="lambda-with-closures">
+<h4>Lambda with Closures<a class="headerlink" href="#lambda-with-closures" title="Permalink to this heading">¶</a></h4>
+<p>Closures allow lambdas to capture variables from their enclosing scope.</p>
+<p>The following shows how to capture variables by value:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">]()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+<span class="w">    </span><span class="p">};</span>
+
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Sum = "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">sum</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w"> </span><span class="c1">// 15</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Here, <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> are captured by value. That is, they can be read but not modified.</p>
+<p>The following, however, shows apture by reference:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">incrementA</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="o">&amp;</span><span class="n">a</span><span class="p">]()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">a</span><span class="o">++</span><span class="p">;</span>
+<span class="w">    </span><span class="p">};</span>
+
+<span class="w">    </span><span class="n">incrementA</span><span class="p">();</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"a = "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w"> </span><span class="c1">// 6</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">a</span></code> is captured by reference in the <code class="docutils literal notranslate"><span class="pre">incrementA</span></code> lambda.</p>
+<p>Having to capture variables, individually, is not practical when there are more than a couple of variables needed by the lambda function. All variables can be captured by value:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="o">=</span><span class="p">]()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>And the following shows how to Capture everything by reference (use with caution):</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">incrementBoth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="o">&amp;</span><span class="p">]()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">a</span><span class="o">++</span><span class="p">;</span><span class="w"> </span><span class="n">b</span><span class="o">++</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>These are foundational examples of lambdas and closures in C++. Lambdas can be even more versatile with features like mutable lambdas and complex capture rules.</p>
+</section>
 </section>
 <section id="naming-conventions">
 <h3>Naming Conventions<a class="headerlink" href="#naming-conventions" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#naming-conventions'">¶</a></h3>
@@ -382,178 +472,6 @@
 <p>Working to put all of the above into a repo. Focusing on narrative first.</p>
 </div>
 </section>
-<section id="co-routines">
-<h3>Co-routines<a class="headerlink" href="#co-routines" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#co-routines'">¶</a></h3>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Co-routines are a fairly new C++ feature and may not be supported by your compiler.</p>
-</div>
-<p>Co-routines are an important concept that is relevant to our discussion of SYCL and OneAPI.</p>
-<p>A coroutine is a allows for the execution of multiple, independent, and cooperative subroutines or functions that can be paused and resumed at certain points to enable asynchronous or concurrent programming, without the overhead of creating multiple threads or processes.</p>
-<p>Historically, the concept of coroutines was first introduced in the programming language Simula 67 – the language that introduced object-oriented programming – developed by Ole-Johan Dahl and Kristen Nygaard at the Norwegian Computing Center in Oslo, Norway in the mid-1960s.
-The implementation of coroutines in Simula 67 was a bit different from the modern concept of coroutines, and the term “coroutine” itself was not used at that time.
-The first programming language to use the term “coroutine” and to implement coroutines in a way that is closer to the modern concept was the programming language Modula-2, developed by Niklaus Wirth in the late 1970s.
-After Modula-2, the next programming language to introduce support for coroutines was Ada, which added support for coroutines in the Ada 95 version of the language.</p>
-<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="kn">with</span> <span class="n">Ada.Text_IO</span><span class="p">;</span> <span class="kn">use</span> <span class="n">Ada.Text_IO</span><span class="p">;</span>
-<span class="kn">with</span> <span class="n">Ada.Numerics.Float_Random</span><span class="p">;</span> <span class="kn">use</span> <span class="n">Ada.Numerics.Float_Random</span><span class="p">;</span>
-
-<span class="kd">procedure</span> <span class="nf">Coroutine_Example</span> <span class="kr">is</span>
-
-   <span class="kd">type</span> <span class="kt">Coroutine</span> <span class="kr">is</span> <span class="kr">access</span> <span class="kd">procedure</span><span class="p">;</span> <span class="c1">-- define a type for a coroutine</span>
-
-   <span class="kd">task</span> <span class="kd">type</span> <span class="kt">Coroutine_Task</span> <span class="kr">is</span> <span class="c1">-- define a task type for a coroutine</span>
-      <span class="kd">entry</span> <span class="nf">Start</span><span class="p">(</span><span class="nv">C</span> <span class="p">: </span><span class="nv">in</span> <span class="nv">Coroutine</span><span class="p">);</span> <span class="c1">-- an entry to start the coroutine</span>
-   <span class="kr">end</span> <span class="nf">Coroutine_Task</span><span class="p">;</span>
-
-   <span class="n">Sum</span> <span class="p">:</span> <span class="kt">Float</span> <span class="p">:=</span> <span class="mf">0.0</span><span class="p">;</span> <span class="c1">-- shared variable to accumulate the sum</span>
-   <span class="no">Num_Coroutines</span> <span class="p">:</span> <span class="kr">constant</span> <span class="kt">Integer</span> <span class="p">:=</span> <span class="mi">10</span><span class="p">;</span> <span class="c1">-- number of coroutines</span>
-
-   <span class="c1">-- define the coroutine procedure</span>
-   <span class="kd">procedure</span> <span class="nf">My_Coroutine</span> <span class="kr">is</span>
-      <span class="n">R</span> <span class="p">:</span> <span class="n">Float_Random</span><span class="p">.</span><span class="kt">Generator</span><span class="p">;</span> <span class="c1">-- random number generator</span>
-      <span class="no">X</span> <span class="p">:</span> <span class="kr">constant</span> <span class="kt">Float</span> <span class="p">:=</span> <span class="n">Float_Random</span><span class="p">.</span><span class="n">Random</span><span class="p">(</span><span class="n">R</span><span class="p">);</span> <span class="c1">-- compute a random number</span>
-   <span class="kr">begin</span>
-      <span class="n">Put_Line</span><span class="p">(</span><span class="s">"Coroutine started, X = "</span> <span class="o">&amp;</span> <span class="kt">Float</span><span class="p">'</span><span class="na">Image</span><span class="p">(</span><span class="n">X</span><span class="p">));</span>
-      <span class="n">Sum</span> <span class="p">:=</span> <span class="n">Sum</span> <span class="o">+</span> <span class="n">X</span><span class="p">;</span> <span class="c1">-- add X to the sum</span>
-   <span class="kr">end</span> <span class="nf">My_Coroutine</span><span class="p">;</span>
-
-   <span class="c1">-- array of coroutines</span>
-   <span class="n">Coroutines</span> <span class="p">:</span> <span class="kr">array</span> <span class="p">(</span><span class="mf">1.</span><span class="p">.</span><span class="n">Num_Coroutines</span><span class="p">)</span> <span class="kr">of</span> <span class="n">Coroutine</span><span class="p">;</span>
-
-   <span class="c1">-- array of coroutine tasks</span>
-   <span class="kd">Task</span><span class="n">s</span> <span class="p">:</span> <span class="kr">array</span> <span class="p">(</span><span class="mf">1.</span><span class="p">.</span><span class="n">Num_Coroutines</span><span class="p">)</span> <span class="kr">of</span> <span class="n">Coroutine_Task</span><span class="p">;</span>
-
-<span class="kr">begin</span>
-
-   <span class="c1">-- create the coroutines and their tasks</span>
-   <span class="kr">for</span> <span class="n">I</span> <span class="ow">in</span> <span class="mf">1.</span><span class="p">.</span><span class="n">Num_Coroutines</span> <span class="kr">loop</span>
-      <span class="n">Coroutines</span><span class="p">(</span><span class="n">I</span><span class="p">)</span> <span class="p">:=</span> <span class="n">My_Coroutine</span><span class="p">'</span><span class="na">Access</span><span class="p">;</span> <span class="c1">-- create a coroutine</span>
-      <span class="kd">Task</span><span class="n">s</span><span class="p">(</span><span class="n">I</span><span class="p">)</span> <span class="p">:=</span> <span class="kr">new</span> <span class="n">Coroutine_Task</span><span class="p">;</span> <span class="c1">-- create a task for the coroutine</span>
-      <span class="kd">Task</span><span class="n">s</span><span class="p">(</span><span class="n">I</span><span class="p">).</span><span class="n">Start</span><span class="p">(</span><span class="n">Coroutines</span><span class="p">(</span><span class="n">I</span><span class="p">));</span> <span class="c1">-- start the task, passing the coroutine as parameter</span>
-   <span class="kr">end</span> <span class="kr">loop</span><span class="p">;</span>
-
-   <span class="c1">-- wait for all tasks to complete</span>
-   <span class="kr">for</span> <span class="n">I</span> <span class="ow">in</span> <span class="mf">1.</span><span class="p">.</span><span class="n">Num_Coroutines</span> <span class="kr">loop</span>
-      <span class="kc">null</span><span class="p">;</span>
-   <span class="kr">end</span> <span class="kr">loop</span><span class="p">;</span>
-
-   <span class="c1">-- print the final result</span>
-   <span class="n">Put_Line</span><span class="p">(</span><span class="s">"Sum = "</span> <span class="o">&amp;</span> <span class="kt">Float</span><span class="p">'</span><span class="na">Image</span><span class="p">(</span><span class="n">Sum</span><span class="p">));</span>
-
-<span class="kr">end</span> <span class="nf">Coroutine_Example</span><span class="p">;</span>
-</pre></div>
-</div>
-<p>Co-routines have become popular in many recent language designs, notably Go. Here is what a co-routine looks like in Go.</p>
-<div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
-
-<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
-<span class="w">    </span><span class="s">"fmt"</span>
-<span class="w">    </span><span class="s">"math/rand"</span>
-<span class="w">    </span><span class="s">"time"</span>
-<span class="p">)</span>
-
-<span class="kd">func</span><span class="w"> </span><span class="nx">coroutine</span><span class="p">(</span><span class="nx">ch</span><span class="w"> </span><span class="kd">chan</span><span class="o">&lt;-</span><span class="w"> </span><span class="kt">float64</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">r</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">rand</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="nx">rand</span><span class="p">.</span><span class="nx">NewSource</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Now</span><span class="p">().</span><span class="nx">UnixNano</span><span class="p">()))</span><span class="w"> </span><span class="c1">// create a random number generator</span>
-<span class="w">    </span><span class="nx">x</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">r</span><span class="p">.</span><span class="nx">Float64</span><span class="p">()</span><span class="w"> </span><span class="c1">// compute a random number</span>
-<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">"Coroutine started, x = %f\n"</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">)</span>
-<span class="w">    </span><span class="nx">ch</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nx">x</span><span class="w"> </span><span class="c1">// send the result back to the main program</span>
-<span class="p">}</span>
-
-<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">sum</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mf">0.0</span><span class="w"> </span><span class="c1">// shared variable to accumulate the sum</span>
-<span class="w">    </span><span class="nx">numCoroutines</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="c1">// number of coroutines</span>
-<span class="w">    </span><span class="nx">ch</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="kd">chan</span><span class="w"> </span><span class="kt">float64</span><span class="p">)</span><span class="w"> </span><span class="c1">// create a channel for communication</span>
-
-<span class="w">    </span><span class="c1">// start the coroutines</span>
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="nx">numCoroutines</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">go</span><span class="w"> </span><span class="nx">coroutine</span><span class="p">(</span><span class="nx">ch</span><span class="p">)</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="c1">// wait for all coroutines to complete and accumulate the results</span>
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="nx">numCoroutines</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">sum</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="o">&lt;-</span><span class="nx">ch</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="c1">// print the final result</span>
-<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">"Sum = %f\n"</span><span class="p">,</span><span class="w"> </span><span class="nx">sum</span><span class="p">)</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<p>While our course is about C++, it is important to realize that many modern C++ features are greatly influenced by the other modern languages (and forms of expression) around them.
-The ability to write co-routines and use <em>blocking</em> channels to exchange results between the co-routine and the main program demonstrate a high level of awareness that allows programmers to express concurrency clearly and concisely.</p>
-<p>Modern co-routines, therefore, allow not only for the expression of concurrency but also for the elegant transmission of data to and from the co-routine. There are some similarities with how SYCL supports these concepts using <em>accessors</em>. We’ll speak to this again when introducing SYCL.</p>
-<p>Let’s take a look at how C++ introduces co-routines.
-The following shows how to create four co-routines that sleep for random amounts of time and join at the end?</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;chrono&gt;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;random&gt;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;coroutine&gt;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span>
-
-<span class="c1">// A simple coroutine that sleeps for a random amount of time</span>
-<span class="c1">// and returns the amount of time slept</span>
-
-<span class="k">class</span><span class="w"> </span><span class="nc">SleepCoroutine</span><span class="w"> </span><span class="p">{</span>
-<span class="k">public</span><span class="o">:</span>
-<span class="w">    </span><span class="n">SleepCoroutine</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">;</span>
-
-<span class="w">    </span><span class="c1">// The coroutine promise type</span>
-<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">promise_type</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">get_return_object</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">SleepCoroutine</span><span class="p">{</span><span class="n">handle_type</span><span class="o">::</span><span class="n">from_promise</span><span class="p">(</span><span class="o">*</span><span class="k">this</span><span class="p">)};</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">suspend_never</span><span class="w"> </span><span class="n">initial_suspend</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="p">{};</span><span class="w"> </span><span class="p">}</span>
-<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">suspend_always</span><span class="w"> </span><span class="n">final_suspend</span><span class="p">()</span><span class="w"> </span><span class="k">noexcept</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="p">{};</span><span class="w"> </span><span class="p">}</span>
-<span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="n">unhandled_exception</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">terminate</span><span class="p">();</span><span class="w"> </span><span class="p">}</span>
-<span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="n">return_void</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span>
-<span class="w">    </span><span class="p">};</span>
-
-<span class="w">    </span><span class="c1">// The coroutine handle type</span>
-<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">handle_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">coroutine_handle</span><span class="o">&lt;</span><span class="n">promise_type</span><span class="o">&gt;</span><span class="p">;</span>
-
-<span class="w">    </span><span class="c1">// The coroutine execution function</span>
-<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">operator</span><span class="p">()()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="c1">// Generate a random sleep time</span>
-<span class="w">     </span><span class="n">std</span><span class="o">::</span><span class="n">random_device</span><span class="w"> </span><span class="n">rd</span><span class="p">;</span>
-<span class="w">     </span><span class="n">std</span><span class="o">::</span><span class="n">mt19937</span><span class="w"> </span><span class="n">gen</span><span class="p">(</span><span class="n">rd</span><span class="p">());</span>
-<span class="w">     </span><span class="n">std</span><span class="o">::</span><span class="n">uniform_int_distribution</span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="n">distr</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span><span class="w"> </span><span class="mi">5000</span><span class="p">);</span>
-<span class="w">     </span><span class="kt">int</span><span class="w"> </span><span class="n">sleep_time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">distr</span><span class="p">(</span><span class="n">gen</span><span class="p">);</span>
-
-<span class="w">     </span><span class="c1">// Sleep for the random time</span>
-<span class="w">     </span><span class="n">std</span><span class="o">::</span><span class="n">this_thread</span><span class="o">::</span><span class="n">sleep_for</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">milliseconds</span><span class="p">(</span><span class="n">sleep_time</span><span class="p">));</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="k">private</span><span class="o">:</span>
-<span class="w">    </span><span class="n">SleepCoroutine</span><span class="p">(</span><span class="n">handle_type</span><span class="w"> </span><span class="n">h</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">handle</span><span class="p">(</span><span class="n">h</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
-<span class="w">    </span><span class="n">handle_type</span><span class="w"> </span><span class="n">handle</span><span class="p">;</span>
-<span class="p">};</span>
-
-<span class="c1">// A function that creates and runs four sleep coroutines</span>
-<span class="kt">void</span><span class="w"> </span><span class="nf">run_sleep_coroutines</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Create a vector to hold the coroutines</span>
-<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">SleepCoroutine</span><span class="o">::</span><span class="n">handle_type</span><span class="o">&gt;</span><span class="w"> </span><span class="n">coroutines</span><span class="p">;</span>
-
-<span class="w">    </span><span class="c1">// Create and start the coroutines</span>
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">coroutines</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">SleepCoroutine</span><span class="p">{}());</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="c1">// Join the coroutines</span>
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">coroutine</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">coroutines</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">coroutine</span><span class="p">.</span><span class="n">resume</span><span class="p">();</span>
-<span class="w">        </span><span class="n">coroutine</span><span class="p">.</span><span class="n">destroy</span><span class="p">();</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="p">}</span>
-
-<span class="c1">// The main function</span>
-<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">run_sleep_coroutines</span><span class="p">();</span>
-<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"All coroutines joined."</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</section>
 <section id="automatic-variables">
 <h3>Automatic variables<a class="headerlink" href="#automatic-variables" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#automatic-variables'">¶</a></h3>
 <p>The auto keyword was introduced in C++11 as part of the language’s support for type inference.
@@ -574,11 +492,11 @@ We also demonstrate how to initialize more complex structures such as an STL gen
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;fmt/core.h&gt;</span>
 
 <span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">42</span><span class="p">;</span>
-<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">d1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.23</span><span class="p">,</span><span class="w"> </span><span class="n">d2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">4.56</span><span class="p">;</span>
-<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">f1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.123f</span><span class="p">,</span><span class="w"> </span><span class="n">f2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">6.789f</span><span class="p">;</span>
-<span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="n">b1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">,</span><span class="w"> </span><span class="n">b2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
-<span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="n">c1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sc">'c'</span><span class="p">,</span><span class="w"> </span><span class="n">c2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sc">'d'</span><span class="p">;</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">42</span><span class="p">;</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">d1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.23</span><span class="p">,</span><span class="w"> </span><span class="n">d2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">4.56</span><span class="p">;</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">f1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.123f</span><span class="p">,</span><span class="w"> </span><span class="n">f2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">6.789f</span><span class="p">;</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">b1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">,</span><span class="w"> </span><span class="n">b2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">c1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sc">'c'</span><span class="p">,</span><span class="w"> </span><span class="n">c2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sc">'d'</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">v1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">};</span>
 <span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">l1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">list</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">{</span><span class="n">d1</span><span class="p">,</span><span class="w"> </span><span class="n">d2</span><span class="p">,</span><span class="w"> </span><span class="n">d1</span><span class="p">,</span><span class="w"> </span><span class="n">d2</span><span class="p">,</span><span class="w"> </span><span class="n">d1</span><span class="p">};</span>
@@ -804,12 +722,14 @@ It is an open-source, header-only library that provides fast and flexible loggin
 It supports various logging backends, such as console, file, and syslog, and provides features such as log rotation, thread-safety, and customizable formatting.
 Spdlog has gained popularity in the C++ community due to its ease of use, performance, and compatibility with other libraries and frameworks.</p>
 <p>The common logging levels, in increasing order of severity, are:</p>
-<p><strong>TRACE</strong>: Fine-grained informational events that are most useful to debug an application.</p>
-<p><strong>DEBUG</strong>: Detailed debug information that can be useful to diagnose an application.</p>
-<p><strong>INFO</strong>: Informational messages that highlight the progress of the application at a high level.</p>
-<p><strong>WARN</strong>: Potentially harmful situations or unexpected events that do not prevent the application from working, but might require attention.</p>
-<p><strong>ERROR</strong>: Error events that might still allow the application to continue running.</p>
-<p><strong>FATAL</strong>: Severe error events that might cause the application to terminate.</p>
+<ul class="simple">
+<li><p><strong>TRACE</strong>: Fine-grained informational events that are most useful to debug an application.</p></li>
+<li><p><strong>DEBUG</strong>: Detailed debug information that can be useful to diagnose an application.</p></li>
+<li><p><strong>INFO</strong>: Informational messages that highlight the progress of the application at a high level.</p></li>
+<li><p><strong>WARN</strong>: Potentially harmful situations or unexpected events that do not prevent the application from working, but might require attention.</p></li>
+<li><p><strong>ERROR</strong>: Error events that might still allow the application to continue running.</p></li>
+<li><p><strong>FATAL</strong>: Severe error events that might cause the application to terminate.</p></li>
+</ul>
 <p>The following code shows how to use the logging levels in <strong>spdlog</strong>.
 By default, a message is sent to <em>all</em> of the logging levels.
 You can override the message by using one of the levels, e.g. <code class="docutils literal notranslate"><span class="pre">--debug</span> <span class="pre">"This</span> <span class="pre">is</span> <span class="pre">some</span> <span class="pre">debug</span> <span class="pre">text."</span></code>
@@ -1411,14 +1331,180 @@ We use lambda expressions to select points in each quadrant, subject to what the
 </pre></div>
 </div>
 </section>
-<section id="smart-pointers">
-<h3>Smart Pointers<a class="headerlink" href="#smart-pointers" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#smart-pointers'">¶</a></h3>
-</section>
 <section id="threading">
 <h3>Threading<a class="headerlink" href="#threading" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#threading'">¶</a></h3>
 </section>
-<section id="exception-handling">
-<h3>Exception Handling<a class="headerlink" href="#exception-handling" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#exception-handling'">¶</a></h3>
+<section id="co-routines">
+<h3>Co-routines<a class="headerlink" href="#co-routines" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#co-routines'">¶</a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Co-routines are a fairly new C++ feature and may not be supported by your compiler.</p>
+</div>
+<p>Co-routines are an important concept that is relevant to our discussion of SYCL and OneAPI.</p>
+<p>A coroutine is a allows for the execution of multiple, independent, and cooperative subroutines or functions that can be paused and resumed at certain points to enable asynchronous or concurrent programming, without the overhead of creating multiple threads or processes.</p>
+<p>Historically, the concept of coroutines was first introduced in the programming language Simula 67 – the language that introduced object-oriented programming – developed by Ole-Johan Dahl and Kristen Nygaard at the Norwegian Computing Center in Oslo, Norway in the mid-1960s.
+The implementation of coroutines in Simula 67 was a bit different from the modern concept of coroutines, and the term “coroutine” itself was not used at that time.
+The first programming language to use the term “coroutine” and to implement coroutines in a way that is closer to the modern concept was the programming language Modula-2, developed by Niklaus Wirth in the late 1970s.
+After Modula-2, the next programming language to introduce support for coroutines was Ada, which added support for coroutines in the Ada 95 version of the language.</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="kn">with</span> <span class="n">Ada.Text_IO</span><span class="p">;</span> <span class="kn">use</span> <span class="n">Ada.Text_IO</span><span class="p">;</span>
+<span class="kn">with</span> <span class="n">Ada.Numerics.Float_Random</span><span class="p">;</span> <span class="kn">use</span> <span class="n">Ada.Numerics.Float_Random</span><span class="p">;</span>
+
+<span class="kd">procedure</span> <span class="nf">Coroutine_Example</span> <span class="kr">is</span>
+
+   <span class="kd">type</span> <span class="kt">Coroutine</span> <span class="kr">is</span> <span class="kr">access</span> <span class="kd">procedure</span><span class="p">;</span> <span class="c1">-- define a type for a coroutine</span>
+
+   <span class="kd">task</span> <span class="kd">type</span> <span class="kt">Coroutine_Task</span> <span class="kr">is</span> <span class="c1">-- define a task type for a coroutine</span>
+      <span class="kd">entry</span> <span class="nf">Start</span><span class="p">(</span><span class="nv">C</span> <span class="p">: </span><span class="nv">in</span> <span class="nv">Coroutine</span><span class="p">);</span> <span class="c1">-- an entry to start the coroutine</span>
+   <span class="kr">end</span> <span class="nf">Coroutine_Task</span><span class="p">;</span>
+
+   <span class="n">Sum</span> <span class="p">:</span> <span class="kt">Float</span> <span class="p">:=</span> <span class="mf">0.0</span><span class="p">;</span> <span class="c1">-- shared variable to accumulate the sum</span>
+   <span class="no">Num_Coroutines</span> <span class="p">:</span> <span class="kr">constant</span> <span class="kt">Integer</span> <span class="p">:=</span> <span class="mi">10</span><span class="p">;</span> <span class="c1">-- number of coroutines</span>
+
+   <span class="c1">-- define the coroutine procedure</span>
+   <span class="kd">procedure</span> <span class="nf">My_Coroutine</span> <span class="kr">is</span>
+      <span class="n">R</span> <span class="p">:</span> <span class="n">Float_Random</span><span class="p">.</span><span class="kt">Generator</span><span class="p">;</span> <span class="c1">-- random number generator</span>
+      <span class="no">X</span> <span class="p">:</span> <span class="kr">constant</span> <span class="kt">Float</span> <span class="p">:=</span> <span class="n">Float_Random</span><span class="p">.</span><span class="n">Random</span><span class="p">(</span><span class="n">R</span><span class="p">);</span> <span class="c1">-- compute a random number</span>
+   <span class="kr">begin</span>
+      <span class="n">Put_Line</span><span class="p">(</span><span class="s">"Coroutine started, X = "</span> <span class="o">&amp;</span> <span class="kt">Float</span><span class="p">'</span><span class="na">Image</span><span class="p">(</span><span class="n">X</span><span class="p">));</span>
+      <span class="n">Sum</span> <span class="p">:=</span> <span class="n">Sum</span> <span class="o">+</span> <span class="n">X</span><span class="p">;</span> <span class="c1">-- add X to the sum</span>
+   <span class="kr">end</span> <span class="nf">My_Coroutine</span><span class="p">;</span>
+
+   <span class="c1">-- array of coroutines</span>
+   <span class="n">Coroutines</span> <span class="p">:</span> <span class="kr">array</span> <span class="p">(</span><span class="mf">1.</span><span class="p">.</span><span class="n">Num_Coroutines</span><span class="p">)</span> <span class="kr">of</span> <span class="n">Coroutine</span><span class="p">;</span>
+
+   <span class="c1">-- array of coroutine tasks</span>
+   <span class="kd">Task</span><span class="n">s</span> <span class="p">:</span> <span class="kr">array</span> <span class="p">(</span><span class="mf">1.</span><span class="p">.</span><span class="n">Num_Coroutines</span><span class="p">)</span> <span class="kr">of</span> <span class="n">Coroutine_Task</span><span class="p">;</span>
+
+<span class="kr">begin</span>
+
+   <span class="c1">-- create the coroutines and their tasks</span>
+   <span class="kr">for</span> <span class="n">I</span> <span class="ow">in</span> <span class="mf">1.</span><span class="p">.</span><span class="n">Num_Coroutines</span> <span class="kr">loop</span>
+      <span class="n">Coroutines</span><span class="p">(</span><span class="n">I</span><span class="p">)</span> <span class="p">:=</span> <span class="n">My_Coroutine</span><span class="p">'</span><span class="na">Access</span><span class="p">;</span> <span class="c1">-- create a coroutine</span>
+      <span class="kd">Task</span><span class="n">s</span><span class="p">(</span><span class="n">I</span><span class="p">)</span> <span class="p">:=</span> <span class="kr">new</span> <span class="n">Coroutine_Task</span><span class="p">;</span> <span class="c1">-- create a task for the coroutine</span>
+      <span class="kd">Task</span><span class="n">s</span><span class="p">(</span><span class="n">I</span><span class="p">).</span><span class="n">Start</span><span class="p">(</span><span class="n">Coroutines</span><span class="p">(</span><span class="n">I</span><span class="p">));</span> <span class="c1">-- start the task, passing the coroutine as parameter</span>
+   <span class="kr">end</span> <span class="kr">loop</span><span class="p">;</span>
+
+   <span class="c1">-- wait for all tasks to complete</span>
+   <span class="kr">for</span> <span class="n">I</span> <span class="ow">in</span> <span class="mf">1.</span><span class="p">.</span><span class="n">Num_Coroutines</span> <span class="kr">loop</span>
+      <span class="kc">null</span><span class="p">;</span>
+   <span class="kr">end</span> <span class="kr">loop</span><span class="p">;</span>
+
+   <span class="c1">-- print the final result</span>
+   <span class="n">Put_Line</span><span class="p">(</span><span class="s">"Sum = "</span> <span class="o">&amp;</span> <span class="kt">Float</span><span class="p">'</span><span class="na">Image</span><span class="p">(</span><span class="n">Sum</span><span class="p">));</span>
+
+<span class="kr">end</span> <span class="nf">Coroutine_Example</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Co-routines have become popular in many recent language designs, notably Go. Here is what a co-routine looks like in Go.</p>
+<div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">"fmt"</span>
+<span class="w">    </span><span class="s">"math/rand"</span>
+<span class="w">    </span><span class="s">"time"</span>
+<span class="p">)</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="nx">coroutine</span><span class="p">(</span><span class="nx">ch</span><span class="w"> </span><span class="kd">chan</span><span class="o">&lt;-</span><span class="w"> </span><span class="kt">float64</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">r</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">rand</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="nx">rand</span><span class="p">.</span><span class="nx">NewSource</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Now</span><span class="p">().</span><span class="nx">UnixNano</span><span class="p">()))</span><span class="w"> </span><span class="c1">// create a random number generator</span>
+<span class="w">    </span><span class="nx">x</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">r</span><span class="p">.</span><span class="nx">Float64</span><span class="p">()</span><span class="w"> </span><span class="c1">// compute a random number</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">"Coroutine started, x = %f\n"</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">ch</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nx">x</span><span class="w"> </span><span class="c1">// send the result back to the main program</span>
+<span class="p">}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">sum</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mf">0.0</span><span class="w"> </span><span class="c1">// shared variable to accumulate the sum</span>
+<span class="w">    </span><span class="nx">numCoroutines</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="c1">// number of coroutines</span>
+<span class="w">    </span><span class="nx">ch</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="kd">chan</span><span class="w"> </span><span class="kt">float64</span><span class="p">)</span><span class="w"> </span><span class="c1">// create a channel for communication</span>
+
+<span class="w">    </span><span class="c1">// start the coroutines</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="nx">numCoroutines</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">go</span><span class="w"> </span><span class="nx">coroutine</span><span class="p">(</span><span class="nx">ch</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// wait for all coroutines to complete and accumulate the results</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="nx">numCoroutines</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">sum</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="o">&lt;-</span><span class="nx">ch</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// print the final result</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">"Sum = %f\n"</span><span class="p">,</span><span class="w"> </span><span class="nx">sum</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>While our course is about C++, it is important to realize that many modern C++ features are greatly influenced by the other modern languages (and forms of expression) around them.
+The ability to write co-routines and use <em>blocking</em> channels to exchange results between the co-routine and the main program demonstrate a high level of awareness that allows programmers to express concurrency clearly and concisely.</p>
+<p>Modern co-routines, therefore, allow not only for the expression of concurrency but also for the elegant transmission of data to and from the co-routine. There are some similarities with how SYCL supports these concepts using <em>accessors</em>. We’ll speak to this again when introducing SYCL.</p>
+<p>Let’s take a look at how C++ introduces co-routines.
+The following shows how to create four co-routines that sleep for random amounts of time and join at the end?</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;chrono&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;random&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;coroutine&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span>
+
+<span class="c1">// A simple coroutine that sleeps for a random amount of time</span>
+<span class="c1">// and returns the amount of time slept</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">SleepCoroutine</span><span class="w"> </span><span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="n">SleepCoroutine</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// The coroutine promise type</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">promise_type</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">get_return_object</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">SleepCoroutine</span><span class="p">{</span><span class="n">handle_type</span><span class="o">::</span><span class="n">from_promise</span><span class="p">(</span><span class="o">*</span><span class="k">this</span><span class="p">)};</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">suspend_never</span><span class="w"> </span><span class="n">initial_suspend</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="p">{};</span><span class="w"> </span><span class="p">}</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">suspend_always</span><span class="w"> </span><span class="n">final_suspend</span><span class="p">()</span><span class="w"> </span><span class="k">noexcept</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="p">{};</span><span class="w"> </span><span class="p">}</span>
+<span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="n">unhandled_exception</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">terminate</span><span class="p">();</span><span class="w"> </span><span class="p">}</span>
+<span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="n">return_void</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span>
+<span class="w">    </span><span class="p">};</span>
+
+<span class="w">    </span><span class="c1">// The coroutine handle type</span>
+<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">handle_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">coroutine_handle</span><span class="o">&lt;</span><span class="n">promise_type</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// The coroutine execution function</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">operator</span><span class="p">()()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Generate a random sleep time</span>
+<span class="w">     </span><span class="n">std</span><span class="o">::</span><span class="n">random_device</span><span class="w"> </span><span class="n">rd</span><span class="p">;</span>
+<span class="w">     </span><span class="n">std</span><span class="o">::</span><span class="n">mt19937</span><span class="w"> </span><span class="n">gen</span><span class="p">(</span><span class="n">rd</span><span class="p">());</span>
+<span class="w">     </span><span class="n">std</span><span class="o">::</span><span class="n">uniform_int_distribution</span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="n">distr</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span><span class="w"> </span><span class="mi">5000</span><span class="p">);</span>
+<span class="w">     </span><span class="kt">int</span><span class="w"> </span><span class="n">sleep_time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">distr</span><span class="p">(</span><span class="n">gen</span><span class="p">);</span>
+
+<span class="w">     </span><span class="c1">// Sleep for the random time</span>
+<span class="w">     </span><span class="n">std</span><span class="o">::</span><span class="n">this_thread</span><span class="o">::</span><span class="n">sleep_for</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">milliseconds</span><span class="p">(</span><span class="n">sleep_time</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="k">private</span><span class="o">:</span>
+<span class="w">    </span><span class="n">SleepCoroutine</span><span class="p">(</span><span class="n">handle_type</span><span class="w"> </span><span class="n">h</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">handle</span><span class="p">(</span><span class="n">h</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
+<span class="w">    </span><span class="n">handle_type</span><span class="w"> </span><span class="n">handle</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="c1">// A function that creates and runs four sleep coroutines</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">run_sleep_coroutines</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Create a vector to hold the coroutines</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">SleepCoroutine</span><span class="o">::</span><span class="n">handle_type</span><span class="o">&gt;</span><span class="w"> </span><span class="n">coroutines</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Create and start the coroutines</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">coroutines</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">SleepCoroutine</span><span class="p">{}());</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Join the coroutines</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">coroutine</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">coroutines</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">coroutine</span><span class="p">.</span><span class="n">resume</span><span class="p">();</span>
+<span class="w">        </span><span class="n">coroutine</span><span class="p">.</span><span class="n">destroy</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// The main function</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">run_sleep_coroutines</span><span class="p">();</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"All coroutines joined."</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
 </section>
 </section>
 </section>
@@ -1428,12 +1514,16 @@ We use lambda expressions to select points in each quadrant, subject to what the
 <li><a :data-current="activeSection === '#overview-of-modern-c'" class="reference internal" href="#overview-of-modern-c">Overview of Modern C++</a></li>
 <li><a :data-current="activeSection === '#language-features'" class="reference internal" href="#language-features">Language Features</a><ul>
 <li><a :data-current="activeSection === '#the-modern-c-class'" class="reference internal" href="#the-modern-c-class">The Modern C++ Class</a></li>
-<li><a :data-current="activeSection === '#standard-library'" class="reference internal" href="#standard-library">Standard Library</a></li>
-<li><a :data-current="activeSection === '#lambda-expressions'" class="reference internal" href="#lambda-expressions">Lambda Expressions</a></li>
 <li><a :data-current="activeSection === '#move-semantics'" class="reference internal" href="#move-semantics">Move Semantics</a></li>
+<li><a :data-current="activeSection === '#lambda-expressions'" class="reference internal" href="#lambda-expressions">Lambda Expressions</a><ul>
+<li><a :data-current="activeSection === '#basic-lambda-with-no-parameters'" class="reference internal" href="#basic-lambda-with-no-parameters">Basic Lambda with No Parameters</a></li>
+<li><a :data-current="activeSection === '#lambda-with-parameters'" class="reference internal" href="#lambda-with-parameters">Lambda with Parameters</a></li>
+<li><a :data-current="activeSection === '#lambda-with-explicit-return-type'" class="reference internal" href="#lambda-with-explicit-return-type">Lambda with Explicit Return Type</a></li>
+<li><a :data-current="activeSection === '#lambda-with-closures'" class="reference internal" href="#lambda-with-closures">Lambda with Closures</a></li>
+</ul>
+</li>
 <li><a :data-current="activeSection === '#naming-conventions'" class="reference internal" href="#naming-conventions">Naming Conventions</a></li>
 <li><a :data-current="activeSection === '#adding-this-to-a-cmake-folder'" class="reference internal" href="#adding-this-to-a-cmake-folder">Adding this to a CMake folder</a></li>
-<li><a :data-current="activeSection === '#co-routines'" class="reference internal" href="#co-routines">Co-routines</a></li>
 <li><a :data-current="activeSection === '#automatic-variables'" class="reference internal" href="#automatic-variables">Automatic variables</a></li>
 <li><a :data-current="activeSection === '#constants-and-constant-expressions'" class="reference internal" href="#constants-and-constant-expressions">Constants and Constant Expressions</a></li>
 <li><a :data-current="activeSection === '#initializer-expressions'" class="reference internal" href="#initializer-expressions">initializer expressions</a></li>
@@ -1448,9 +1538,8 @@ We use lambda expressions to select points in each quadrant, subject to what the
 </li>
 <li><a :data-current="activeSection === '#random-number-generation'" class="reference internal" href="#random-number-generation">Random Number Generation</a></li>
 <li><a :data-current="activeSection === '#ranges'" class="reference internal" href="#ranges">Ranges</a></li>
-<li><a :data-current="activeSection === '#smart-pointers'" class="reference internal" href="#smart-pointers">Smart Pointers</a></li>
 <li><a :data-current="activeSection === '#threading'" class="reference internal" href="#threading">Threading</a></li>
-<li><a :data-current="activeSection === '#exception-handling'" class="reference internal" href="#exception-handling">Exception Handling</a></li>
+<li><a :data-current="activeSection === '#co-routines'" class="reference internal" href="#co-routines">Co-routines</a></li>
 </ul>
 </li>
 </ul>
