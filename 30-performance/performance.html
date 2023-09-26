@@ -15,7 +15,7 @@
 <link href="../search.html" rel="search" title="Search"/>
 <link href="../genindex.html" rel="index" title="Index"/>
 <link href="../40-going-distributed/distributed.html" rel="next" title="Distributed Computing with OneAPI"/>
-<link href="../25-devices/devices.html" rel="prev" title="Selecting and Using Devices"/>
+<link href="../18-dpcpp/dpcpp.html" rel="prev" title="Data-Parallel C++"/>
 <script>
     <!-- Prevent Flash of wrong theme -->
       const userPreference = localStorage.getItem('darkMode');
@@ -81,9 +81,9 @@
 <li class="toctree-l1"><a class="reference internal" href="../10-software-engineering/software-engineering.html">Software Engineering</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../15-modern-cpp/modern-cpp.html">Modern C++ as a Better C (and C++)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../18-dpcpp/dpcpp.html">Data-Parallel C++</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../25-devices/devices.html">Selecting and Using Devices</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Performance</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../40-going-distributed/distributed.html">Distributed Computing with OneAPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../80-running/running.html">Compiling and Running oneAPI programs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../99-sandbox/issues.html">Issues</a></li>
 </ul>
 </nav>
@@ -109,6 +109,33 @@
 <div id="content" role="main">
 <section id="performance">
 <h1>Performance<a class="headerlink" href="#performance" title="Permalink to this heading">¶</a></h1>
+<div class="admonition-todo admonition" id="id1">
+<p class="admonition-title">Todo</p>
+<p>add a proper overview paragraph</p>
+</div>
+<p>We can use the <code class="docutils literal notranslate"><span class="pre">chrono</span></code> section of the C++ Standard Library for measuring performance in terms of elapsed wall clock time.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 7</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">mark_time</span><span class="p">(</span>
+<span class="linenos"> 8</span><span class="w">   </span><span class="n">ts_vector</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">timestamps</span><span class="p">,</span>
+<span class="linenos"> 9</span><span class="w">   </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string_view</span><span class="w"> </span><span class="n">label</span><span class="p">)</span>
+<span class="linenos">10</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">11</span><span class="w">   </span><span class="n">timestamps</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="p">(</span><span class="n">label</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span>
+<span class="linenos">12</span><span class="w">     </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">steady_clock</span><span class="o">::</span><span class="n">now</span><span class="p">()));</span>
+<span class="linenos">13</span><span class="w"> </span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Every time we want to add a timestamp, we invoke <code class="docutils literal notranslate"><span class="pre">mark_time</span></code> with a suitable string label for the phase whose performance we are measuring.
+At the end, we use the <code class="docutils literal notranslate"><span class="pre">print_timestamps</span></code> function to print the collected measurements in comma-separated-values (CSV) format.
+(For readability, we have replaced the actual device name, “Intel(R) UHD Graphics P630 [0x3e96]”, with “gen9.”)</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>TIME,DELTA,UNIT,DEVICE,PHASE
+68719429381281,0,ns,gen9,Start 68719429386913,5632,ns,gen9,Memory
+allocation 68719466567445,37180532,ns,gen9,Queue creation
+68719769668012,303100567,ns,gen9,Integration
+68719773241994,3573982,ns,gen9,DONE
+68719773241994,343860713,ns,gen9,TOTAL
+</pre></div>
+</div>
+<p>These measurements lead to various insights on what is going “under the hood” during program execution, to name a few:</p>
+<p>Initial allocation of a SYCL buffer takes very little time compared to allocating an standard vector. Queue creation introduces significant overhead. To achieve an overall speedup in light of this overhead, a high degree of parallelism is required (between about 10 and 20 million trapezoids on an Intel DevCloud gen9 node). Compared to the sequential version, there is an overall speedup even when using SYCL on the host CPU rather than the accelerator.</p>
 </section>
 </div></div>
 </main>

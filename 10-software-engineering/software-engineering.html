@@ -81,9 +81,9 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Software Engineering</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../15-modern-cpp/modern-cpp.html">Modern C++ as a Better C (and C++)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../18-dpcpp/dpcpp.html">Data-Parallel C++</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../25-devices/devices.html">Selecting and Using Devices</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../30-performance/performance.html">Performance</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../40-going-distributed/distributed.html">Distributed Computing with OneAPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../80-running/running.html">Compiling and Running oneAPI programs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../99-sandbox/issues.html">Issues</a></li>
 </ul>
 </nav>
@@ -123,13 +123,94 @@ While SE principles evoke a wide range of responses, it is possible to embrace m
 <li><p><strong>Automatic Compilation</strong>: Makefile vs. CMake</p></li>
 <li><p><strong>Continuous Integration</strong>: Using GitHub Actions (at least for the non-GPU specific stuff)</p></li>
 </ul>
+<div class="admonition-todo admonition" id="id1">
+<p class="admonition-title">Todo</p>
+<p>rootless package management</p>
+</div>
 <p>While there are other practices that give the <em>full</em> software engineering experience, we think these can be a helpful starting point to ensure success in developing research software (the kind of software you are likely doing if you’re reading about SYCL and OneAPI).</p>
 <p>We are going to take a look at some of the more <em>technical</em> aspects of software engineering: testing, documentation, version control, security/privacy (by discouraging unsafe practices, e.g. explicit pointer usage), and professionalism/ethics. As scientific computing is something used to drive scientific progress, we need to write software that users can trust (“trust science”), which results, in part, from taking all possible steps to ensure reliability and reproducibility.</p>
 <section id="testing">
 <h2>Testing<a class="headerlink" href="#testing" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#testing'">¶</a></h2>
+<p>The main value proposition of <a class="reference external" href="https://en.wikipedia.org/wiki/Test-driven_development">automated unit testing</a> is that it encourages frequent regression testing by making it painless.
+During the last two decades, this “test-infected” mindset has gradually entered the mainstream including introductory computer science courses.
+We argue that it can benefit and integrate seamlessly with HPC education.</p>
+<p>Support for unit testing in C/C++ has improved considerably, and we prefer <a class="reference external" href="https://google.github.io/googletest/">GoogleTest</a> for this purpose.
+A typical floating-point correctness test looks like this:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="linenos">36</span><span class="n">TEST_F</span><span class="p">(</span><span class="n">IntegrationTest</span><span class="p">,</span><span class="w"> </span><span class="n">Simple3</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">37</span><span class="w">  </span><span class="n">EXPECT_NEAR</span><span class="p">(</span><span class="n">trapezoid</span><span class="p">(</span><span class="mi">-1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">EPS</span><span class="p">);</span>
+<span class="linenos">38</span><span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="build-and-configuration-management">
+<h2>Build and Configuration Management<a class="headerlink" href="#build-and-configuration-management" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#build-and-configuration-management'">¶</a></h2>
+<p>A key portability challenge results from differences across users’ development and production environments, such as different versions of operating systems, compilers, libraries, and other tools.
+Among several efforts to abstract away these differences and support building a project on any environment meeting certain minimum criteria, (modern) <a class="reference external" href="https://cmake.org">CMake</a> has emerged as the most painless choice, especially for C/C++-based projects.</p>
+<p>CMake enables us to use C/C++ similar to other languages, such as Java, Scala, Python, JavaScript/Node, by managing external library dependencies declaratively and fetching them dynamically.
+This encourages parametric thinking and makes it possible to develop adaptable HPC codes.</p>
+<p>The following settings consistently ensure a specific language standard:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="linenos">10</span><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_CXX_STANDARD</span><span class="w"> </span><span class="s">17</span><span class="p">)</span>
+<span class="linenos">11</span><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_CXX_STANDARD_REQUIRED</span><span class="w"> </span><span class="s">ON</span><span class="p">)</span>
+<span class="linenos">12</span><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_CXX_EXTENSIONS</span><span class="w"> </span><span class="s">OFF</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This section is an example of declaring an external dependency that gets included into the build process at source level.</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="linenos">18</span><span class="nb">FetchContent_Declare</span><span class="p">(</span>
+<span class="linenos">19</span><span class="w">  </span><span class="s">fmt</span>
+<span class="linenos">20</span><span class="w">  </span><span class="s">GIT_REPOSITORY</span><span class="w"> </span><span class="s">https://github.com/fmtlib/fmt.git</span>
+<span class="linenos">21</span><span class="w">  </span><span class="s">GIT_TAG</span><span class="w">        </span><span class="s">8.1.1</span>
+<span class="linenos">22</span><span class="p">)</span>
+<span class="linenos">23</span><span class="nb">FetchContent_MakeAvailable</span><span class="p">(</span><span class="s">fmt</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The external dependencies declared in this way then become available for linking into the executable(s).</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="nb">add_executable</span><span class="p">(</span><span class="s">integration</span><span class="w"> </span>
+<span class="linenos">2</span><span class="w">  </span><span class="s">main.cpp</span><span class="w"> </span><span class="s">f.cpp</span><span class="w"> </span><span class="s">trapezoid.cpp</span><span class="w"> </span><span class="s">timestamps.cpp</span>
+<span class="linenos">3</span><span class="p">)</span>
+<span class="linenos">4</span><span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">integration</span><span class="w"> </span>
+<span class="linenos">5</span><span class="w">  </span><span class="s">fmt::fmt</span><span class="w"> </span><span class="s">spdlog::spdlog</span><span class="w"> </span><span class="s">CLI11::CLI11</span>
+<span class="linenos">6</span><span class="p">)</span>
+</pre></div>
+</div>
 </section>
 <section id="version-control">
 <h2>Version Control<a class="headerlink" href="#version-control" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#version-control'">¶</a></h2>
+<p>Version control, especially distributed, hosted services such as GitHub, GitLab, and Bitbucket, are one of the foundations of modern software engineering practice.
+Version control allows a development team to keep their code in a secure place and enables collaboration following numerous different models and cultures.</p>
+<div class="admonition-todo admonition" id="id2">
+<p class="admonition-title">Todo</p>
+<p>expand to include various subtopics</p>
+</div>
+</section>
+<section id="continuous-integration">
+<h2>Continuous Integration<a class="headerlink" href="#continuous-integration" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#continuous-integration'">¶</a></h2>
+<p>There are various choices for adding continuous integration to a software project, such as setting up a dedicated server or connecting to an external provider.
+Even more conveniently, major hosted version control services already include support for continuous integration.
+In practice, automated builds (workflow runs) are triggered every time a project contributor commits changes to the code base.
+Such a build automates the steps one would typically perform manually on one’s workstation:</p>
+<ul class="simple">
+<li><p>starting with a vanilla configuration,</p></li>
+<li><p>installing prerequisites to the build,</p></li>
+<li><p>checking out the project source code,</p></li>
+<li><p>building executable artifacts, and</p></li>
+<li><p>running/testing them.</p></li>
+</ul>
+<p>Starting with a vanilla (default) system configuration ensures that all project dependencies (tools, external libraries, etc.) are fully understood and explicit.
+In addition, build automation results in almost immediate feedback on an incorrect commit that “breaks the build” (see also <a class="reference external" href="https://github.com/LoyolaChicagoCode/unoapi-dpcpp-examples/blob/main/.github/workflows/oneapi-cmake.yml">the actual script</a>).</p>
+<p>We argue that continuous integration can make us reproducibility-aware: A researcher wishing to reproduce the work represented by a particular project can “fork” the project into their own account on, say, GitHub.
+The CI workflow then runs on that user’s fork of the project.
+This gives us some degree of reproducibility “for free,” subject to limitations in devices available through the actual CI container (i.e., not usually accelerators).</p>
+</section>
+<section id="automated-testing">
+<h2>Automated Testing<a class="headerlink" href="#automated-testing" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#automated-testing'">¶</a></h2>
+<p>Automated testing usually takes place as part of continuous integration.  Indeed, the last section of the CI workflow shown above invokes all discovered executable tests.</p>
+</section>
+<section id="rootless-package-management-for-libraries-and-tools">
+<h2>Rootless Package Management for Libraries and Tools<a class="headerlink" href="#rootless-package-management-for-libraries-and-tools" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#rootless-package-management-for-libraries-and-tools'">¶</a></h2>
+<p>On publicly accessible HPC clusters, such as Intel’s DevCloud and those run by some national laboratories, users don’t typically have root access (administrative privileges).
+This precludes them from using native package management, such as <code class="docutils literal notranslate"><span class="pre">apt</span></code> on Ubuntu, to install missing packages or newer versions of outdated packages.</p>
+<p>During the last decade or so, userland package management tools have emerged as a complement to native package management.
+These tools, such as Homebrew on MacOS and Linux and Chocolatey on Windows, allow users to install additional packages for their personal use without requiring root access, e.g., a current version of CMake.</p>
 </section>
 <section id="documentation">
 <h2>Documentation<a class="headerlink" href="#documentation" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#documentation'">¶</a></h2>
@@ -153,7 +234,11 @@ While SE principles evoke a wide range of responses, it is possible to embrace m
 <div class="sticky top-16 -mt-10 max-h-[calc(var(--vh)-4rem)] overflow-y-auto pt-6 space-y-2"><p class="font-medium">On this page</p>
 <ul>
 <li><a :data-current="activeSection === '#testing'" class="reference internal" href="#testing">Testing</a></li>
+<li><a :data-current="activeSection === '#build-and-configuration-management'" class="reference internal" href="#build-and-configuration-management">Build and Configuration Management</a></li>
 <li><a :data-current="activeSection === '#version-control'" class="reference internal" href="#version-control">Version Control</a></li>
+<li><a :data-current="activeSection === '#continuous-integration'" class="reference internal" href="#continuous-integration">Continuous Integration</a></li>
+<li><a :data-current="activeSection === '#automated-testing'" class="reference internal" href="#automated-testing">Automated Testing</a></li>
+<li><a :data-current="activeSection === '#rootless-package-management-for-libraries-and-tools'" class="reference internal" href="#rootless-package-management-for-libraries-and-tools">Rootless Package Management for Libraries and Tools</a></li>
 <li><a :data-current="activeSection === '#documentation'" class="reference internal" href="#documentation">Documentation</a></li>
 <li><a :data-current="activeSection === '#security-privacy'" class="reference internal" href="#security-privacy">Security/Privacy</a></li>
 <li><a :data-current="activeSection === '#professionalism-ethics'" class="reference internal" href="#professionalism-ethics">Professionalism/Ethics</a></li>

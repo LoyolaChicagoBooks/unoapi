@@ -14,7 +14,7 @@
 <link href="../_static/theme.d5da1ae72e45df4c5b8e.css" rel="stylesheet"/>
 <link href="../search.html" rel="search" title="Search"/>
 <link href="../genindex.html" rel="index" title="Index"/>
-<link href="../25-devices/devices.html" rel="next" title="Selecting and Using Devices"/>
+<link href="../30-performance/performance.html" rel="next" title="Performance"/>
 <link href="../15-modern-cpp/modern-cpp.html" rel="prev" title="Modern C++ as a Better C (and C++)"/>
 <script>
     <!-- Prevent Flash of wrong theme -->
@@ -81,9 +81,9 @@
 <li class="toctree-l1"><a class="reference internal" href="../10-software-engineering/software-engineering.html">Software Engineering</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../15-modern-cpp/modern-cpp.html">Modern C++ as a Better C (and C++)</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Data-Parallel C++</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../25-devices/devices.html">Selecting and Using Devices</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../30-performance/performance.html">Performance</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../40-going-distributed/distributed.html">Distributed Computing with OneAPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../80-running/running.html">Compiling and Running oneAPI programs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../99-sandbox/issues.html">Issues</a></li>
 </ul>
 </nav>
@@ -109,8 +109,158 @@
 <div id="content" role="main">
 <section id="data-parallel-c">
 <h1>Data-Parallel C++<a class="headerlink" href="#data-parallel-c" title="Permalink to this heading">¶</a></h1>
+<p>A growing challenge for the HPC community has been <a class="reference external" href="https://performanceportability.org">performance portability</a> , i.e., the ability to maintain consistent application performance in the context of increasing complexity and heterogeneity of hardware, as well as the additional need to maintain developer productivity and computational precision.
+The intersection of performance, portability, and productivity goals (P3) has also been the focus of an annual workshop at the Supercomputing Conference (SC) for several years.</p>
+<p>One of the key frameworks to emerge in response to the P3 challenge is oneAPI, which promises to be a single application programming interface (API) that can be used to program all available architectures.
+Programming is done using a modern dialect of C/C++, known as Data-Parallel C++ and SYCL, a standard for higher-level abstractions for parallelism and concurrency.
+While oneAPI is not the only alternative, the ability to write largely device-independent programs is a promising direction with great potential to exploit parallelism as the world moves toward more “on chip” heterogeneity and clusters thereof.</p>
+<section id="running-example-trapezoidal-integration">
+<h2>Running Example: Trapezoidal Integration<a class="headerlink" href="#running-example-trapezoidal-integration" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#running-example-trapezoidal-integration'">¶</a></h2>
+<p>Sometimes, a program needs to integrate a function (i.e., calculate the area under a curve).
+We might be able to use a formula for the integral, but this isn’t always possible.
+An easy alternative approach, suitable for numeric integration, is to approximate the curve with straight line segments and calculate an estimate of the area from them.</p>
+<figure class="align-default">
+<img alt="../_images/trapezoidal.png" src="../_images/trapezoidal.png"/>
+</figure>
+<p>Concretely, to find the area under the curve from a to b, we approximate the function by dividing the domain from a to b into g equally sized segments.
+Each segment is (b – a) / g long. Let the boundaries of these segments be x0 = a, x1, x2, … , xg = b.
+The polyline approximating the curve will have coordinates (x0, f(x0)), (x1, f(x1)), (x2, f(x2)), …, (xg, f(xg)).
+This allows us to approximate the area under the curve as the sum of g trapezoids.</p>
 </section>
-</div></div>
+<section id="data-parallel-c-implementation">
+<h2>Data-Parallel C++ Implementation<a class="headerlink" href="#data-parallel-c-implementation" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#data-parallel-c-implementation'">¶</a></h2>
+<p>Our <a class="reference external" href="https://github.com/LoyolaChicagoCode/unoapi-dpcpp-examples/tree/main/integration">trapezoidal integration exemplar</a> example demonstrates various key aspects of data-parallel C++ programming using Intel’s <a class="reference external" href="https://www.intel.com/content/www/us/en/developer/tools/oneapi/overview.html">oneAPI platform</a>, which is based on the <a class="reference external" href="https://www.khronos.org/sycl">SYCL</a> cross-platform standard for heterogeneous accelerator-based computing.
+Although the example is embarrassingly parallel, it nevertheless exhibits various non-trivial challenges that we will discuss in detail.</p>
+<p>The exemplar’s sequential version illustrates the underlying fused-loop map-reduce algorithm, which maps each adjacent pair of function values to a trapezoid area and, in the same loop body, reduces (adds) the area to the cumulative result.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="linenos">65</span><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">run_sequentially</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">66</span><span class="w">      </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="w"> </span><span class="nf">values</span><span class="p">(</span><span class="n">size</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">);</span>
+<span class="linenos">67</span><span class="w">      </span><span class="kt">double</span><span class="w"> </span><span class="n">result</span><span class="p">{</span><span class="mf">0.0</span><span class="p">};</span>
+<span class="linenos">68</span>
+<span class="linenos">69</span><span class="w">      </span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="n">x_min</span><span class="p">);</span>
+<span class="linenos">70</span><span class="w">      </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="n">i</span><span class="p">{</span><span class="mi">0UL</span><span class="p">};</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">number_of_trapezoids</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">71</span><span class="w">        </span><span class="n">values</span><span class="p">[</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="n">x_min</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">dx</span><span class="p">);</span>
+<span class="linenos">72</span><span class="w">        </span><span class="n">result</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>
+<span class="linenos">73</span><span class="w">          </span><span class="n">trapezoid</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="w"> </span><span class="n">values</span><span class="p">[</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="n">half_dx</span><span class="p">);</span>
+<span class="linenos">74</span><span class="w">      </span><span class="p">}</span>
+<span class="linenos">75</span>
+<span class="linenos">76</span><span class="w">      </span><span class="n">fmt</span><span class="o">::</span><span class="n">print</span><span class="p">(</span><span class="s">"result = {}</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="p">);</span>
+<span class="linenos">77</span><span class="w">    </span><span class="p">}</span>
+</pre></div>
+</div>
+<p>We’ll see shortly how to write the data-parallel version of this algorithm in DPC++.</p>
+</section>
+<section id="the-platform-intel-oneapi-khronos-sycl">
+<h2>The Platform: Intel oneAPI/Khronos SYCL<a class="headerlink" href="#the-platform-intel-oneapi-khronos-sycl" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#the-platform-intel-oneapi-khronos-sycl'">¶</a></h2>
+<p>The <a class="reference external" href="https://www.khronos.org/sycl">SYCL standard</a> defines high-level abstractions for parallel computing using modern C++, in an effort by Khronos to influence the ISO C standard to support heterogeneous computing.
+<a class="reference external" href="https://spec.oneapi.io/versions/1.1-rev-1/elements/dpcpp/source/index.html">Data-Parallel C++ (DPC++)</a>, a part of Intel’s oneAPI standard, is an implementation of SYCL.
+Intel provides remote access to various types of accelerator hardware, including GPUs and FPGAs, through its <a class="reference external" href="https://www.intel.com/content/www/us/en/developer/tools/Dev-Cloud/overview.html">DevCloud program</a>.</p>
+<section id="device-selection-and-task-queues">
+<h3>Device Selection and Task Queues<a class="headerlink" href="#device-selection-and-task-queues" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#device-selection-and-task-queues'">¶</a></h3>
+<dl class="simple">
+<dt>A typical DPC++ program starts with the selection of one or more accelerator devices based on criteria of varying specificity.</dt><dd><p>In our exemplar, the user can choose between running the code on the host CPU and an available accelerator:</p>
+</dd>
+</dl>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 99</span><span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="n">sycl</span><span class="o">::</span><span class="n">device_selector</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">device_selector</span><span class="p">{</span><span class="w"> </span>
+<span class="linenos">100</span><span class="w">          </span><span class="n">run_cpuonly</span><span class="w"> </span><span class="o">?</span>
+<span class="linenos">101</span><span class="w">            </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="n">sycl</span><span class="o">::</span><span class="n">device_selector</span><span class="w"> </span><span class="o">&amp;&gt;</span><span class="p">(</span>
+<span class="linenos">102</span><span class="w">              </span><span class="n">sycl</span><span class="o">::</span><span class="n">cpu_selector</span><span class="p">{})</span><span class="w"> </span><span class="o">:</span>
+<span class="linenos">103</span><span class="w">            </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="n">sycl</span><span class="o">::</span><span class="n">device_selector</span><span class="w"> </span><span class="o">&amp;&gt;</span><span class="p">(</span>
+<span class="linenos">104</span><span class="w">              </span><span class="n">sycl</span><span class="o">::</span><span class="n">default_selector</span><span class="p">{})</span>
+<span class="linenos">105</span><span class="w">        </span><span class="p">};</span>
+</pre></div>
+</div>
+<p>The interface between the programmer and the chosen device is a <em>queue</em>, to which we can later submit <em>commands</em> for execution on the device.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="linenos">110</span><span class="w">        </span><span class="n">sycl</span><span class="o">::</span><span class="n">queue</span><span class="w"> </span><span class="n">q</span><span class="p">{</span>
+<span class="linenos">111</span><span class="w">          </span><span class="n">device_selector</span><span class="p">,</span><span class="w"> </span>
+<span class="linenos">112</span><span class="w">          </span><span class="n">dpc_common</span><span class="o">::</span><span class="n">exception_handler</span><span class="p">,</span><span class="w"> </span>
+<span class="linenos">113</span><span class="w">          </span><span class="n">sycl</span><span class="o">::</span><span class="n">property</span><span class="o">::</span><span class="n">queue</span><span class="o">::</span><span class="n">in_order</span><span class="p">()</span>
+<span class="linenos">114</span><span class="w">        </span><span class="p">};</span>
+<span class="linenos">115</span><span class="w">        </span><span class="n">spdlog</span><span class="o">::</span><span class="n">info</span><span class="p">(</span><span class="s">"Device: {}"</span><span class="p">,</span><span class="w"> </span><span class="n">q</span><span class="p">.</span><span class="n">get_device</span><span class="p">().</span>
+<span class="linenos">116</span><span class="w">          </span><span class="n">get_info</span><span class="o">&lt;</span><span class="n">sycl</span><span class="o">::</span><span class="n">info</span><span class="o">::</span><span class="n">device</span><span class="o">::</span><span class="n">name</span><span class="o">&gt;</span><span class="p">());</span>
+</pre></div>
+</div>
+<p>If we do not explicitly specify a device when creating our queue, the queue will automatically select the most suitable available device on the current hardware.
+Also, we can choose between a simple in-order queue, as we have done here, or we can have the queue figure out the best order for executing the submitted commands without deadlocking.</p>
+</section>
+<section id="buffers-shared-between-host-and-device">
+<h3>Buffers Shared Between Host and Device<a class="headerlink" href="#buffers-shared-between-host-and-device" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#buffers-shared-between-host-and-device'">¶</a></h3>
+<p>Data-parallel computing typically involves some form of data sharing between the host and the device.
+SYCL allows several choices for this with varying degrees of control where the data should reside and how it is shared between host and device.
+E.g., we could allocate a standard vector on the host and use universal shared memory (USM) to share it with the device executing the data-parallel instructions.
+This might require copying substantial amounts of data between host and device and thereby impair performance.</p>
+<p>Instead, a <em>buffer</em> is a higher-level data container that allows SYCL to determine where best to allocate the corresponding memory; a <em>range</em> represents a 1, 2, or 3-dimensional index range for a buffer.
+By not explicitly backing a buffer by a host-allocated standard vector, the data can remain on the device for faster access during kernel execution—until we may need to access it on the host later.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="linenos">92</span><span class="w">        </span><span class="n">sycl</span><span class="o">::</span><span class="n">buffer</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">v_buf</span><span class="p">{</span><span class="n">sycl</span><span class="o">::</span><span class="n">range</span><span class="o">&lt;</span><span class="mi">1</span><span class="o">&gt;</span><span class="p">{</span><span class="n">size</span><span class="p">}};</span>
+<span class="linenos">93</span><span class="w">        </span><span class="n">sycl</span><span class="o">::</span><span class="n">buffer</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">r_buf</span><span class="p">{</span><span class="n">sycl</span><span class="o">::</span><span class="n">range</span><span class="o">&lt;</span><span class="mi">1</span><span class="o">&gt;</span><span class="p">{</span><span class="mi">1</span><span class="p">}};</span>
+</pre></div>
+</div>
+</section>
+<section id="parallel-for-construct">
+<h3>parallel_for() Construct<a class="headerlink" href="#parallel-for-construct" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#parallel-for-construct'">¶</a></h3>
+<p>At the heart of SYCL’s support for data parallelism lies the <code class="docutils literal notranslate"><span class="pre">parallel_for()</span></code> construct, which allows us to express the instructions that should execute in parallel.
+While also providing varying degrees of control over splitting up the workload and assigning it to the accelerator device, SYCL is able to come up with a suitable assignment that maximizes parallelism based on the capabilities of the device.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="linenos">116</span><span class="w">        </span><span class="n">q</span><span class="p">.</span><span class="n">submit</span><span class="p">([</span><span class="o">&amp;</span><span class="p">](</span><span class="k">auto</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">h</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">117</span><span class="w">          </span><span class="k">const</span><span class="w"> </span><span class="n">sycl</span><span class="o">::</span><span class="n">accessor</span><span class="w"> </span><span class="n">v</span><span class="p">{</span><span class="n">v_buf</span><span class="p">,</span><span class="w"> </span><span class="n">h</span><span class="p">};</span>
+<span class="linenos">118</span><span class="w">          </span><span class="n">h</span><span class="p">.</span><span class="n">parallel_for</span><span class="p">(</span><span class="n">size</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="o">=</span><span class="p">](</span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">index</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">119</span><span class="w">            </span><span class="n">v</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="n">x_min</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">dx</span><span class="p">);</span>
+<span class="linenos">120</span><span class="w">          </span><span class="p">});</span><span class="w"> </span><span class="c1">// end inner lambda/parallel_for</span>
+<span class="linenos">121</span><span class="w">        </span><span class="p">});</span><span class="w"> </span><span class="c1">// end of command group</span>
+</pre></div>
+</div>
+<p>In this example, <code class="docutils literal notranslate"><span class="pre">f()</span></code> represents the computation we perform in parallel on each data item.
+As shown below, separating <code class="docutils literal notranslate"><span class="pre">f</span></code> into its own compilation unit enables us to unit-test it, as well as choose a specific implementation of <code class="docutils literal notranslate"><span class="pre">f</span></code> at build time.</p>
+<p>To combine the trapezoids’ areas into a single result, while allowing SYCL to maximize parallelism, we can use <code class="docutils literal notranslate"><span class="pre">parallel_for()</span></code> along with a suitable reduction operation, i.e., <code class="docutils literal notranslate"><span class="pre">sycl::plus&lt;&gt;()</span></code>.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="linenos">126</span><span class="w">        </span><span class="n">q</span><span class="p">.</span><span class="n">submit</span><span class="p">([</span><span class="o">&amp;</span><span class="p">](</span><span class="k">auto</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">h</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">127</span><span class="w">          </span><span class="k">const</span><span class="w"> </span><span class="n">sycl</span><span class="o">::</span><span class="n">accessor</span><span class="w"> </span><span class="n">v</span><span class="p">{</span><span class="n">v_buf</span><span class="p">,</span><span class="w"> </span><span class="n">h</span><span class="p">};</span>
+<span class="linenos">128</span><span class="w">          </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">sum_reduction</span><span class="p">{</span>
+<span class="linenos">129</span><span class="w">            </span><span class="n">sycl</span><span class="o">::</span><span class="n">reduction</span><span class="p">(</span><span class="n">r_buf</span><span class="p">,</span><span class="w"> </span><span class="n">h</span><span class="p">,</span><span class="w"> </span><span class="n">sycl</span><span class="o">::</span><span class="n">plus</span><span class="o">&lt;&gt;</span><span class="p">())};</span>
+<span class="linenos">130</span><span class="w">          </span><span class="n">h</span><span class="p">.</span><span class="n">parallel_for</span><span class="p">(</span>
+<span class="linenos">131</span><span class="w">            </span><span class="n">sycl</span><span class="o">::</span><span class="n">range</span><span class="o">&lt;</span><span class="mi">1</span><span class="o">&gt;</span><span class="p">{</span><span class="n">number_of_trapezoids</span><span class="p">},</span><span class="w"> </span>
+<span class="linenos">132</span><span class="w">            </span><span class="n">sum_reduction</span><span class="p">,</span><span class="w"> </span>
+<span class="linenos">133</span><span class="w">            </span><span class="p">[</span><span class="o">=</span><span class="p">](</span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">index</span><span class="p">,</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">sum</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">134</span><span class="w">              </span><span class="n">sum</span><span class="p">.</span><span class="n">combine</span><span class="p">(</span>
+<span class="linenos">135</span><span class="w">                </span><span class="n">trapezoid</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="n">index</span><span class="p">],</span><span class="w"> </span><span class="n">v</span><span class="p">[</span><span class="n">index</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="n">half_dx</span><span class="p">));</span>
+<span class="linenos">136</span><span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="c1">// end inner lambda</span>
+<span class="linenos">137</span><span class="w">          </span><span class="p">);</span><span class="w"> </span><span class="c1">// end parallel_for</span>
+<span class="linenos">138</span><span class="w">        </span><span class="p">});</span><span class="w"> </span><span class="c1">// end of outer command group</span>
+</pre></div>
+</div>
+</section>
+<section id="separate-compilation-and-external-functions">
+<h3>Separate Compilation and External Functions<a class="headerlink" href="#separate-compilation-and-external-functions" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#separate-compilation-and-external-functions'">¶</a></h3>
+<p>Separate compilation of source files helps us decompose a software system into smaller modules.
+This has multiple benefits, including separation of concerns, unit testing, easier collaborative development, and the ability to defer certain decisions (e.g., what we’re integrating) until build time.</p>
+<p>In our exemplar, we’ll want to unit-test the function to be integrated and defer choosing a specific implementation of that function until build time.
+To be able to separately compile the function and call it inside a DPC++ kernel, we declare it in this SYCL-specific way:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos">6</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;CL/sycl.hpp&gt;</span>
+<span class="linenos">7</span>
+<span class="linenos">8</span><span class="n">SYCL_EXTERNAL</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>To observe a speedup when using <code class="docutils literal notranslate"><span class="pre">parallel_for</span></code>, we define <code class="docutils literal notranslate"><span class="pre">f</span></code> as an intentionally inefficient way to compute the unit value:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="linenos">4</span><span class="kt">double</span><span class="w"> </span><span class="nf">f</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">5</span><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+<span class="linenos">6</span><span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+</div></div><aside class="hidden text-sm xl:block" id="right-sidebar">
+<div class="sticky top-16 -mt-10 max-h-[calc(var(--vh)-4rem)] overflow-y-auto pt-6 space-y-2"><p class="font-medium">On this page</p>
+<ul>
+<li><a :data-current="activeSection === '#running-example-trapezoidal-integration'" class="reference internal" href="#running-example-trapezoidal-integration">Running Example: Trapezoidal Integration</a></li>
+<li><a :data-current="activeSection === '#data-parallel-c-implementation'" class="reference internal" href="#data-parallel-c-implementation">Data-Parallel C++ Implementation</a></li>
+<li><a :data-current="activeSection === '#the-platform-intel-oneapi-khronos-sycl'" class="reference internal" href="#the-platform-intel-oneapi-khronos-sycl">The Platform: Intel oneAPI/Khronos SYCL</a><ul>
+<li><a :data-current="activeSection === '#device-selection-and-task-queues'" class="reference internal" href="#device-selection-and-task-queues">Device Selection and Task Queues</a></li>
+<li><a :data-current="activeSection === '#buffers-shared-between-host-and-device'" class="reference internal" href="#buffers-shared-between-host-and-device">Buffers Shared Between Host and Device</a></li>
+<li><a :data-current="activeSection === '#parallel-for-construct'" class="reference internal" href="#parallel-for-construct">parallel_for() Construct</a></li>
+<li><a :data-current="activeSection === '#separate-compilation-and-external-functions'" class="reference internal" href="#separate-compilation-and-external-functions">Separate Compilation and External Functions</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</aside>
 </main>
 </div>
 </div><footer class="py-6 border-t border-border md:py-0">

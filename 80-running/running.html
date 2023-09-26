@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+
+<html :class="{'dark': darkMode === 'dark' || (darkMode === 'system' &amp;&amp; window.matchMedia('(prefers-color-scheme: dark)').matches)}" class="scroll-smooth" lang="en" x-data="{ darkMode: localStorage.getItem('darkMode') || localStorage.setItem('darkMode', 'system'), activeSection: '' }" x-init="$watch('darkMode', val =&gt; localStorage.setItem('darkMode', val))">
+<head>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta charset="utf-8"/>
+<meta content="white" media="(prefers-color-scheme: light)" name="theme-color"/>
+<meta content="black" metia="(prefers-color-scheme: dark)" name="theme-color"/>
+<meta content="Docutils 0.18.1: http://docutils.sourceforge.net/" name="generator"/>
+<title>Compiling and Running oneAPI programs | UnoAPI: updated 2023.09.26</title>
+<meta content="Compiling and Running oneAPI programs | UnoAPI: updated 2023.09.26" property="og:title"/>
+<meta content="Compiling and Running oneAPI programs | UnoAPI: updated 2023.09.26" name="twitter:title"/>
+<link href="../_static/pygments.css" rel="stylesheet"/>
+<link href="../_static/theme.d5da1ae72e45df4c5b8e.css" rel="stylesheet"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../99-sandbox/issues.html" rel="next" title="Issues"/>
+<link href="../40-going-distributed/distributed.html" rel="prev" title="Distributed Computing with OneAPI"/>
+<script>
+    <!-- Prevent Flash of wrong theme -->
+      const userPreference = localStorage.getItem('darkMode');
+      let mode;
+      if (userPreference === 'dark' || window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        mode = 'dark';
+        document.documentElement.classList.add('dark');
+      } else {
+        mode = 'light';
+      }
+      if (!userPreference) {localStorage.setItem('darkMode', mode)}
+    </script>
+<script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=4a4006ad"></script>
+<script src="../_static/doctools.js?v=888ff710"></script>
+<script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+<script defer="" src="../_static/theme.83923940ee80f2e3f0bf.js"></script>
+</head>
+<body :class="{ 'overflow-hidden': showSidebar }" class="min-h-screen font-sans antialiased bg-background text-foreground" x-data="{ showSidebar: false }">
+<div @click.self="showSidebar = false" class="fixed inset-0 z-50 overflow-hidden bg-background/80 backdrop-blur-sm" x-cloak="" x-show="showSidebar"></div><div class="relative flex flex-col min-h-screen" id="page"><a class="absolute top-0 left-0 z-[100] block bg-background p-4 text-xl transition -translate-x-full opacity-0 focus:translate-x-0 focus:opacity-100" href="#content">
+      Skip to content
+    </a>
+<header class="sticky top-0 z-40 w-full border-b shadow-sm border-border supports-backdrop-blur:bg-background/60 bg-background/95 backdrop-blur"><div class="container flex items-center h-14">
+<div class="hidden mr-4 md:flex">
+<a class="flex items-center mr-6" href="../index.html"><span class="hidden font-bold sm:inline-block text-clip whitespace-nowrap">UnoAPI: updated 2023.09.26</span>
+</a></div><button @click="showSidebar = true" class="inline-flex items-center justify-center h-10 px-0 py-2 mr-2 text-base font-medium transition-colors rounded-md hover:text-accent-foreground hover:bg-transparent md:hidden" type="button">
+<svg aria-hidden="true" fill="currentColor" height="24" viewbox="0 96 960 960" width="24" xmlns="http://www.w3.org/2000/svg">
+<path d="M152.587 825.087q-19.152 0-32.326-13.174t-13.174-32.326q0-19.152 13.174-32.326t32.326-13.174h440q19.152 0 32.326 13.174t13.174 32.326q0 19.152-13.174 32.326t-32.326 13.174h-440Zm0-203.587q-19.152 0-32.326-13.174T107.087 576q0-19.152 13.174-32.326t32.326-13.174h320q19.152 0 32.326 13.174T518.087 576q0 19.152-13.174 32.326T472.587 621.5h-320Zm0-203.587q-19.152 0-32.326-13.174t-13.174-32.326q0-19.152 13.174-32.326t32.326-13.174h440q19.152 0 32.326 13.174t13.174 32.326q0 19.152-13.174 32.326t-32.326 13.174h-440ZM708.913 576l112.174 112.174q12.674 12.674 12.674 31.826t-12.674 31.826Q808.413 764.5 789.261 764.5t-31.826-12.674l-144-144Q600 594.391 600 576t13.435-31.826l144-144q12.674-12.674 31.826-12.674t31.826 12.674q12.674 12.674 12.674 31.826t-12.674 31.826L708.913 576Z"></path>
+</svg>
+<span class="sr-only">Toggle navigation menu</span>
+</button>
+<div class="flex items-center justify-between flex-1 space-x-2 sm:space-x-4 md:justify-end">
+<div class="flex-1 w-full md:w-auto md:flex-none">
+<form @keydown.k.window.meta="$refs.search.focus()" action="../search.html" class="relative flex items-center group" id="searchbox" method="get">
+<input aria-label="Search the docs" class="inline-flex items-center font-medium transition-colors bg-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background border border-input hover:bg-accent focus:bg-accent hover:text-accent-foreground focus:text-accent-foreground hover:placeholder-accent-foreground py-2 px-4 relative h-9 w-full justify-start rounded-[0.5rem] text-sm text-muted-foreground sm:pr-12 md:w-40 lg:w-64" id="search-input" name="q" placeholder="Search ..." type="search" x-ref="search"/>
+<kbd class="pointer-events-none absolute right-1.5 top-2 hidden h-5 select-none text-muted-foreground items-center gap-1 rounded border border-border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex group-hover:bg-accent group-hover:text-accent-foreground">
+<span class="text-xs">⌘</span>
+      K
+    </kbd>
+</form>
+</div>
+<nav class="flex items-center space-x-1">
+<button @click="darkMode = darkMode === 'light' ? 'dark' : 'light'" class="relative inline-flex items-center justify-center px-0 text-sm font-medium transition-colors rounded-md hover:bg-accent hover:text-accent-foreground h-9 w-9" type="button">
+<svg class="absolute transition-all scale-100 rotate-0 dark:-rotate-90 dark:scale-0" fill="currentColor" height="24" viewbox="0 96 960 960" width="24" xmlns="http://www.w3.org/2000/svg">
+<path d="M480 685q45.456 0 77.228-31.772Q589 621.456 589 576q0-45.456-31.772-77.228Q525.456 467 480 467q-45.456 0-77.228 31.772Q371 530.544 371 576q0 45.456 31.772 77.228Q434.544 685 480 685Zm0 91q-83 0-141.5-58.5T280 576q0-83 58.5-141.5T480 376q83 0 141.5 58.5T680 576q0 83-58.5 141.5T480 776ZM80 621.5q-19.152 0-32.326-13.174T34.5 576q0-19.152 13.174-32.326T80 530.5h80q19.152 0 32.326 13.174T205.5 576q0 19.152-13.174 32.326T160 621.5H80Zm720 0q-19.152 0-32.326-13.174T754.5 576q0-19.152 13.174-32.326T800 530.5h80q19.152 0 32.326 13.174T925.5 576q0 19.152-13.174 32.326T880 621.5h-80Zm-320-320q-19.152 0-32.326-13.174T434.5 256v-80q0-19.152 13.174-32.326T480 130.5q19.152 0 32.326 13.174T525.5 176v80q0 19.152-13.174 32.326T480 301.5Zm0 720q-19.152 0-32.326-13.17Q434.5 995.152 434.5 976v-80q0-19.152 13.174-32.326T480 850.5q19.152 0 32.326 13.174T525.5 896v80q0 19.152-13.174 32.33-13.174 13.17-32.326 13.17ZM222.174 382.065l-43-42Q165.5 327.391 166 308.239t13.174-33.065q13.435-13.674 32.587-13.674t32.065 13.674l42.239 43q12.674 13.435 12.555 31.706-.12 18.272-12.555 31.946-12.674 13.674-31.445 13.413-18.772-.261-32.446-13.174Zm494 494.761-42.239-43q-12.674-13.435-12.674-32.087t12.674-31.565Q686.609 756.5 705.38 757q18.772.5 32.446 13.174l43 41.761Q794.5 824.609 794 843.761t-13.174 33.065Q767.391 890.5 748.239 890.5t-32.065-13.674Zm-42-494.761Q660.5 369.391 661 350.62q.5-18.772 13.174-32.446l41.761-43Q728.609 261.5 747.761 262t33.065 13.174q13.674 13.435 13.674 32.587t-13.674 32.065l-43 42.239q-13.435 12.674-31.706 12.555-18.272-.12-31.946-12.555Zm-495 494.761Q165.5 863.391 165.5 844.239t13.674-32.065l43-42.239q13.435-12.674 32.087-12.674t31.565 12.674Q299.5 782.609 299 801.38q-.5 18.772-13.174 32.446l-41.761 43Q231.391 890.5 212.239 890t-33.065-13.174ZM480 576Z"></path>
+</svg>
+<svg class="absolute transition-all scale-0 rotate-90 dark:rotate-0 dark:scale-100" fill="currentColor" height="24" viewbox="0 96 960 960" width="24" xmlns="http://www.w3.org/2000/svg">
+<path d="M480 936q-151 0-255.5-104.5T120 576q0-138 90-239.5T440 218q25-3 39 18t-1 44q-17 26-25.5 55t-8.5 61q0 90 63 153t153 63q31 0 61.5-9t54.5-25q21-14 43-1.5t19 39.5q-14 138-117.5 229T480 936Zm0-80q88 0 158-48.5T740 681q-20 5-40 8t-40 3q-123 0-209.5-86.5T364 396q0-20 3-40t8-40q-78 32-126.5 102T200 576q0 116 82 198t198 82Zm-10-270Z"></path>
+</svg>
+</button>
+</nav>
+</div>
+</div>
+</header>
+<div class="flex-1"><div class="container flex-1 items-start md:grid md:grid-cols-[220px_minmax(0,1fr)] md:gap-6 lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-10"><aside :aria-hidden="!showSidebar" :class="{ 'translate-x-0': showSidebar }" class="fixed inset-y-0 left-0 md:top-14 z-50 md:z-30 bg-background md:bg-transparent transition-all duration-100 -translate-x-full md:translate-x-0 ml-0 p-6 md:p-0 md:-ml-2 md:h-[calc(100vh-3.5rem)] w-5/6 md:w-full shrink-0 overflow-y-auto border-r border-border md:sticky" id="left-sidebar">
+<a class="!justify-start text-sm md:!hidden bg-background" href="../index.html"><span class="font-bold text-clip whitespace-nowrap">UnoAPI: updated 2023.09.26</span>
+</a>
+<div class="relative overflow-hidden md:overflow-auto my-4 md:my-0 h-[calc(100vh-8rem)] md:h-auto">
+<div class="overflow-y-auto h-full w-full relative pr-6"><nav class="table w-full min-w-full my-6 lg:my-8">
+<p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../00-preliminaries/preliminaries.html">Preliminaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05-parallel/parallel.html">Parallel Programming Preliminaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10-software-engineering/software-engineering.html">Software Engineering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../15-modern-cpp/modern-cpp.html">Modern C++ as a Better C (and C++)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../18-dpcpp/dpcpp.html">Data-Parallel C++</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../30-performance/performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../40-going-distributed/distributed.html">Distributed Computing with OneAPI</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Compiling and Running oneAPI programs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../99-sandbox/issues.html">Issues</a></li>
+</ul>
+</nav>
+</div>
+</div>
+<button @click="showSidebar = false" class="absolute md:hidden right-4 top-4 rounded-sm opacity-70 transition-opacity hover:opacity-100" type="button">
+<svg class="h-4 w-4" fill="currentColor" height="24" stroke="none" viewbox="0 96 960 960" width="24" xmlns="http://www.w3.org/2000/svg">
+<path d="M480 632 284 828q-11 11-28 11t-28-11q-11-11-11-28t11-28l196-196-196-196q-11-11-11-28t11-28q11-11 28-11t28 11l196 196 196-196q11-11 28-11t28 11q11 11 11 28t-11 28L536 576l196 196q11 11 11 28t-11 28q-11 11-28 11t-28-11L480 632Z"></path>
+</svg>
+</button>
+</aside>
+<main class="relative py-6 lg:gap-10 lg:py-8 xl:grid xl:grid-cols-[1fr_300px]">
+<div class="w-full min-w-0 mx-auto">
+<nav aria-label="breadcrumbs" class="flex items-center mb-4 space-x-1 text-sm text-muted-foreground">
+<a class="overflow-hidden text-ellipsis whitespace-nowrap hover:text-foreground" href="../index.html">
+<span class="hidden md:inline">UnoAPI: updated 2023.09.26</span>
+<svg aria-label="Home" class="md:hidden" fill="currentColor" height="18" stroke="none" viewbox="0 96 960 960" width="18" xmlns="http://www.w3.org/2000/svg">
+<path d="M240 856h120V616h240v240h120V496L480 316 240 496v360Zm-80 80V456l320-240 320 240v480H520V696h-80v240H160Zm320-350Z"></path>
+</svg>
+</a>
+<div class="mr-1">/</div><span aria-current="page" class="font-medium text-foreground overflow-hidden text-ellipsis whitespace-nowrap">Compiling and Running oneAPI programs</span>
+</nav>
+<div id="content" role="main">
+<section id="compiling-and-running-oneapi-programs">
+<h1>Compiling and Running oneAPI programs<a class="headerlink" href="#compiling-and-running-oneapi-programs" title="Permalink to this heading">¶</a></h1>
+<p>Our examples are CMake-based CPP projects along with unit tests in source form.
+They are publicly available as a GitHub repository under the Apache 2.0 open-source license at <a class="reference external" href="https://github.com/LoyolaChicagoCode/unoapi-dpcpp-examples">github.com/LoyolaChicagoCode/unoapi-dpcpp-examples</a>.</p>
+<p>The examples include a README file with instructions for building and running on Debian-based Linux systems (including Ubuntu), as well as the scripts needed to run the experiments described in this paper.</p>
+<section id="running-the-example-on-github-as-a-fork-of-the-original-repo-browser-based">
+<h2>Running the example on GitHub as a fork of the original repo (browser-based)<a class="headerlink" href="#running-the-example-on-github-as-a-fork-of-the-original-repo-browser-based" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#running-the-example-on-github-as-a-fork-of-the-original-repo-browser-based'">¶</a></h2>
+<p>The repository is configured with continuous integration (CI) using the following GitHub Actions workflow:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="linenos">19</span><span class="w">    </span>steps:
+<span class="linenos">20</span><span class="w">    </span>-<span class="w"> </span>name:<span class="w"> </span>Checkout<span class="w"> </span>project<span class="w"> </span>code
+<span class="linenos">21</span><span class="w">      </span>uses:<span class="w"> </span>actions/checkout@v2
+<span class="linenos">22</span>
+<span class="linenos">23</span><span class="w">    </span>-<span class="w"> </span>name:<span class="w"> </span>Install<span class="w"> </span>Intel<span class="w"> </span>oneAPI
+<span class="linenos">24</span><span class="w">      </span>timeout-minutes:<span class="w"> </span><span class="m">5</span>
+<span class="linenos">25</span><span class="w">      </span>run:<span class="w"> </span>./install-dpcpp.sh
+<span class="linenos">26</span>
+<span class="linenos">27</span><span class="w">    </span>-<span class="w"> </span>name:<span class="w"> </span>Set<span class="w"> </span>oneAPI<span class="w"> </span>environment
+<span class="linenos">28</span><span class="w">      </span>run:<span class="w"> </span><span class="p">|</span>
+<span class="linenos">29</span><span class="w">        </span><span class="nb">source</span><span class="w"> </span>/opt/intel/oneapi/setvars.sh
+<span class="linenos">30</span><span class="w">        </span>printenv<span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="nv">$GITHUB_ENV</span>
+<span class="linenos">31</span><span class="w">        </span><span class="nb">echo</span><span class="w"> </span>/opt/oneapi/compiler/latest/linux/bin<span class="w"> </span><span class="se">\</span>
+<span class="linenos">32</span><span class="w">          </span>&gt;&gt;<span class="w"> </span><span class="nv">$GITHUB_PATH</span>
+<span class="linenos">33</span>
+<span class="linenos">34</span><span class="w">    </span>-<span class="w"> </span>name:<span class="w"> </span>CMake<span class="w"> </span>configure
+<span class="linenos">35</span><span class="w">      </span>run:<span class="w"> </span>cmake<span class="w"> </span>-S<span class="w"> </span>.<span class="w"> </span>-B<span class="w"> </span><span class="nv">$BUILD_DIR</span>
+<span class="linenos">36</span>
+<span class="linenos">37</span><span class="w">    </span>-<span class="w"> </span>name:<span class="w"> </span>CMake<span class="w"> </span>build
+<span class="linenos">38</span><span class="w">      </span>run:<span class="w"> </span>cmake<span class="w"> </span>--build<span class="w"> </span><span class="nv">$BUILD_DIR</span>
+<span class="linenos">39</span>
+<span class="linenos">40</span><span class="w">    </span>-<span class="w"> </span>name:<span class="w"> </span>CMake<span class="w"> </span><span class="nb">test</span>
+<span class="linenos">41</span><span class="w">      </span>run:<span class="w"> </span><span class="p">|</span>
+<span class="linenos">42</span><span class="w">        </span><span class="k">for</span><span class="w"> </span>test_bin<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nv">$BUILD_DIR</span>/bin/*tests<span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span>
+<span class="linenos">43</span><span class="w">          </span><span class="s2">"./</span><span class="nv">$test_bin</span><span class="s2">"</span>
+<span class="linenos">44</span><span class="w">        </span><span class="k">done</span>
+</pre></div>
+</div>
+<p>It relies on this prerequisite installation script, which one can also invoke manually on a local workstation:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 5</span><span class="nb">echo</span><span class="w"> </span>Add<span class="w"> </span>Intel<span class="w"> </span>Apt<span class="w"> </span>repository
+<span class="linenos"> 6</span>
+<span class="linenos"> 7</span>wget<span class="w"> </span>-qO-<span class="w"> </span><span class="se">\</span>
+<span class="linenos"> 8</span><span class="w">  </span>https://apt.repos.intel.com/intel-gpg-keys/<span class="se">\</span>
+<span class="linenos"> 9</span>GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+<span class="linenos">10</span><span class="w">  </span>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/apt/trusted.gpg.d/<span class="se">\</span>
+<span class="linenos">11</span>GPG-PUB-KEY-INTEL-SW-PRODUCTS.asc
+<span class="linenos">12</span><span class="nb">echo</span><span class="w"> </span><span class="s2">"deb https://apt.repos.intel.com/oneapi"</span><span class="w"> </span><span class="se">\</span>
+<span class="linenos">13</span><span class="w">     </span><span class="s2">"all main"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+<span class="linenos">14</span><span class="w">     </span>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/apt/sources.list.d/oneAPI.list
+<span class="linenos">15</span>sudo<span class="w"> </span>apt<span class="w"> </span>update
+<span class="linenos">16</span><span class="w">        </span>
+<span class="linenos">17</span><span class="nb">echo</span><span class="w"> </span>Install<span class="w"> </span>Intel<span class="w"> </span>oneAPI
+<span class="linenos">18</span>
+<span class="linenos">19</span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>intel-oneapi-compiler-dpcpp-cpp
+</pre></div>
+</div>
+<p>Every commit or pull request to the repository triggers a build and results in an indication of successful or unsuccessful completion of the build, including execution of the unit test suite.
+This option is subject to limitations in devices available through the actual CI container (i.e., not usually accelerators).</p>
+<p>These are the steps to copy, build, and run the artifact in a web browser without involving a local build environment.</p>
+<ul class="simple">
+<li><p>Visit <a class="reference external" href="https://github.com/LoyolaChicagoCode/unoapi-dpcpp-examples">github.com/LoyolaChicagoCode/unoapi-dpcpp-examples</a>.</p></li>
+<li><p>Near the top right corner, look for the Fork button, click on the dropdown, and select “Create a new fork.”</p></li>
+<li><p>Create the new fork in your GitHub account or organization.</p></li>
+<li><p>Visit the Actions tab, where you will see the message “Workflows aren’t being run on this forked repository.”</p></li>
+<li><p>Click on the green button labeled “I understand my workflows, go ahead and enable them.”</p></li>
+<li><p>Use the web interface to create a file, say “dummy.txt”, to trigger a workflow run. This will create an entry under the GitHub actions tab for this workflow run. To observe execution in real time or after completion, one can drill into this entry until the step-by-step execution log appears.</p></li>
+</ul>
+</section>
+<section id="running-the-examples-locally">
+<h2>Running the examples locally<a class="headerlink" href="#running-the-examples-locally" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#running-the-examples-locally'">¶</a></h2>
+<p>This option requires a physical or virtual Debian-based system on Intel hardware, which may include an accelerator, such as a GPU.
+The specific steps are documented in the top-level README file in the GitHub repository.
+The artifact’s main executable is self-documenting using the <code class="docutils literal notranslate"><span class="pre">-h</span></code> or <code class="docutils literal notranslate"><span class="pre">–help</span></code> CLI option.</p>
+</section>
+<section id="running-the-examples-on-the-intel-devcloud">
+<h2>Running the examples on the Intel DevCloud<a class="headerlink" href="#running-the-examples-on-the-intel-devcloud" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#running-the-examples-on-the-intel-devcloud'">¶</a></h2>
+<p>This option requires a (free) account on Intel’s DevCloud for working with oneAPI and provides access to various types of accelerators, such as GPUs based on the gen9 architecture we’ve used for the sample runs shown above; it thereby provides the highest degree of reproducibility.
+Once access to DevCloud has been established, the specific steps are documented in the top-level README file in the GitHub repository.
+The artifact’s main executable is self-documenting using the <code class="docutils literal notranslate"><span class="pre">-h</span></code> or <code class="docutils literal notranslate"><span class="pre">–help</span></code> CLI option.</p>
+</section>
+<section id="gitpod-is-not-currently-supported">
+<h2>Gitpod is not currently supported<a class="headerlink" href="#gitpod-is-not-currently-supported" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#gitpod-is-not-currently-supported'">¶</a></h2>
+<p>The installation and compilation steps work on Gitpod as intended.
+Nevertheless, because they are based on a virtualized AMD chipset, Gitpod and similar environments don’t support the execution of data-parallel code, not even using the CPU itself as an accelerator.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Machine</span><span class="p">:</span>
+  <span class="n">Type</span><span class="p">:</span> <span class="n">Docker</span> <span class="n">Mobo</span><span class="p">:</span> <span class="n">Google</span> <span class="n">model</span><span class="p">:</span> <span class="n">Google</span> <span class="n">Compute</span> <span class="n">Engine</span> <span class="n">serial</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">superuser</span> <span class="n">required</span><span class="o">&gt;</span> <span class="n">BIOS</span><span class="p">:</span> <span class="n">Google</span> <span class="n">v</span><span class="p">:</span> <span class="n">Google</span> <span class="n">date</span><span class="p">:</span> <span class="mi">08</span><span class="o">/</span><span class="mi">04</span><span class="o">/</span><span class="mi">2023</span>
+  <span class="n">CPU</span><span class="p">:</span>
+    <span class="n">Info</span><span class="p">:</span> <span class="mi">8</span><span class="o">-</span><span class="n">core</span> <span class="n">model</span><span class="p">:</span> <span class="n">AMD</span> <span class="n">EPYC</span> <span class="mi">7</span><span class="n">B13</span> <span class="n">bits</span><span class="p">:</span> <span class="mi">64</span> <span class="nb">type</span><span class="p">:</span> <span class="n">MT</span> <span class="n">MCP</span> <span class="n">cache</span><span class="p">:</span> <span class="n">L2</span><span class="p">:</span> <span class="mi">4</span> <span class="n">MiB</span>
+</pre></div>
+</div>
+<p>By contrast, we were able to run data-parallel code on an Intel-based virtual machine, e.g., on Microsoft Azure.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Machine</span><span class="p">:</span>
+  <span class="n">Type</span><span class="p">:</span> <span class="n">Desktop</span> <span class="n">Mobo</span><span class="p">:</span> <span class="n">Microsoft</span> <span class="n">model</span><span class="p">:</span> <span class="n">Virtual</span> <span class="n">Machine</span> <span class="n">v</span><span class="p">:</span> <span class="mf">7.0</span> <span class="n">serial</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">superuser</span><span class="o">/</span><span class="n">root</span> <span class="n">required</span><span class="o">&gt;</span> <span class="n">BIOS</span><span class="p">:</span> <span class="n">American</span> <span class="n">Megatrends</span> <span class="n">v</span><span class="p">:</span> <span class="mi">090008</span> <span class="n">date</span><span class="p">:</span> <span class="mi">12</span><span class="o">/</span><span class="mi">07</span><span class="o">/</span><span class="mi">2018</span>
+<span class="n">CPU</span><span class="p">:</span>
+  <span class="n">Topology</span><span class="p">:</span> <span class="n">Quad</span> <span class="n">Core</span> <span class="n">model</span><span class="p">:</span> <span class="n">Intel</span> <span class="n">Xeon</span> <span class="n">Platinum</span> <span class="mi">8171</span><span class="n">M</span> <span class="n">bits</span><span class="p">:</span> <span class="mi">64</span> <span class="nb">type</span><span class="p">:</span> <span class="n">MCP</span>
+</pre></div>
+</div>
+</section>
+</section>
+</div></div><aside class="hidden text-sm xl:block" id="right-sidebar">
+<div class="sticky top-16 -mt-10 max-h-[calc(var(--vh)-4rem)] overflow-y-auto pt-6 space-y-2"><p class="font-medium">On this page</p>
+<ul>
+<li><a :data-current="activeSection === '#running-the-example-on-github-as-a-fork-of-the-original-repo-browser-based'" class="reference internal" href="#running-the-example-on-github-as-a-fork-of-the-original-repo-browser-based">Running the example on GitHub as a fork of the original repo (browser-based)</a></li>
+<li><a :data-current="activeSection === '#running-the-examples-locally'" class="reference internal" href="#running-the-examples-locally">Running the examples locally</a></li>
+<li><a :data-current="activeSection === '#running-the-examples-on-the-intel-devcloud'" class="reference internal" href="#running-the-examples-on-the-intel-devcloud">Running the examples on the Intel DevCloud</a></li>
+<li><a :data-current="activeSection === '#gitpod-is-not-currently-supported'" class="reference internal" href="#gitpod-is-not-currently-supported">Gitpod is not currently supported</a></li>
+</ul>
+</div>
+</aside>
+</main>
+</div>
+</div><footer class="py-6 border-t border-border md:py-0">
+<div class="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
+<div class="flex flex-col items-center gap-4 px-8 md:flex-row md:gap-2 md:px-0">
+<p class="text-sm leading-loose text-center text-muted-foreground md:text-left">© 2013-2019, UnoAPI Software Systems Laboratory Built with <a class="font-medium underline underline-offset-4" href="https://www.sphinx-doc.org" rel="noreferrer">Sphinx 7.1.2</a></p>
+</div>
+</div>
+</footer>
+</div>
+</body>
+</html>
