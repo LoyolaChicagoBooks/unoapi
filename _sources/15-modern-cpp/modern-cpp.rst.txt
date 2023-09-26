@@ -374,11 +374,18 @@ We also demonstrate how to initialize more complex structures such as an STL gen
 Constants and Constant Expressions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-In this example, we define a pythagorean function using constexpr. The function takes two arguments a and b representing the lengths of the two sides of a right-angled triangle, and calculates the length of the hypotenuse using the Pythagorean theorem.
+.. note:: George still working on this.
+
+In this example, we define a pythagorean function using constexpr and lambda expressions.
+The function takes two arguments a and b representing the lengths of the two sides of a right-angled triangle, and calculates the length of the hypotenuse using the Pythagorean theorem.
 
 We then define two const variables a and b, which have values of 3.0 and 4.0 respectively. Since a and b are const, we cannot change their values once they have been initialized.
 
 Finally, we initialize a constexpr variable c with the value of pythagorean(a, b). Since a, b, and pythagorean are all const or constexpr, we can evaluate pythagorean(a, b) at compile-time and use it to initialize c.
+
+Using lambda functions is another way to achieve compile-time computations and can simplify the structure for certain operations.
+
+Below is an implementation that uses a lambda function to compute the square root at compile time:
 
 The program then prints the length of the hypotenuse to the console using std::cout.
 
@@ -387,22 +394,36 @@ Overall, this example demonstrates how you can use const and constexpr together 
 .. code-block:: cpp
 
    #include <iostream>
-   #include <cmath>
    
    constexpr double pythagorean(double a, double b) {
-       return std::sqrt(a * a + b * b);
+       auto constexpr_sqrt = [](double num) -> double {
+           constexpr double epsilon = 1e-10;
+           constexpr int max_iterations = 50;
+           
+           double guess = num;
+           double prev_guess = 0.0;
+           
+           for (int i = 0; (i < max_iterations) && (abs(guess - prev_guess) > epsilon); ++i) {
+               prev_guess = guess;
+               guess = 0.5 * (guess + num / guess);
+           }
+           
+           return guess;
+       };
+   
+       return constexpr_sqrt(a * a + b * b);
    }
    
    int main() {
-       const double a = 3.0;
-       const double b = 4.0;
+       constexpr double a = 3.0;
+       constexpr double b = 4.0;
        constexpr double c = pythagorean(a, b);
    
        std::cout << "The hypotenuse is " << c << std::endl;
    
        return 0;
    }
-   
+
 
 initializer expressions
 ^^^^^^^^^^^^^^^^^^^^^^^^
