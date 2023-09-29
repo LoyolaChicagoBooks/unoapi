@@ -1,5 +1,5 @@
-Parallel Programming Preliminaries
-==================================
+Introduction to Parallel Programming
+======================================
 
 
 Notable Parallel Computing Systems

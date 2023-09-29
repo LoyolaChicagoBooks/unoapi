@@ -1,5 +1,5 @@
-Data-Parallel C++
-=================
+Data-Parallel C++ with oneAPI/SYCL
+===================================
 
 A growing challenge for the HPC community has been `performance portability <https://performanceportability.org>`_ , i.e., the ability to maintain consistent application performance in the context of increasing complexity and heterogeneity of hardware, as well as the additional need to maintain developer productivity and computational precision.
 The intersection of performance, portability, and productivity goals (P3) has also been the focus of an annual workshop at the Supercomputing Conference (SC) for several years.

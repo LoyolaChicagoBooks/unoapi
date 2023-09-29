@@ -1,7 +1,9 @@
-Performance
-===========
+Performance Essentials
+========================
 
 .. todo:: add a proper overview paragraph
+
+.. todo:: Basically, you can reference the notion of scaling. Specifically, in showing the results, vary the problem size, e.g. by 10x or your favorite multiplier but 10x increements usually makes sense. And we want a nice plot.
 
 We can use the ``chrono`` section of the C++ Standard Library for measuring performance in terms of elapsed wall clock time.
 
