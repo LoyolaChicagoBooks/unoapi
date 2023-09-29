@@ -1,5 +1,5 @@
-Software Engineering
-====================
+Introduction to Software Engineering
+========================================
 
 Software engineering (SE) is and remains vital to success as a professional software developer / research software engineer.
 While SE principles evoke a wide range of responses, it is possible to embrace many princples from software engineering and ensure impact on your projects without distracting you (entirely) from your day-to-day work. We encourage readers to consult https://ecommons.luc.edu/cs_facpubs/75/ to see how software engineering need not be difficult to apply to your work.
