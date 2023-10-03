@@ -58,7 +58,7 @@ Finally, the class provides accessors for the ``x``, ``y``, and ``z`` values, wh
 
 Let's take a look at how to *use* this class:
 
-.. literalinclude:: ../../examples/modern-cpp-examples/modern-cpp/point_demo.cpp
+.. literalinclude:: ../../examples/modern-cpp-examples/modern-cpp/point-demo.cpp
    :language: cpp
 
 Move Semantics
@@ -74,7 +74,7 @@ Here's an example of how to use std::move to enable move semantics:
 
  
 .. literalinclude:: ../../examples/modern-cpp-examples/modern-cpp/move-mvp.cpp
-   :language: cp
+   :language: cpp
 
 
 In this example, we define a class `MyClass` that has a default constructor, a destructor, and move semantics enabled through the move constructor and move assignment operator.
@@ -96,58 +96,24 @@ Basic Lambda with No Parameters
 
 In the following example, ``sayHello`` is a lambda function with no parameters, and when we call it, it will print "Hello from lambda!".
 
-.. code-block:: cpp
-
-   #include <iostream>
-
-   int main() {
-       auto sayHello = []() {
-           std::cout << "Hello from lambda!" << std::endl;
-       };
-
-       sayHello();
-       return 0;
-   }
-
+.. literalinclude:: ../../examples/modern-cpp-examples/modern-cpp/lambda-no-parameters.cpp
+   :language: cpp
 
 Lambda with Parameters
 """"""""""""""""""""""""""
 
 In the following example, the ``add`` lambda takes two integer parameters and returns their sum.
 
-.. code-block:: cpp
-
-   #include <iostream>
-
-   int main() {
-       auto add = [](int a, int b) {
-           return a + b;
-       };
-
-       std::cout << "3 + 4 = " << add(3, 4) << std::endl;
-       return 0;
-   }
-
+.. literalinclude:: ../../examples/modern-cpp-examples/modern-cpp/lambda-with-parameters.cpp
+   :language: cpp
 
 Lambda with Explicit Return Type
 """"""""""""""""""""""""""""""""""""
 
 And in the following, The ``divide`` lambda has an explicit return type of ``double``.
 
-.. code-block:: cpp
-
-   #include <iostream>
-
-   int main() {
-       auto divide = [](double a, double b) -> double {
-           if (b == 0.0) return 0.0; // handle division by zero
-           return a / b;
-       };
-
-       std::cout << "8.0 / 2.0 = " << divide(8.0, 2.0) << std::endl;
-       return 0;
-   }
-
+.. literalinclude:: ../../examples/modern-cpp-examples/modern-cpp/lambda-with-return-type.cpp
+   :language: cpp
 
 Lambda with Closures
 """"""""""""""""""""""""""""""""""""
@@ -156,60 +122,28 @@ Closures allow lambdas to capture variables from their enclosing scope.
 
 The following shows how to capture variables by value:
 
-.. code-block:: cpp
-
-   #include <iostream>
-
-   int main() {
-       int a = 5;
-       int b = 10;
-
-       auto sum = [a, b]() {
-           return a + b;
-       };
-
-       std::cout << "Sum = " << sum() << std::endl; // 15
-       return 0;
-   }
+.. literalinclude:: ../../examples/modern-cpp-examples/modern-cpp/lambda-with-closures-byval.cpp
+   :language: cpp
 
 Here, ``a`` and ``b`` are captured by value. That is, they can be read but not modified.
 
 The following, however, shows apture by reference:
 
-.. code-block:: cpp
+.. literalinclude:: ../../examples/modern-cpp-examples/modern-cpp/lambda-with-closures-byref.cpp
+   :language: cpp
 
-   #include <iostream>
-
-   int main() {
-       int a = 5;
-       int b = 10;
-
-       auto incrementA = [&a]() {
-           a++;
-       };
-
-       incrementA();
-       std::cout << "a = " << a << std::endl; // 6
-       return 0;
-   }
 
 ``a`` is captured by reference in the ``incrementA`` lambda.
 
 Having to capture variables, individually, is not practical when there are more than a couple of variables needed by the lambda function. All variables can be captured by value:
 
-.. code-block:: cpp
-
-   auto sum = [=]() {
-       return a + b;
-   };
+.. literalinclude:: ../../examples/modern-cpp-examples/modern-cpp/lambda-with-closures-byval-all.cpp
+   :language: cpp
 
 And the following shows how to Capture everything by reference (use with caution):
 
-.. code-block:: cpp
-
-   auto incrementBoth = [&]() {
-       a++; b++;
-   };
+.. literalinclude:: ../../examples/modern-cpp-examples/modern-cpp/lambda-with-closures-byref-all.cpp
+   :language: cpp
 
 These are foundational examples of lambdas and closures in C++. Lambdas can be even more versatile with features like mutable lambdas and complex capture rules.
 
