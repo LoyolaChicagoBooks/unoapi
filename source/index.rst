@@ -2,9 +2,12 @@
 Welcome to the UnoAPI Curricular Project
 ==========================================
 
+Ok to add text here?
+
 .. toctree::
    :maxdepth: 4
    :caption: Table of Contents
+   :hidden:
 
    00-preliminaries/preliminaries.rst
    05-parallel/parallel.rst

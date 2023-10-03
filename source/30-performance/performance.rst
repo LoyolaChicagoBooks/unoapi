@@ -1,8 +1,9 @@
-Performance
-===========
+Performance Essentials
+========================
+
+.. todo:: Basically, you can reference the notion of scaling. Specifically, in showing the results, vary the problem size, e.g. by 10x or your favorite multiplier but 10x increements usually makes sense. And we want a nice plot.  
 
 In this section, we discuss various aspects of performance of data-parallel C++ code, including how we can measure time performance in terms of elapsed "wall clock" time, and how we can achieve and observe a speedup when leveraging data parallelism.
-
 
 Measuring time performance
 --------------------------

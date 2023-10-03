@@ -1,7 +1,7 @@
 Modern C++ as a Better C (and C++)
 ==================================
 
-.. note:: This text contains a mix of original writing and strategic use of Chat-GPT4. All examples will be available in our repository with an appropriate **cmake** build file and tests. We will also make our prompts and analysis available, similar to what we have done for our recent ongoing study of Chat-GPT4 and Systems Programming. See https://doi.org/10.6084/m9.figshare.22257274.
+.. note:: This text contains a mix of original writing and programming with strategic use of Chat-GPT4 via intelligent/clever prompting. All examples will be available in our repository with an appropriate **cmake** build file and tests. We will also make our prompts and analysis available, similar to what we have done for our recent ongoing study of Chat-GPT4 and Systems Programming. See https://doi.org/10.6084/m9.figshare.22257274.
 
 If you want to learn SYCL and OneAPI *properly*  you will need to come up to speed with Modern C++.  In our experience, we know many people who say they "know" C++.  C++ has undergone numerous changes since it was introduced in the 1980s and 1990s.  While the original syntax remains intact, if you have not kept up with the changes since then (notably, C++ 11), you should take steps to refresh your knowlege of the language, since many of its recent features make it virtually *unrecognizable* from its earlier incarnations.
 
@@ -12,23 +12,23 @@ Overview of Modern C++
 
 If you already know some Object-Oriented Programming (OOP) concepts and want to learn modern C++, here are some topics that are worthy of exploration:
 
-- **Standard Library**: The C++ Standard Library provides a wide range of pre-built classes and functions that can be used to perform common tasks. You should learn about the different components of the Standard Library, such as containers, algorithms, and iterators, and how to use them effectively. We avoid using C-style pointer-based data structures in favor of STL classes. We also avoid external C++ data structures whenever the STL classes are most appropriate (and they often are).
+**Standard Library**: The C++ Standard Library provides a wide range of pre-built classes and functions that can be used to perform common tasks. You should learn about the different components of the Standard Library, such as containers, algorithms, and iterators, and how to use them effectively. We avoid using C-style pointer-based data structures in favor of STL classes. We also avoid external C++ data structures whenever the STL classes are most appropriate (and they often are).
 
-- **Templates**: Templates allow you to write generic code that works with any data type. This can save you a lot of time and effort by reducing code duplication. You should learn how to write function templates and class templates. Class templates are already well employed in STL. We often make use of function templates in our examples.
+**Templates**: Templates allow you to write generic code that works with any data type. This can save you a lot of time and effort by reducing code duplication. You should learn how to write function templates and class templates. Class templates are already well employed in STL. We often make use of function templates in our examples.
 
-- **Smart Pointers**: Smart pointers are a modern way of managing memory in C++. They automatically manage memory allocation and deallocation, making it less prone to memory leaks and errors. You should learn about the different types of smart pointers, including `unique_ptr`, `shared_ptr`, and `weak_ptr`.
+**Smart Pointers**: Smart pointers are a modern way of managing memory in C++. They automatically manage memory allocation and deallocation, making it less prone to memory leaks and errors. You should learn about the different types of smart pointers, including `unique_ptr`, `shared_ptr`, and `weak_ptr`.
 
-- **Lambda expressions**: Lambda expressions provide a concise way to define anonymous functions, which are functions that have no name. You should learn how to write lambda expressions and how to use them with the Standard Library algorithms. Lambda functions are indispensable when it comes to learning OneAPI and SYCL programming.
+**Lambda expressions**: Lambda expressions provide a concise way to define anonymous functions, which are functions that have no name. You should learn how to write lambda expressions and how to use them with the Standard Library algorithms. Lambda functions are indispensable when it comes to learning OneAPI and SYCL programming.
 
-- **Move semantics**: Move semantics is a new feature introduced in C++11 that allows you to transfer the resources of an object to another object. This can lead to more efficient code by avoiding unnecessary copying of objects. You should learn about r-value references, move constructors, and move assignment operators. Move smeantics should be used whenever large (and deep) data structures are involved.
+**Move semantics**: Move semantics is a new feature introduced in C++11 that allows you to transfer the resources of an object to another object. This can lead to more efficient code by avoiding unnecessary copying of objects. You should learn about r-value references, move constructors, and move assignment operators. Move smeantics should be used whenever large (and deep) data structures are involved.
 
-- **Threading**: Threading allows you to run multiple tasks concurrently. You should learn about the different threading constructs provided by the Standard Library, such as threads, mutexes, and condition variables. Keep in mind, of course, that OneAPI/SYCL are an *alternative* to threading and also allow for code ot be written without assuming a particular threading model.
+**Threading**: Threading allows you to run multiple tasks concurrently. You should learn about the different threading constructs provided by the Standard Library, such as threads, mutexes, and condition variables. Keep in mind, of course, that OneAPI/SYCL are an *alternative* to threading and also allow for code ot be written without assuming a particular threading model.
 
-- **Modern C++ features**: C++ has been evolving rapidly in recent years, and new features are being added all the time. You should learn about modern C++ features such as `auto`, `constexpr`, `consteval`, and `module`, which can help you write more efficient and maintainable code. We greatly value software engineering, so all of these modern features will help to write *clean code*, especially when used judiciously.
+**Modern C++ features**: C++ has been evolving rapidly in recent years, and new features are being added all the time. You should learn about modern C++ features such as `auto`, `constexpr`, `consteval`, and `module`, which can help you write more efficient and maintainable code. We greatly value software engineering, so all of these modern features will help to write *clean code*, especially when used judiciously.
 
-- **Exception handling**: Exception handling allows you to handle runtime errors in a structured way. You should learn about the try-catch blocks and how to throw and catch exceptions. (That said, we try to avoid them in our tutorial in favor of the systems tradition of using error codes whenever possible.)
+**Exception handling**: Exception handling allows you to handle runtime errors in a structured way. You should learn about the try-catch blocks and how to throw and catch exceptions. (That said, we try to avoid them in our tutorial in favor of the systems tradition of using error codes whenever possible.)
 
-- **Ranges**: Ranges in C++ are a new library feature introduced in C++20 that provide a unified and composable way to work with sequences of values, including arrays, containers, and generators. Ranges allow you to express operations on sequences as composable, functional transformations, and can greatly simplify and improve the readability of code that works with sequences.
+**Ranges**: Ranges in C++ are a new library feature introduced in C++20 that provide a unified and composable way to work with sequences of values, including arrays, containers, and generators. Ranges allow you to express operations on sequences as composable, functional transformations, and can greatly simplify and improve the readability of code that works with sequences.
 
 These topics will allow you to become proficient in modern C++ programming and write efficient, maintainable, and scalable code.
 
@@ -58,20 +58,8 @@ Finally, the class provides accessors for the ``x``, ``y``, and ``z`` values, wh
 
 Let's take a look at how to *use* this class:
 
-.. literalinclude:: ../../examples/modern-cpp-examples/modern-cpp/point_demo.cpp
+.. literalinclude:: ../../examples/modern-cpp-examples/modern-cpp/point-demo.cpp
    :language: cpp
-
-Standard Library
-^^^^^^^^^^^^^^^^^
-
-.. note:: Coming soon.  Short version: The standard library is much more than I/O.
-
-Lambda Expressions
-^^^^^^^^^^^^^^^^^^^
-
-
-.. note:: Coming soon. I have put together some nice science focused examples of this.
-
 
 Move Semantics
 ^^^^^^^^^^^^^^
@@ -86,7 +74,7 @@ Here's an example of how to use std::move to enable move semantics:
 
  
 .. literalinclude:: ../../examples/modern-cpp-examples/modern-cpp/move-mvp.cpp
-   :language: cp
+   :language: cpp
 
 
 In this example, we define a class `MyClass` that has a default constructor, a destructor, and move semantics enabled through the move constructor and move assignment operator.
@@ -96,6 +84,69 @@ We then create an object a of `MyClass`. We move `a` to create a new object `b` 
 In the move constructor and move assignment operator, we use `std::move` to cast the l-value reference to other to an r-value reference, enabling move semantics. This allows us to transfer the resources of the original object to the new object, instead of copying them.
 
 Note that `std::move` does not actually move anything by itself; it simply enables move semantics by casting an l-value reference to an r-value reference. It is up to the move constructor or move assignment operator to actually perform the move operation.
+
+Lambda Expressions
+^^^^^^^^^^^^^^^^^^^
+
+Lambda expressions in C++ allow you to define anonymous functions directly within your code. 
+Readers familiar with lambda expressions from other functional or object/functional languages should note that C++ lambda functions differ, fundamentally, in how they manage *closures* and, in particular, how and whether variables from the enclosing scope can be accessed and or modified.
+
+Basic Lambda with No Parameters
+"""""""""""""""""""""""""""""""""""
+
+In the following example, ``sayHello`` is a lambda function with no parameters, and when we call it, it will print "Hello from lambda!".
+
+.. literalinclude:: ../../examples/modern-cpp-examples/modern-cpp/lambda-no-parameters.cpp
+   :language: cpp
+
+Lambda with Parameters
+""""""""""""""""""""""""""
+
+In the following example, the ``add`` lambda takes two integer parameters and returns their sum.
+
+.. literalinclude:: ../../examples/modern-cpp-examples/modern-cpp/lambda-with-parameters.cpp
+   :language: cpp
+
+Lambda with Explicit Return Type
+""""""""""""""""""""""""""""""""""""
+
+And in the following, The ``divide`` lambda has an explicit return type of ``double``.
+
+.. literalinclude:: ../../examples/modern-cpp-examples/modern-cpp/lambda-with-return-type.cpp
+   :language: cpp
+
+Lambda with Closures
+""""""""""""""""""""""""""""""""""""
+
+Closures allow lambdas to capture variables from their enclosing scope.
+
+The following shows how to capture variables by value:
+
+.. literalinclude:: ../../examples/modern-cpp-examples/modern-cpp/lambda-with-closures-byval.cpp
+   :language: cpp
+
+Here, ``a`` and ``b`` are captured by value. That is, they can be read but not modified.
+
+The following, however, shows apture by reference:
+
+.. literalinclude:: ../../examples/modern-cpp-examples/modern-cpp/lambda-with-closures-byref.cpp
+   :language: cpp
+
+
+``a`` is captured by reference in the ``incrementA`` lambda.
+
+Having to capture variables, individually, is not practical when there are more than a couple of variables needed by the lambda function. All variables can be captured by value:
+
+.. literalinclude:: ../../examples/modern-cpp-examples/modern-cpp/lambda-with-closures-byval-all.cpp
+   :language: cpp
+
+And the following shows how to Capture everything by reference (use with caution):
+
+.. literalinclude:: ../../examples/modern-cpp-examples/modern-cpp/lambda-with-closures-byref-all.cpp
+   :language: cpp
+
+These are foundational examples of lambdas and closures in C++. Lambdas can be even more versatile with features like mutable lambdas and complex capture rules.
+
 
 Naming Conventions
 ^^^^^^^^^^^^^^^^^^^
@@ -199,189 +250,6 @@ To use this `CMakeLists.txt` file, you would create a folder named `point_exampl
 .. note:: Working to put all of the above into a repo. Focusing on narrative first.
 
 
-Co-routines
-^^^^^^^^^^^^
-
-.. note:: Co-routines are a fairly new C++ feature and may not be supported by your compiler.
-
-Co-routines are an important concept that is relevant to our discussion of SYCL and OneAPI.
-
-A coroutine is a allows for the execution of multiple, independent, and cooperative subroutines or functions that can be paused and resumed at certain points to enable asynchronous or concurrent programming, without the overhead of creating multiple threads or processes.
-
-Historically, the concept of coroutines was first introduced in the programming language Simula 67 -- the language that introduced object-oriented programming -- developed by Ole-Johan Dahl and Kristen Nygaard at the Norwegian Computing Center in Oslo, Norway in the mid-1960s.
-The implementation of coroutines in Simula 67 was a bit different from the modern concept of coroutines, and the term "coroutine" itself was not used at that time.
-The first programming language to use the term "coroutine" and to implement coroutines in a way that is closer to the modern concept was the programming language Modula-2, developed by Niklaus Wirth in the late 1970s.
-After Modula-2, the next programming language to introduce support for coroutines was Ada, which added support for coroutines in the Ada 95 version of the language.
-
-.. code-block:: ada
-
-   with Ada.Text_IO; use Ada.Text_IO;
-   with Ada.Numerics.Float_Random; use Ada.Numerics.Float_Random;
-   
-   procedure Coroutine_Example is
-   
-      type Coroutine is access procedure; -- define a type for a coroutine
-      
-      task type Coroutine_Task is -- define a task type for a coroutine
-         entry Start(C : in Coroutine); -- an entry to start the coroutine
-      end Coroutine_Task;
-   
-      Sum : Float := 0.0; -- shared variable to accumulate the sum
-      Num_Coroutines : constant Integer := 10; -- number of coroutines
-      
-      -- define the coroutine procedure
-      procedure My_Coroutine is
-         R : Float_Random.Generator; -- random number generator
-         X : constant Float := Float_Random.Random(R); -- compute a random number
-      begin
-         Put_Line("Coroutine started, X = " & Float'Image(X));
-         Sum := Sum + X; -- add X to the sum
-      end My_Coroutine;
-   
-      -- array of coroutines
-      Coroutines : array (1..Num_Coroutines) of Coroutine;
-   
-      -- array of coroutine tasks
-      Tasks : array (1..Num_Coroutines) of Coroutine_Task;
-   
-   begin
-   
-      -- create the coroutines and their tasks
-      for I in 1..Num_Coroutines loop
-         Coroutines(I) := My_Coroutine'Access; -- create a coroutine
-         Tasks(I) := new Coroutine_Task; -- create a task for the coroutine
-         Tasks(I).Start(Coroutines(I)); -- start the task, passing the coroutine as parameter
-      end loop;
-   
-      -- wait for all tasks to complete
-      for I in 1..Num_Coroutines loop
-         null;
-      end loop;
-   
-      -- print the final result
-      Put_Line("Sum = " & Float'Image(Sum));
-   
-   end Coroutine_Example;
-   
-
-Co-routines have become popular in many recent language designs, notably Go. Here is what a co-routine looks like in Go.
-
-.. code-block:: go
-
-   package main
-   
-   import (
-       "fmt"
-       "math/rand"
-       "time"
-   )
-   
-   func coroutine(ch chan<- float64) {
-       r := rand.New(rand.NewSource(time.Now().UnixNano())) // create a random number generator
-       x := r.Float64() // compute a random number
-       fmt.Printf("Coroutine started, x = %f\n", x)
-       ch <- x // send the result back to the main program
-   }
-   
-   func main() {
-       sum := 0.0 // shared variable to accumulate the sum
-       numCoroutines := 10 // number of coroutines
-       ch := make(chan float64) // create a channel for communication
-   
-       // start the coroutines
-       for i := 0; i < numCoroutines; i++ {
-           go coroutine(ch)
-       }
-   
-       // wait for all coroutines to complete and accumulate the results
-       for i := 0; i < numCoroutines; i++ {
-           sum += <-ch
-       }
-   
-       // print the final result
-       fmt.Printf("Sum = %f\n", sum)
-   }
-   
-While our course is about C++, it is important to realize that many modern C++ features are greatly influenced by the other modern languages (and forms of expression) around them.
-The ability to write co-routines and use *blocking* channels to exchange results between the co-routine and the main program demonstrate a high level of awareness that allows programmers to express concurrency clearly and concisely.
-
-Modern co-routines, therefore, allow not only for the expression of concurrency but also for the elegant transmission of data to and from the co-routine. There are some similarities with how SYCL supports these concepts using *accessors*. We'll speak to this again when introducing SYCL.
-   
-Let's take a look at how C++ introduces co-routines.
-The following shows how to create four co-routines that sleep for random amounts of time and join at the end?
-
-.. code-block:: cpp
-
-   #include <iostream>
-   #include <chrono>
-   #include <random>
-   #include <coroutine>
-   #include <vector>
-   
-   // A simple coroutine that sleeps for a random amount of time
-   // and returns the amount of time slept
-
-   class SleepCoroutine {
-   public:
-       SleepCoroutine() = default;
-   
-       // The coroutine promise type
-       struct promise_type {
-           auto get_return_object() {
-               return SleepCoroutine{handle_type::from_promise(*this)};
-           }
-           std::suspend_never initial_suspend() { return {}; }
-           std::suspend_always final_suspend() noexcept { return {}; }
-           void unhandled_exception() { std::terminate(); }
-           void return_void() {}
-       };
-   
-       // The coroutine handle type
-       using handle_type = std::coroutine_handle<promise_type>;
-   
-       // The coroutine execution function
-       void operator()() {
-           // Generate a random sleep time
-        std::random_device rd;
-        std::mt19937 gen(rd());
-        std::uniform_int_distribution<> distr(1000, 5000);
-        int sleep_time = distr(gen);
-
-        // Sleep for the random time
-        std::this_thread::sleep_for(std::chrono::milliseconds(sleep_time));
-       }
-   
-   private:
-       SleepCoroutine(handle_type h) : handle(h) {}
-       handle_type handle;
-   };
-   
-   // A function that creates and runs four sleep coroutines
-   void run_sleep_coroutines() {
-       // Create a vector to hold the coroutines
-       std::vector<SleepCoroutine::handle_type> coroutines;
-   
-       // Create and start the coroutines
-       for (int i = 0; i < 4; i++) {
-           coroutines.push_back(SleepCoroutine{}());
-       }
-   
-       // Join the coroutines
-       for (auto& coroutine : coroutines) {
-           coroutine.resume();
-           coroutine.destroy();
-       }
-   }
-
-   // The main function
-   int main() {
-       run_sleep_coroutines();
-       std::cout << "All coroutines joined." << std::endl;
-       return 0;
-   }
-
-.. todo:: May redo this example to mirror the Ada/Go versions.
-
 Automatic variables
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -407,11 +275,11 @@ We also demonstrate how to initialize more complex structures such as an STL gen
    #include <fmt/core.h>
    
    int main() {
-       int i = 42;
-       double d1 = 1.23, d2 = 4.56;
-       float f1 = 0.123f, f2 = 6.789f;
-       bool b1 = true, b2 = false;
-       char c1 = 'c', c2 = 'd';
+       auto i = 42;
+       auto d1 = 1.23, d2 = 4.56;
+       auto f1 = 0.123f, f2 = 6.789f;
+       auto b1 = true, b2 = false;
+       auto c1 = 'c', c2 = 'd';
    
        auto v1 = std::vector<int>{1, 2, 3, 4, 5};
        auto l1 = std::list<double>{d1, d2, d1, d2, d1};
@@ -440,11 +308,18 @@ We also demonstrate how to initialize more complex structures such as an STL gen
 Constants and Constant Expressions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-In this example, we define a pythagorean function using constexpr. The function takes two arguments a and b representing the lengths of the two sides of a right-angled triangle, and calculates the length of the hypotenuse using the Pythagorean theorem.
+.. note:: George still working on this.
+
+In this example, we define a pythagorean function using constexpr and lambda expressions.
+The function takes two arguments a and b representing the lengths of the two sides of a right-angled triangle, and calculates the length of the hypotenuse using the Pythagorean theorem.
 
 We then define two const variables a and b, which have values of 3.0 and 4.0 respectively. Since a and b are const, we cannot change their values once they have been initialized.
 
 Finally, we initialize a constexpr variable c with the value of pythagorean(a, b). Since a, b, and pythagorean are all const or constexpr, we can evaluate pythagorean(a, b) at compile-time and use it to initialize c.
+
+Using lambda functions is another way to achieve compile-time computations and can simplify the structure for certain operations.
+
+Below is an implementation that uses a lambda function to compute the square root at compile time:
 
 The program then prints the length of the hypotenuse to the console using std::cout.
 
@@ -453,22 +328,36 @@ Overall, this example demonstrates how you can use const and constexpr together 
 .. code-block:: cpp
 
    #include <iostream>
-   #include <cmath>
    
    constexpr double pythagorean(double a, double b) {
-       return std::sqrt(a * a + b * b);
+       auto constexpr_sqrt = [](double num) -> double {
+           constexpr double epsilon = 1e-10;
+           constexpr int max_iterations = 50;
+           
+           double guess = num;
+           double prev_guess = 0.0;
+           
+           for (int i = 0; (i < max_iterations) && (abs(guess - prev_guess) > epsilon); ++i) {
+               prev_guess = guess;
+               guess = 0.5 * (guess + num / guess);
+           }
+           
+           return guess;
+       };
+   
+       return constexpr_sqrt(a * a + b * b);
    }
    
    int main() {
-       const double a = 3.0;
-       const double b = 4.0;
+       constexpr double a = 3.0;
+       constexpr double b = 4.0;
        constexpr double c = pythagorean(a, b);
    
        std::cout << "The hypotenuse is " << c << std::endl;
    
        return 0;
    }
-   
+
 
 initializer expressions
 ^^^^^^^^^^^^^^^^^^^^^^^^
@@ -677,17 +566,17 @@ Spdlog has gained popularity in the C++ community due to its ease of use, perfor
 
 The common logging levels, in increasing order of severity, are:
 
-**TRACE**: Fine-grained informational events that are most useful to debug an application.
+- **TRACE**: Fine-grained informational events that are most useful to debug an application.
 
-**DEBUG**: Detailed debug information that can be useful to diagnose an application.
+- **DEBUG**: Detailed debug information that can be useful to diagnose an application.
 
-**INFO**: Informational messages that highlight the progress of the application at a high level.
+- **INFO**: Informational messages that highlight the progress of the application at a high level.
 
-**WARN**: Potentially harmful situations or unexpected events that do not prevent the application from working, but might require attention.
+- **WARN**: Potentially harmful situations or unexpected events that do not prevent the application from working, but might require attention.
 
-**ERROR**: Error events that might still allow the application to continue running.
+- **ERROR**: Error events that might still allow the application to continue running.
 
-**FATAL**: Severe error events that might cause the application to terminate.
+- **FATAL**: Severe error events that might cause the application to terminate.
 
 The following code shows how to use the logging levels in **spdlog**.
 By default, a message is sent to *all* of the logging levels.
@@ -1342,12 +1231,195 @@ In this example, we use the ``std::views::filter`` function to create a new view
    }
 
 
-Smart Pointers
-^^^^^^^^^^^^^^^
+.. Smart Pointers
+
+
+.. Exception Handling
+
 
 Threading
-^^^^^^^^^^^^^^^
+^^^^^^^^^^^^
 
-Exception Handling
-^^^^^^^^^^^^^^^^^^^
+Co-routines
+^^^^^^^^^^^^
+
+.. note:: Co-routines are a fairly new C++ feature and may not be supported by your compiler.
+
+Co-routines are an important concept that is relevant to our discussion of SYCL and OneAPI.
+
+A coroutine is a allows for the execution of multiple, independent, and cooperative subroutines or functions that can be paused and resumed at certain points to enable asynchronous or concurrent programming, without the overhead of creating multiple threads or processes.
+
+Historically, the concept of coroutines was first introduced in the programming language Simula 67 -- the language that introduced object-oriented programming -- developed by Ole-Johan Dahl and Kristen Nygaard at the Norwegian Computing Center in Oslo, Norway in the mid-1960s.
+The implementation of coroutines in Simula 67 was a bit different from the modern concept of coroutines, and the term "coroutine" itself was not used at that time.
+The first programming language to use the term "coroutine" and to implement coroutines in a way that is closer to the modern concept was the programming language Modula-2, developed by Niklaus Wirth in the late 1970s.
+After Modula-2, the next programming language to introduce support for coroutines was Ada, which added support for coroutines in the Ada 95 version of the language.
+
+.. code-block:: ada
+
+   with Ada.Text_IO; use Ada.Text_IO;
+   with Ada.Numerics.Float_Random; use Ada.Numerics.Float_Random;
+   
+   procedure Coroutine_Example is
+   
+      type Coroutine is access procedure; -- define a type for a coroutine
+      
+      task type Coroutine_Task is -- define a task type for a coroutine
+         entry Start(C : in Coroutine); -- an entry to start the coroutine
+      end Coroutine_Task;
+   
+      Sum : Float := 0.0; -- shared variable to accumulate the sum
+      Num_Coroutines : constant Integer := 10; -- number of coroutines
+      
+      -- define the coroutine procedure
+      procedure My_Coroutine is
+         R : Float_Random.Generator; -- random number generator
+         X : constant Float := Float_Random.Random(R); -- compute a random number
+      begin
+         Put_Line("Coroutine started, X = " & Float'Image(X));
+         Sum := Sum + X; -- add X to the sum
+      end My_Coroutine;
+   
+      -- array of coroutines
+      Coroutines : array (1..Num_Coroutines) of Coroutine;
+   
+      -- array of coroutine tasks
+      Tasks : array (1..Num_Coroutines) of Coroutine_Task;
+   
+   begin
+   
+      -- create the coroutines and their tasks
+      for I in 1..Num_Coroutines loop
+         Coroutines(I) := My_Coroutine'Access; -- create a coroutine
+         Tasks(I) := new Coroutine_Task; -- create a task for the coroutine
+         Tasks(I).Start(Coroutines(I)); -- start the task, passing the coroutine as parameter
+      end loop;
+   
+      -- wait for all tasks to complete
+      for I in 1..Num_Coroutines loop
+         null;
+      end loop;
+   
+      -- print the final result
+      Put_Line("Sum = " & Float'Image(Sum));
+   
+   end Coroutine_Example;
+   
+
+Co-routines have become popular in many recent language designs, notably Go. Here is what a co-routine looks like in Go.
+
+.. code-block:: go
+
+   package main
+   
+   import (
+       "fmt"
+       "math/rand"
+       "time"
+   )
+   
+   func coroutine(ch chan<- float64) {
+       r := rand.New(rand.NewSource(time.Now().UnixNano())) // create a random number generator
+       x := r.Float64() // compute a random number
+       fmt.Printf("Coroutine started, x = %f\n", x)
+       ch <- x // send the result back to the main program
+   }
+   
+   func main() {
+       sum := 0.0 // shared variable to accumulate the sum
+       numCoroutines := 10 // number of coroutines
+       ch := make(chan float64) // create a channel for communication
+   
+       // start the coroutines
+       for i := 0; i < numCoroutines; i++ {
+           go coroutine(ch)
+       }
+   
+       // wait for all coroutines to complete and accumulate the results
+       for i := 0; i < numCoroutines; i++ {
+           sum += <-ch
+       }
+   
+       // print the final result
+       fmt.Printf("Sum = %f\n", sum)
+   }
+   
+While our course is about C++, it is important to realize that many modern C++ features are greatly influenced by the other modern languages (and forms of expression) around them.
+The ability to write co-routines and use *blocking* channels to exchange results between the co-routine and the main program demonstrate a high level of awareness that allows programmers to express concurrency clearly and concisely.
+
+Modern co-routines, therefore, allow not only for the expression of concurrency but also for the elegant transmission of data to and from the co-routine. There are some similarities with how SYCL supports these concepts using *accessors*. We'll speak to this again when introducing SYCL.
+   
+Let's take a look at how C++ introduces co-routines.
+The following shows how to create four co-routines that sleep for random amounts of time and join at the end?
+
+.. code-block:: cpp
+
+   #include <iostream>
+   #include <chrono>
+   #include <random>
+   #include <coroutine>
+   #include <vector>
+   
+   // A simple coroutine that sleeps for a random amount of time
+   // and returns the amount of time slept
+
+   class SleepCoroutine {
+   public:
+       SleepCoroutine() = default;
+   
+       // The coroutine promise type
+       struct promise_type {
+           auto get_return_object() {
+               return SleepCoroutine{handle_type::from_promise(*this)};
+           }
+           std::suspend_never initial_suspend() { return {}; }
+           std::suspend_always final_suspend() noexcept { return {}; }
+           void unhandled_exception() { std::terminate(); }
+           void return_void() {}
+       };
+   
+       // The coroutine handle type
+       using handle_type = std::coroutine_handle<promise_type>;
+   
+       // The coroutine execution function
+       void operator()() {
+           // Generate a random sleep time
+        std::random_device rd;
+        std::mt19937 gen(rd());
+        std::uniform_int_distribution<> distr(1000, 5000);
+        int sleep_time = distr(gen);
+
+        // Sleep for the random time
+        std::this_thread::sleep_for(std::chrono::milliseconds(sleep_time));
+       }
+   
+   private:
+       SleepCoroutine(handle_type h) : handle(h) {}
+       handle_type handle;
+   };
+   
+   // A function that creates and runs four sleep coroutines
+   void run_sleep_coroutines() {
+       // Create a vector to hold the coroutines
+       std::vector<SleepCoroutine::handle_type> coroutines;
+   
+       // Create and start the coroutines
+       for (int i = 0; i < 4; i++) {
+           coroutines.push_back(SleepCoroutine{}());
+       }
+   
+       // Join the coroutines
+       for (auto& coroutine : coroutines) {
+           coroutine.resume();
+           coroutine.destroy();
+       }
+   }
+
+   // The main function
+   int main() {
+       run_sleep_coroutines();
+       std::cout << "All coroutines joined." << std::endl;
+       return 0;
+   }
+
+.. todo:: May redo this example to mirror the Ada/Go versions.
 

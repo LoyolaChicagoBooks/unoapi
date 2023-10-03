@@ -1,4 +1,4 @@
-Preliminaries
+About the Book
 ================
 
 This is tutorial on Modern C++ and OneAPI/SYCL.
