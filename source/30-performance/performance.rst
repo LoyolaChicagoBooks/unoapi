@@ -30,21 +30,7 @@ Every time we want to add a timestamp, we invoke ``mark_time`` with a suitable s
 - remainder of execution (e.g., displaying the results)
 - total wall clock execution time
 
-At the end, we use the ``print_timestamps`` function to print the collected measurements in comma-separated-values (CSV) format.
-(For readability, we have replaced the actual device name, “Intel(R) UHD Graphics P630 [0x3e96]”, with “gen9.”)
-
-.. code-block:: text
-
-   TIME,DELTA,UNIT,DEVICE,PHASE
-   68719429381281,0,ns,gen9,Start 68719429386913,5632,ns,gen9,Memory allocation
-   68719466567445,37180532,ns,gen9,Queue creation
-   68719769668012,303100567,ns,gen9,Integration
-   68719773241994,3573982,ns,gen9,DONE
-   68719773241994,343860713,ns,gen9,TOTAL
-
-These measurements lead to various insights on what is going “under the hood” during program execution, to name a few:
-
-Initial allocation of a SYCL buffer takes very little time compared to allocating an standard vector. Queue creation introduces significant overhead. To achieve an overall speedup in light of this overhead, a high degree of parallelism is required (between about 10 and 20 million trapezoids on an Intel DevCloud gen9 node). Compared to the sequential version, there is an overall speedup even when using SYCL on the host CPU rather than the accelerator.
+At the end, we use the ``print_timestamps`` function to print the collected measurements in comma-separated-values (CSV) format, as shown in the sample runs below.
 
 
 How to achieve speedup
@@ -78,20 +64,20 @@ We start with strictly sequential execution on the node's CPU using the `-s` opt
 
 .. code-block:: text
 
-   u204386@s001-n063:~/Work/unoapi-dpcpp-examples$ ./build/bin/integration -s -n 1000000
-   [2023-10-03 12:53:18.577] [info] integrating function from 0 to 1 using 1000000 trapezoid(s), dx = 1e-06
-   [2023-10-03 12:53:18.584] [info] starting sequential integration
-   [2023-10-03 12:53:45.562] [info] result should be available now
-   result = 1.000000000007918
-   [2023-10-03 12:53:45.562] [info] all done for now
+   u204386@s001-n141:~/Work/unoapi-dpcpp-examples$ ./build/bin/integration -s -n 10000000
+   [2023-10-05 13:08:59.649] [info] integrating function from 0 to 1 using 10000000 trapezoid(s), dx = 1e-07
+   [2023-10-05 13:08:59.695] [info] starting sequential integration
+   [2023-10-05 13:12:33.593] [info] result should be available now
+   result = 0.99999999975017
+   [2023-10-05 13:12:33.597] [info] all done for now
    TIME,DELTA,UNIT,DEVICE,PHASE
-   26056679523006414,0,ns,sequential,Start
-   26056679528971854,5965440,ns,sequential,Memory allocation
-   26056706507242628,26978270774,ns,sequential,Integration
-   26056706507743085,500457,ns,sequential,DONE
-   26056706507743085,26984736671,ns,sequential,TOTAL
-
-The total wall time for this run was about 27 seconds.
+   1387106620763,0,ns,sequential,Start
+   1387152751270,46130507,ns,sequential,Memory allocation
+   1601050897104,213898145834,ns,sequential,Integration
+   1601054456984,3559880,ns,sequential,DONE
+   1601054456984,213947836221,ns,sequential,TOTAL
+		
+The total wall time for this sequential run was about 214 seconds.
 
 
 Parallel execution on an accelerator
@@ -100,51 +86,56 @@ Parallel execution on an accelerator
 Next, we allow our integration code to select and utilize the available accelerator.
 
 .. code-block:: text
-	  
-   u204386@s001-n063:~/Work/unoapi-dpcpp-examples$ ./build/bin/integration -n 1000000
-   [2023-10-03 12:53:05.759] [info] integrating function from 0 to 1 using 1000000 trapezoid(s), dx = 1e-06
-   [2023-10-03 12:53:05.759] [info] preparing for vectorized integration
-   [2023-10-03 12:53:05.847] [info] Device: Intel(R) Xeon(R) Gold 6128 CPU @ 3.40GHz
-   [2023-10-03 12:53:06.168] [info] done submitting to queue...waiting for results
-   [2023-10-03 12:53:06.198] [info] result should be available now
-   result = 0.9999999999999984
-   [2023-10-03 12:53:06.199] [info] all done for now
+
+   u204386@s001-n141:~/Work/unoapi-dpcpp-examples$ ./build/bin/integration -n 10000000
+   [2023-10-05 13:07:20.616] [info] integrating function from 0 to 1 using 10000000 trapezoid(s), dx = 1e-07
+   [2023-10-05 13:07:20.616] [info] preparing for vectorized integration
+   [2023-10-05 13:07:20.670] [info] Device: Intel(R) UHD Graphics P630 [0x3e96]
+   [2023-10-05 13:07:21.475] [info] done submitting to queue...waiting for results
+   [2023-10-05 13:07:23.805] [info] result should be available now
+   result = 1.0000000000000266
+   [2023-10-05 13:07:23.806] [info] all done for now
    TIME,DELTA,UNIT,DEVICE,PHASE
-   26056666704838678,0,ns,Intel(R) Xeon(R) Gold 6128 CPU @ 3.40GHz,Start
-   26056666704857606,18928,ns,Intel(R) Xeon(R) Gold 6128 CPU @ 3.40GHz,Memory allocation
-   26056666792383780,87526174,ns,Intel(R) Xeon(R) Gold 6128 CPU @ 3.40GHz,Queue creation
-   26056667143619359,351235579,ns,Intel(R) Xeon(R) Gold 6128 CPU @ 3.40GHz,Integration
-   26056667144791438,1172079,ns,Intel(R) Xeon(R) Gold 6128 CPU @ 3.40GHz,DONE
-   26056667144791438,439952760,ns,Intel(R) Xeon(R) Gold 6128 CPU @ 3.40GHz,TOTAL
+   1288073741984,0,ns,Intel(R) UHD Graphics P630 [0x3e96],Start
+   1288073757723,15739,ns,Intel(R) UHD Graphics P630 [0x3e96],Memory allocation
+   1288127582056,53824333,ns,Intel(R) UHD Graphics P630 [0x3e96],Queue creation
+   1291261937903,3134355847,ns,Intel(R) UHD Graphics P630 [0x3e96],Integration
+   1291263543190,1605287,ns,Intel(R) UHD Graphics P630 [0x3e96],DONE
+   1291263543190,3189801206,ns,Intel(R) UHD Graphics P630 [0x3e96],TOTAL
+		
+The total wall time for this run was about 3.2 seconds, including the overhead for preparing the task queue and shipping any required data back and forth.
+This corresponds to a speedup of about 67 compared to sequential execution.
 
-The total wall time for this run was about 0.44 seconds, including the overhead for preparing the task queue and shipping any required data back and forth.
-This corresponds to a speedup of about 60 compared to sequential execution.
+These measurements lead to various insights on what is going “under the hood” during program execution, to name a few:
 
-.. todo:: Figure out which nodes actually have GPUs. This error comes up on most of them: ` No device of requested type 'info::device_type::gpu' available`
-	  
+- Initial allocation of a SYCL buffer takes very little time compared to allocating a standard vector.
+- Queue creation introduces a certain overhead, comparable to allocation a vector on the host CPU.
 
 Parallel execution on a multicore CPU
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Our examples also support a `-c` option for executing data-parallel code on the host CPU.
+Our examples also support a `-c` option for executing data-parallel code on the host CPU itself.
 This is reasonable when the CPU already has multiple cores.
 
 .. code-block:: text
-   
-   u204386@s001-n063:~/Work/unoapi-dpcpp-examples$ ./build/bin/integration -c -n 1000000
-   [2023-10-03 12:53:13.632] [info] integrating function from 0 to 1 using 1000000 trapezoid(s), dx = 1e-06
-   [2023-10-03 12:53:13.632] [info] preparing for vectorized integration
-   [2023-10-03 12:53:13.714] [info] Device: Intel(R) Xeon(R) Gold 6128 CPU @ 3.40GHz
-   [2023-10-03 12:53:14.019] [info] done submitting to queue...waiting for results
-   [2023-10-03 12:53:14.033] [info] result should be available now
-   result = 0.9999999999999984
-   [2023-10-03 12:53:14.033] [info] all done for now
+
+   u204386@s001-n141:~/Work/unoapi-dpcpp-examples$ ./build/bin/integration -c -n 10000000
+   [2023-10-05 13:06:20.645] [info] integrating function from 0 to 1 using 10000000 trapezoid(s), dx = 1e-07
+   [2023-10-05 13:06:20.645] [info] preparing for vectorized integration
+   [2023-10-05 13:06:20.754] [info] Device: Intel(R) Xeon(R) E-2176G CPU @ 3.70GHz
+   [2023-10-05 13:06:21.009] [info] done submitting to queue...waiting for results
+   [2023-10-05 13:06:21.306] [info] result should be available now
+   result = 1.0000000000001883
+   [2023-10-05 13:06:21.309] [info] all done for now
    TIME,DELTA,UNIT,DEVICE,PHASE
-   26056674577074730,0,ns,Intel(R) Xeon(R) Gold 6128 CPU @ 3.40GHz,Start
-   26056674577089540,14810,ns,Intel(R) Xeon(R) Gold 6128 CPU @ 3.40GHz,Memory allocation
-   26056674659674721,82585181,ns,Intel(R) Xeon(R) Gold 6128 CPU @ 3.40GHz,Queue creation
-   26056674977998101,318323380,ns,Intel(R) Xeon(R) Gold 6128 CPU @ 3.40GHz,Integration
-   26056674978681734,683633,ns,Intel(R) Xeon(R) Gold 6128 CPU @ 3.40GHz,DONE
-   26056674978681734,401607004,ns,Intel(R) Xeon(R) Gold 6128 CPU @ 3.40GHz,TOTAL
+   1228102597488,0,ns,Intel(R) Xeon(R) E-2176G CPU @ 3.70GHz,Start
+   1228102606002,8514,ns,Intel(R) Xeon(R) E-2176G CPU @ 3.70GHz,Memory allocation
+   1228211703518,109097516,ns,Intel(R) Xeon(R) E-2176G CPU @ 3.70GHz,Queue creation
+   1228763275054,551571536,ns,Intel(R) Xeon(R) E-2176G CPU @ 3.70GHz,Integration
+   1228766647826,3372772,ns,Intel(R) Xeon(R) E-2176G CPU @ 3.70GHz,DONE
+   1228766647826,664050338,ns,Intel(R) Xeon(R) E-2176G CPU @ 3.70GHz,TOTAL
+
+The total wall time for this run was about 0.66 seconds, including the overhead for preparing the task queue on the host CPU.
+This corresponds to a speedup of about 320 compared to sequential execution or a speedup of about 5 compared to execution on the GPU, possibly because of the better support for 64-bit floating point arithmetic on the CPU.
 
 .. todo:: chapter conclusion
