@@ -70,6 +70,12 @@ But...
 - The most modern languages still *punt to C* to provide acceleration.
 - Research software engineers who know about *computer systems* and *software engineering* are most likely to progress by embracing these two areas (computer systems and SE)
 
+AI Disclosure
+---------------
+
+.. note:: This text contains a mix of original writing and programming with strategic use of Chat-GPT4 via intelligent/clever prompting. All examples will be available in our repository with an appropriate **cmake** build file and tests. We will also make our prompts and analysis available, similar to what we have done for our recent ongoing study of Chat-GPT4 and Systems Programming. See https://doi.org/10.6084/m9.figshare.22257274.
+
+
 Contributors
 --------------
 
