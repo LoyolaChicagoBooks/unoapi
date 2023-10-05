@@ -1,11 +1,11 @@
 Modern C++ as a Better C (and C++)
 ==================================
 
-.. note:: This text contains a mix of original writing and programming with strategic use of Chat-GPT4 via intelligent/clever prompting. All examples will be available in our repository with an appropriate **cmake** build file and tests. We will also make our prompts and analysis available, similar to what we have done for our recent ongoing study of Chat-GPT4 and Systems Programming. See https://doi.org/10.6084/m9.figshare.22257274.
-
 If you want to learn SYCL and OneAPI *properly*  you will need to come up to speed with Modern C++.  In our experience, we know many people who say they "know" C++.  C++ has undergone numerous changes since it was introduced in the 1980s and 1990s.  While the original syntax remains intact, if you have not kept up with the changes since then (notably, C++ 11), you should take steps to refresh your knowlege of the language, since many of its recent features make it virtually *unrecognizable* from its earlier incarnations.
 
-.. note:: We are particularly impressed with how C++ has incorporated features from modern object-functional languages.  Please let us know if you think other features are worthy of inclusion. As this section is still in draft status, we realize our list may not be exhaustive.
+We are particularly impressed with how C++ has incorporated features from modern object-functional languages, some of which we will cover here.  Please let us know if you think other features are worthy of inclusion. As this section is still in draft status, we realize our list may not be exhaustive.
+
+.. note:: We focus our energy on language features that are likely to appear in OneAPI/SYCL code examples in our tutorial.
 
 Overview of Modern C++
 -----------------------
@@ -64,26 +64,26 @@ Let's take a look at how to *use* this class:
 Move Semantics
 ^^^^^^^^^^^^^^
 
-So it is natural to wonder: What does std::move() actually do?
+So it is natural to wonder: What does ``std::move()`` actually do?
 
-std::move is a C++ Standard Library function defined in the <utility> header. It is used to cast an l-value reference to an r-value reference, which enables move semantics.
+``std::move()`` is a C++ Standard Library function defined in the ``<utility>`` header file. It is used to cast an l-value reference to an r-value reference, which enables move semantics.
 
 When an object is moved (using move semantics), its resources (such as dynamically allocated memory) are transferred to the new object instead of being copied. This can lead to more efficient code by avoiding unnecessary copying of objects.
 
-Here's an example of how to use std::move to enable move semantics:
+Here's an example of how to use ``std::move()`` to enable move semantics:
 
- 
+
 .. literalinclude:: ../../examples/modern-cpp-examples/modern-cpp/move-mvp.cpp
    :language: cpp
 
 
-In this example, we define a class `MyClass` that has a default constructor, a destructor, and move semantics enabled through the move constructor and move assignment operator.
+In this example, we define a class ``MyClass`` that has a default constructor, a destructor, and move semantics enabled through the move constructor and move assignment operator.
 
-We then create an object a of `MyClass`. We move `a` to create a new object `b` using `std::move(a)`. We then move `b` to create a new object `c` using `std::move(b)`.
+We then create an object a of ``MyClass``. We move ``a`` to create a new object ``b`` using ``std::move(a)``. We then move ``b`` to create a new object ``c`` using ``std::move(b)``.
 
-In the move constructor and move assignment operator, we use `std::move` to cast the l-value reference to other to an r-value reference, enabling move semantics. This allows us to transfer the resources of the original object to the new object, instead of copying them.
+In the move constructor and move assignment operator, we use ``std::move()`` to cast the l-value reference to other to an r-value reference, enabling move semantics. This allows us to transfer the resources of the original object to the new object, instead of copying them.
 
-Note that `std::move` does not actually move anything by itself; it simply enables move semantics by casting an l-value reference to an r-value reference. It is up to the move constructor or move assignment operator to actually perform the move operation.
+Note that ``std::move`` does not actually move anything by itself; it simply enables move semantics by casting an l-value reference to an r-value reference. It is up to the move constructor or move assignment operator to actually perform the move operation.
 
 Lambda Expressions
 ^^^^^^^^^^^^^^^^^^^
@@ -162,59 +162,8 @@ In general, it is a good practice to follow the naming conventions established b
 
 A possibility for avoiding underscore is to reorganize the member variables with a struct. The struct is a lightweight to create a value object in C++.
 
-.. code-block:: cpp
-
-   class Point {
-   public:
-       Point(double x = 0.0, double y = 0.0, double z = 0.0)
-           : coords{x, y, z} {}
-   
-       // Copy constructor
-       Point(const Point& other)
-           : coords{other.coords} {}
-   
-       // Move constructor
-       Point(Point&& other) noexcept
-           : coords{std::move(other.coords)} {}
-   
-       // Copy assignment operator
-       Point& operator=(const Point& other) {
-           coords = other.coords;
-           return *this;
-       }
-   
-       // Move assignment operator
-       Point& operator=(Point&& other) noexcept {
-           coords = std::move(other.coords);
-           return *this;
-       }
-   
-       // Accessors
-       double x() const { return coords.x; }
-       double y() const { return coords.y; }
-       double z() const { return coords.z; }
-   
-       // Scale the Point by a double factor
-       void scale(double factor) {
-           coords.x *= factor;
-           coords.y *= factor;
-           coords.z *= factor;
-       }
-   
-       // Translate the Point by another Point
-       void operator+=(const Point& other) {
-           coords.x += other.coords.x;
-           coords.y += other.coords.y;
-           coords.z += other.coords.z;
-       }
-   
-   private:
-       struct Coords {
-           double x, y, z;
-       };
-   
-       Coords coords;
-   };
+.. literalinclude:: ../../examples/modern-cpp-examples/modern-cpp/point-struct.h
+   :language: cpp
 
 
 Adding this to a CMake folder
@@ -264,46 +213,9 @@ auto is a useful feature that can simplify code, improve readability, and reduce
 The following shows how auto can be used to initialize some variables of primitive types, e.g. int, double, float, bool, and char.
 We also demonstrate how to initialize more complex structures such as an STL generic type (class).
 
-.. code-block:: cpp
-   
-   #include <iostream>
-   #include <vector>
-   #include <list>
-   #include <map>
-   #include <set>
-   #include <string>
-   #include <fmt/core.h>
-   
-   int main() {
-       auto i = 42;
-       auto d1 = 1.23, d2 = 4.56;
-       auto f1 = 0.123f, f2 = 6.789f;
-       auto b1 = true, b2 = false;
-       auto c1 = 'c', c2 = 'd';
-   
-       auto v1 = std::vector<int>{1, 2, 3, 4, 5};
-       auto l1 = std::list<double>{d1, d2, d1, d2, d1};
-       auto m1 = std::map<float, bool>{{f1, b1}, {f2, b2}, {f1, b2}};
-       auto s1 = std::set<char>{c1, c2, c1, c2};
-       auto str1 = std::string{"Hello, world!"};
-   
-       fmt::print("i = {}\n", i);
-       fmt::print("d1 = {}\n", d1);
-       fmt::print("d2 = {}\n", d2);
-       fmt::print("f1 = {}\n", f1);
-       fmt::print("f2 = {}\n", f2);
-       fmt::print("b1 = {}\n", b1);
-       fmt::print("b2 = {}\n", b2);
-       fmt::print("c1 = '{}'\n", c1);
-       fmt::print("c2 = '{}'\n", c2);
-       fmt::print("v1 = {}\n", fmt::join(v1, ", "));
-       fmt::print("l1 = {}\n", fmt::join(l1, ", "));
-       fmt::print("m1 = {{{}, {}}}\n", m1.begin()->first, m1.begin()->second);
-       fmt::print("s1 = {{{}}}\n", fmt::join(s1, ", "));
-       fmt::print("str1 = \"{}\"\n", str1);
-   
-       return 0;
-   }
+.. literalinclude:: ../../examples/modern-cpp-examples/modern-cpp/auto-mva2.cpp
+   :language: cpp
+
 
 Constants and Constant Expressions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -325,38 +237,9 @@ The program then prints the length of the hypotenuse to the console using std::c
 
 Overall, this example demonstrates how you can use const and constexpr together to define constants and perform compile-time evaluations of functions, even for more complex calculations such as the Pythagorean theorem.
 
-.. code-block:: cpp
+.. literalinclude:: ../../examples/modern-cpp-examples/modern-cpp/const-constexpr.cpp
+   :language: cpp
 
-   #include <iostream>
-   
-   constexpr double pythagorean(double a, double b) {
-       auto constexpr_sqrt = [](double num) -> double {
-           constexpr double epsilon = 1e-10;
-           constexpr int max_iterations = 50;
-           
-           double guess = num;
-           double prev_guess = 0.0;
-           
-           for (int i = 0; (i < max_iterations) && (abs(guess - prev_guess) > epsilon); ++i) {
-               prev_guess = guess;
-               guess = 0.5 * (guess + num / guess);
-           }
-           
-           return guess;
-       };
-   
-       return constexpr_sqrt(a * a + b * b);
-   }
-   
-   int main() {
-       constexpr double a = 3.0;
-       constexpr double b = 4.0;
-       constexpr double c = pythagorean(a, b);
-   
-       std::cout << "The hypotenuse is " << c << std::endl;
-   
-       return 0;
-   }
 
 
 initializer expressions
