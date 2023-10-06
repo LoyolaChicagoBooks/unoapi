@@ -1,8 +1,10 @@
 
 Welcome to the UnoAPI Curricular Project
-==========================================
+========================================
 
-Ok to add text here?
+This is tutorial on oneAPI (based on SYCL), a promising direction to support modern high-performance computing on heterogeneous architectures using the C++ language and its ever-improving ecosystem.
+
+Please get started by reading :doc:`00-preliminaries/preliminaries`.
 
 .. toctree::
    :maxdepth: 4
@@ -18,6 +20,7 @@ Ok to add text here?
    80-running/running.rst
    99-sandbox/issues.rst
 
+.. Bring this back later.
 .. 40-going-distributed/distributed.rst
 
 Repository
