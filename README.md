@@ -32,6 +32,8 @@ If you cloned without `--recurse-submodules`:
 If you want to update:
 
 - git pull --recurse-submodules
+- git submodule update --remote --merge
+
 
 If you want to run a git command on every submodule:
 
