@@ -15,9 +15,10 @@ Ok to add text here?
    15-modern-cpp/modern-cpp.rst
    18-dpcpp/dpcpp.rst
    30-performance/performance.rst
-   40-going-distributed/distributed.rst
    80-running/running.rst
    99-sandbox/issues.rst
+
+.. 40-going-distributed/distributed.rst
 
 Repository
    `github.com/LoyolaChicagoBooks/unoapi <https://github.com/LoyolaChicagoBooks/unoapi>`_
