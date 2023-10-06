@@ -1,35 +1,64 @@
-#!/usr/bin/env python
+import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-import math
+import sympy as sp
+import re
 
-def f(x):
-    return (x - 2) * (x - 50) * (x - 80) + 20000
+# Define the symbolic function
+x = sp.Symbol('x')
+f_sym = (x - 2) * (x - 50) * (x - 80) + 15000
+f_lambda = sp.lambdify(x, f_sym, 'numpy')
+
+# Convert the symbolic expression to a sanitized string for filename
+filename_data = re.sub(r'[\*\^\(\)/\+\-\s]', '_', str(f_sym)) + "_trapezoids.csv"
+filename_base_plot = re.sub(r'[\*\^\(\)/\+\-\s]', '_', str(f_sym)) + "_trapezoidal_integration"
 
 # Define the range
 a, b = 0, 100
-n = 10  # number of trapezoids; using fewer to clearly visualize each trapezoid
+n = 8  # number of trapezoids
 h = (b - a) / n
-x = np.linspace(a, b, 1000)
-x_trapezoids = np.linspace(a, b, n+1)
+x_intervals = np.linspace(a, b, n+1)
 
+# Populate DataFrame for Trapezoids
+data = {
+    'x_left': x_intervals[:-1],
+    'x_right': x_intervals[1:],
+}
+data['y_left'] = f_lambda(data['x_left'])
+data['y_right'] = f_lambda(data['x_right'])
+data['area'] = 0.5 * h * (data['y_left'] + data['y_right'])
+
+df = pd.DataFrame(data)
+
+# Save DataFrame to CSV
+df.to_csv(filename_data, index=False)
+
+# Plotting
 plt.figure(figsize=(10,6))
-plt.plot(x, f(x), 'b-', label='f(x) = $x^3 + 3x^2 + 3x - 10$')
+x_vals = np.linspace(a, b, 1000)
+plt.plot(x_vals, f_lambda(x_vals), 'b-', label=f'$f(x) = {sp.latex(f_sym)}$')
 
-# Plot trapezoids
-for i in range(n):
-    x0 = x_trapezoids[i]
-    x1 = x_trapezoids[i+1]
-    y = [f(x0), f(x1)]
+for index, row in df.iterrows():
+    x0, x1 = row['x_left'], row['x_right']
+    y = [row['y_left'], row['y_right']]
     plt.fill_between([x0, x1], y, color='skyblue', alpha=0.4)
     plt.plot([x0, x1], y, 'r-')
-    plt.plot([x0, x0], [0, f(x0)], 'r-')  # left vertical line
-    plt.plot([x1, x1], [0, f(x1)], 'r-')  # right vertical line
+    plt.plot([x0, x0], [0, row['y_left']], 'r-')
+    plt.plot([x1, x1], [0, row['y_right']], 'r-')
 
-plt.title('Trapezoidal Integration of $f(x) = x^3 + 3x^2 + 3x - 10$')
+plt.title(f'Trapezoidal Integration of $f(x) = {sp.latex(f_sym)}$')
 plt.xlabel('x')
 plt.ylabel('f(x)')
 plt.legend()
 plt.grid(True)
-plt.show()
+
+# Save to both PDF and PNG
+plt.savefig(filename_base_plot + ".pdf")
+plt.savefig(filename_base_plot + ".png")
+
+# Show the plot
+#plt.show()
+
+print(f"Data saved to {filename_data}")
+print(f"Plots saved to {filename_base_plot}.pdf and {filename_base_plot}.png")
 
