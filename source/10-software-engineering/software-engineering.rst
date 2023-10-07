@@ -57,7 +57,7 @@ At the unit testing level, the following techniques are of particular interest:
 
 .. math::
 
-  \forall y \in [0, 100] \forall w \in [0, 10]: trapezoid(-y, +y, w) \leq \epsilon
+  \forall y \in [0, 100] \forall w \in [0, 10] \, trapezoid(-y, +y, w) \leq \epsilon
 
 We have covered various aspects of testing in other works, including
 
