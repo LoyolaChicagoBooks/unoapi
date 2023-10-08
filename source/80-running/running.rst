@@ -6,9 +6,11 @@ They are publicly available as a GitHub repository under the Apache 2.0 open-sou
 
 The examples include a README file with instructions for building and running on Debian-based Linux systems (including Ubuntu), as well as the scripts needed to run the experiments described in this paper.
 
+The full documentation of the LLVM-based oneAPI DPC++ compilation toolchain is available at `intel.github.io/llvm-docs <https://intel.github.io/llvm-docs>`_.
 
-Running the example on GitHub as a fork of the original repo (browser-based)
-----------------------------------------------------------------------------
+
+Running the examples on GitHub as a fork of the original repo (browser-based)
+-----------------------------------------------------------------------------
 
 The repository is configured with continuous integration (CI) using the following GitHub Actions workflow:
 
@@ -46,34 +48,92 @@ This option requires a physical or virtual Debian-based system on Intel hardware
 The specific steps are documented in the top-level README file in the GitHub repository.
 The artifact’s main executable is self-documenting using the ``-h`` or ``–help`` CLI option.
 
+The Intel oneAPI DPC++ toolchain is currently supported on Linux and Windows (64-bit).
+It is possible to develop DPC++ applications on Intel-based MacOS computers by doing so within a Linux virtual machine.
+
 
 Running the examples on the Intel DevCloud
 ------------------------------------------
 
-This option requires a (free) account on Intel’s DevCloud for working with oneAPI and provides access to various types of accelerators, such as GPUs based on the gen9 architecture we’ve used for the sample runs shown above; it thereby provides the highest degree of reproducibility.
+This option requires a (free) account on Intel’s DevCloud for working with oneAPI and provides access to various types of accelerators, such as GPUs based on the gen9 architecture we’ve used for the sample runs shown above; it thereby provides a highe degree of reproducibility.
 Once access to DevCloud has been established, the specific steps are documented in the top-level README file in the GitHub repository.
-The artifact’s main executable is self-documenting using the ``-h`` or ``–help`` CLI option.
+
+Concretely, on a DevCloud compute node, one can use OpenCL's ``clinfo`` command to discover the available accelerators:
+
+.. code-block:: text
+
+  u204386@s001-n140:~$ clinfo -l
+  Platform #0: Intel(R) OpenCL
+  `-- Device #0: Intel(R) Xeon(R) E-2176G CPU @ 3.70GHz
+  Platform #1: Intel(R) OpenCL HD Graphics
+  `-- Device #0: Intel(R) UHD Graphics P630 [0x3e96]
 
 
-Gitpod is not currently supported
----------------------------------
+Better yet, after running the oneAPI setvars.sh script, one can use SYCL's ``sycl-ls`` command to do the same thing:
 
-The installation and compilation steps work on Gitpod as intended.
-Nevertheless, because they are based on a virtualized AMD chipset, Gitpod and similar environments don't support the execution of data-parallel code, not even using the CPU itself as an accelerator.
+.. code-block:: text
 
-.. code-block::
+  u204386@s001-n140:~/Work/unoapi-dpcpp-examples$ sycl-ls
+  [opencl:cpu:0] Intel(R) OpenCL, Intel(R) Xeon(R) E-2176G CPU @ 3.70GHz 3.0 [2023.16.7.0.21_160000]
+  [opencl:gpu:1] Intel(R) OpenCL HD Graphics, Intel(R) UHD Graphics P630 [0x3e96] 3.0 [22.28.23726.1]
+  [ext_oneapi_level_zero:gpu:0] Intel(R) Level-Zero, Intel(R) UHD Graphics P630 [0x3e96] 1.3 [1.3.23726]
+
+At the time of this writing, DevCloud provides well over 200 compute nodes with various types of accelerators, including field-programmable gate arrays (FPGAs).
+Some accelerators, however, don't support certain types of data, e.g., 64-bit floating point numbers.
+
+
+Running on cloud-based virtual machines
+---------------------------------------
+
+We can actually run data-parallel code on an Intel-based virtual machine, e.g., Microsoft Azure; in some cases, installing the OpenCL headers might be required in addition to the DPC++ compiler toolchain:
+
+.. code-block:: text
+
+  sudo apt install opencl-clhpp-headers
+
+After running the oneAPI setvars.sh script, ``sycl-ls`` reports the available accelerators.
+
+.. code-block:: text
+
+  comp141@ML-RefVm-775968:~/Work/unoapi-dpcpp-examples$ sycl-ls
+  [opencl:acc:0] Intel(R) FPGA Emulation Platform for OpenCL(TM), Intel(R) FPGA Emulation Device 1.2 [2023.16.7.0.21_160000]
+  [opencl:cpu:1] Intel(R) OpenCL, Intel(R) Xeon(R) Platinum 8171M CPU @ 2.60GHz 3.0 [2023.16.7.0.21_160000]
+
+
+On Gitpod, the installation and compilation steps work as intended, and sequential execution is supported.
+Nevertheless, because they are based on a virtualized AMD chipset without GPU, this environment doesn't support the execution of data-parallel code, not even using the CPU itself as an accelerator.
+
+.. code-block:: text
 
   Machine:
     Type: Docker Mobo: Google model: Google Compute Engine serial: <superuser required> BIOS: Google v: Google date: 08/04/2023
     CPU:
       Info: 8-core model: AMD EPYC 7B13 bits: 64 type: MT MCP cache: L2: 4 MiB
 
-By contrast, we were able to run data-parallel code on an Intel-based virtual machine, e.g., on Microsoft Azure.
+Accordingly, ``sycl-ls`` doesn't return anything.
 
-.. code-block::
 
-  Machine:
-    Type: Desktop Mobo: Microsoft model: Virtual Machine v: 7.0 serial: <superuser/root required> BIOS: American Megatrends v: 090008 date: 12/07/2018
-  CPU:
-    Topology: Quad Core model: Intel Xeon Platinum 8171M bits: 64 type: MCP
+Running on hardware with NVIDIA GPUs
+------------------------------------
 
+The oneAPI plugin for NVIDIA GPUs is currently in beta testing.
+Detailed instructions are `available from Codeplay <https://developer.codeplay.com/products/oneapi/nvidia/2023.2.1/guides/get-started-guide-nvidia>`_.
+
+In particular, the plugin uses the LLVM-based oneAPI DPC++ toolchain. 
+To build our example in a separate build directory targeting the NVIDIA GPU, coexisting with the default one targeting the host CPU, we can perform the following steps:
+
+.. code-block:: text
+
+  $ . ./setvars.sh
+  $ CXXFLAGS="$CXXFLAGS -fsycl-targets=nvptx64-nvidia-cuda" cmake -DCMAKE_BUILD_TYPE=Release -S . -B build-nvidia
+  $ CXXFLAGS="$CXXFLAGS -fsycl-targets=nvptx64-nvidia-cuda" cmake --build build-nvidia
+  $ ONEAPI_DEVICE_SELECTOR=cuda:\* ./build-nvidia/bin/integration -n 10000000 -w 1000
+  [2023-10-08 01:48:10.176] [info] integrating function from 0 to 1 using 10000000 trapezoid(s), dx = 1e-07
+  [2023-10-08 01:48:10.176] [info] preparing for vectorized integration
+  [2023-10-08 01:48:10.696] [info] Device: NVIDIA RTX A6000
+  [2023-10-08 01:48:10.697] [info] done submitting to queue...waiting for results
+  [2023-10-08 01:48:15.505] [info] result should be available now
+  result = 1.0000000000000013
+  [2023-10-08 01:48:15.506] [info] all done for now
+
+.. todo:: change CL/ includes to sycl/ in snippets
