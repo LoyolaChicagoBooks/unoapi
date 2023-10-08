@@ -120,7 +120,7 @@ The oneAPI plugin for NVIDIA GPUs is currently in beta testing.
 Detailed instructions are `available from Codeplay <https://developer.codeplay.com/products/oneapi/nvidia/2023.2.1/guides/get-started-guide-nvidia>`_.
 
 In particular, the plugin uses the LLVM-based oneAPI DPC++ toolchain. 
-To build our example in a separate build directory targeting the NVIDIA GPU, coexisting with the default one targeting the host CPU, we can perform the following steps:
+To build our example in a separate build directory targeting the NVIDIA GPU, which is not binary-compatible with the default one targeting the host CPU, we can perform the following steps:
 
 .. code-block:: text
 
