@@ -15,26 +15,27 @@ Build Status
          :alt: GitHub Pages and Release PDF
 
 
-GitHub Actions
-   See https://github.com/LoyolaChicagoBooks/unoapi/actions
+      See https://github.com/LoyolaChicagoBooks/unoapi/actions
 
 
+Distribution
+-------------
 
-Download
----------
-
-HTML [this page]
+Web Version
    See https://unoapi.cs.luc.edu.
 
-PDF
+Book Version
    See https://github.com/LoyolaChicagoBooks/unoapi/releases/latest/download/UnoAPI.pdf.
 
-Source Code
+Example Source Code
 
 - `UnoAPI Data-Parallel C++ Examples <https://github.com/LoyolaChicagoCode/unoapi-dpcpp-examples>`__
+- `Modern C++ Examples <https://github.com/LoyolaChicagoCode/modern-cpp-examples>`__
+
+Other Systems Code Examples - C/C++
+
 - `COMP 310 Systems Code Examples in C <https://github.com/SoftwareSystemsLaboratory/systems-code-examples>`__
 - `Process Tree in C++ <https://github.com/LoyolaChicagoCode/processtree-cpp>`__
-
 
 Citation
 ---------
@@ -70,17 +71,18 @@ But...
 - The most modern languages still *punt to C* to provide acceleration.
 - Research software engineers who know about *computer systems* and *software engineering* are most likely to progress by embracing these two areas (computer systems and SE)
 
-AI Disclosure
----------------
-
-.. note:: This text contains a mix of original writing and programming with strategic use of Chat-GPT4 via intelligent/clever prompting. All examples will be available in our repository with an appropriate **cmake** build file and tests. We will also make our prompts and analysis available, similar to what we have done for our recent ongoing study of Chat-GPT4 and Systems Programming. See https://doi.org/10.6084/m9.figshare.22257274.
-
 
 Contributors
 --------------
 
 - `George K. Thiruvathukal (project lead) <https://gkt.sh>`__
 - `Konstantin Läufer <https://laufer.cs.luc.edu>`__
+
+AI Disclosure
+---------------
+
+.. note:: This text contains a mix of original writing and programming with strategic use of Chat-GPT4 via intelligent/clever prompting. All examples will be available in our repository with an appropriate **cmake** build file and tests. We will also make our prompts and analysis available, similar to what we have done for our recent ongoing study of Chat-GPT4 and Systems Programming. See https://doi.org/10.6084/m9.figshare.22257274.
+
 
 Acknowledgements
 -----------------
