@@ -58,13 +58,13 @@ Device Selection and Task Queues
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 A typical DPC++ program starts with the selection of one or more accelerator devices based on criteria of varying specificity.
- In our exemplar, the user can choose between running the code on the host CPU and an available accelerator:
+In our exemplar, the user can choose between running the code on the host CPU and an available accelerator:
 
 .. literalinclude:: ../snippets/snip-UnoAPI-main-parallel-devices.tex
   :language: cpp
   :linenos: 
   :lineno-start: 99
-  :lines: 3-9
+  :lines: 3-5
 
 The interface between the programmer and the chosen device is a *queue*, to which we can later submit *commands* for execution on the device.
 
@@ -76,6 +76,9 @@ The interface between the programmer and the chosen device is a *queue*, to whic
 
 If we do not explicitly specify a device when creating our queue, the queue will automatically select the most suitable available device on the current hardware.
 Also, we can choose between a simple in-order queue, as we have done here, or we can have the queue figure out the best order for executing the submitted commands without deadlocking.
+
+In addition to programmatic device selection through the API, setting the ``ONEAPI_DEVICE_SELECTOR`` environment variable may be required to help oneAPI find specific accelerators; 
+the section :ref:`running_on_nvidia` shows an example of this mechanism.
 
 
 Buffers Shared Between Host and Device
