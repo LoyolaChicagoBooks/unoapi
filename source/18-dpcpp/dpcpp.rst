@@ -146,3 +146,72 @@ To observe a speedup when using ``parallel_for``, we define ``f`` as an intentio
   :linenos: 
   :lineno-start: 4
   :lines: 3-5
+
+
+Another Example: Calulating Pi using the Monte Carlo Method
+-----------------------------------------------------------
+
+This example follows a similar pattern as the trapezoidal integration one.
+Conceptually, each player throws a given number of darts, where those that fall within the quarter circle are counted toward the calculation of π.
+The various players operates in parallel with and independently of all other players
+To improve randomization, each player's random number generator instance starts with a differen seed offset.
+
+.. code-block:: cpp
+
+  q.submit([&](auto &h) {
+      const auto c = c_buf.get_access<sycl::access_mode::write>(h);
+
+      h.parallel_for(number_of_players, [=](const auto index) {
+          const auto offset = 37 * index.get_linear_id() + 13;
+          oneapi::dpl::minstd_rand minstd(seed, offset);
+          oneapi::dpl::ranlux48 ranlux(seed, offset);
+
+          constexpr uint64_t R{3037000493UL}; // largest prime <= sqrt(ULONG_MAX / 2)
+          oneapi::dpl::uniform_int_distribution<uint64_t> distr(0, R);
+          const auto r_square{R * R};
+
+          auto darts_within_circle{0UL};
+          for (auto i{0UL}; i < number_of_darts; i++) {
+              const auto x{use_ranlux ? distr(ranlux) : distr(minstd)};
+              const auto y{use_ranlux ? distr(ranlux) : distr(minstd)};
+              const auto d_square{x * x + y * y};
+              if (d_square <= r_square)
+                  darts_within_circle++;
+          }
+          c[index] = darts_within_circle;
+      });
+  });
+
+
+After all the players are done, we perform a reduction to combine the number of darts within the quarter circle.
+
+.. code-block:: cpp
+
+  q.submit([&](auto &h) {
+      const auto c{c_buf.get_access<sycl::access_mode::read>(h)};
+      const auto sum_reduction{sycl::reduction(s_buf, h, sycl::plus<>())};
+
+      h.parallel_for(
+        sycl::range<1>{number_of_players}, 
+        sum_reduction, 
+        [=](const auto index, auto &sum) {
+          sum.combine(c[index]);
+      });
+  });
+
+A sample run looks like this:
+
+.. code-block:: text
+  
+  [2023-10-09 20:12:49.704] [info] 4 players are going to throw 1000000 darts each
+  [2023-10-09 20:12:49.704] [info] using minstd engine with real distribution
+  [2023-10-09 20:12:49.704] [info] randomization is off
+  [2023-10-09 20:12:49.763] [info] Device: Intel(R) Core(TM) i5-1030NG7 CPU @ 1.10GHz
+  [2023-10-09 20:12:49.763] [info] Max workgroup size: 8192
+  [2023-10-09 20:12:50.474] [info] done submitting to queue...waiting for results
+  [2023-10-09 20:12:50.474] [info] result[0] = 786512
+  [2023-10-09 20:12:50.474] [info] result[1] = 786064
+  [2023-10-09 20:12:50.474] [info] result[2] = 786509
+  [2023-10-09 20:12:50.474] [info] result[3] = 786054
+  [2023-10-09 20:12:50.474] [info] sum = 3145139
+  pi = 3.145139
