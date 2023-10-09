@@ -6,17 +6,17 @@
 
     - name: Install Intel oneAPI
       timeout-minutes: 5
-      run: ./install-dpcpp.sh
+      run: |
+        ./install-dpcpp.sh
 
     - name: Set oneAPI environment
       run: |
-        source /opt/intel/oneapi/setvars.sh
+        source ./setvars.sh
         printenv >> $GITHUB_ENV
-        echo /opt/oneapi/compiler/latest/linux/bin \
-          >> $GITHUB_PATH
+        echo /opt/intel/oneapi/compiler/latest/linux/bin-llvm >> $GITHUB_PATH
 
     - name: CMake configure
-      run: cmake -S . -B $BUILD_DIR
+      run: cmake -DCMAKE_BUILD_TYPE=Debug -S . -B $BUILD_DIR
 
     - name: CMake build
       run: cmake --build $BUILD_DIR
