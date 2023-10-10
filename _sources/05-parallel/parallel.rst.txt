@@ -1,30 +1,43 @@
 Introduction to Parallel Programming
 ======================================
 
+We introduce parallel computing.
+We begin with a discussion of parallel computing history, including a discussion of computing systems and programming techniques.  We then cover key parallel programming concepts, specifically how to categorize parallel computing approaches and evaluate performance.
+Knowing this foundational material remains of timeless importance when it comes to achieving desired results.
 
-Notable Parallel Computing Systems
+Notable Early Parallel Computing Systems
 --------------------------------------------
 
-.. This chapter is being drafted now. Set expectations accordingly! This is a combination of notes from George's HOC efforts with David Dennis and ChatGPT.
+The history of parallel computing systems dates nearly to the beginning of modern electronic computing history itself, which featured notable systems such as `Atanasoff-Berry Computer (ABC) <https://www.britannica.com/technology/Atanasoff-Berry-Computer>`__ (1939), `Colossus <https://www.britannica.com/technology/Colossus-computer>`__ (1943), and `ENIAC https://www.britannica.com/technology/ENIAC <https://www.britannica.com/technology/ENIAC>`__ (1945).
 
+Here is a timeline of key developments in parallel computing, focusing on computers designed for parallel and scientific computing, with an emphasis on on-chip parallelism.
 
-Here is a timeline of key developments in parallel computing, focusing on computers designed for parallel and scientific computing, with an emphasis on on-chip parallelism. In 1945, ENIAC, the first general-purpose electronic computer, laid the foundation for computing capabilities, though not specifically designed for parallelism. ILLIAC I (1952) and ILLIAC II (1957) were early examples of computers tailored for scientific and engineering calculations, with ILLIAC II introducing parallel computing capabilities. In 1962, ILLIAC III emerged as a highly parallel computer, accommodating up to 256 processors for large-scale parallel computations. ILLIAC IV (1966) continued the trend with a highly parallel supercomputer featuring 64 independent processing nodes. Convex C1 (1985) marked the advent of the first commercial parallel computer, utilizing custom-designed parallel processing architecture for scientific and engineering applications. Cray X-MP (1985) employed vector processing and parallelism to achieve remarkable performance. In 1991, the Thinking Machines CM-5 supercomputer utilized vector processors and a custom interconnect network to deliver high performance across diverse scientific and engineering applications. The IBM SP (1993) featured a distributed-memory architecture and high-speed interconnect network for impressive scientific computing performance. Beyond 1993, parallel computing became more ubiquitous, evolving into a commodity. Clusters, accelerators, and other specialized parallel hardware emerged, which we cover separately in the subsequent section.
+- In 1945, ENIAC, the first general-purpose electronic computer, laid the foundation for computing capabilities, though not specifically designed for parallelism. ILLIAC I (1952) and ILLIAC II (1957) were early examples of computers tailored for scientific and engineering calculations, with ILLIAC II introducing parallel computing capabilities.
+- In 1962, ILLIAC III emerged as a highly parallel computer, accommodating up to 256 processors for large-scale parallel computations. ILLIAC IV (1966) continued the trend with a highly parallel supercomputer featuring 64 independent processing nodes.
+- Convex C1 (1985) marked the advent of the first commercial parallel computer, utilizing custom-designed parallel processing architecture for scientific and engineering applications.
+- Cray X-MP (1985) employed vector processing and parallelism to achieve remarkable performance.
+- In 1991, the Thinking Machines CM-5 supercomputer utilized vector processors and a custom interconnect network to deliver high performance across diverse scientific and engineering applications.
+- The IBM SP (1993) featured a distributed-memory architecture and high-speed interconnect network for impressive scientific computing performance. Beyond 1993, parallel computing became more ubiquitous, evolving into a commodity. Clusters, accelerators, and other specialized parallel hardware emerged, which we cover separately in the subsequent section.
 
 Cluster Computing
 ^^^^^^^^^^^^^^^^^^
 
 Cluster computing, also known as high-performance computing (HPC), has its origins in the early days of computing when it became clear that solving complex computational problems required more processing power than a single machine could provide.
-The concept of connecting multiple computers together to work in parallel emerged as a solution.
-In the 1960s and 1970s, research institutions and government agencies began experimenting with cluster-like architectures, such as the Control Data Corporation's CDC 6600 system, which employed multiple processors to tackle scientific calculations.
-However, it was not until the 1990s that cluster computing gained widespread recognition with the advent of inexpensive, commodity hardware, and the development of networking technologies that allowed computers to communicate efficiently.
-The Beowulf project, initiated by NASA in the mid-1990s, played a crucial role in popularizing cluster computing by demonstrating that a cluster of interconnected off-the-shelf computers could deliver impressive computing power at a fraction of the cost of traditional supercomputers.
+The concept of connecting multiple computers together to work in parallel emerged as a solution and is the basis for modern supercomputers such as those found on the `Top 500 List <https://www.top500.org/>`__.
+
+- In the 1960s and 1970s, research institutions and government agencies began experimenting with cluster-like architectures, such as the Control Data Corporation's CDC 6600 system, which employed multiple processors to tackle scientific calculations.
+- In the 1990s, cluster computing gained widespread recognition with the advent of inexpensive, commodity hardware, and the development of networking technologies that allowed computers to communicate efficiently.
+- The Beowulf project, initiated by NASA in the mid-1990s, played a crucial role in popularizing cluster computing by demonstrating that a cluster of interconnected off-the-shelf computers could deliver impressive computing power at a fraction of the cost of traditional supercomputers.
+
 Since then, cluster computing has evolved significantly, becoming a dominant paradigm for high-performance computing, enabling breakthroughs in fields such as weather modeling, drug discovery, and data analysis.
 
 
 Accelerators
 ^^^^^^^^^^^^^
 
-Accelerators and co-processors play a crucial role in enhancing the computational capabilities of central processing units (CPUs). These specialized hardware components are designed to offload specific tasks or types of computations from the CPU, thereby accelerating the overall performance of a system. By leveraging parallel processing techniques and tailored architectures, accelerators such as graphics processing units (GPUs), field-programmable gate arrays (FPGAs), and application-specific integrated circuits (ASICs) excel at performing repetitive and data-intensive operations. GPUs, originally developed for rendering graphics, have found widespread use in areas such as scientific simulations, machine learning, and cryptocurrency mining. FPGAs offer reconfigurability and low power consumption, making them suitable for prototyping and custom logic implementation. ASICs, on the other hand, are highly optimized for specific applications and deliver exceptional performance and efficiency. Incorporating accelerators and co-processors alongside CPUs enables a heterogeneous computing environment, allowing for more efficient and specialized processing tailored to the demands of modern workloads.
+Accelerators and co-processors play a crucial role in enhancing the computational capabilities of central processing units (CPUs). These specialized hardware components are designed to offload specific tasks or types of computations from the CPU, thereby accelerating the overall performance of a system. By leveraging parallel processing techniques and tailored architectures, accelerators such as graphics processing units (GPUs), field-programmable gate arrays (FPGAs), and application-specific integrated circuits (ASICs) excel at performing repetitive and data-intensive operations.
+
+GPUs, originally developed for rendering graphics, have found widespread use in areas such as scientific simulations, machine learning, and cryptocurrency mining. FPGAs offer reconfigurability and low power consumption, making them suitable for prototyping and custom logic implementation. ASICs, on the other hand, are highly optimized for specific applications and deliver exceptional performance and efficiency. Incorporating accelerators and co-processors alongside CPUs enables a heterogeneous computing environment, allowing for more efficient and specialized processing tailored to the demands of modern workloads.
 
 Among the most common accelerators are the following:
 
@@ -376,9 +389,9 @@ Flynn produced a taxonomy of parallel machines that is widely used. He classifie
 
 - SIMD—(pronounced “sim-dee”) single instruction stream–multiple data stream: These machines typically are used to process arrays. A single processor fetches instructions and broadcasts those instructions to a number of data units. Those data units fetch data and perform operations on them. The appropriate programming language for such machines has a single flow of control (like a Von Neumann language), but has operations that can operate on entire arrays, rather than on individual array elements. The hardware needs ways in which data units will not execute some operations based on tests of their own data (e.g., so that some units can turn off for the then and others for the else parts of if-then-else statements), and it needs to let the control unit read the and or the or of the results of data tests at the data units (e.g. to know when all units have finished executing a while loop).
 
-MISD—multiple instruction stream–single data stream: It’s not totally clear what machines fit into this category. One kind of MISD machine would be designed for fail-safe operation; several processors perform the same operations on the same data and check each other to be sure that any failure will be caught.
+- MISD—multiple instruction stream–single data stream: It’s not totally clear what machines fit into this category. One kind of MISD machine would be designed for fail-safe operation; several processors perform the same operations on the same data and check each other to be sure that any failure will be caught. (An early system that worked in this manner was the `Tandem <https://en.wikipedia.org/wiki/Tandem_Computers>`__).
 
-Another proposed MISD machine is a systolic array processor. Streams of data are fetched from memory and passed through arrays of processors. The individual processors perform their own operations on the streams of data passing through them, but they have no control over where to fetch data from.
+  Another proposed MISD machine is a systolic array processor. Streams of data are fetched from memory and passed through arrays of processors. The individual processors perform their own operations on the streams of data passing through them, but they have no control over where to fetch data from.
 
 MIMD machines are divided into two varieties: shared memory and distributed memory.
 
@@ -392,7 +405,7 @@ There is another problem with shared-memory machines: It’s hard to build them 
 
 An alternative to UMA is NUMA (nonuniform memory access) machines. Typically, NUMA machines have some memory attached to each processor, which the processor can access quickly. To get to the memory attached to another processor, the processor must go through some sort of switch, which slows down the access. By careful placement and rep-lication of some data and subroutines, NUMA machines can have many of the programming conveniences of UMA machines, but with cheaper hardware, larger numbers of processors, and reasonable speed. However, programmers tend to discover that they can gain even better performance by copying entire data structures into local memory, operating on them locally, and writing them back to local memory. At this point, their code becomes more complex and less portable.Distributed-memory MIMD machines (MIMD-DM) are much easier to build, but much harder to program. The MIMD-DM machine is basically a collection of computers, called nodes, connected through a high-performance network. The major programming problem is that the individual machines must coordinate and communicate data by message passing; it often requires entire redesigns of programs to port them to MIMD-DM machines. The only way to access data on another node is to have that node send it to you. For that to happen, the other node must know that you need the data—or you must send it a request message, and it must be programmed to reply.
 
-It is arguable that the change from shared-memory to distributed-memory machines is a radical shift; it goes to the root of how one thinks about computations. On the von Neumann machine, the most important entity is the process, the program in execution. The process fetches instructions and manipulates data, thereby embodying both control and data. On a shared-memory machine, the process is still the most important entity, although there are now multiple threads of execution within the data space. But at the global level, on a distributed-memory machine, messages convey data across the machine and the arrival of messages enables computations. At the global level of distributed-memory machines, it is the messages that embody control and data. Hence, the messages are more important than the processes that are running on the nodes.
+It is arguable that the change from shared-memory to distributed-memory machines is a radical shift (but one becoming more common); it goes to the root of how one thinks about computations. On the von Neumann machine, the most important entity is the process, the program in execution. The process fetches instructions and manipulates data, thereby embodying both control and data. On a shared-memory machine, the process is still the most important entity, although there are now multiple threads of execution within the data space. But at the global level, on a distributed-memory machine, messages convey data across the machine and the arrival of messages enables computations. At the global level of distributed-memory machines, it is the messages that embody control and data. Hence, the messages are more important than the processes that are running on the nodes.
 
 Control-memory taxonomy
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -528,7 +541,7 @@ Another aspect of this argument against Amdahl’s law is that, as the problem s
 .. ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Granularity
---------------------------------------
+^^^^^^^^^^^^^
 
 Grain size loosely refers to the amount of computation that is done between communications or synchronizations. Too large a grain size can result in an unbalanced load. Too small a grain size can waste too much time on system overhead. Consider eight processors that are to execute 10 independent tasks, each of which takes :math:`t` time units. Suppose the system takes :math:`s` time units to run a task. The schedule looks like this:
 
