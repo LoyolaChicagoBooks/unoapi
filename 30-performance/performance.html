@@ -108,10 +108,6 @@
 <div id="content" role="main">
 <section id="performance-essentials">
 <h1>Performance Essentials<a class="headerlink" href="#performance-essentials" title="Permalink to this heading">¶</a></h1>
-<div class="admonition-todo admonition" id="id1">
-<p class="admonition-title">Todo</p>
-<p>Basically, you can reference the notion of scaling. Specifically, in showing the results, vary the problem size, e.g. by 10x or your favorite multiplier but 10x increements usually makes sense. And we want a nice plot.</p>
-</div>
 <p>In this section, we discuss various aspects of performance of data-parallel C++ code, including how we can measure time performance in terms of elapsed “wall clock” time, and how we can achieve and observe a speedup when leveraging data parallelism.</p>
 <section id="measuring-time-performance">
 <h2>Measuring time performance<a class="headerlink" href="#measuring-time-performance" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#measuring-time-performance'">¶</a></h2>
@@ -223,11 +219,21 @@ TIME,DELTA,UNIT,DEVICE,PHASE
 </div>
 <p>The total wall time for this run was about 0.66 seconds, including the overhead for preparing the task queue on the host CPU.
 This corresponds to a speedup of about 320 compared to sequential execution or a speedup of about 5 compared to execution on the GPU, possibly because of the better support for 64-bit floating point arithmetic on the CPU.</p>
-<div class="admonition-todo admonition" id="id2">
-<p class="admonition-title">Todo</p>
-<p>chapter conclusion</p>
-</div>
 </section>
+</section>
+<section id="observed-scaling">
+<h2>Observed scaling<a class="headerlink" href="#observed-scaling" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#observed-scaling'">¶</a></h2>
+<p>In this section, we’ll share some observations of scaling in terms of the number of trapezoids n and the unit workload factor (number of repetitions) w.
+Each chart shows wall time in seconds and unit time in nanoseconds per total problem size (n times w).</p>
+<figure class="align-default">
+<img alt="../_images/walltime-fixed-n.png" src="../_images/walltime-fixed-n.png"/>
+</figure>
+<p>For a reasonably high, fixed number of trapezoids, wall time increases sublinearly, while unit time decreases substantially for higher workload factors.</p>
+<figure class="align-default">
+<img alt="../_images/walltime-fixed-workload.png" src="../_images/walltime-fixed-workload.png"/>
+</figure>
+<p>For a reasonably high, fixed workload, wall time increases sublinearly (very gradually), while unit time is mostly flat.</p>
+<p>In addition, our raw performance data is <a class="reference external" href="https://docs.google.com/spreadsheets/d/1g6oeu2-ABbHGwrdyisv4kE2KKr-Wf9zjQLVnjsDn4_s">available in this spreadsheet</a>.</p>
 </section>
 </section>
 </div></div><aside class="hidden text-sm xl:block" id="right-sidebar">
@@ -240,6 +246,7 @@ This corresponds to a speedup of about 320 compared to sequential execution or a
 <li><a :data-current="activeSection === '#parallel-execution-on-a-multicore-cpu'" class="reference internal" href="#parallel-execution-on-a-multicore-cpu">Parallel execution on a multicore CPU</a></li>
 </ul>
 </li>
+<li><a :data-current="activeSection === '#observed-scaling'" class="reference internal" href="#observed-scaling">Observed scaling</a></li>
 </ul>
 </div>
 </aside>

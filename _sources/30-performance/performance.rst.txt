@@ -1,8 +1,6 @@
 Performance Essentials
 ========================
 
-.. todo:: Basically, you can reference the notion of scaling. Specifically, in showing the results, vary the problem size, e.g. by 10x or your favorite multiplier but 10x increements usually makes sense. And we want a nice plot.  
-
 In this section, we discuss various aspects of performance of data-parallel C++ code, including how we can measure time performance in terms of elapsed "wall clock" time, and how we can achieve and observe a speedup when leveraging data parallelism.
 
 Measuring time performance
@@ -138,4 +136,22 @@ This is reasonable when the CPU already has multiple cores.
 The total wall time for this run was about 0.66 seconds, including the overhead for preparing the task queue on the host CPU.
 This corresponds to a speedup of about 320 compared to sequential execution or a speedup of about 5 compared to execution on the GPU, possibly because of the better support for 64-bit floating point arithmetic on the CPU.
 
-.. todo:: chapter conclusion
+
+Observed scaling
+----------------
+
+In this section, we'll share some observations of scaling in terms of the number of trapezoids n and the unit workload factor (number of repetitions) w.
+Each chart shows wall time in seconds and unit time in nanoseconds per total problem size (n times w).
+
+.. figure:: ../images/walltime-fixed-n.png
+
+For a reasonably high, fixed number of trapezoids, wall time increases sublinearly, while unit time decreases substantially for higher workload factors.
+
+.. figure:: ../images/walltime-fixed-workload.png
+
+For a reasonably high, fixed workload, wall time increases sublinearly (very gradually), while unit time is mostly flat.
+
+In addition, our raw performance data is `available in this spreadsheet <https://docs.google.com/spreadsheets/d/1g6oeu2-ABbHGwrdyisv4kE2KKr-Wf9zjQLVnjsDn4_s>`_.
+
+
+.. TODO chapter conclusion
