@@ -136,8 +136,6 @@ This is reasonable when the CPU already has multiple cores.
 The total wall time for this run was about 0.66 seconds, including the overhead for preparing the task queue on the host CPU.
 This corresponds to a speedup of about 320 compared to sequential execution or a speedup of about 5 compared to execution on the GPU, possibly because of the better support for 64-bit floating point arithmetic on the CPU.
 
-.. todo:: chapter conclusion
-
 
 Observed scaling
 ----------------
@@ -154,3 +152,6 @@ For a reasonably high, fixed number of trapezoids, wall time increases sublinear
 For a reasonably high, fixed workload, wall time increases sublinearly (very gradually), while unit time is mostly flat.
 
 In addition, our raw performance data is `available in this spreadsheet <https://docs.google.com/spreadsheets/d/1g6oeu2-ABbHGwrdyisv4kE2KKr-Wf9zjQLVnjsDn4_s>`_.
+
+
+.. TODO chapter conclusion
