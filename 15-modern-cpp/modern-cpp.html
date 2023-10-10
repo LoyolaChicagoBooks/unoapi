@@ -108,12 +108,9 @@
 <div id="content" role="main">
 <section id="modern-c-as-a-better-c-and-c">
 <h1>Modern C++ as a Better C (and C++)<a class="headerlink" href="#modern-c-as-a-better-c-and-c" title="Permalink to this heading">¶</a></h1>
-<p>If you want to learn SYCL and oneAPI <em>properly</em>  you will need to come up to speed with Modern C++.  In our experience, we know many people who say they “know” C++.  C++ has undergone numerous changes since it was introduced in the 1980s and 1990s.  While the original syntax remains intact, if you have not kept up with the changes since then (notably, C++ 11), you should take steps to refresh your knowlege of the language, since many of its recent features make it virtually <em>unrecognizable</em> from its earlier incarnations.</p>
+<p>If you want to learn SYCL and oneAPI <em>properly</em>, you will need to come up to speed with Modern C++.  In our experience, we know many people–including ourselves–who say they “know” C++.  C++ has undergone numerous changes since it was introduced in the 1980s and 1990s.  While the original syntax remains intact, if you have not kept up with the changes since then (notably, C++ 11), you should take steps to refresh your knowlege of the language, since many of its recent features make it virtually <em>unrecognizable</em> from its earlier incarnations.</p>
 <p>We are particularly impressed with how C++ has incorporated features from modern object-functional languages, some of which we will cover here.  Please let us know if you think other features are worthy of inclusion. As this section is still in draft status, we realize our list may not be exhaustive.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>We focus our energy on language features that are likely to appear in oneAPI/SYCL code examples in our tutorial.</p>
-</div>
+<p>In the remaining discussion, we focus our energy on on language features that are likely to appear in oneAPI/SYCL code examples in our tutorial.</p>
 <section id="overview-of-modern-c">
 <h2>Overview of Modern C++<a class="headerlink" href="#overview-of-modern-c" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#overview-of-modern-c'">¶</a></h2>
 <p>If you already know some Object-Oriented Programming (OOP) concepts and want to learn modern C++, here are some topics that are worthy of exploration:</p>
@@ -135,7 +132,6 @@
 <p>Even if you programmed with C++ in the past, you need to understand that C++ has changed a great deal since its debut in the late-1980s and early 1990s.</p>
 <p>Here’s an example implementation of the familiar Point class with <code class="docutils literal notranslate"><span class="pre">x</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code>, and <code class="docutils literal notranslate"><span class="pre">z</span></code> parameters in modern C++ with support for move semantics:</p>
 <p>You can assume that this code can be placed in a C++ header file (e.g. Point.h) as a header-only solution:</p>
-<p>Include version</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#ifndef POINT_H</span>
 <span class="cp">#define POINT_H</span>
 
@@ -501,10 +497,6 @@ Readers familiar with lambda expressions from other functional or object/functio
 <p>We then create a library for the <cite>Point</cite> class using the <cite>add_library</cite> command with the <cite>INTERFACE</cite> option. The <cite>INTERFACE</cite> option specifies that the library does not have an implementation file, and its headers should be made available to other targets that depend on it. We use the <cite>target_include_directories</cite> command to add the current source directory to the include paths of the <cite>Point</cite> library.</p>
 <p>We then create an executable for the point_example using the add_executable command with the source file <cite>main.cpp</cite>. We use the <cite>target_link_libraries</cite> command to link the <cite>Point</cite> library to the <cite>point_example</cite> executable.</p>
 <p>To use this <cite>CMakeLists.txt</cite> file, you would create a folder named <cite>point_example</cite> in your project directory, and place the <cite>Point.h</cite> header file and the <cite>main.cpp</cite> source file in that folder.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Working to put all of the above into a repo. Focusing on narrative first.</p>
-</div>
 </section>
 <section id="automatic-variables">
 <h3>Automatic variables<a class="headerlink" href="#automatic-variables" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#automatic-variables'">¶</a></h3>
@@ -578,10 +570,6 @@ We also demonstrate how to initialize more complex structures such as an STL gen
 </section>
 <section id="constants-and-constant-expressions">
 <h3>Constants and Constant Expressions<a class="headerlink" href="#constants-and-constant-expressions" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#constants-and-constant-expressions'">¶</a></h3>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>George still working on this.</p>
-</div>
 <p>In this example, we define a pythagorean function using constexpr and lambda expressions.
 The function takes two arguments a and b representing the lengths of the two sides of a right-angled triangle, and calculates the length of the hypotenuse using the Pythagorean theorem.</p>
 <p>We then define two const variables a and b, which have values of 3.0 and 4.0 respectively. Since a and b are const, we cannot change their values once they have been initialized.</p>
@@ -1132,10 +1120,6 @@ Only log messages written to this level or higher will actulaly be displayed.</p
 </pre></div>
 </div>
 <p>Testing using “print” statements is not ideal. Here is how to rewrite the above using unit tests:</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>output will be available soon</p>
-</div>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;gtest/gtest.h&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;map&gt;</span>
 
@@ -1397,7 +1381,7 @@ We use lambda expressions to select points in each quadrant, subject to what the
 <h3>Co-routines<a class="headerlink" href="#co-routines" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#co-routines'">¶</a></h3>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Co-routines are a fairly new C++ feature and may not be supported by your compiler.</p>
+<p>Co-routines are a fairly new C++ feature and may not be supported by your compiler. This is not needed for our oneAPI tutorial.</p>
 </div>
 <p>Co-routines are an important concept that is relevant to our discussion of SYCL and oneAPI.</p>
 <p>A coroutine is a allows for the execution of multiple, independent, and cooperative subroutines or functions that can be paused and resumed at certain points to enable asynchronous or concurrent programming, without the overhead of creating multiple threads or processes.</p>
@@ -1563,10 +1547,6 @@ The following shows how to create four co-routines that sleep for random amounts
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
-</div>
-<div class="admonition-todo admonition" id="id1">
-<p class="admonition-title">Todo</p>
-<p>May redo this example to mirror the Ada/Go versions.</p>
 </div>
 </section>
 </section>

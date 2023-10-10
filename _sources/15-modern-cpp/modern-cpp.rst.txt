@@ -1,11 +1,11 @@
 Modern C++ as a Better C (and C++)
 ==================================
 
-If you want to learn SYCL and oneAPI *properly*  you will need to come up to speed with Modern C++.  In our experience, we know many people who say they "know" C++.  C++ has undergone numerous changes since it was introduced in the 1980s and 1990s.  While the original syntax remains intact, if you have not kept up with the changes since then (notably, C++ 11), you should take steps to refresh your knowlege of the language, since many of its recent features make it virtually *unrecognizable* from its earlier incarnations.
+If you want to learn SYCL and oneAPI *properly*, you will need to come up to speed with Modern C++.  In our experience, we know many people--including ourselves--who say they "know" C++.  C++ has undergone numerous changes since it was introduced in the 1980s and 1990s.  While the original syntax remains intact, if you have not kept up with the changes since then (notably, C++ 11), you should take steps to refresh your knowlege of the language, since many of its recent features make it virtually *unrecognizable* from its earlier incarnations.
 
 We are particularly impressed with how C++ has incorporated features from modern object-functional languages, some of which we will cover here.  Please let us know if you think other features are worthy of inclusion. As this section is still in draft status, we realize our list may not be exhaustive.
 
-.. note:: We focus our energy on language features that are likely to appear in oneAPI/SYCL code examples in our tutorial.
+In the remaining discussion, we focus our energy on on language features that are likely to appear in oneAPI/SYCL code examples in our tutorial.
 
 Overview of Modern C++
 -----------------------
@@ -44,11 +44,8 @@ Here's an example implementation of the familiar Point class with ``x``, ``y``, 
 
 You can assume that this code can be placed in a C++ header file (e.g. Point.h) as a header-only solution:
 
-Include version
-
 .. literalinclude:: ../../examples/modern-cpp-examples/modern-cpp/point.h
    :language: cpp
-
 
 In this implementation, the ``Point`` class has three private data members ``x_``, ``y_``, and ``z_``, representing the coordinates of the point. The class also provides a default constructor and a constructor that takes the ``x``, ``y``, and ``z`` values as parameters.
 
@@ -196,8 +193,6 @@ We then create an executable for the point_example using the add_executable comm
 
 To use this `CMakeLists.txt` file, you would create a folder named `point_example` in your project directory, and place the `Point.h` header file and the `main.cpp` source file in that folder.
 
-.. note:: Working to put all of the above into a repo. Focusing on narrative first.
-
 
 Automatic variables
 ^^^^^^^^^^^^^^^^^^^^^^^^
@@ -219,8 +214,6 @@ We also demonstrate how to initialize more complex structures such as an STL gen
 
 Constants and Constant Expressions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-.. note:: George still working on this.
 
 In this example, we define a pythagorean function using constexpr and lambda expressions.
 The function takes two arguments a and b representing the lengths of the two sides of a right-angled triangle, and calculates the length of the hypotenuse using the Pythagorean theorem.
@@ -838,8 +831,6 @@ Your output may look like the following:
 
 Testing using "print" statements is not ideal. Here is how to rewrite the above using unit tests:
 
-.. note:: output will be available soon
-
 .. code-block:: cpp
 
    #include <gtest/gtest.h>
@@ -1126,7 +1117,7 @@ Threading
 Co-routines
 ^^^^^^^^^^^^
 
-.. note:: Co-routines are a fairly new C++ feature and may not be supported by your compiler.
+.. note:: Co-routines are a fairly new C++ feature and may not be supported by your compiler. This is not needed for our oneAPI tutorial.
 
 Co-routines are an important concept that is relevant to our discussion of SYCL and oneAPI.
 
@@ -1304,5 +1295,4 @@ The following shows how to create four co-routines that sleep for random amounts
        return 0;
    }
 
-.. todo:: May redo this example to mirror the Ada/Go versions.
 
