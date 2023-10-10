@@ -137,5 +137,3 @@ To build our example in a separate build directory targeting the NVIDIA GPU, whi
   [2023-10-08 01:48:15.505] [info] result should be available now
   result = 1.0000000000000013
   [2023-10-08 01:48:15.506] [info] all done for now
-
-.. todo:: change CL/ includes to sycl/ in snippets
