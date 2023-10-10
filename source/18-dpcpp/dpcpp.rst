@@ -152,7 +152,7 @@ Another Example: Calulating Pi using the Monte Carlo Method
 -----------------------------------------------------------
 
 This example follows a similar pattern as the trapezoidal integration one.
-Conceptually, each player throws a given number of darts, where those that fall within the quarter circle are counted toward the calculation of π.
+Conceptually, each player throws a given number of darts, where those that fall within the quarter circle are counted toward the calculation of :math:`\pi`.
 The various players operates in parallel with and independently of all other players
 To improve randomization, each player's random number generator instance starts with a differen seed offset.
 
