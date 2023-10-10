@@ -1,4 +1,4 @@
-Distributed Computing with OneAPI
+Distributed Computing with oneAPI
 =================================
 
 

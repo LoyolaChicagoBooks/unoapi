@@ -26,7 +26,7 @@ We maintain that there are many software engineering principles that matter in d
 
 - **Professionalism and ethics**: Behaving ethically and professionally, and following industry standards and regulations, is essential for building trust with clients, customers, and the wider community. This includes following ethical principles such as honesty, integrity, and respect, complying with regulations such as GDPR and HIPAA, and adopting industry standards such as ISO 9001 and CMMI.
 
-While there are other practices that give the *full* software engineering experience, we think these can be a helpful starting point to ensure success in developing research software (the kind of software you are likely doing if you're reading about SYCL and OneAPI).
+While there are other practices that give the *full* software engineering experience, we think these can be a helpful starting point to ensure success in developing research software (the kind of software you are likely doing if you're reading about SYCL and oneAPI).
 
 We are going to take a look at some of the more *technical* aspects of software engineering: testing, documentation, version control, security/privacy (by discouraging unsafe practices, e.g. explicit pointer usage), and professionalism/ethics. As scientific computing is something used to drive scientific progress, we need to write software that users can trust ("trust science"), which results, in part, from taking all possible steps to ensure reliability and reproducibility.
 
@@ -99,6 +99,22 @@ The external dependencies declared in this way then become available for linking
   :lines: 3-8
 
    
+With our CMake build configuration in place, we normally perform the following to steps to configure a debug build:
+
+.. code-block:: shell
+
+  cmake -DCMAKE_BUILD_TYPE=Debug -S . -B build
+  cmake --build build
+
+For measuring the performance of our code, however, configuring a release build ensures that code optimization is properly enabled:
+
+.. code-block:: shell
+
+  cmake -DCMAKE_BUILD_TYPE=Release -S . -B build
+
+This is the type of build we use for our performance measurements (see also :doc:`/30-performance/performance`.
+
+
 Version Control
 ----------------
 
@@ -131,14 +147,22 @@ Such a build automates the steps one would typically perform manually on one’s
 - running/testing them.
 
 Starting with a vanilla (default) system configuration ensures that all project dependencies (tools, external libraries, etc.) are fully understood and explicit.
-In addition, build automation results in almost immediate feedback on an incorrect commit that “breaks the build” (see also `the actual GitHub Actions script <https://github.com/LoyolaChicagoCode/unoapi-dpcpp-examples/blob/main/.github/workflows/oneapi-cmake.yml>`_).
+In addition, build automation results in almost immediate feedback on an incorrect commit that “breaks the build”.
 
 We argue that continuous integration can make us reproducibility-aware: A researcher wishing to reproduce the work represented by a particular project can “fork” the project into their own account on, say, GitHub.
 The CI workflow then runs on that user’s fork of the project.
 This gives us some degree of reproducibility “for free,” subject to limitations in devices available through the actual CI container (i.e., not usually accelerators).
 
+These are the steps of our GitHub Actions CI workflow (see also the full script `here <https://github.com/LoyolaChicagoCode/unoapi-dpcpp-examples/blob/main/.github/workflows/oneapi-cmake.yml>`_).
+
+.. literalinclude:: ../snippets/snip-UnoAPI-github-workflow.tex
+  :language: bash
+  :linenos:
+  :lineno-start: 19
+  :lines: 3-28
+
 Automated testing usually takes place as part of the continuous integration process.  
-Indeed, the last section of the CI workflow shown above invokes all discovered executable tests.
+Accordingly, the last step of our CI workflow invokes all discovered executable tests.
 
 
 Rootless Package Management for Libraries and Tools

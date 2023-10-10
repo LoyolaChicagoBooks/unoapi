@@ -101,7 +101,7 @@ After running the oneAPI setvars.sh script, ``sycl-ls`` reports the available ac
 
 
 On Gitpod, the installation and compilation steps work as intended, and sequential execution is supported.
-Nevertheless, because they are based on a virtualized AMD chipset without GPU, this environment doesn't support the execution of data-parallel code, not even using the CPU itself as an accelerator.
+this environment doesn't support the execution of data-parallel code, not even using the CPU itself as an accelerator, possibly because of kernel configuration settings.
 
 .. code-block:: text
 
@@ -112,6 +112,8 @@ Nevertheless, because they are based on a virtualized AMD chipset without GPU, t
 
 Accordingly, ``sycl-ls`` doesn't return anything.
 
+
+.. _running_on_nvidia:
 
 Running on hardware with NVIDIA GPUs
 ------------------------------------

@@ -1,11 +1,11 @@
 Modern C++ as a Better C (and C++)
 ==================================
 
-If you want to learn SYCL and OneAPI *properly*  you will need to come up to speed with Modern C++.  In our experience, we know many people who say they "know" C++.  C++ has undergone numerous changes since it was introduced in the 1980s and 1990s.  While the original syntax remains intact, if you have not kept up with the changes since then (notably, C++ 11), you should take steps to refresh your knowlege of the language, since many of its recent features make it virtually *unrecognizable* from its earlier incarnations.
+If you want to learn SYCL and oneAPI *properly*  you will need to come up to speed with Modern C++.  In our experience, we know many people who say they "know" C++.  C++ has undergone numerous changes since it was introduced in the 1980s and 1990s.  While the original syntax remains intact, if you have not kept up with the changes since then (notably, C++ 11), you should take steps to refresh your knowlege of the language, since many of its recent features make it virtually *unrecognizable* from its earlier incarnations.
 
 We are particularly impressed with how C++ has incorporated features from modern object-functional languages, some of which we will cover here.  Please let us know if you think other features are worthy of inclusion. As this section is still in draft status, we realize our list may not be exhaustive.
 
-.. note:: We focus our energy on language features that are likely to appear in OneAPI/SYCL code examples in our tutorial.
+.. note:: We focus our energy on language features that are likely to appear in oneAPI/SYCL code examples in our tutorial.
 
 Overview of Modern C++
 -----------------------
@@ -18,11 +18,11 @@ If you already know some Object-Oriented Programming (OOP) concepts and want to 
 
 **Smart Pointers**: Smart pointers are a modern way of managing memory in C++. They automatically manage memory allocation and deallocation, making it less prone to memory leaks and errors. You should learn about the different types of smart pointers, including `unique_ptr`, `shared_ptr`, and `weak_ptr`.
 
-**Lambda expressions**: Lambda expressions provide a concise way to define anonymous functions, which are functions that have no name. You should learn how to write lambda expressions and how to use them with the Standard Library algorithms. Lambda functions are indispensable when it comes to learning OneAPI and SYCL programming.
+**Lambda expressions**: Lambda expressions provide a concise way to define anonymous functions, which are functions that have no name. You should learn how to write lambda expressions and how to use them with the Standard Library algorithms. Lambda functions are indispensable when it comes to learning oneAPI and SYCL programming.
 
 **Move semantics**: Move semantics is a new feature introduced in C++11 that allows you to transfer the resources of an object to another object. This can lead to more efficient code by avoiding unnecessary copying of objects. You should learn about r-value references, move constructors, and move assignment operators. Move smeantics should be used whenever large (and deep) data structures are involved.
 
-**Threading**: Threading allows you to run multiple tasks concurrently. You should learn about the different threading constructs provided by the Standard Library, such as threads, mutexes, and condition variables. Keep in mind, of course, that OneAPI/SYCL are an *alternative* to threading and also allow for code ot be written without assuming a particular threading model.
+**Threading**: Threading allows you to run multiple tasks concurrently. You should learn about the different threading constructs provided by the Standard Library, such as threads, mutexes, and condition variables. Keep in mind, of course, that oneAPI/SYCL are an *alternative* to threading and also allow for code ot be written without assuming a particular threading model.
 
 **Modern C++ features**: C++ has been evolving rapidly in recent years, and new features are being added all the time. You should learn about modern C++ features such as `auto`, `constexpr`, `consteval`, and `module`, which can help you write more efficient and maintainable code. We greatly value software engineering, so all of these modern features will help to write *clean code*, especially when used judiciously.
 
@@ -206,7 +206,7 @@ The auto keyword was introduced in C++11 as part of the language's support for t
 auto is used to declare a variable whose type is automatically inferred from its initializer (the right hand side of the assignment).
 auto can simplify the syntax of variable declarations and make code more concise and readable.
 auto is especially useful when working with complex or nested types that may be difficult to express explicitly in code.
-In our book, SYCL/OneAPI code is greatly simplified by not having to write the actual data type over and over again.
+In our book, SYCL/oneAPI code is greatly simplified by not having to write the actual data type over and over again.
 Code that uses auto is more resilient to changes, since the type of a variable can be changed without needing to update the code that uses it, subject to the compiler checking it, of course.
 auto is a useful feature that can simplify code, improve readability, and reduce the likelihood of type errors.
 
@@ -1128,7 +1128,7 @@ Co-routines
 
 .. note:: Co-routines are a fairly new C++ feature and may not be supported by your compiler.
 
-Co-routines are an important concept that is relevant to our discussion of SYCL and OneAPI.
+Co-routines are an important concept that is relevant to our discussion of SYCL and oneAPI.
 
 A coroutine is a allows for the execution of multiple, independent, and cooperative subroutines or functions that can be paused and resumed at certain points to enable asynchronous or concurrent programming, without the overhead of creating multiple threads or processes.
 

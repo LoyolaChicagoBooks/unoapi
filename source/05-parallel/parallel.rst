@@ -5,7 +5,7 @@ Introduction to Parallel Programming
 Notable Parallel Computing Systems
 --------------------------------------------
 
-.. note:: This chapter is being drafted now. Set expectations accordingly! This is a combination of notes from George's HOC efforts with David Dennis and ChatGPT.
+.. This chapter is being drafted now. Set expectations accordingly! This is a combination of notes from George's HOC efforts with David Dennis and ChatGPT.
 
 
 Here is a timeline of key developments in parallel computing, focusing on computers designed for parallel and scientific computing, with an emphasis on on-chip parallelism. In 1945, ENIAC, the first general-purpose electronic computer, laid the foundation for computing capabilities, though not specifically designed for parallelism. ILLIAC I (1952) and ILLIAC II (1957) were early examples of computers tailored for scientific and engineering calculations, with ILLIAC II introducing parallel computing capabilities. In 1962, ILLIAC III emerged as a highly parallel computer, accommodating up to 256 processors for large-scale parallel computations. ILLIAC IV (1966) continued the trend with a highly parallel supercomputer featuring 64 independent processing nodes. Convex C1 (1985) marked the advent of the first commercial parallel computer, utilizing custom-designed parallel processing architecture for scientific and engineering applications. Cray X-MP (1985) employed vector processing and parallelism to achieve remarkable performance. In 1991, the Thinking Machines CM-5 supercomputer utilized vector processors and a custom interconnect network to deliver high performance across diverse scientific and engineering applications. The IBM SP (1993) featured a distributed-memory architecture and high-speed interconnect network for impressive scientific computing performance. Beyond 1993, parallel computing became more ubiquitous, evolving into a commodity. Clusters, accelerators, and other specialized parallel hardware emerged, which we cover separately in the subsequent section.
@@ -143,7 +143,7 @@ In early versions of Fortran, loop parallelism was typically achieved through ma
 C* and Data-Parallel C efforts
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. note:: I'm still working on this.
+.. note:: We're still working on this section.
 
 - Language Spec: http://people.csail.mit.edu/bradley/cm5docs/CStarProgrammingGuide.pdf
 
@@ -338,19 +338,21 @@ And here is a FORTRAN version:
    end program dot_product
 
 As you can see, a strength of OpenMP is the ability to write similar code to express parallelism in all three of the languages.
-This legacy is important to frameworks such as OneAPI/SYCL, which aim to provide a similar framework without relying on compiler pramgas.
+This legacy is important to frameworks such as oneAPI/SYCL, which aim to provide a similar framework without relying on compiler pramgas.
+In particular, we will discuss oneAPI in more detail :doc:`in the section on data-parallel C++ </18-dpcpp/dpcpp>` below.
 
-MPI
-^^^^
-
-
-oneAPI
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Parallel Concepts for Humans
 ------------------------------
 
-.. note:: The track for this was laid in the Java threads/networking book.
+In this section, we'll discuss some of the key concepts and principles underlying parallel computing. 
+The track for this material was laid in the book `High Performance Java Platform Computing <https://ecommons.luc.edu/cs_facpubs/3/>`_.
+
+https://ecommons.luc.edu/cs_facpubs/3/
+
+
+https://figshare.com/articles/dataset/hpjpc/962958
+
 
 von Neumann machines and their limits
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -522,8 +524,8 @@ which approaches the parallel fraction as the number of processors increases. In
 Another aspect of this argument against Amdahl’s law is that, as the problem size increases, the serial fraction may decrease. Consider a program that reads in two N-by-N matrices, multiplies them, and writes out the result. The serial I/O time grows as :math:`N^2`, while the multiplication, which is highly parallelizable, grows as :math:`N^3`.
 
 
-Strong/Weak scaling [new topic]
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. Strong/Weak scaling [new topic]
+.. ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Granularity
 --------------------------------------
@@ -550,8 +552,9 @@ So, if s is even seven percent of t, the version with 100 tasks will be as slow 
 
 
 
-starvation, deadlock
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Starvation and deadlock
+^^^^^^^^^^^^^^^^^^^^^^^
+
 Starvation results when some user computations do not get adequate processor time. Here’s an example of starvation on a distributed-memory machine: For some distributed computa- tions, it is difficult to determine if they are finished. There are some algorithms that send system probe messages around to inquire about the state of the computation. Starvation can result if the probe messages use up significant processor time, making processor time unavailable to the user computations. On shared-memory machines, processors lock and unlock resources. When a resource is unlocked, one of the processors waiting for it (if any) is allowed to proceed. If the resource allocation mechanism is unfair, some waiting pro- cesses may be long delayed, while other processes acquire the resource repeatedly.
 
 A set of processes is deadlocked if each process is waiting for resources that other pro- cesses in the set hold and none will release until the processes have been granted the other resources that they are waiting for. There are four conditions required for deadlock:
@@ -566,9 +569,8 @@ There are three things you can try to do about deadlock:
 • You can try to make it impossible for deadlock to occur. The easiest prevention is to eliminate circular waits by numbering the resources and requesting resources in ascending numeric order. That is, never request a resource if you already possess one with a higher number.
 
 
-
 Flooding/Throttling
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^
 
 Strangely, one of the problems with parallelism is having too much rather than too little. For many parallel algorithms (especially divide and conquer and combinatoric search), a problem is repeatedly broken into smaller parts that can be run in parallel. Once the num- ber of parallel parts significantly exceeds the number of processors available, it is some- times detrimental to create more parallelism: All processors will be kept busy anyway, the
 time to create more parallel tasks will be wasted, and the storage for those task descrip-
@@ -668,8 +670,8 @@ However, if the processing of a single element takes little time, the grain size
 
 
 
-task graphs / dataflow execution / macro-dataflow concept
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. task graphs / dataflow execution / macro-dataflow concept
+.. ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
 
