@@ -7,9 +7,9 @@
 <meta content="white" media="(prefers-color-scheme: light)" name="theme-color"/>
 <meta content="black" metia="(prefers-color-scheme: dark)" name="theme-color"/>
 <meta content="Docutils 0.18.1: http://docutils.sourceforge.net/" name="generator"/>
-<title>Introduction to Parallel Programming | UnoAPI: updated 2023.10.08</title>
-<meta content="Introduction to Parallel Programming | UnoAPI: updated 2023.10.08" property="og:title"/>
-<meta content="Introduction to Parallel Programming | UnoAPI: updated 2023.10.08" name="twitter:title"/>
+<title>Introduction to Parallel Programming | UnoAPI: updated 2023.10.10</title>
+<meta content="Introduction to Parallel Programming | UnoAPI: updated 2023.10.10" property="og:title"/>
+<meta content="Introduction to Parallel Programming | UnoAPI: updated 2023.10.10" name="twitter:title"/>
 <link href="../_static/pygments.css" rel="stylesheet"/>
 <link href="../_static/theme.d5da1ae72e45df4c5b8e.css" rel="stylesheet"/>
 <link href="../search.html" rel="search" title="Search"/>
@@ -28,7 +28,7 @@
       }
       if (!userPreference) {localStorage.setItem('darkMode', mode)}
     </script>
-<script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=b63a6272"></script>
+<script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=f1668139"></script>
 <script src="../_static/doctools.js?v=888ff710"></script>
 <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
 <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -40,7 +40,7 @@
     </a>
 <header class="sticky top-0 z-40 w-full border-b shadow-sm border-border supports-backdrop-blur:bg-background/60 bg-background/95 backdrop-blur"><div class="container flex items-center h-14">
 <div class="hidden mr-4 md:flex">
-<a class="flex items-center mr-6" href="../index.html"><span class="hidden font-bold sm:inline-block text-clip whitespace-nowrap">UnoAPI: updated 2023.10.08</span>
+<a class="flex items-center mr-6" href="../index.html"><span class="hidden font-bold sm:inline-block text-clip whitespace-nowrap">UnoAPI: updated 2023.10.10</span>
 </a></div><button @click="showSidebar = true" class="inline-flex items-center justify-center h-10 px-0 py-2 mr-2 text-base font-medium transition-colors rounded-md hover:text-accent-foreground hover:bg-transparent md:hidden" type="button">
 <svg aria-hidden="true" fill="currentColor" height="24" viewbox="0 96 960 960" width="24" xmlns="http://www.w3.org/2000/svg">
 <path d="M152.587 825.087q-19.152 0-32.326-13.174t-13.174-32.326q0-19.152 13.174-32.326t32.326-13.174h440q19.152 0 32.326 13.174t13.174 32.326q0 19.152-13.174 32.326t-32.326 13.174h-440Zm0-203.587q-19.152 0-32.326-13.174T107.087 576q0-19.152 13.174-32.326t32.326-13.174h320q19.152 0 32.326 13.174T518.087 576q0 19.152-13.174 32.326T472.587 621.5h-320Zm0-203.587q-19.152 0-32.326-13.174t-13.174-32.326q0-19.152 13.174-32.326t32.326-13.174h440q19.152 0 32.326 13.174t13.174 32.326q0 19.152-13.174 32.326t-32.326 13.174h-440ZM708.913 576l112.174 112.174q12.674 12.674 12.674 31.826t-12.674 31.826Q808.413 764.5 789.261 764.5t-31.826-12.674l-144-144Q600 594.391 600 576t13.435-31.826l144-144q12.674-12.674 31.826-12.674t31.826 12.674q12.674 12.674 12.674 31.826t-12.674 31.826L708.913 576Z"></path>
@@ -71,7 +71,7 @@
 </div>
 </header>
 <div class="flex-1"><div class="container flex-1 items-start md:grid md:grid-cols-[220px_minmax(0,1fr)] md:gap-6 lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-10"><aside :aria-hidden="!showSidebar" :class="{ 'translate-x-0': showSidebar }" class="fixed inset-y-0 left-0 md:top-14 z-50 md:z-30 bg-background md:bg-transparent transition-all duration-100 -translate-x-full md:translate-x-0 ml-0 p-6 md:p-0 md:-ml-2 md:h-[calc(100vh-3.5rem)] w-5/6 md:w-full shrink-0 overflow-y-auto border-r border-border md:sticky" id="left-sidebar">
-<a class="!justify-start text-sm md:!hidden bg-background" href="../index.html"><span class="font-bold text-clip whitespace-nowrap">UnoAPI: updated 2023.10.08</span>
+<a class="!justify-start text-sm md:!hidden bg-background" href="../index.html"><span class="font-bold text-clip whitespace-nowrap">UnoAPI: updated 2023.10.10</span>
 </a>
 <div class="relative overflow-hidden md:overflow-auto my-4 md:my-0 h-[calc(100vh-8rem)] md:h-auto">
 <div class="overflow-y-auto h-full w-full relative pr-6"><nav class="table w-full min-w-full my-6 lg:my-8">
@@ -99,7 +99,7 @@
 <div class="w-full min-w-0 mx-auto">
 <nav aria-label="breadcrumbs" class="flex items-center mb-4 space-x-1 text-sm text-muted-foreground">
 <a class="overflow-hidden text-ellipsis whitespace-nowrap hover:text-foreground" href="../index.html">
-<span class="hidden md:inline">UnoAPI: updated 2023.10.08</span>
+<span class="hidden md:inline">UnoAPI: updated 2023.10.10</span>
 <svg aria-label="Home" class="md:hidden" fill="currentColor" height="18" stroke="none" viewbox="0 96 960 960" width="18" xmlns="http://www.w3.org/2000/svg">
 <path d="M240 856h120V616h240v240h120V496L480 316 240 496v360Zm-80 80V456l320-240 320 240v480H520V696h-80v240H160Zm320-350Z"></path>
 </svg>
@@ -111,10 +111,6 @@
 <h1>Introduction to Parallel Programming<a class="headerlink" href="#introduction-to-parallel-programming" title="Permalink to this heading">¶</a></h1>
 <section id="notable-parallel-computing-systems">
 <h2>Notable Parallel Computing Systems<a class="headerlink" href="#notable-parallel-computing-systems" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#notable-parallel-computing-systems'">¶</a></h2>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This chapter is being drafted now. Set expectations accordingly! This is a combination of notes from George’s HOC efforts with David Dennis and ChatGPT.</p>
-</div>
 <p>Here is a timeline of key developments in parallel computing, focusing on computers designed for parallel and scientific computing, with an emphasis on on-chip parallelism. In 1945, ENIAC, the first general-purpose electronic computer, laid the foundation for computing capabilities, though not specifically designed for parallelism. ILLIAC I (1952) and ILLIAC II (1957) were early examples of computers tailored for scientific and engineering calculations, with ILLIAC II introducing parallel computing capabilities. In 1962, ILLIAC III emerged as a highly parallel computer, accommodating up to 256 processors for large-scale parallel computations. ILLIAC IV (1966) continued the trend with a highly parallel supercomputer featuring 64 independent processing nodes. Convex C1 (1985) marked the advent of the first commercial parallel computer, utilizing custom-designed parallel processing architecture for scientific and engineering applications. Cray X-MP (1985) employed vector processing and parallelism to achieve remarkable performance. In 1991, the Thinking Machines CM-5 supercomputer utilized vector processors and a custom interconnect network to deliver high performance across diverse scientific and engineering applications. The IBM SP (1993) featured a distributed-memory architecture and high-speed interconnect network for impressive scientific computing performance. Beyond 1993, parallel computing became more ubiquitous, evolving into a commodity. Clusters, accelerators, and other specialized parallel hardware emerged, which we cover separately in the subsequent section.</p>
 <section id="cluster-computing">
 <h3>Cluster Computing<a class="headerlink" href="#cluster-computing" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#cluster-computing'">¶</a></h3>
@@ -230,7 +226,7 @@ Since then, cluster computing has evolved significantly, becoming a dominant par
 <h3>C* and Data-Parallel C efforts<a class="headerlink" href="#c-and-data-parallel-c-efforts" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#c-and-data-parallel-c-efforts'">¶</a></h3>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>I’m still working on this.</p>
+<p>We’re still working on this section.</p>
 </div>
 <ul class="simple">
 <li><p>Language Spec: <a class="reference external" href="http://people.csail.mit.edu/bradley/cm5docs/CStarProgrammingGuide.pdf">http://people.csail.mit.edu/bradley/cm5docs/CStarProgrammingGuide.pdf</a></p></li>
@@ -410,21 +406,16 @@ Since then, cluster computing has evolved significantly, becoming a dominant par
 </pre></div>
 </div>
 <p>As you can see, a strength of OpenMP is the ability to write similar code to express parallelism in all three of the languages.
-This legacy is important to frameworks such as OneAPI/SYCL, which aim to provide a similar framework without relying on compiler pramgas.</p>
-</section>
-<section id="mpi">
-<h3>MPI<a class="headerlink" href="#mpi" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#mpi'">¶</a></h3>
-</section>
-<section id="oneapi">
-<h3>oneAPI<a class="headerlink" href="#oneapi" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#oneapi'">¶</a></h3>
+This legacy is important to frameworks such as oneAPI/SYCL, which aim to provide a similar framework without relying on compiler pramgas.
+In particular, we will discuss oneAPI in more detail <a class="reference internal" href="../18-dpcpp/dpcpp.html"><span class="doc">in the section on data-parallel C++</span></a> below.</p>
 </section>
 </section>
 <section id="parallel-concepts-for-humans">
 <h2>Parallel Concepts for Humans<a class="headerlink" href="#parallel-concepts-for-humans" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#parallel-concepts-for-humans'">¶</a></h2>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The track for this was laid in the Java threads/networking book.</p>
-</div>
+<p>In this section, we’ll discuss some of the key concepts and principles underlying parallel computing.
+The track for this material was laid in the book <a class="reference external" href="https://ecommons.luc.edu/cs_facpubs/3/">High Performance Java Platform Computing</a>.</p>
+<p><a class="reference external" href="https://ecommons.luc.edu/cs_facpubs/3/">https://ecommons.luc.edu/cs_facpubs/3/</a></p>
+<p><a class="reference external" href="https://figshare.com/articles/dataset/hpjpc/962958">https://figshare.com/articles/dataset/hpjpc/962958</a></p>
 <section id="von-neumann-machines-and-their-limits">
 <h3>von Neumann machines and their limits<a class="headerlink" href="#von-neumann-machines-and-their-limits" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#von-neumann-machines-and-their-limits'">¶</a></h3>
 <p>A discussion of parallel computing must begin with a discussion of sequential computing and the von Neumann machine—our sequential computer. The von Neumann machine is one of the computer designs of John von Neumann. A processor fetches instructions and data from a memory, operates on the data, and writes the results back into memory. Computation is accomplished by making small incremental changes in the global memory.</p>
@@ -525,9 +516,6 @@ slower the program runs. And for weather forecasting, if the calculation takes t
 <p>which approaches the parallel fraction as the number of processors increases. In this for- mulation, there is no theoretical limit on speedup. As long as we scale the problem size to the size of the machine, we will not run into limits.</p>
 <p>Another aspect of this argument against Amdahl’s law is that, as the problem size increases, the serial fraction may decrease. Consider a program that reads in two N-by-N matrices, multiplies them, and writes out the result. The serial I/O time grows as <span class="math notranslate nohighlight">\(N^2\)</span>, while the multiplication, which is highly parallelizable, grows as <span class="math notranslate nohighlight">\(N^3\)</span>.</p>
 </section>
-<section id="strong-weak-scaling-new-topic">
-<h3>Strong/Weak scaling [new topic]<a class="headerlink" href="#strong-weak-scaling-new-topic" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#strong-weak-scaling-new-topic'">¶</a></h3>
-</section>
 </section>
 <section id="granularity">
 <h2>Granularity<a class="headerlink" href="#granularity" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#granularity'">¶</a></h2>
@@ -544,8 +532,8 @@ slower the program runs. And for weather forecasting, if the calculation takes t
 <p>How do these compare? If s is negligible compared to t, then schedule (1) will complete in 2t, and schedule (2) in 1.3t. However, 13s is significantly larger than 2s, so system over- head s, being even a small fraction of grain size t, might destroy all of the advantages of load balancing. What is the cutover point? That is, at what fraction of t does s cause sched- ule (2) to take as long as schedule (1)? The answer is</p>
 <p>2t + 2s = 1.3t + 13s s = (0.7/11)t = 0.064t</p>
 <p>So, if s is even seven percent of t, the version with 100 tasks will be as slow as the version with 10. So how do you choose a good grain size? Folklore suggests that one millisecond of execution between communications is a reasonable amount. Other folklore suggests that processing 300–400 array elements between communications is good on some systems. What you will probably have to do is experiment for yourself to find a good grain size. By parameterizing your actual code, you can enable the possibility to experiment.</p>
-<section id="starvation-deadlock">
-<h3>starvation, deadlock<a class="headerlink" href="#starvation-deadlock" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#starvation-deadlock'">¶</a></h3>
+<section id="starvation-and-deadlock">
+<h3>Starvation and deadlock<a class="headerlink" href="#starvation-and-deadlock" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#starvation-and-deadlock'">¶</a></h3>
 <p>Starvation results when some user computations do not get adequate processor time. Here’s an example of starvation on a distributed-memory machine: For some distributed computa- tions, it is difficult to determine if they are finished. There are some algorithms that send system probe messages around to inquire about the state of the computation. Starvation can result if the probe messages use up significant processor time, making processor time unavailable to the user computations. On shared-memory machines, processors lock and unlock resources. When a resource is unlocked, one of the processors waiting for it (if any) is allowed to proceed. If the resource allocation mechanism is unfair, some waiting pro- cesses may be long delayed, while other processes acquire the resource repeatedly.</p>
 <p>A set of processes is deadlocked if each process is waiting for resources that other pro- cesses in the set hold and none will release until the processes have been granted the other resources that they are waiting for. There are four conditions required for deadlock:
 • Mutual Exclusion: Only a process in possession of a resource may proceed.
@@ -629,9 +617,6 @@ We can assign blocks of rows to nodes, as in (1) and (2), but guarantee that no 
 </pre></div>
 </div>
 </section>
-<section id="task-graphs-dataflow-execution-macro-dataflow-concept">
-<h3>task graphs / dataflow execution / macro-dataflow concept<a class="headerlink" href="#task-graphs-dataflow-execution-macro-dataflow-concept" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#task-graphs-dataflow-execution-macro-dataflow-concept'">¶</a></h3>
-</section>
 </section>
 </section>
 </div></div><aside class="hidden text-sm xl:block" id="right-sidebar">
@@ -647,8 +632,6 @@ We can assign blocks of rows to nodes, as in (1) and (2), but guarantee that no 
 <li><a :data-current="activeSection === '#c-and-data-parallel-c-efforts'" class="reference internal" href="#c-and-data-parallel-c-efforts">C* and Data-Parallel C efforts</a></li>
 <li><a :data-current="activeSection === '#cuda'" class="reference internal" href="#cuda">CUDA</a></li>
 <li><a :data-current="activeSection === '#openmp'" class="reference internal" href="#openmp">OpenMP</a></li>
-<li><a :data-current="activeSection === '#mpi'" class="reference internal" href="#mpi">MPI</a></li>
-<li><a :data-current="activeSection === '#oneapi'" class="reference internal" href="#oneapi">oneAPI</a></li>
 </ul>
 </li>
 <li><a :data-current="activeSection === '#parallel-concepts-for-humans'" class="reference internal" href="#parallel-concepts-for-humans">Parallel Concepts for Humans</a><ul>
@@ -658,16 +641,14 @@ We can assign blocks of rows to nodes, as in (1) and (2), but guarantee that no 
 <li><a :data-current="activeSection === '#speedup-vs-efficiency'" class="reference internal" href="#speedup-vs-efficiency">Speedup vs. Efficiency</a></li>
 <li><a :data-current="activeSection === '#amdahls-law'" class="reference internal" href="#amdahls-law">Amdahl’s Law</a></li>
 <li><a :data-current="activeSection === '#scalability'" class="reference internal" href="#scalability">Scalability</a></li>
-<li><a :data-current="activeSection === '#strong-weak-scaling-new-topic'" class="reference internal" href="#strong-weak-scaling-new-topic">Strong/Weak scaling [new topic]</a></li>
 </ul>
 </li>
 <li><a :data-current="activeSection === '#granularity'" class="reference internal" href="#granularity">Granularity</a><ul>
-<li><a :data-current="activeSection === '#starvation-deadlock'" class="reference internal" href="#starvation-deadlock">starvation, deadlock</a></li>
+<li><a :data-current="activeSection === '#starvation-and-deadlock'" class="reference internal" href="#starvation-and-deadlock">Starvation and deadlock</a></li>
 <li><a :data-current="activeSection === '#flooding-throttling'" class="reference internal" href="#flooding-throttling">Flooding/Throttling</a></li>
 <li><a :data-current="activeSection === '#layout'" class="reference internal" href="#layout">Layout</a></li>
 <li><a :data-current="activeSection === '#latency'" class="reference internal" href="#latency">Latency</a></li>
 <li><a :data-current="activeSection === '#scheduling-needed-for-understanding-q-submit'" class="reference internal" href="#scheduling-needed-for-understanding-q-submit">Scheduling [needed for understanding q.submit()]</a></li>
-<li><a :data-current="activeSection === '#task-graphs-dataflow-execution-macro-dataflow-concept'" class="reference internal" href="#task-graphs-dataflow-execution-macro-dataflow-concept">task graphs / dataflow execution / macro-dataflow concept</a></li>
 </ul>
 </li>
 </ul>

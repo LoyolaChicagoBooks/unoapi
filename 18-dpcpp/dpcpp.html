@@ -7,9 +7,9 @@
 <meta content="white" media="(prefers-color-scheme: light)" name="theme-color"/>
 <meta content="black" metia="(prefers-color-scheme: dark)" name="theme-color"/>
 <meta content="Docutils 0.18.1: http://docutils.sourceforge.net/" name="generator"/>
-<title>Data-Parallel C++ with oneAPI/SYCL | UnoAPI: updated 2023.10.08</title>
-<meta content="Data-Parallel C++ with oneAPI/SYCL | UnoAPI: updated 2023.10.08" property="og:title"/>
-<meta content="Data-Parallel C++ with oneAPI/SYCL | UnoAPI: updated 2023.10.08" name="twitter:title"/>
+<title>Data-Parallel C++ with oneAPI/SYCL | UnoAPI: updated 2023.10.10</title>
+<meta content="Data-Parallel C++ with oneAPI/SYCL | UnoAPI: updated 2023.10.10" property="og:title"/>
+<meta content="Data-Parallel C++ with oneAPI/SYCL | UnoAPI: updated 2023.10.10" name="twitter:title"/>
 <link href="../_static/pygments.css" rel="stylesheet"/>
 <link href="../_static/theme.d5da1ae72e45df4c5b8e.css" rel="stylesheet"/>
 <link href="../search.html" rel="search" title="Search"/>
@@ -28,9 +28,10 @@
       }
       if (!userPreference) {localStorage.setItem('darkMode', mode)}
     </script>
-<script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=b63a6272"></script>
+<script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=f1668139"></script>
 <script src="../_static/doctools.js?v=888ff710"></script>
 <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+<script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <script defer="" src="../_static/theme.83923940ee80f2e3f0bf.js"></script>
 </head>
 <body :class="{ 'overflow-hidden': showSidebar }" class="min-h-screen font-sans antialiased bg-background text-foreground" x-data="{ showSidebar: false }">
@@ -39,7 +40,7 @@
     </a>
 <header class="sticky top-0 z-40 w-full border-b shadow-sm border-border supports-backdrop-blur:bg-background/60 bg-background/95 backdrop-blur"><div class="container flex items-center h-14">
 <div class="hidden mr-4 md:flex">
-<a class="flex items-center mr-6" href="../index.html"><span class="hidden font-bold sm:inline-block text-clip whitespace-nowrap">UnoAPI: updated 2023.10.08</span>
+<a class="flex items-center mr-6" href="../index.html"><span class="hidden font-bold sm:inline-block text-clip whitespace-nowrap">UnoAPI: updated 2023.10.10</span>
 </a></div><button @click="showSidebar = true" class="inline-flex items-center justify-center h-10 px-0 py-2 mr-2 text-base font-medium transition-colors rounded-md hover:text-accent-foreground hover:bg-transparent md:hidden" type="button">
 <svg aria-hidden="true" fill="currentColor" height="24" viewbox="0 96 960 960" width="24" xmlns="http://www.w3.org/2000/svg">
 <path d="M152.587 825.087q-19.152 0-32.326-13.174t-13.174-32.326q0-19.152 13.174-32.326t32.326-13.174h440q19.152 0 32.326 13.174t13.174 32.326q0 19.152-13.174 32.326t-32.326 13.174h-440Zm0-203.587q-19.152 0-32.326-13.174T107.087 576q0-19.152 13.174-32.326t32.326-13.174h320q19.152 0 32.326 13.174T518.087 576q0 19.152-13.174 32.326T472.587 621.5h-320Zm0-203.587q-19.152 0-32.326-13.174t-13.174-32.326q0-19.152 13.174-32.326t32.326-13.174h440q19.152 0 32.326 13.174t13.174 32.326q0 19.152-13.174 32.326t-32.326 13.174h-440ZM708.913 576l112.174 112.174q12.674 12.674 12.674 31.826t-12.674 31.826Q808.413 764.5 789.261 764.5t-31.826-12.674l-144-144Q600 594.391 600 576t13.435-31.826l144-144q12.674-12.674 31.826-12.674t31.826 12.674q12.674 12.674 12.674 31.826t-12.674 31.826L708.913 576Z"></path>
@@ -70,7 +71,7 @@
 </div>
 </header>
 <div class="flex-1"><div class="container flex-1 items-start md:grid md:grid-cols-[220px_minmax(0,1fr)] md:gap-6 lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-10"><aside :aria-hidden="!showSidebar" :class="{ 'translate-x-0': showSidebar }" class="fixed inset-y-0 left-0 md:top-14 z-50 md:z-30 bg-background md:bg-transparent transition-all duration-100 -translate-x-full md:translate-x-0 ml-0 p-6 md:p-0 md:-ml-2 md:h-[calc(100vh-3.5rem)] w-5/6 md:w-full shrink-0 overflow-y-auto border-r border-border md:sticky" id="left-sidebar">
-<a class="!justify-start text-sm md:!hidden bg-background" href="../index.html"><span class="font-bold text-clip whitespace-nowrap">UnoAPI: updated 2023.10.08</span>
+<a class="!justify-start text-sm md:!hidden bg-background" href="../index.html"><span class="font-bold text-clip whitespace-nowrap">UnoAPI: updated 2023.10.10</span>
 </a>
 <div class="relative overflow-hidden md:overflow-auto my-4 md:my-0 h-[calc(100vh-8rem)] md:h-auto">
 <div class="overflow-y-auto h-full w-full relative pr-6"><nav class="table w-full min-w-full my-6 lg:my-8">
@@ -98,7 +99,7 @@
 <div class="w-full min-w-0 mx-auto">
 <nav aria-label="breadcrumbs" class="flex items-center mb-4 space-x-1 text-sm text-muted-foreground">
 <a class="overflow-hidden text-ellipsis whitespace-nowrap hover:text-foreground" href="../index.html">
-<span class="hidden md:inline">UnoAPI: updated 2023.10.08</span>
+<span class="hidden md:inline">UnoAPI: updated 2023.10.10</span>
 <svg aria-label="Home" class="md:hidden" fill="currentColor" height="18" stroke="none" viewbox="0 96 960 960" width="18" xmlns="http://www.w3.org/2000/svg">
 <path d="M240 856h120V616h240v240h120V496L480 316 240 496v360Zm-80 80V456l320-240 320 240v480H520V696h-80v240H160Zm320-350Z"></path>
 </svg>
@@ -222,17 +223,11 @@ Although the example is embarrassingly parallel, it nevertheless exhibits variou
 Intel provides remote access to various types of accelerator hardware, including GPUs and FPGAs, through its <a class="reference external" href="https://www.intel.com/content/www/us/en/developer/tools/Dev-Cloud/overview.html">DevCloud program</a>.</p>
 <section id="device-selection-and-task-queues">
 <h3>Device Selection and Task Queues<a class="headerlink" href="#device-selection-and-task-queues" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#device-selection-and-task-queues'">¶</a></h3>
-<dl class="simple">
-<dt>A typical DPC++ program starts with the selection of one or more accelerator devices based on criteria of varying specificity.</dt><dd><p>In our exemplar, the user can choose between running the code on the host CPU and an available accelerator:</p>
-</dd>
-</dl>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 99</span><span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="n">sycl</span><span class="o">::</span><span class="n">device_selector</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">device_selector</span><span class="p">{</span><span class="w"> </span>
-<span class="linenos">100</span><span class="w">          </span><span class="n">run_cpuonly</span><span class="w"> </span><span class="o">?</span>
-<span class="linenos">101</span><span class="w">            </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="n">sycl</span><span class="o">::</span><span class="n">device_selector</span><span class="w"> </span><span class="o">&amp;&gt;</span><span class="p">(</span>
-<span class="linenos">102</span><span class="w">              </span><span class="n">sycl</span><span class="o">::</span><span class="n">cpu_selector</span><span class="p">{})</span><span class="w"> </span><span class="o">:</span>
-<span class="linenos">103</span><span class="w">            </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="n">sycl</span><span class="o">::</span><span class="n">device_selector</span><span class="w"> </span><span class="o">&amp;&gt;</span><span class="p">(</span>
-<span class="linenos">104</span><span class="w">              </span><span class="n">sycl</span><span class="o">::</span><span class="n">default_selector</span><span class="p">{})</span>
-<span class="linenos">105</span><span class="w">        </span><span class="p">};</span>
+<p>A typical DPC++ program starts with the selection of one or more accelerator devices based on criteria of varying specificity.
+In our exemplar, the user can choose between running the code on the host CPU and an available accelerator:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 99</span><span class="w">        </span><span class="n">sycl</span><span class="o">::</span><span class="n">device</span><span class="w"> </span><span class="n">device</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
+<span class="linenos">100</span><span class="w">          </span><span class="n">run_cpuonly</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">sycl</span><span class="o">::</span><span class="n">cpu_selector_v</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">sycl</span><span class="o">::</span><span class="n">default_selector_v</span><span class="w"> </span>
+<span class="linenos">101</span><span class="w">        </span><span class="p">};</span>
 </pre></div>
 </div>
 <p>The interface between the programmer and the chosen device is a <em>queue</em>, to which we can later submit <em>commands</em> for execution on the device.</p>
@@ -247,6 +242,8 @@ Intel provides remote access to various types of accelerator hardware, including
 </div>
 <p>If we do not explicitly specify a device when creating our queue, the queue will automatically select the most suitable available device on the current hardware.
 Also, we can choose between a simple in-order queue, as we have done here, or we can have the queue figure out the best order for executing the submitted commands without deadlocking.</p>
+<p>In addition to programmatic device selection through the API, setting the <code class="docutils literal notranslate"><span class="pre">ONEAPI_DEVICE_SELECTOR</span></code> environment variable may be required to help oneAPI find specific accelerators;
+the section <a class="reference internal" href="../80-running/running.html#running-on-nvidia"><span class="std std-ref">Running on hardware with NVIDIA GPUs</span></a> shows an example of this mechanism.</p>
 </section>
 <section id="buffers-shared-between-host-and-device">
 <h3>Buffers Shared Between Host and Device<a class="headerlink" href="#buffers-shared-between-host-and-device" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#buffers-shared-between-host-and-device'">¶</a></h3>
@@ -298,7 +295,7 @@ As shown below, separating <code class="docutils literal notranslate"><span clas
 This has multiple benefits, including separation of concerns, unit testing, easier collaborative development, and the ability to defer certain decisions (e.g., what we’re integrating) until build time.</p>
 <p>In our exemplar, we’ll want to unit-test the function to be integrated and defer choosing a specific implementation of that function until build time.
 To be able to separately compile the function and call it inside a DPC++ kernel, we declare it in this SYCL-specific way:</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos">6</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;CL/sycl.hpp&gt;</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos">6</span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;sycl/sycl.hpp&gt;</span>
 <span class="linenos">7</span>
 <span class="linenos">8</span><span class="n">SYCL_EXTERNAL</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="p">);</span>
 </pre></div>
@@ -310,6 +307,67 @@ To be able to separately compile the function and call it inside a DPC++ kernel,
 </pre></div>
 </div>
 </section>
+</section>
+<section id="another-example-calulating-pi-using-the-monte-carlo-method">
+<h2>Another Example: Calulating Pi using the Monte Carlo Method<a class="headerlink" href="#another-example-calulating-pi-using-the-monte-carlo-method" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#another-example-calulating-pi-using-the-monte-carlo-method'">¶</a></h2>
+<p>This example follows a similar pattern as the trapezoidal integration one.
+Conceptually, each player throws a given number of darts, where those that fall within the quarter circle are counted toward the calculation of <span class="math notranslate nohighlight">\(\pi\)</span>.
+The various players operates in parallel with and independently of all other players
+To improve randomization, each player’s random number generator instance starts with a differen seed offset.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">q</span><span class="p">.</span><span class="n">submit</span><span class="p">([</span><span class="o">&amp;</span><span class="p">](</span><span class="k">auto</span><span class="w"> </span><span class="o">&amp;</span><span class="n">h</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">c_buf</span><span class="p">.</span><span class="n">get_access</span><span class="o">&lt;</span><span class="n">sycl</span><span class="o">::</span><span class="n">access_mode</span><span class="o">::</span><span class="n">write</span><span class="o">&gt;</span><span class="p">(</span><span class="n">h</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">h</span><span class="p">.</span><span class="n">parallel_for</span><span class="p">(</span><span class="n">number_of_players</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="o">=</span><span class="p">](</span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">index</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">offset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">37</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">index</span><span class="p">.</span><span class="n">get_linear_id</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">13</span><span class="p">;</span>
+<span class="w">        </span><span class="n">oneapi</span><span class="o">::</span><span class="n">dpl</span><span class="o">::</span><span class="n">minstd_rand</span><span class="w"> </span><span class="nf">minstd</span><span class="p">(</span><span class="n">seed</span><span class="p">,</span><span class="w"> </span><span class="n">offset</span><span class="p">);</span>
+<span class="w">        </span><span class="n">oneapi</span><span class="o">::</span><span class="n">dpl</span><span class="o">::</span><span class="n">ranlux48</span><span class="w"> </span><span class="nf">ranlux</span><span class="p">(</span><span class="n">seed</span><span class="p">,</span><span class="w"> </span><span class="n">offset</span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">uint64_t</span><span class="w"> </span><span class="n">R</span><span class="p">{</span><span class="mi">3037000493UL</span><span class="p">};</span><span class="w"> </span><span class="c1">// largest prime &lt;= sqrt(ULONG_MAX / 2)</span>
+<span class="w">        </span><span class="n">oneapi</span><span class="o">::</span><span class="n">dpl</span><span class="o">::</span><span class="n">uniform_int_distribution</span><span class="o">&lt;</span><span class="kt">uint64_t</span><span class="o">&gt;</span><span class="w"> </span><span class="n">distr</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">R</span><span class="p">);</span>
+<span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">r_square</span><span class="p">{</span><span class="n">R</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">R</span><span class="p">};</span>
+
+<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">darts_within_circle</span><span class="p">{</span><span class="mi">0UL</span><span class="p">};</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="n">i</span><span class="p">{</span><span class="mi">0UL</span><span class="p">};</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">number_of_darts</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">x</span><span class="p">{</span><span class="n">use_ranlux</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">distr</span><span class="p">(</span><span class="n">ranlux</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">distr</span><span class="p">(</span><span class="n">minstd</span><span class="p">)};</span>
+<span class="w">            </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">y</span><span class="p">{</span><span class="n">use_ranlux</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">distr</span><span class="p">(</span><span class="n">ranlux</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">distr</span><span class="p">(</span><span class="n">minstd</span><span class="p">)};</span>
+<span class="w">            </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">d_square</span><span class="p">{</span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">y</span><span class="p">};</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">d_square</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">r_square</span><span class="p">)</span>
+<span class="w">                </span><span class="n">darts_within_circle</span><span class="o">++</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">c</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">darts_within_circle</span><span class="p">;</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>After all the players are done, we perform a reduction to combine the number of darts within the quarter circle.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">q</span><span class="p">.</span><span class="n">submit</span><span class="p">([</span><span class="o">&amp;</span><span class="p">](</span><span class="k">auto</span><span class="w"> </span><span class="o">&amp;</span><span class="n">h</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">c</span><span class="p">{</span><span class="n">c_buf</span><span class="p">.</span><span class="n">get_access</span><span class="o">&lt;</span><span class="n">sycl</span><span class="o">::</span><span class="n">access_mode</span><span class="o">::</span><span class="n">read</span><span class="o">&gt;</span><span class="p">(</span><span class="n">h</span><span class="p">)};</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">sum_reduction</span><span class="p">{</span><span class="n">sycl</span><span class="o">::</span><span class="n">reduction</span><span class="p">(</span><span class="n">s_buf</span><span class="p">,</span><span class="w"> </span><span class="n">h</span><span class="p">,</span><span class="w"> </span><span class="n">sycl</span><span class="o">::</span><span class="n">plus</span><span class="o">&lt;&gt;</span><span class="p">())};</span>
+
+<span class="w">    </span><span class="n">h</span><span class="p">.</span><span class="n">parallel_for</span><span class="p">(</span>
+<span class="w">      </span><span class="n">sycl</span><span class="o">::</span><span class="n">range</span><span class="o">&lt;</span><span class="mi">1</span><span class="o">&gt;</span><span class="p">{</span><span class="n">number_of_players</span><span class="p">},</span>
+<span class="w">      </span><span class="n">sum_reduction</span><span class="p">,</span>
+<span class="w">      </span><span class="p">[</span><span class="o">=</span><span class="p">](</span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">index</span><span class="p">,</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="o">&amp;</span><span class="n">sum</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">sum</span><span class="p">.</span><span class="n">combine</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="n">index</span><span class="p">]);</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>A sample run looks like this:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[2023-10-09 20:12:49.704] [info] 4 players are going to throw 1000000 darts each
+[2023-10-09 20:12:49.704] [info] using minstd engine with real distribution
+[2023-10-09 20:12:49.704] [info] randomization is off
+[2023-10-09 20:12:49.763] [info] Device: Intel(R) Core(TM) i5-1030NG7 CPU @ 1.10GHz
+[2023-10-09 20:12:49.763] [info] Max workgroup size: 8192
+[2023-10-09 20:12:50.474] [info] done submitting to queue...waiting for results
+[2023-10-09 20:12:50.474] [info] result[0] = 786512
+[2023-10-09 20:12:50.474] [info] result[1] = 786064
+[2023-10-09 20:12:50.474] [info] result[2] = 786509
+[2023-10-09 20:12:50.474] [info] result[3] = 786054
+[2023-10-09 20:12:50.474] [info] sum = 3145139
+pi = 3.145139
+</pre></div>
+</div>
 </section>
 </section>
 </div></div><aside class="hidden text-sm xl:block" id="right-sidebar">
@@ -324,6 +382,7 @@ To be able to separately compile the function and call it inside a DPC++ kernel,
 <li><a :data-current="activeSection === '#separate-compilation-and-external-functions'" class="reference internal" href="#separate-compilation-and-external-functions">Separate Compilation and External Functions</a></li>
 </ul>
 </li>
+<li><a :data-current="activeSection === '#another-example-calulating-pi-using-the-monte-carlo-method'" class="reference internal" href="#another-example-calulating-pi-using-the-monte-carlo-method">Another Example: Calulating Pi using the Monte Carlo Method</a></li>
 </ul>
 </div>
 </aside>
