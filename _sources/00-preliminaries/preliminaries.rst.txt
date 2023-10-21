@@ -22,7 +22,7 @@ Distribution
 -------------
 
 Web Version
-   See https://unoapi.cs.luc.edu.
+   See https://unoapi.org/
 
 Book Version
    See https://github.com/LoyolaChicagoBooks/unoapi/releases/latest/download/UnoAPI.pdf.
