@@ -44,7 +44,7 @@ jobs:
       - name: Generate HTML using Sphinx
         run: |
           make html
-          echo unoapi.cs.luc.edu > build/html/CNAME
+          echo unoapi.org > build/html/CNAME
 
       - name: Generate LaTeX using Sphinx
         run: |
