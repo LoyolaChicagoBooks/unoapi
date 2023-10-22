@@ -2,6 +2,8 @@
 Welcome to the UnoAPI Curricular Project
 ========================================
 
+.. note:: UnoAPI is now hosted at https://unoapi.org.
+
 This is tutorial on oneAPI (based on SYCL), a promising direction to support modern high-performance computing on heterogeneous architectures using the C++ language and its ever-improving ecosystem.
 
 Please get started by reading :doc:`00-preliminaries/preliminaries`.
