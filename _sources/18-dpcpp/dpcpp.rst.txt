@@ -23,7 +23,7 @@ Each segment is (b – a) / g long. Let the boundaries of these segments be x0 =
 The polyline approximating the curve will have coordinates (x0, f(x0)), (x1, f(x1)), (x2, f(x2)), ..., (xg, f(xg)).
 This allows us to approximate the area under the curve as the sum of g trapezoids.
 
-For the interested reader, you can see the code to produce this figure using Python's remarkable matplotlib package!
+For the interested reader, you can see the code to produce this figure using Python's remarkable matplotlib package!  See also `Trapezoidal Plot on Google Colab <https://colab.research.google.com/drive/1vrFkJnuIk1jxIrPN1dpJ95onhWRbwMlj>`__.
 
 .. literalinclude:: ../scripts/plot-trapezoidal.py
    :language: python
