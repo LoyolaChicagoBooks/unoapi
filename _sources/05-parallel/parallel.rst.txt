@@ -1,9 +1,33 @@
+.. index::
+   single: Parallel Computing; Introduction
+   single: Parallel Programming; Concepts
+   single: Performance Evaluation; Parallel Computing
+   single: Computing Systems; History
+   single: Programming Techniques; Parallel
+
+
 Introduction to Parallel Programming
 ======================================
 
 We introduce parallel computing.
 We begin with a discussion of parallel computing history, including a discussion of computing systems and programming techniques.  We then cover key parallel programming concepts, specifically how to categorize parallel computing approaches and evaluate performance.
 Knowing this foundational material remains of timeless importance when it comes to achieving desired results.
+
+.. index::
+   single: Parallel Computing; History
+   single: Atanasoff-Berry Computer (ABC)
+   single: Colossus
+   single: ENIAC
+   single: ILLIAC I
+   single: ILLIAC II
+   single: ILLIAC III
+   single: ILLIAC IV
+   single: Convex C1
+   single: Cray X-MP
+   single: Thinking Machines CM-5
+   single: IBM SP
+   single: On-chip Parallelism
+
 
 Notable Early Parallel Computing Systems
 --------------------------------------------
@@ -19,6 +43,15 @@ Here is a timeline of key developments in parallel computing, focusing on comput
 - In 1991, the Thinking Machines CM-5 supercomputer utilized vector processors and a custom interconnect network to deliver high performance across diverse scientific and engineering applications.
 - The IBM SP (1993) featured a distributed-memory architecture and high-speed interconnect network for impressive scientific computing performance. Beyond 1993, parallel computing became more ubiquitous, evolving into a commodity. Clusters, accelerators, and other specialized parallel hardware emerged, which we cover separately in the subsequent section.
 
+.. index::
+   single: Cluster Computing
+   single: High-performance Computing (HPC)
+   single: Top 500 List; Supercomputers
+   single: CDC 6600
+   single: Beowulf Project
+   single: Networking Technologies; Cluster Computing
+
+
 Cluster Computing
 ^^^^^^^^^^^^^^^^^^
 
@@ -30,6 +63,15 @@ The concept of connecting multiple computers together to work in parallel emerge
 - The Beowulf project, initiated by NASA in the mid-1990s, played a crucial role in popularizing cluster computing by demonstrating that a cluster of interconnected off-the-shelf computers could deliver impressive computing power at a fraction of the cost of traditional supercomputers.
 
 Since then, cluster computing has evolved significantly, becoming a dominant paradigm for high-performance computing, enabling breakthroughs in fields such as weather modeling, drug discovery, and data analysis.
+
+
+.. index::
+   single: Cluster Computing
+   single: High-performance Computing (HPC)
+   single: Top 500 List; Supercomputers
+   single: CDC 6600
+   single: Beowulf Project
+   single: Networking Technologies; Cluster Computing
 
 
 Accelerators
@@ -67,20 +109,58 @@ The first historical examples of accelerators can be traced back to the early da
 
 These early accelerators paved the way for the development of more specialized and powerful hardware accelerators that emerged later, such as GPUs, FPGAs, and ASICs, to address the growing demands of specific computational tasks and domains.
 
+.. index::
+   single: Vector Processing
+   single: Cray Supercomputers
+   single: Seymour Cray
+   single: Cray-1
+   single: Cray X-MP
+   single: Cray Y-MP
+
+
 Vector machines (Cray)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Cray, a renowned supercomputer company founded by Seymour Cray, played a pivotal role in advancing the field of vector processing. Vector processing is a technique that allows a single instruction to operate on multiple data elements simultaneously, enabling efficient execution of computationally intensive tasks. Cray supercomputers, starting with the Cray-1 in the 1970s, were among the first to incorporate vector processing architecture. By leveraging specialized vector registers and instructions, Cray systems achieved remarkable performance gains in scientific simulations, weather forecasting, and other applications that required large-scale numerical computations. The Cray-1, with its distinctive "C" shape design and liquid cooling system, became an iconic symbol of supercomputing prowess. Subsequent generations of Cray systems, including the Cray-2, Cray X-MP, and Cray Y-MP, continued to refine and enhance vector processing capabilities, pushing the boundaries of computational performance. Even though modern supercomputers have evolved beyond pure vector processing, Cray's contributions to this field were instrumental in establishing the foundation for high-performance computing and shaping the development of future supercomputer architectures.
+
+.. index::
+   single: Connection Machine
+   single: Thinking Machines Corporation
+   single: Parallel Processing; Connection Machine
+   single: Massively Parallel Processing
+   single: Nodes; Connection Machine
+   single: Artificial Intelligence; Connection Machine
+   single: Pattern Recognition; Connection Machine
+   single: Scientific Simulations; Connection Machine
+
 
 Connection Machine (Thinking Machines)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The Connection Machine, developed by Danny Hillis and his team at Thinking Machines Corporation in the 1980s, was a highly influential supercomputer known for its parallel processing capabilities. The name "Connection Machine" derived from its unique architectural design, inspired by the concept of massively parallel processing. Instead of relying on a small number of powerful processors, the Connection Machine employed a large number of simpler processors called "nodes" that communicated and coordinated their activities through a high-speed network. Each node had its own local memory, and computations were performed in parallel across multiple nodes, enabling the machine to tackle complex problems through distributed processing. The Connection Machine gained attention for its ability to handle massive amounts of data and execute tasks in parallel, making it suitable for applications like artificial intelligence, pattern recognition, and scientific simulations. This innovative approach to parallel computing made the Connection Machine a groundbreaking contribution to the field of supercomputing.
 
+.. index::
+   single: Systolic Array Architectures
+   single: Parallel Computing; Systolic Arrays
+   single: SIMD (Single Instruction, Multiple Data)
+   single: MIMD (Multiple Instruction, Multiple Data)
+   single: TPUs; Systolic Arrays
+   single: FPGAs; Systolic Arrays
+
+
 Systolic architectures
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Systolic array architectures are a type of parallel computing design inspired by the human heart's rhythmic pumping action. In systolic arrays, data flows through a network of specialized processing elements arranged in a regular grid-like pattern. Each processing element performs a simple computation and passes the results to its neighboring elements. This design facilitates the efficient execution of iterative computations and allows for a high degree of parallelism. However, despite their promising potential, systolic array architectures did not experience widespread adoption. Several factors contributed to this. Firstly, systolic arrays require highly regular data access patterns, making them less suitable for irregular or unpredictable computations. Secondly, the complexity of designing and programming systolic arrays posed significant challenges for developers. Lastly, the advent of other parallel computing architectures, such as SIMD (Single Instruction, Multiple Data) and MIMD (Multiple Instruction, Multiple Data), provided more flexibility and better suited the diverse range of applications. However, it's worth noting that the spirit of systolic arrays lives on in various forms. Modern incarnations include specialized hardware accelerators, such as TPUs and FPGAs, which employ array-like structures and dataflow architectures to achieve high-performance computing for specific workloads. Additionally, some parallel programming frameworks and languages incorporate systolic-like concepts to optimize data movement and parallel execution in distributed systems.
+
+.. index::
+   single: Systolic Array Architectures
+   single: Parallel Computing; Systolic Arrays
+   single: SIMD (Single Instruction, Multiple Data)
+   single: MIMD (Multiple Instruction, Multiple Data)
+   single: TPUs; Systolic Arrays
+   single: FPGAs; Systolic Arrays
+
 
 Loop parallelism in FORTRAN
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -162,10 +242,38 @@ C* and Data-Parallel C efforts
 
 - Data-Parallel on MIMD Computers: P. J. Hatcher, M. J. Quinn, A. J. Lapadula, B. K. Seevers, R. J. Anderson and R. R. Jones, "Data-parallel programming on MIMD computers," in IEEE Transactions on Parallel and Distributed Systems, vol. 2, no. 3, pp. 377-383, July 1991, doi: 10.1109/71.86112, https://ieeexplore.ieee.org/document/86112
 
+.. _cuda:
+
+CUDA
+====
+
+.. index::
+   single: CUDA
+   single: parallel computing; CUDA
+   single: GPU acceleration; CUDA
+   single: performance improvement; CUDA
+   single: scientific simulations; CUDA
+   single: data analysis; CUDA
+   single: machine learning; CUDA
+   single: NVIDIA; CUDA
+
 CUDA
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 CUDA (Compute Unified Device Architecture) is a parallel computing platform and programming model developed by NVIDIA. It allows developers to harness the power of NVIDIA GPUs (Graphics Processing Units) to accelerate computationally intensive tasks. By utilizing CUDA, developers can write code that offloads parallel computations to the GPU, enabling significant speedups and performance improvements in a wide range of applications, such as scientific simulations, data analysis, machine learning, and more.
+
+.. index::
+   single: market share; NVIDIA GPUs
+   single: performance acceleration; CUDA
+   single: parallel architecture; GPUs
+   single: developer-friendly; CUDA
+   single: programming model; CUDA
+   single: tools and libraries; CUDA
+   single: documentation; CUDA
+   single: application domains; CUDA
+   single: industry adoption; CUDA
+   single: research; CUDA
+   single: GPU hardware; NVIDIA
 
 CUDA became popular due to several key factors. First, NVIDIA GPUs had already gained a significant market share in graphics rendering, providing a large user base to leverage for parallel computing. Second, CUDA offered substantial performance acceleration by harnessing the massive parallel architecture of GPUs, allowing developers to offload computationally intensive tasks and achieve significant speedups. Third, CUDA provided a developer-friendly programming model, extending the C language with directives and APIs that made it easier to express parallelism and utilize GPU resources. Fourth, NVIDIA's support ecosystem was comprehensive, offering tools, libraries, and documentation to aid CUDA development. The diverse range of application domains, including scientific simulations, data analytics, machine learning, and image processing, further contributed to CUDA's popularity. Lastly, the availability of NVIDIA's powerful GPU hardware across various price points enabled wider accessibility and adoption of CUDA in different industries and research fields.
 
@@ -233,6 +341,17 @@ Here's the CUDA code example for computing the vector dot product in reStructure
        return 0;
    }
 
+
+.. index::
+    single: CUDA; example; dot product
+    single: GPU parallelism; CUDA
+    single: memory; device; CUDA
+    single: memory; host; CUDA
+    single: cudaMalloc
+    single: cudaMemcpy
+    single: kernel; CUDA
+    single: parallel processing; GPU
+    single: performance; CUDA
 
 The above CUDA example demonstrates the computation of the dot product of two vectors using GPU parallelism. The code begins by initializing the input vectors with example values on the host. Then, device memory is allocated using ``cudaMalloc``, and the input vectors are copied from the host to the device memory using ``cudaMemcpy``. The dot product computation is performed by launching a CUDA kernel, ``dotProduct``, which runs in parallel on the GPU. Each thread calculates the product of corresponding elements from the input vectors. After the kernel execution, the results are copied back to the host memory using ``cudaMemcpy``, and the dot product is computed on the host. Finally, the dot product result is printed to the console. The example showcases how CUDA leverages the parallel processing capabilities of GPUs to accelerate computations, leading to improved performance compared to traditional CPU-based implementations.
 
