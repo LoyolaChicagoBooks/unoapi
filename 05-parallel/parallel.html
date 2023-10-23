@@ -79,7 +79,6 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../00-preliminaries/preliminaries.html">About the Book</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction to Parallel Programming</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#cuda">CUDA</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../10-software-engineering/software-engineering.html">Introduction to Software Engineering</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../15-modern-cpp/modern-cpp.html">Modern C++ as a Better C (and C++)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../18-dpcpp/dpcpp.html">Data-Parallel C++ with oneAPI/SYCL</a></li>
@@ -208,9 +207,10 @@ The concept of connecting multiple computers together to work in parallel emerge
 <span class="w">  </span><span class="k">end function </span><span class="n">f</span>
 
 <span class="k">end program </span><span class="n">AreaUnderCurve</span>
-
-
-<span class="c">! Computation of the dot product of two vectors using loop parallelism</span>
+</pre></div>
+</div>
+<p>This is another example of how to compute the vector dot product in F90.</p>
+<div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="c">! Computation of the dot product of two vectors using loop parallelism</span>
 <span class="k">program </span><span class="n">VectorDotProduct</span>
 <span class="w">  </span><span class="k">implicit none</span>
 <span class="k">  </span><span class="kt">integer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">n</span>
@@ -248,12 +248,10 @@ The concept of connecting multiple computers together to work in parallel emerge
 <li><p>Language Spec: <a class="reference external" href="http://people.csail.mit.edu/bradley/cm5docs/CStarProgrammingGuide.pdf">http://people.csail.mit.edu/bradley/cm5docs/CStarProgrammingGuide.pdf</a></p></li>
 <li><p>Data-Parallel on MIMD Computers: P. J. Hatcher, M. J. Quinn, A. J. Lapadula, B. K. Seevers, R. J. Anderson and R. R. Jones, “Data-parallel programming on MIMD computers,” in IEEE Transactions on Parallel and Distributed Systems, vol. 2, no. 3, pp. 377-383, July 1991, doi: 10.1109/71.86112, <a class="reference external" href="https://ieeexplore.ieee.org/document/86112">https://ieeexplore.ieee.org/document/86112</a></p></li>
 </ul>
-</section>
-</section>
-</section>
-<section id="cuda">
-<span id="id1"></span><h1>CUDA<a class="headerlink" href="#cuda" title="Permalink to this heading">¶</a></h1>
-<p id="index-8">CUDA (Compute Unified Device Architecture) is a parallel computing platform and programming model developed by NVIDIA. It allows developers to harness the power of NVIDIA GPUs (Graphics Processing Units) to accelerate computationally intensive tasks. By utilizing CUDA, developers can write code that offloads parallel computations to the GPU, enabling significant speedups and performance improvements in a wide range of applications, such as scientific simulations, data analysis, machine learning, and more.</p>
+<span class="target" id="cuda"></span></section>
+<section id="index-8">
+<span id="id1"></span><h3>CUDA<a class="headerlink" href="#index-8" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#index-8'">¶</a></h3>
+<p>CUDA (Compute Unified Device Architecture) is a parallel computing platform and programming model developed by NVIDIA. It allows developers to harness the power of NVIDIA GPUs (Graphics Processing Units) to accelerate computationally intensive tasks. By utilizing CUDA, developers can write code that offloads parallel computations to the GPU, enabling significant speedups and performance improvements in a wide range of applications, such as scientific simulations, data analysis, machine learning, and more.</p>
 <p id="index-9">CUDA became popular due to several key factors. First, NVIDIA GPUs had already gained a significant market share in graphics rendering, providing a large user base to leverage for parallel computing. Second, CUDA offered substantial performance acceleration by harnessing the massive parallel architecture of GPUs, allowing developers to offload computationally intensive tasks and achieve significant speedups. Third, CUDA provided a developer-friendly programming model, extending the C language with directives and APIs that made it easier to express parallelism and utilize GPU resources. Fourth, NVIDIA’s support ecosystem was comprehensive, offering tools, libraries, and documentation to aid CUDA development. The diverse range of application domains, including scientific simulations, data analytics, machine learning, and image processing, further contributed to CUDA’s popularity. Lastly, the availability of NVIDIA’s powerful GPU hardware across various price points enabled wider accessibility and adoption of CUDA in different industries and research fields.</p>
 <p>Here’s the CUDA code example for computing the vector dot product in reStructuredText format:</p>
 <div class="highlight-cuda notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
@@ -318,6 +316,9 @@ The concept of connecting multiple computers together to work in parallel emerge
 </pre></div>
 </div>
 <p id="index-10">The above CUDA example demonstrates the computation of the dot product of two vectors using GPU parallelism. The code begins by initializing the input vectors with example values on the host. Then, device memory is allocated using <code class="docutils literal notranslate"><span class="pre">cudaMalloc</span></code>, and the input vectors are copied from the host to the device memory using <code class="docutils literal notranslate"><span class="pre">cudaMemcpy</span></code>. The dot product computation is performed by launching a CUDA kernel, <code class="docutils literal notranslate"><span class="pre">dotProduct</span></code>, which runs in parallel on the GPU. Each thread calculates the product of corresponding elements from the input vectors. After the kernel execution, the results are copied back to the host memory using <code class="docutils literal notranslate"><span class="pre">cudaMemcpy</span></code>, and the dot product is computed on the host. Finally, the dot product result is printed to the console. The example showcases how CUDA leverages the parallel processing capabilities of GPUs to accelerate computations, leading to improved performance compared to traditional CPU-based implementations.</p>
+</section>
+<section id="openmp">
+<h3>OpenMP<a class="headerlink" href="#openmp" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#openmp'">¶</a></h3>
 <p>OpenMP (Open Multi-Processing) is a portable API (Application Programming Interface) for shared-memory parallel programming in C, C++, and Fortran. It was developed in the late 1990s by various hardware and software vendors, aiming to create a standardized and user-friendly programming model for shared-memory parallelism. The initial release, OpenMP 1.0, came out in 1997, offering basic parallelism constructs. Subsequent versions, including OpenMP 2.0 (1998) and OpenMP 3.0 (2008), introduced additional features such as task parallelism and nested parallelism. OpenMP gained widespread adoption in high-performance computing due to its simplicity, portability, and compatibility with existing codebases. OpenMP 5.0, released in 2018, brought advanced features like improved accelerator offloading, enhanced tasking capabilities, and SIMD programming support. It remains actively developed and maintained by a consortium of vendors, researchers, and users. OpenMP enables developers to leverage multi-core processors and parallel architectures for enhanced performance and scalability in their applications.</p>
 <p>C, C++, and Fortran, are the primary languages directly supported by OpenMP. OpenMP offers language extensions, compiler directives, and runtime libraries specific to each language to facilitate parallel programming and exploit shared-memory parallelism:</p>
 <ol class="arabic simple">
@@ -423,6 +424,8 @@ The concept of connecting multiple computers together to work in parallel emerge
 <p>As you can see, a strength of OpenMP is the ability to write similar code to express parallelism in all three of the languages.
 This legacy is important to frameworks such as oneAPI/SYCL, which aim to provide a similar framework without relying on compiler pramgas.
 In particular, we will discuss oneAPI in more detail <a class="reference internal" href="../18-dpcpp/dpcpp.html"><span class="doc">in the section on data-parallel C++</span></a> below.</p>
+</section>
+</section>
 <section id="parallel-concepts-for-humans">
 <h2>Parallel Concepts for Humans<a class="headerlink" href="#parallel-concepts-for-humans" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#parallel-concepts-for-humans'">¶</a></h2>
 <p>In this section, we’ll discuss some of the key concepts and principles underlying parallel computing.
@@ -636,7 +639,6 @@ We can assign blocks of rows to nodes, as in (1) and (2), but guarantee that no 
 </div></div><aside class="hidden text-sm xl:block" id="right-sidebar">
 <div class="sticky top-16 -mt-10 max-h-[calc(var(--vh)-4rem)] overflow-y-auto pt-6 space-y-2"><p class="font-medium">On this page</p>
 <ul>
-<li><ul>
 <li><a :data-current="activeSection === '#notable-early-parallel-computing-systems'" class="reference internal" href="#notable-early-parallel-computing-systems">Notable Early Parallel Computing Systems</a><ul>
 <li><a :data-current="activeSection === '#cluster-computing'" class="reference internal" href="#cluster-computing">Cluster Computing</a></li>
 <li><a :data-current="activeSection === '#accelerators'" class="reference internal" href="#accelerators">Accelerators</a></li>
@@ -645,11 +647,10 @@ We can assign blocks of rows to nodes, as in (1) and (2), but guarantee that no 
 <li><a :data-current="activeSection === '#systolic-architectures'" class="reference internal" href="#systolic-architectures">Systolic architectures</a></li>
 <li><a :data-current="activeSection === '#loop-parallelism-in-fortran'" class="reference internal" href="#loop-parallelism-in-fortran">Loop parallelism in FORTRAN</a></li>
 <li><a :data-current="activeSection === '#c-and-data-parallel-c-efforts'" class="reference internal" href="#c-and-data-parallel-c-efforts">C* and Data-Parallel C efforts</a></li>
+<li><a :data-current="activeSection === '#index-8'" class="reference internal" href="#index-8">CUDA</a></li>
+<li><a :data-current="activeSection === '#openmp'" class="reference internal" href="#openmp">OpenMP</a></li>
 </ul>
 </li>
-</ul>
-</li>
-<li><a :data-current="activeSection === '#cuda'" class="reference internal" href="#cuda">CUDA</a><ul>
 <li><a :data-current="activeSection === '#parallel-concepts-for-humans'" class="reference internal" href="#parallel-concepts-for-humans">Parallel Concepts for Humans</a><ul>
 <li><a :data-current="activeSection === '#von-neumann-machines-and-their-limits'" class="reference internal" href="#von-neumann-machines-and-their-limits">von Neumann machines and their limits</a></li>
 <li><a :data-current="activeSection === '#flynn-s-taxonomy'" class="reference internal" href="#flynn-s-taxonomy">Flynn’s taxonomy</a></li>
@@ -663,8 +664,6 @@ We can assign blocks of rows to nodes, as in (1) and (2), but guarantee that no 
 <li><a :data-current="activeSection === '#layout'" class="reference internal" href="#layout">Layout</a></li>
 <li><a :data-current="activeSection === '#latency'" class="reference internal" href="#latency">Latency</a></li>
 <li><a :data-current="activeSection === '#scheduling-needed-for-understanding-q-submit'" class="reference internal" href="#scheduling-needed-for-understanding-q-submit">Scheduling [needed for understanding q.submit()]</a></li>
-</ul>
-</li>
 </ul>
 </li>
 </ul>

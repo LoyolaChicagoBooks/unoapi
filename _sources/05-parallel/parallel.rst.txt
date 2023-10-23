@@ -169,42 +169,12 @@ Loop parallelism techniques, including the use of compiler directives like OpenM
 
 In early versions of Fortran, loop parallelism was typically achieved through manual techniques and compiler directives. Here's an example that demonstrates the computation of the area under a curve and the vector dot product using loop parallelism in Fortran:
 
+.. literalinclude:: ../../examples/unoapi-fortran-examples/aoc.f90
+   :language: fortran
+
+This is another example of how to compute the vector dot product in F90.
+
 .. code-block:: fortran
-
-   ! Computation of the area under a curve using loop parallelism
-   program AreaUnderCurve
-     implicit none
-     integer :: i, n
-     real :: a, b, dx, x, area
-
-     n = 1000  ! Number of intervals
-     a = 0.0   ! Lower limit of integration
-     b = 1.0   ! Upper limit of integration
-     dx = (b - a) / n  ! Width of each interval
-
-     area = 0.0
-
-     !$OMP PARALLEL DO DEFAULT(NONE) PRIVATE(x) SHARED(a, dx, n, area)
-     do i = 1, n
-       x = a + (i - 0.5) * dx  ! Midpoint of the interval
-       area = area + f(x) * dx
-     end do
-     !$OMP END PARALLEL DO
-
-     print *, "The area under the curve is:", area
-
-   contains
-
-     ! Function representing the curve
-     function f(x)
-       real, intent(in) :: x
-       real :: f
-
-       f = x**2  ! Example function: x^2
-     end function f
-
-   end program AreaUnderCurve
-
 
    ! Computation of the dot product of two vectors using loop parallelism
    program VectorDotProduct
@@ -243,9 +213,6 @@ C* and Data-Parallel C efforts
 - Data-Parallel on MIMD Computers: P. J. Hatcher, M. J. Quinn, A. J. Lapadula, B. K. Seevers, R. J. Anderson and R. R. Jones, "Data-parallel programming on MIMD computers," in IEEE Transactions on Parallel and Distributed Systems, vol. 2, no. 3, pp. 377-383, July 1991, doi: 10.1109/71.86112, https://ieeexplore.ieee.org/document/86112
 
 .. _cuda:
-
-CUDA
-====
 
 .. index::
    single: CUDA
