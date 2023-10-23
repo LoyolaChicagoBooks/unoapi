@@ -22,3 +22,6 @@
 [submodule "examples/modern-cpp-examples"]
 	path = examples/modern-cpp-examples
 	url = https://github.com/LoyolaChicagoCode/modern-cpp-examples
+[submodule "examples/unoapi-fortran-examples"]
+	path = examples/unoapi-fortran-examples
+	url = https://github.com/LoyolaChicagoCode/unoapi-fortran-examples
