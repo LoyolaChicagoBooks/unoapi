@@ -30,6 +30,7 @@ Book Version
 Example Source Code
 
 - `UnoAPI Data-Parallel C++ Examples <https://github.com/LoyolaChicagoCode/unoapi-dpcpp-examples>`__
+- `UnoAPI Parallel FORTRAN Examples <https://github.com/LoyolaChicagoCode/unoapi-fortran-examples>`__
 - `Modern C++ Examples <https://github.com/LoyolaChicagoCode/modern-cpp-examples>`__
 
 Other Systems Code Examples - C/C++
