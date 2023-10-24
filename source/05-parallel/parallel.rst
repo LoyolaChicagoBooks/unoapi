@@ -1,4 +1,4 @@
-.. index::
+
    single: Parallel Computing; Introduction
    single: Parallel Programming; Concepts
    single: Performance Evaluation; Parallel Computing
@@ -169,13 +169,26 @@ Loop parallelism techniques, including the use of compiler directives like OpenM
 
 In early versions of Fortran, loop parallelism was typically achieved through manual techniques and compiler directives. Here's an example that demonstrates the computation of the area under a curve and the vector dot product using loop parallelism in Fortran:
 
+
+.. note:: These examples can be found in the `LoyolaChicagoCode/unoapi-fortran-exmaples <https://github.com/LoyolaChicagoCode/unoapi-fortran-exmaples>`__ repository. These examples exist to show the relative merts of using OpenMPI/SYCL vs. lower level methods. This book is not about FORTRAN; however, this history will help to understand the sigificance of  modern C++ efforts.`
+
+
 .. literalinclude:: ../../examples/unoapi-fortran-examples/aoc.f90
    :language: fortran
+
 
 This is another example of how to compute the vector dot product in F90.
 
 .. literalinclude:: ../../examples/unoapi-fortran-examples/vdp.f90
    :language: fortran
+
+
+Similar to our C++ code, you can create a ``CMakeLists.txt1`` for building FORTRAN programs:
+
+
+.. literalinclude:: ../../examples/unoapi-fortran-examples/CMakeLists.txt
+   :language: cmake
+
 
 C* and Data-Parallel C efforts
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
