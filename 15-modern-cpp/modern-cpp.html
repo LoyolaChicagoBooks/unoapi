@@ -7,9 +7,9 @@
 <meta content="white" media="(prefers-color-scheme: light)" name="theme-color"/>
 <meta content="black" metia="(prefers-color-scheme: dark)" name="theme-color"/>
 <meta content="Docutils 0.18.1: http://docutils.sourceforge.net/" name="generator"/>
-<title>Modern C++ as a Better C (and C++) | UnoAPI: updated 2023.10.24</title>
-<meta content="Modern C++ as a Better C (and C++) | UnoAPI: updated 2023.10.24" property="og:title"/>
-<meta content="Modern C++ as a Better C (and C++) | UnoAPI: updated 2023.10.24" name="twitter:title"/>
+<title>Modern C++ as a Better C (and C++) | UnoAPI: updated 2023.11.12</title>
+<meta content="Modern C++ as a Better C (and C++) | UnoAPI: updated 2023.11.12" property="og:title"/>
+<meta content="Modern C++ as a Better C (and C++) | UnoAPI: updated 2023.11.12" name="twitter:title"/>
 <link href="../_static/pygments.css" rel="stylesheet"/>
 <link href="../_static/theme.47abdafeea10b5ccf58b.css" rel="stylesheet"/>
 <link href="../search.html" rel="search" title="Search"/>
@@ -39,7 +39,7 @@
     </a>
 <header class="sticky top-0 z-40 w-full border-b shadow-sm border-border supports-backdrop-blur:bg-background/60 bg-background/95 backdrop-blur"><div class="container flex items-center h-14">
 <div class="hidden mr-4 md:flex">
-<a class="flex items-center mr-6" href="../index.html"><span class="hidden font-bold sm:inline-block text-clip whitespace-nowrap">UnoAPI: updated 2023.10.24</span>
+<a class="flex items-center mr-6" href="../index.html"><span class="hidden font-bold sm:inline-block text-clip whitespace-nowrap">UnoAPI: updated 2023.11.12</span>
 </a></div><button @click="showSidebar = true" class="inline-flex items-center justify-center h-10 px-0 py-2 mr-2 text-base font-medium transition-colors rounded-md hover:text-accent-foreground hover:bg-transparent md:hidden" type="button">
 <svg aria-hidden="true" fill="currentColor" height="24" viewbox="0 96 960 960" width="24" xmlns="http://www.w3.org/2000/svg">
 <path d="M152.587 825.087q-19.152 0-32.326-13.174t-13.174-32.326q0-19.152 13.174-32.326t32.326-13.174h440q19.152 0 32.326 13.174t13.174 32.326q0 19.152-13.174 32.326t-32.326 13.174h-440Zm0-203.587q-19.152 0-32.326-13.174T107.087 576q0-19.152 13.174-32.326t32.326-13.174h320q19.152 0 32.326 13.174T518.087 576q0 19.152-13.174 32.326T472.587 621.5h-320Zm0-203.587q-19.152 0-32.326-13.174t-13.174-32.326q0-19.152 13.174-32.326t32.326-13.174h440q19.152 0 32.326 13.174t13.174 32.326q0 19.152-13.174 32.326t-32.326 13.174h-440ZM708.913 576l112.174 112.174q12.674 12.674 12.674 31.826t-12.674 31.826Q808.413 764.5 789.261 764.5t-31.826-12.674l-144-144Q600 594.391 600 576t13.435-31.826l144-144q12.674-12.674 31.826-12.674t31.826 12.674q12.674 12.674 12.674 31.826t-12.674 31.826L708.913 576Z"></path>
@@ -70,7 +70,7 @@
 </div>
 </header>
 <div class="flex-1"><div class="container flex-1 items-start md:grid md:grid-cols-[220px_minmax(0,1fr)] md:gap-6 lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-10"><aside :aria-hidden="!showSidebar" :class="{ 'translate-x-0': showSidebar }" class="fixed inset-y-0 left-0 md:top-14 z-50 md:z-30 bg-background md:bg-transparent transition-all duration-100 -translate-x-full md:translate-x-0 ml-0 p-6 md:p-0 md:-ml-2 md:h-[calc(100vh-3.5rem)] w-5/6 md:w-full shrink-0 overflow-y-auto border-r border-border md:sticky" id="left-sidebar">
-<a class="!justify-start text-sm md:!hidden bg-background" href="../index.html"><span class="font-bold text-clip whitespace-nowrap">UnoAPI: updated 2023.10.24</span>
+<a class="!justify-start text-sm md:!hidden bg-background" href="../index.html"><span class="font-bold text-clip whitespace-nowrap">UnoAPI: updated 2023.11.12</span>
 </a>
 <div class="relative overflow-hidden md:overflow-auto my-4 md:my-0 h-[calc(100vh-8rem)] md:h-auto">
 <div class="overflow-y-auto h-full w-full relative pr-6"><nav class="table w-full min-w-full my-6 lg:my-8">
@@ -98,7 +98,7 @@
 <div class="w-full min-w-0 mx-auto">
 <nav aria-label="breadcrumbs" class="flex items-center mb-4 space-x-1 text-sm text-muted-foreground">
 <a class="overflow-hidden text-ellipsis whitespace-nowrap hover:text-foreground" href="../index.html">
-<span class="hidden md:inline">UnoAPI: updated 2023.10.24</span>
+<span class="hidden md:inline">UnoAPI: updated 2023.11.12</span>
 <svg aria-label="Home" class="md:hidden" fill="currentColor" height="18" stroke="none" viewbox="0 96 960 960" width="18" xmlns="http://www.w3.org/2000/svg">
 <path d="M240 856h120V616h240v240h120V496L480 316 240 496v360Zm-80 80V456l320-240 320 240v480H520V696h-80v240H160Zm320-350Z"></path>
 </svg>
@@ -1371,6 +1371,113 @@ We use lambda expressions to select points in each quadrant, subject to what the
 
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
+</pre></div>
+</div>
+<p>Ranges are still a work in progress in C++20, and support is inconsistent across compilers and operating systems.
+Therefore, for more advanced, portable solutions, it is convenient to use the third-party library <a class="reference external" href="https://ericniebler.github.io/range-v3/">Range-v3</a>, which works with toolchains supporting C++14 and up and forms the basis for range support in C++20.</p>
+<p>The following example is based on the <a class="reference external" href="https://adventofcode.com/2022/day/1">Advent of Code 2022 day one challenge</a>.
+To summarize briefly, the input file consists of zero or more blocks of positive numbers, each on a separate line, separated by blank lines.
+The task is to determine the up to three largest blocks of numbers with respect to the sum of their numbers, and determine the grand total of those (up to three) sums.</p>
+<p>In terms of the original AoC sample input,</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>1000
+2000
+3000
+
+4000
+
+5000
+6000
+
+7000
+8000
+9000
+
+10000
+</pre></div>
+</div>
+<p>the fourth, third, and fifth block would be the three largest, with sums of 24,000, 11,000, and 10,000, respectively, and total sum of 45,000.
+The answer consists of the largest sum and the grand total the three largest sums, i.e., the pair of 24,000 and 45,000.</p>
+<p>Here is a solution in C++20 using Range-v3.
+The main program converts successive lines to a vector of numbers, using 0 to represent empty lines.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">"rangev3-aoc2022day1.hpp"</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;utility&gt;</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;range/v3/view.hpp&gt;</span>
+
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">ranges</span><span class="p">;</span>
+
+<span class="c1">// to use, redirect stdin from data/day1input.txt</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// read lines into vector&lt;int&gt; converting blank lines to zeroes</span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getlines</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">cin</span><span class="p">)</span><span class="w"> </span>
+<span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">views</span><span class="o">::</span><span class="n">transform</span><span class="p">([](</span><span class="k">auto</span><span class="w"> </span><span class="k">const</span><span class="o">&amp;</span><span class="w"> </span><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">stoi</span><span class="p">(</span><span class="n">s</span><span class="p">);</span><span class="w"> </span><span class="p">})</span>
+<span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">to_vector</span>
+<span class="w">    </span><span class="p">;</span>
+
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">views</span><span class="o">::</span><span class="n">all</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">most_nutritious_inventories</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">);</span>
+
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Day 1 part 1 (max) = "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="n">first</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Day 1 part 2 (sum) = "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="n">second</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The core logic groups the flat vector into chunks terminated by, but not including, zeroes and then filters out any leftover chunks containing a zero.
+It then replaces each chunk with the sum of its values in the form of a flattened vector, and uses <code class="docutils literal notranslate"><span class="pre">nth_element</span></code> to partially sort the vector in descending order but only down to the first n (i.e., three) elements.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">"rangev3-aoc2022day1.hpp"</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;utility&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;range/v3/view.hpp&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;range/v3/algorithm.hpp&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;range/v3/numeric.hpp&gt;</span>
+
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">ranges</span><span class="p">;</span>
+
+<span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">most_nutritious_inventories</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="k">const</span><span class="o">&amp;</span><span class="w"> </span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// divide into chunks separated by one or more zeroes</span>
+<span class="w">  </span><span class="c1">// then add up each chunk's calories</span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">inventories</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span><span class="w"> </span>
+<span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">views</span><span class="o">::</span><span class="n">chunk_by</span><span class="p">([](</span><span class="k">auto</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">l</span><span class="p">,</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">r</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="n">l</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="p">(</span><span class="n">r</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span><span class="w"> </span><span class="p">})</span>
+<span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">views</span><span class="o">::</span><span class="n">filter</span><span class="p">([](</span><span class="k">auto</span><span class="w"> </span><span class="k">const</span><span class="o">&amp;</span><span class="w"> </span><span class="n">xs</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">find</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">end</span><span class="p">(</span><span class="n">xs</span><span class="p">);</span><span class="w"> </span><span class="p">})</span>
+<span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">views</span><span class="o">::</span><span class="n">transform</span><span class="p">([](</span><span class="k">auto</span><span class="w"> </span><span class="k">const</span><span class="o">&amp;</span><span class="w"> </span><span class="n">c</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">accumulate</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span><span class="w"> </span><span class="p">})</span>
+<span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">to_vector</span>
+<span class="w">    </span><span class="p">;</span>
+
+<span class="w">  </span><span class="c1">// return error value if there are fewer than n inventories</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">size</span><span class="p">(</span><span class="n">inventories</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_pair</span><span class="p">(</span><span class="mi">-1</span><span class="p">,</span><span class="w"> </span><span class="mi">-1</span><span class="p">);</span>
+
+<span class="w">  </span><span class="c1">// sort just enough in descending order to obtain largest n inventories</span>
+<span class="w">  </span><span class="n">nth_element</span><span class="p">(</span><span class="n">inventories</span><span class="p">,</span><span class="w"> </span><span class="n">begin</span><span class="p">(</span><span class="n">inventories</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">greater</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">());</span>
+
+<span class="w">  </span><span class="c1">// return top and sum of top n inventory values</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_pair</span><span class="p">(</span><span class="n">front</span><span class="p">(</span><span class="n">inventories</span><span class="p">),</span><span class="w"> </span><span class="n">accumulate</span><span class="p">(</span><span class="n">inventories</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">views</span><span class="o">::</span><span class="n">take</span><span class="p">(</span><span class="n">n</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Note that all lambdas involved in this example are pure in the sense that they aren’t closures that capture anything from their environment.</p>
+<p>To appreciate the strong influence functional languages have had on C++ ranges, let’s take a look at a Scala 3 version of this example.
+We first implement the extension method <code class="docutils literal notranslate"><span class="pre">splitWhere</span></code>, similar to <code class="docutils literal notranslate"><span class="pre">chunkBy</span></code> but without having to filter, which we can then use in a very similar pipeline as above.
+<code class="docutils literal notranslate"><span class="pre">toIndexedSeq</span></code> is equivalent to <code class="docutils literal notranslate"><span class="pre">to_vector</span></code>, and we are not aware of an efficient partial sorting method in Scala.</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="cm">/** Partitions an iterator into chunks of consecutive elements for which the predicate holds. */</span>
+<span class="k">extension</span><span class="w"> </span><span class="p">[</span><span class="nc">A</span><span class="p">](</span><span class="n">it</span><span class="p">:</span><span class="w"> </span><span class="nc">Iterator</span><span class="p">[</span><span class="nc">A</span><span class="p">])</span>
+<span class="w">    </span><span class="k">def</span><span class="w"> </span><span class="nf">splitWhere</span><span class="p">(</span><span class="n">p</span><span class="p">:</span><span class="w"> </span><span class="nc">A</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nc">Boolean</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Iterator</span>
+<span class="w">    </span><span class="p">.</span><span class="n">continually</span><span class="p">(</span><span class="n">it</span><span class="p">.</span><span class="n">takeWhile</span><span class="p">(</span><span class="n">p</span><span class="p">))</span>
+<span class="w">    </span><span class="p">.</span><span class="n">takeWhile</span><span class="p">(</span><span class="n">_</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">it</span><span class="p">.</span><span class="n">hasNext</span><span class="p">)</span>
+
+<span class="kd">val</span><span class="w"> </span><span class="n">input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scala</span><span class="p">.</span><span class="n">io</span><span class="p">.</span><span class="nc">Source</span><span class="p">.</span><span class="n">stdin</span><span class="p">.</span><span class="n">getLines</span>
+
+<span class="c1">// iterate over inventories of consecutive nonempty lines</span>
+<span class="c1">// this stores only one Int per elf in memory</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">input</span>
+<span class="w">    </span><span class="p">.</span><span class="n">splitWhere</span><span class="p">(</span><span class="n">_</span><span class="p">.</span><span class="n">nonEmpty</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="n">map</span><span class="p">(</span><span class="n">_</span><span class="p">.</span><span class="n">map</span><span class="p">(</span><span class="n">_</span><span class="p">.</span><span class="n">toInt</span><span class="p">).</span><span class="n">sum</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="n">toIndexedSeq</span>
+<span class="w">    </span><span class="p">.</span><span class="n">sorted</span>
 </pre></div>
 </div>
 </section>
