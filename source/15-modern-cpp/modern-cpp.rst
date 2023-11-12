@@ -1104,6 +1104,71 @@ In this example, we use the ``std::views::filter`` function to create a new view
        return 0;
    }
 
+Ranges are still a work in progress in C++20, and support is inconsistent across compilers and operating systems.
+Therefore, for more advanced, portable solutions, it is convenient to use the third-party library `Range-v3 <https://ericniebler.github.io/range-v3/>`_, which works with toolchains supporting C++14 and up and forms the basis for range support in C++20.
+
+The following example is based on the `Advent of Code 2022 day one challenge <https://adventofcode.com/2022/day/1>`_.
+To summarize briefly, the input file consists of zero or more blocks of positive numbers, each on a separate line, separated by blank lines.
+The task is to determine the up to three largest blocks of numbers with respect to the sum of their numbers, and determine the grand total of those (up to three) sums.
+
+In terms of the original AoC sample input,
+
+.. code-block:: text
+
+    1000
+    2000
+    3000
+
+    4000
+
+    5000
+    6000
+
+    7000
+    8000
+    9000
+
+    10000    
+
+the fourth, third, and fifth block would be the three largest, with sums of 24,000, 11,000, and 10,000, respectively, and total sum of 45,000.
+The answer consists of the largest sum and the grand total the three largest sums, i.e., the pair of 24,000 and 45,000.
+
+Here is a solution in C++20 using Range-v3.
+The main program converts successive lines to a vector of numbers, using 0 to represent empty lines.
+
+.. literalinclude:: ../../examples/modern-cpp-examples/modern-cpp/rangev3-aoc2022day1_main.cpp
+   :language: cpp
+
+The core logic groups the flat vector into chunks terminated by, but not including, zeroes and then filters out any leftover chunks containing a zero.
+It then replaces each chunk with the sum of its values in the form of a flattened vector, and uses ``nth_element`` to partially sort the vector in descending order but only down to the first n (i.e., three) elements.
+
+.. literalinclude:: ../../examples/modern-cpp-examples/modern-cpp/rangev3-aoc2022day1.cpp
+   :language: cpp
+
+Note that all lambdas involved in this example are pure in the sense that they aren't closures that capture anything from their environment.
+
+To appreciate the strong influence functional languages have had on C++ ranges, let's take a look at a Scala 3 version of this example.
+We first implement the extension method ``splitWhere``, similar to ``chunkBy`` but without having to filter, which we can then use in a very similar pipeline as above.
+``toIndexedSeq`` is equivalent to ``to_vector``, and we are not aware of an efficient partial sorting method in Scala.
+
+.. code-block:: scala
+
+    /** Partitions an iterator into chunks of consecutive elements for which the predicate holds. */
+    extension [A](it: Iterator[A])
+        def splitWhere(p: A => Boolean) = Iterator
+        .continually(it.takeWhile(p))
+        .takeWhile(_ => it.hasNext)
+
+    val input = scala.io.Source.stdin.getLines
+
+    // iterate over inventories of consecutive nonempty lines
+    // this stores only one Int per elf in memory
+    val result = input
+        .splitWhere(_.nonEmpty)
+        .map(_.map(_.toInt).sum)
+        .toIndexedSeq
+        .sorted
+
 
 .. Smart Pointers
 
