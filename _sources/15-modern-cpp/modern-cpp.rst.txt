@@ -1117,18 +1117,18 @@ In terms of the original AoC sample input,
 
     1000
     2000
-    3000
+    3000 <- sum = 6000
 
-    4000
+    4000 <- sum = 4000
 
     5000
-    6000
+    6000 <- sum = 11000
 
     7000
     8000
-    9000
+    9000 <- sum = 24000
 
-    10000    
+    10000 <- sum = 10000
 
 the fourth, third, and fifth block would be the three largest, with sums of 24,000, 11,000, and 10,000, respectively, and total sum of 45,000.
 The answer consists of the largest sum and the grand total the three largest sums, i.e., the pair of 24,000 and 45,000.
