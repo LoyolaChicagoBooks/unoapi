@@ -1242,6 +1242,7 @@ Only log messages written to this level or higher will actulaly be displayed.</p
 <li><p><strong>`std::future`</strong> and <strong>`std::promise`</strong>: Introduced in C++11, these classes are used for asynchronous programming. They provide mechanisms to access the result of asynchronous operations.</p></li>
 </ul>
 <p>Understanding and effectively using these template classes can significantly enhance the efficiency, reliability, and readability of your C++ code. Each of these classes serves a particular purpose and can be chosen based on the specific requirements of your program.</p>
+<p>In the remaining, we show minimium viable examples of these, while focusing on the most commonly used (5) methods.</p>
 <section id="std-array">
 <h4><code class="docutils literal notranslate"><span class="pre">std::array</span></code><a class="headerlink" href="#std-array" title="Permalink to this heading">¶</a></h4>
 <p>This example demonstrates the basics of working with <code class="docutils literal notranslate"><span class="pre">std::array</span></code>.
@@ -1283,6 +1284,168 @@ It also shows how to iterate the contents of the deque in natural order.</p>
 <span class="w">    </span><span class="n">dq</span><span class="p">.</span><span class="n">pop_back</span><span class="p">();</span>
 
 <span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">dq</span><span class="p">)</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">" "</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="std-forward-list-when-a-deque-is-not-needed">
+<h4><code class="docutils literal notranslate"><span class="pre">std:forward_list</span></code>: When a <code class="docutils literal notranslate"><span class="pre">deque</span></code> is not needed<a class="headerlink" href="#std-forward-list-when-a-deque-is-not-needed" title="Permalink to this heading">¶</a></h4>
+<p>If you do not need a <code class="docutils literal notranslate"><span class="pre">deque</span></code> and can do with a simple forward linked list, consider <code class="docutils literal notranslate"><span class="pre">std::forward_list</span></code>.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;forward_list&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">forward_list</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">flst</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">};</span>
+<span class="w">    </span><span class="n">flst</span><span class="p">.</span><span class="n">push_front</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="w">    </span><span class="n">flst</span><span class="p">.</span><span class="n">pop_front</span><span class="p">();</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Forward List: "</span><span class="p">;</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">flst</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">" "</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">flst</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span><span class="w"> </span><span class="c1">// Iterator to the start of the list</span>
+<span class="w">    </span><span class="n">flst</span><span class="p">.</span><span class="n">insert_after</span><span class="p">(</span><span class="n">it</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">);</span><span class="w"> </span><span class="c1">// Insert '5' after the first element</span>
+<span class="w">    </span><span class="n">flst</span><span class="p">.</span><span class="n">remove</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span><span class="w"> </span><span class="c1">// Removes all elements with the value '3'</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Modified Forward List: "</span><span class="p">;</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">flst</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">" "</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="std-set">
+<h4><code class="docutils literal notranslate"><span class="pre">std::set</span></code><a class="headerlink" href="#std-set" title="Permalink to this heading">¶</a></h4>
+<p>This an example focusing only on <code class="docutils literal notranslate"><span class="pre">std::set</span></code> in C++ and highlight its top (10) commonly-used methods. <code class="docutils literal notranslate"><span class="pre">std::set</span></code> is a sorted associative container that contains unique elements.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>#include &lt;iostream&gt;
+#include &lt;set&gt;
+#include &lt;iterator&gt;
+#include &lt;algorithm&gt;
+
+int main() {
+    std::set&lt;int&gt; s = {4, 1, 3, 5, 2};
+
+    s.insert(6);
+    s.erase(4);
+    auto it = s.find(3);
+
+    if (s.count(3)) {
+        std::cout &lt;&lt; "3 is in the set\n";
+    }
+
+    std::cout &lt;&lt; "First element: " &lt;&lt; *s.begin() &lt;&lt; "\n";
+    std::cout &lt;&lt; "Last element: " &lt;&lt; *s.rbegin() &lt;&lt; "\n";
+
+    std::cout &lt;&lt; "Size: " &lt;&lt; s.size() &lt;&lt; "\n";
+
+    if (!s.empty()) {
+        std::cout &lt;&lt; "Set is not empty\n";
+    }
+
+    s.clear();
+
+    // This shows how to re-initialize the set members (w/o constructor)
+    s = {1, 2, 3, 4, 5};
+    std::cout &lt;&lt; "Elements in set: ";
+    for (const auto&amp; e : s) {
+        std::cout &lt;&lt; e &lt;&lt; " ";
+    }
+    std::cout &lt;&lt; std::endl;
+
+    return 0;
+}
+</pre></div>
+</div>
+</section>
+<section id="std-multiset">
+<h4><code class="docutils literal notranslate"><span class="pre">std::multiset</span></code><a class="headerlink" href="#std-multiset" title="Permalink to this heading">¶</a></h4>
+<p>A std::multiset in C++ is similar to a std::set, but it allows multiple instances of the same value. This distinction enables some additional capabilities, particularly regarding element counts and handling of duplicates. Here’s an example showcasing std::multiset with a focus on its unique properties and methods:</p>
+<p>This is a reworked version of the <code class="docutils literal notranslate"><span class="pre">set</span></code> example that highlights the additional capabilities of <code class="docutils literal notranslate"><span class="pre">multisset</span></code>.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;set&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">multiset</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ms</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">};</span>
+
+<span class="w">    </span><span class="n">ms</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span><span class="w"> </span><span class="c1">// Inserts another '2' (hence the "muliti")</span>
+
+<span class="w">    </span><span class="c1">// Erase elements by value (erases all instances)</span>
+<span class="w">    </span><span class="n">ms</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span><span class="w"> </span><span class="c1">// Erases all elements with value '1'</span>
+
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ms</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span><span class="w"> </span><span class="c1">// Finds first element with value '3'</span>
+
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Number of instances of 3: "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">ms</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">ms</span><span class="p">.</span><span class="n">insert</span><span class="p">({</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">});</span><span class="w"> </span><span class="c1">// Inserts '5' twice and '6' once (hence the "multiset")</span>
+
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Size: "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">ms</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">it_erase</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ms</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">it_erase</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">ms</span><span class="p">.</span><span class="n">end</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">ms</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="n">it_erase</span><span class="p">);</span><span class="w"> </span><span class="c1">// Erases one instance of '5'</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">ms</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Multiset is not empty</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Elements in multiset: "</span><span class="p">;</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">ms</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">" "</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">ms</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span><span class="w"> </span><span class="c1">// Removes all elements</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="std-priority-queue">
+<h4><code class="docutils literal notranslate"><span class="pre">std::priority_queue</span></code><a class="headerlink" href="#std-priority-queue" title="Permalink to this heading">¶</a></h4>
+<p>Priority queues are often used in systems.</p>
+<p>To use a std::priority_queue to schedule jobs in Shortest Job First (SJF) fashion, you can create a priority queue that sorts jobs based on their length (in seconds). In SJF scheduling, the job with the shortest duration is selected next.</p>
+<p>Here’s a basic example demonstrating this. First, we’ll define a Job struct that includes a job ID and its length in seconds. Then, we’ll use a std::priority_queue with a custom comparator to ensure that jobs with shorter lengths are given higher priority.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;queue&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span>
+
+<span class="k">struct</span><span class="w"> </span><span class="nc">Job</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">id</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">length</span><span class="p">;</span><span class="w"> </span><span class="c1">// Length of the job in seconds</span>
+
+<span class="w">    </span><span class="n">Job</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">length</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">id</span><span class="p">(</span><span class="n">id</span><span class="p">),</span><span class="w"> </span><span class="n">length</span><span class="p">(</span><span class="n">length</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
+
+<span class="w">    </span><span class="c1">// Define the &lt; operator for sorting. Inverse logic because priority_queue</span>
+<span class="w">    </span><span class="c1">// is a max-heap by default, but we need a min-heap for SJF.</span>
+<span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="k">operator</span><span class="o">&lt;</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Job</span><span class="o">&amp;</span><span class="w"> </span><span class="n">other</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">length</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">other</span><span class="p">.</span><span class="n">length</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">};</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Priority queue for SJF scheduling</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">priority_queue</span><span class="o">&lt;</span><span class="n">Job</span><span class="o">&gt;</span><span class="w"> </span><span class="n">jobQueue</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Add jobs to the queue</span>
+<span class="w">    </span><span class="n">jobQueue</span><span class="p">.</span><span class="n">emplace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">);</span><span class="w"> </span><span class="c1">// Job ID 1, length 5 seconds</span>
+<span class="w">    </span><span class="n">jobQueue</span><span class="p">.</span><span class="n">emplace</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">);</span><span class="w"> </span><span class="c1">// Job ID 2, length 3 seconds</span>
+<span class="w">    </span><span class="n">jobQueue</span><span class="p">.</span><span class="n">emplace</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span><span class="w"> </span><span class="c1">// Job ID 3, length 10 seconds</span>
+
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Job execution order (SJF): </span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Process jobs in SJF order</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">jobQueue</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Job</span><span class="w"> </span><span class="n">currentJob</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jobQueue</span><span class="p">.</span><span class="n">top</span><span class="p">();</span>
+<span class="w">        </span><span class="n">jobQueue</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Job ID: "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">currentJob</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">", Length: "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">currentJob</span><span class="p">.</span><span class="n">length</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">" seconds</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1759,6 +1922,10 @@ The following shows how to create four co-routines that sleep for random amounts
 <li><a :data-current="activeSection === '#other-useful-template-classes-beyond-std-vector-and-std-map'" class="reference internal" href="#other-useful-template-classes-beyond-std-vector-and-std-map">Other Useful Template Classes beyond <code class="docutils literal notranslate"><span class="pre">std::vector</span></code> and <code class="docutils literal notranslate"><span class="pre">std::map</span></code></a><ul>
 <li><a :data-current="activeSection === '#std-array'" class="reference internal" href="#std-array"><code class="docutils literal notranslate"><span class="pre">std::array</span></code></a></li>
 <li><a :data-current="activeSection === '#std-deque'" class="reference internal" href="#std-deque"><code class="docutils literal notranslate"><span class="pre">std::deque</span></code></a></li>
+<li><a :data-current="activeSection === '#std-forward-list-when-a-deque-is-not-needed'" class="reference internal" href="#std-forward-list-when-a-deque-is-not-needed"><code class="docutils literal notranslate"><span class="pre">std:forward_list</span></code>: When a <code class="docutils literal notranslate"><span class="pre">deque</span></code> is not needed</a></li>
+<li><a :data-current="activeSection === '#std-set'" class="reference internal" href="#std-set"><code class="docutils literal notranslate"><span class="pre">std::set</span></code></a></li>
+<li><a :data-current="activeSection === '#std-multiset'" class="reference internal" href="#std-multiset"><code class="docutils literal notranslate"><span class="pre">std::multiset</span></code></a></li>
+<li><a :data-current="activeSection === '#std-priority-queue'" class="reference internal" href="#std-priority-queue"><code class="docutils literal notranslate"><span class="pre">std::priority_queue</span></code></a></li>
 </ul>
 </li>
 <li><a :data-current="activeSection === '#random-number-generation'" class="reference internal" href="#random-number-generation">Random Number Generation</a></li>
