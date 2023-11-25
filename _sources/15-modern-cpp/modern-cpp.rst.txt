@@ -1200,6 +1200,51 @@ Here's a basic example demonstrating this. First, we'll define a Job struct that
     }
 
 
+``std::optional``
+""""""""""""""""""""
+
+std::optional is a great choice for situations where a function might or might not return a value. In the context of reading a line of input, std::optional can be used to represent the outcome of the *read* operation: it contains a value if the read was successful, and it's empty (std::nullopt) if the read failed (for example, if the end of file is reached).
+
+Here's an example of how you might use std::optional for reading a line from a file:
+
+.. code-block:: cpp
+    
+    #include <iostream>
+    #include <fstream>
+    #include <string>
+    #include <optional>
+
+    std::optional<std::string> readLine(std::ifstream& file) {
+        std::string line;
+        if (std::getline(file, line)) {
+            return line; // success
+        } else {
+            return std::nullopt; // fail
+        }
+    }
+
+    int main() {
+        std::ifstream file("example.txt");
+        if (!file.is_open()) {
+            std::cerr << "Error opening file\n";
+            return 1;
+        }
+
+        while (true) {
+            auto line = readLine(file);
+            if (line) {
+                std::cout << "Read line: " << *line << std::endl;
+            } else {
+                break;
+            }
+        }
+
+        file.close();
+        return 0;
+    }
+
+.. todo:: George still working on this section. More to come.
+    
 Random Number Generation
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
