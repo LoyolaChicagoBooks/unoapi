@@ -968,7 +968,10 @@ There are several other essential modern template classes in the STL that are hi
 - **`std::future`** and **`std::promise`**: Introduced in C++11, these classes are used for asynchronous programming. They provide mechanisms to access the result of asynchronous operations.
 
 Understanding and effectively using these template classes can significantly enhance the efficiency, reliability, and readability of your C++ code. Each of these classes serves a particular purpose and can be chosen based on the specific requirements of your program.
-   
+
+
+In the remaining, we show minimium viable examples of these, while focusing on the most commonly used (5) methods.
+
 ``std::array``
 """"""""""""""""
 
@@ -1017,6 +1020,183 @@ It also shows how to iterate the contents of the deque in natural order.
         dq.pop_back();
 
         for (auto& e : dq) std::cout << e << " ";
+    }
+
+
+``std:forward_list``: When a ``deque`` is not needed
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+If you do not need a ``deque`` and can do with a simple forward linked list, consider ``std::forward_list``.
+
+.. code-block:: cpp
+
+    #include <forward_list>
+    #include <iostream>
+
+    int main() {
+        std::forward_list<int> flst = {1, 2, 3, 4};
+        flst.push_front(0); 
+        flst.pop_front(); 
+        std::cout << "Forward List: ";
+        for (auto& e : flst) {
+            std::cout << e << " ";
+        }
+        std::cout << std::endl;
+        auto it = flst.begin(); // Iterator to the start of the list
+        flst.insert_after(it, 5); // Insert '5' after the first element
+        flst.remove(3); // Removes all elements with the value '3'
+        std::cout << "Modified Forward List: ";
+        for (auto& e : flst) {
+            std::cout << e << " ";
+        }
+        std::cout << std::endl;
+        return 0;
+    }
+
+
+``std::set``
+"""""""""""""""
+
+This an example focusing only on ``std::set`` in C++ and highlight its top (10) commonly-used methods. ``std::set`` is a sorted associative container that contains unique elements.
+
+.. code-block::
+
+    #include <iostream>
+    #include <set>
+    #include <iterator>
+    #include <algorithm>
+
+    int main() {
+        std::set<int> s = {4, 1, 3, 5, 2};
+
+        s.insert(6);
+        s.erase(4);
+        auto it = s.find(3); 
+
+        if (s.count(3)) {
+            std::cout << "3 is in the set\n";
+        }
+
+        std::cout << "First element: " << *s.begin() << "\n";
+        std::cout << "Last element: " << *s.rbegin() << "\n";
+
+        std::cout << "Size: " << s.size() << "\n";
+
+        if (!s.empty()) {
+            std::cout << "Set is not empty\n";
+        }
+
+        s.clear();
+
+        // This shows how to re-initialize the set members (w/o constructor)
+        s = {1, 2, 3, 4, 5};
+        std::cout << "Elements in set: ";
+        for (const auto& e : s) {
+            std::cout << e << " ";
+        }
+        std::cout << std::endl;
+
+        return 0;
+    }
+
+
+``std::multiset``
+""""""""""""""""""
+
+A std::multiset in C++ is similar to a std::set, but it allows multiple instances of the same value. This distinction enables some additional capabilities, particularly regarding element counts and handling of duplicates. Here's an example showcasing std::multiset with a focus on its unique properties and methods:
+
+This is a reworked version of the ``set`` example that highlights the additional capabilities of ``multisset``.
+
+.. code-block:: cpp
+
+    #include <iostream>
+    #include <set>
+
+    int main() {
+        std::multiset<int> ms = {4, 1, 3, 1, 2, 3, 3};
+
+        ms.insert(2); // Inserts another '2' (hence the "muliti")
+
+        // Erase elements by value (erases all instances)
+        ms.erase(1); // Erases all elements with value '1'
+
+        auto it = ms.find(3); // Finds first element with value '3'
+
+        std::cout << "Number of instances of 3: " << ms.count(3) << "\n";
+
+        ms.insert({5, 5, 6}); // Inserts '5' twice and '6' once (hence the "multiset")
+
+        std::cout << "Size: " << ms.size() << "\n";
+
+        auto it_erase = ms.find(5);
+        if (it_erase != ms.end()) {
+            ms.erase(it_erase); // Erases one instance of '5'
+        }
+
+        if (!ms.empty()) {
+            std::cout << "Multiset is not empty\n";
+        }
+
+        std::cout << "Elements in multiset: ";
+        for (const auto& e : ms) {
+            std::cout << e << " ";
+        }
+        std::cout << std::endl;
+
+        ms.clear(); // Removes all elements
+
+        return 0;
+    }
+
+
+``std::priority_queue``
+""""""""""""""""""""""""""""
+
+Priority queues are often used in systems.
+
+To use a std::priority_queue to schedule jobs in Shortest Job First (SJF) fashion, you can create a priority queue that sorts jobs based on their length (in seconds). In SJF scheduling, the job with the shortest duration is selected next.
+
+Here's a basic example demonstrating this. First, we'll define a Job struct that includes a job ID and its length in seconds. Then, we'll use a std::priority_queue with a custom comparator to ensure that jobs with shorter lengths are given higher priority.
+
+.. code-block:: cpp
+
+    #include <iostream>
+    #include <queue>
+    #include <vector>
+
+    struct Job {
+        int id;
+        int length; // Length of the job in seconds
+
+        Job(int id, int length) : id(id), length(length) {}
+
+        // Define the < operator for sorting. Inverse logic because priority_queue
+        // is a max-heap by default, but we need a min-heap for SJF.
+        bool operator<(const Job& other) const {
+            return length > other.length;
+        }
+    };
+
+    int main() {
+        // Priority queue for SJF scheduling
+        std::priority_queue<Job> jobQueue;
+
+        // Add jobs to the queue
+        jobQueue.emplace(1, 5); // Job ID 1, length 5 seconds
+        jobQueue.emplace(2, 3); // Job ID 2, length 3 seconds
+        jobQueue.emplace(3, 10); // Job ID 3, length 10 seconds
+
+        std::cout << "Job execution order (SJF): \n";
+
+        // Process jobs in SJF order
+        while (!jobQueue.empty()) {
+            Job currentJob = jobQueue.top();
+            jobQueue.pop();
+
+            std::cout << "Job ID: " << currentJob.id << ", Length: " << currentJob.length << " seconds\n";
+        }
+
+        return 0;
     }
 
 
