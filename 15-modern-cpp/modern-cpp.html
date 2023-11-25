@@ -7,9 +7,9 @@
 <meta content="white" media="(prefers-color-scheme: light)" name="theme-color"/>
 <meta content="black" metia="(prefers-color-scheme: dark)" name="theme-color"/>
 <meta content="Docutils 0.18.1: http://docutils.sourceforge.net/" name="generator"/>
-<title>Modern C++ as a Better C (and C++) | UnoAPI: updated 2023.11.24</title>
-<meta content="Modern C++ as a Better C (and C++) | UnoAPI: updated 2023.11.24" property="og:title"/>
-<meta content="Modern C++ as a Better C (and C++) | UnoAPI: updated 2023.11.24" name="twitter:title"/>
+<title>Modern C++ as a Better C (and C++) | UnoAPI: updated 2023.11.25</title>
+<meta content="Modern C++ as a Better C (and C++) | UnoAPI: updated 2023.11.25" property="og:title"/>
+<meta content="Modern C++ as a Better C (and C++) | UnoAPI: updated 2023.11.25" name="twitter:title"/>
 <link href="../_static/pygments.css" rel="stylesheet"/>
 <link href="../_static/theme.47abdafeea10b5ccf58b.css" rel="stylesheet"/>
 <link href="../search.html" rel="search" title="Search"/>
@@ -39,7 +39,7 @@
     </a>
 <header class="sticky top-0 z-40 w-full border-b shadow-sm border-border supports-backdrop-blur:bg-background/60 bg-background/95 backdrop-blur"><div class="container flex items-center h-14">
 <div class="hidden mr-4 md:flex">
-<a class="flex items-center mr-6" href="../index.html"><span class="hidden font-bold sm:inline-block text-clip whitespace-nowrap">UnoAPI: updated 2023.11.24</span>
+<a class="flex items-center mr-6" href="../index.html"><span class="hidden font-bold sm:inline-block text-clip whitespace-nowrap">UnoAPI: updated 2023.11.25</span>
 </a></div><button @click="showSidebar = true" class="inline-flex items-center justify-center h-10 px-0 py-2 mr-2 text-base font-medium transition-colors rounded-md hover:text-accent-foreground hover:bg-transparent md:hidden" type="button">
 <svg aria-hidden="true" fill="currentColor" height="24" viewbox="0 96 960 960" width="24" xmlns="http://www.w3.org/2000/svg">
 <path d="M152.587 825.087q-19.152 0-32.326-13.174t-13.174-32.326q0-19.152 13.174-32.326t32.326-13.174h440q19.152 0 32.326 13.174t13.174 32.326q0 19.152-13.174 32.326t-32.326 13.174h-440Zm0-203.587q-19.152 0-32.326-13.174T107.087 576q0-19.152 13.174-32.326t32.326-13.174h320q19.152 0 32.326 13.174T518.087 576q0 19.152-13.174 32.326T472.587 621.5h-320Zm0-203.587q-19.152 0-32.326-13.174t-13.174-32.326q0-19.152 13.174-32.326t32.326-13.174h440q19.152 0 32.326 13.174t13.174 32.326q0 19.152-13.174 32.326t-32.326 13.174h-440ZM708.913 576l112.174 112.174q12.674 12.674 12.674 31.826t-12.674 31.826Q808.413 764.5 789.261 764.5t-31.826-12.674l-144-144Q600 594.391 600 576t13.435-31.826l144-144q12.674-12.674 31.826-12.674t31.826 12.674q12.674 12.674 12.674 31.826t-12.674 31.826L708.913 576Z"></path>
@@ -70,7 +70,7 @@
 </div>
 </header>
 <div class="flex-1"><div class="container flex-1 items-start md:grid md:grid-cols-[220px_minmax(0,1fr)] md:gap-6 lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-10"><aside :aria-hidden="!showSidebar" :class="{ 'translate-x-0': showSidebar }" class="fixed inset-y-0 left-0 md:top-14 z-50 md:z-30 bg-background md:bg-transparent transition-all duration-100 -translate-x-full md:translate-x-0 ml-0 p-6 md:p-0 md:-ml-2 md:h-[calc(100vh-3.5rem)] w-5/6 md:w-full shrink-0 overflow-y-auto border-r border-border md:sticky" id="left-sidebar">
-<a class="!justify-start text-sm md:!hidden bg-background" href="../index.html"><span class="font-bold text-clip whitespace-nowrap">UnoAPI: updated 2023.11.24</span>
+<a class="!justify-start text-sm md:!hidden bg-background" href="../index.html"><span class="font-bold text-clip whitespace-nowrap">UnoAPI: updated 2023.11.25</span>
 </a>
 <div class="relative overflow-hidden md:overflow-auto my-4 md:my-0 h-[calc(100vh-8rem)] md:h-auto">
 <div class="overflow-y-auto h-full w-full relative pr-6"><nav class="table w-full min-w-full my-6 lg:my-8">
@@ -98,7 +98,7 @@
 <div class="w-full min-w-0 mx-auto">
 <nav aria-label="breadcrumbs" class="flex items-center mb-4 space-x-1 text-sm text-muted-foreground">
 <a class="overflow-hidden text-ellipsis whitespace-nowrap hover:text-foreground" href="../index.html">
-<span class="hidden md:inline">UnoAPI: updated 2023.11.24</span>
+<span class="hidden md:inline">UnoAPI: updated 2023.11.25</span>
 <svg aria-label="Home" class="md:hidden" fill="currentColor" height="18" stroke="none" viewbox="0 96 960 960" width="18" xmlns="http://www.w3.org/2000/svg">
 <path d="M240 856h120V616h240v240h120V496L480 316 240 496v360Zm-80 80V456l320-240 320 240v480H520V696h-80v240H160Zm320-350Z"></path>
 </svg>
@@ -843,11 +843,13 @@ Only log messages written to this level or higher will actulaly be displayed.</p
 </pre></div>
 </div>
 </section>
-<section id="templates-and-stl">
-<h3>Templates and STL<a class="headerlink" href="#templates-and-stl" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#templates-and-stl'">¶</a></h3>
-<section id="std-vector">
-<h4>std::vector<a class="headerlink" href="#std-vector" title="Permalink to this heading">¶</a></h4>
-<p><cite>std::vector</cite> is a dynamic array data structure in C++ that provides efficient memory management and flexible storage of elements, and it is important in scientific computing for its ability to handle large amounts of data efficiently.</p>
+<section id="essential-template-classes-in-stl">
+<h3>Essential Template Classes in STL<a class="headerlink" href="#essential-template-classes-in-stl" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#essential-template-classes-in-stl'">¶</a></h3>
+<p>The C++ Standard Template Library (STL) is a powerful (and comprehensive) set of template classes and functions, providing common data structures and algorithms. The STL is an integral part of the C++ Standard Library.</p>
+<p>Let’s start with the most commonly needed <code class="docutils literal notranslate"><span class="pre">std::vector</span></code> and <code class="docutils literal notranslate"><span class="pre">std::map</span></code>.</p>
+<section id="std-vector-the-standard-all-in-one-vector-type">
+<h4><code class="docutils literal notranslate"><span class="pre">std::vector</span></code>: The Standard All-in-One Vector Type<a class="headerlink" href="#std-vector-the-standard-all-in-one-vector-type" title="Permalink to this heading">¶</a></h4>
+<p><cite>std::vector</cite> is a dynamic all-in-one array data structure in C++ (similar to a Python list) that provides efficient memory management and flexible storage of elements, and it is important in scientific computing for its ability to handle large amounts of data efficiently.</p>
 <p>Using <cite>std::vector</cite> is preferable to using a C pointer based equivalent array because it provides automatic memory management, better safety and convenience, and improved performance for dynamic resizing and storage of elements.</p>
 <p>The advantages of using <cite>std::vector</cite> therefore outweigh any disadvantages, especially if you care about the balance of performance and safety as we do.</p>
 <p>The top 10 operations include:</p>
@@ -1033,8 +1035,9 @@ Only log messages written to this level or higher will actulaly be displayed.</p
 </pre></div>
 </div>
 </section>
-<section id="std-map">
-<h4>std::map<a class="headerlink" href="#std-map" title="Permalink to this heading">¶</a></h4>
+<section id="std-map-the-standard-all-in-one-associative-array-dictionary-type">
+<h4><code class="docutils literal notranslate"><span class="pre">std::map</span></code>: The Standard All-in-One Associative Array/Dictionary Type<a class="headerlink" href="#std-map-the-standard-all-in-one-associative-array-dictionary-type" title="Permalink to this heading">¶</a></h4>
+<p><code class="docutils literal notranslate"><span class="pre">std::map</span></code> is a dynamic all-in-one array data structure in C++ (similar to a Python dictionary) that supports an associative array, where keys of any type can be mapped to values of any type.</p>
 <p>Here are the top 10 most common std::map methods and a brief explanation of their functionality:</p>
 <ul class="simple">
 <li><p><cite>insert()</cite>: Inserts an element into the map with the specified key-value pair.</p></li>
@@ -1213,6 +1216,73 @@ Only log messages written to this level or higher will actulaly be displayed.</p
 <span class="w">        </span><span class="n">count</span><span class="o">++</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="w">    </span><span class="n">ASSERT_EQ</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="n">count</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="other-useful-template-classes-beyond-std-vector-and-std-map">
+<h3>Other Useful Template Classes beyond <code class="docutils literal notranslate"><span class="pre">std::vector</span></code> and <code class="docutils literal notranslate"><span class="pre">std::map</span></code><a class="headerlink" href="#other-useful-template-classes-beyond-std-vector-and-std-map" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#other-useful-template-classes-beyond-std-vector-and-std-map'">¶</a></h3>
+<p>There are several other essential modern template classes in the STL that are highly useful for various programming tasks. Many of these are useful to advanced systems programming, so we will introduce them briefly here and provide examples of each that are appropriate for our tutorial.</p>
+<ul class="simple">
+<li><p><strong>`std::array`</strong>: A container that encapsulates fixed-size arrays. It offers similar functionality to plain arrays but with added benefits of standard container functions like <cite>.size()</cite> and iterators.</p></li>
+<li><p><strong>`std::deque`</strong>: Double-ended queue that allows insertion and deletion at both ends. It’s useful when you need dynamic array behavior but with efficient insertion/removal from the front and back.</p></li>
+<li><p><strong>`std::list`</strong> and <strong>`std::forward_list`</strong>: Implementations of doubly-linked and singly-linked lists, respectively. They offer constant time insertion and deletion of elements but do not provide random access.</p></li>
+<li><p><strong>`std::set`</strong> and <strong>`std::multiset`</strong>: Containers that store unique elements following a specific order. <cite>std::multiset</cite> differs in allowing multiple elements to have equivalent values.</p></li>
+<li><p><strong>`std::unordered_set`</strong> and <strong>`std::unordered_multiset`</strong>: Implementations of hash set and multiset. They provide faster lookup, insertion, and deletion compared to <cite>std::set</cite>/<cite>std::multiset</cite> at the cost of not maintaining order.</p></li>
+<li><p><strong>`std::stack`</strong> and <strong>`std::queue`</strong>: Adaptor containers. <cite>std::stack</cite> provides LIFO (last-in, first-out) data structure, and <cite>std::queue</cite> offers FIFO (first-in, first-out) data structure.</p></li>
+<li><p><strong>`std::priority_queue`</strong>: A container adaptor that provides constant time lookup of the largest (or smallest, if you customize) element.</p></li>
+<li><p><strong>`std::map`</strong> and <strong>`std::multimap`</strong>: Associative containers that store elements formed by a combination of a key value and a mapped value, following a specific order. The <cite>std::multimap</cite> allows multiple entries for a single key.</p></li>
+<li><p><strong>`std::unordered_map`</strong> and <strong>`std::unordered_multimap`</strong>: Implementations of hash map and hash multimap. They allow for faster access than <cite>std::map</cite>/<cite>std::multimap</cite> but do not keep elements in any specific order.</p></li>
+<li><p><strong>`std::optional`</strong>: A wrapper for values that may or may not be present. Introduced in C++17, it’s useful for functions that may or may not return a value in a safe manner.</p></li>
+<li><p><strong>`std::variant`</strong>: Also introduced in C++17, this is a type-safe union class, which can hold one of several specified types but only one at a time.</p></li>
+<li><p><strong>`std::tuple`</strong>: A fixed-size collection of heterogeneous values. It’s a generalization of <cite>std::pair</cite>.</p></li>
+<li><p><strong>`std::function`</strong>: A general-purpose polymorphic function wrapper. It can store, move, and invoke any Callable target—functions, lambda expressions, bind expressions, or other function objects.</p></li>
+<li><p><strong>`std::thread`</strong>: Represents a single thread of execution and introduced in C++11. It allows for more straightforward and portable multithreading.</p></li>
+<li><p><strong>`std::future`</strong> and <strong>`std::promise`</strong>: Introduced in C++11, these classes are used for asynchronous programming. They provide mechanisms to access the result of asynchronous operations.</p></li>
+</ul>
+<p>Understanding and effectively using these template classes can significantly enhance the efficiency, reliability, and readability of your C++ code. Each of these classes serves a particular purpose and can be chosen based on the specific requirements of your program.</p>
+<section id="std-array">
+<h4><code class="docutils literal notranslate"><span class="pre">std::array</span></code><a class="headerlink" href="#std-array" title="Permalink to this heading">¶</a></h4>
+<p>This example demonstrates the basics of working with <code class="docutils literal notranslate"><span class="pre">std::array</span></code>.
+It also demonstrates how to initialize it with an underlying pointer to an array.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;array&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">rawArray</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">};</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">array</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="o">&gt;</span><span class="w"> </span><span class="n">arr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">};</span>
+
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"First element: "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">arr</span><span class="p">.</span><span class="n">front</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Last element: "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">arr</span><span class="p">.</span><span class="n">back</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">arr</span><span class="p">.</span><span class="n">fill</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span><span class="w"> </span><span class="c1">// Fill array with 5</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">arr</span><span class="p">)</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">" "</span><span class="p">;</span><span class="w"> </span><span class="c1">// This uses a range expression on the underlying array</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"</span><span class="se">\n</span><span class="s">Size: "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">arr</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="std-deque">
+<h4><code class="docutils literal notranslate"><span class="pre">std::deque</span></code><a class="headerlink" href="#std-deque" title="Permalink to this heading">¶</a></h4>
+<p>A <em>deque</em> is a doubly-ended queue data structure.
+It assures excellent performance when retrieving items from either side of th deque.</p>
+<p>The following show how to insert items at either end and remove items from either end.
+It also shows how to iterate the contents of the deque in natural order.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;deque&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">deque</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">dq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">};</span>
+
+<span class="w">    </span><span class="n">dq</span><span class="p">.</span><span class="n">push_front</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="w">    </span><span class="n">dq</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Front: "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">dq</span><span class="p">.</span><span class="n">front</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Back: "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">dq</span><span class="p">.</span><span class="n">back</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">dq</span><span class="p">.</span><span class="n">pop_front</span><span class="p">();</span>
+<span class="w">    </span><span class="n">dq</span><span class="p">.</span><span class="n">pop_back</span><span class="p">();</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">dq</span><span class="p">)</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">" "</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1681,9 +1751,14 @@ The following shows how to create four co-routines that sleep for random amounts
 <li><a :data-current="activeSection === '#command-line-argument-handling'" class="reference internal" href="#command-line-argument-handling">Command-line Argument Handling</a></li>
 <li><a :data-current="activeSection === '#better-generics-for-mathematical-functions'" class="reference internal" href="#better-generics-for-mathematical-functions">Better Generics for Mathematical Functions</a></li>
 <li><a :data-current="activeSection === '#logging'" class="reference internal" href="#logging">Logging</a></li>
-<li><a :data-current="activeSection === '#templates-and-stl'" class="reference internal" href="#templates-and-stl">Templates and STL</a><ul>
-<li><a :data-current="activeSection === '#std-vector'" class="reference internal" href="#std-vector">std::vector</a></li>
-<li><a :data-current="activeSection === '#std-map'" class="reference internal" href="#std-map">std::map</a></li>
+<li><a :data-current="activeSection === '#essential-template-classes-in-stl'" class="reference internal" href="#essential-template-classes-in-stl">Essential Template Classes in STL</a><ul>
+<li><a :data-current="activeSection === '#std-vector-the-standard-all-in-one-vector-type'" class="reference internal" href="#std-vector-the-standard-all-in-one-vector-type"><code class="docutils literal notranslate"><span class="pre">std::vector</span></code>: The Standard All-in-One Vector Type</a></li>
+<li><a :data-current="activeSection === '#std-map-the-standard-all-in-one-associative-array-dictionary-type'" class="reference internal" href="#std-map-the-standard-all-in-one-associative-array-dictionary-type"><code class="docutils literal notranslate"><span class="pre">std::map</span></code>: The Standard All-in-One Associative Array/Dictionary Type</a></li>
+</ul>
+</li>
+<li><a :data-current="activeSection === '#other-useful-template-classes-beyond-std-vector-and-std-map'" class="reference internal" href="#other-useful-template-classes-beyond-std-vector-and-std-map">Other Useful Template Classes beyond <code class="docutils literal notranslate"><span class="pre">std::vector</span></code> and <code class="docutils literal notranslate"><span class="pre">std::map</span></code></a><ul>
+<li><a :data-current="activeSection === '#std-array'" class="reference internal" href="#std-array"><code class="docutils literal notranslate"><span class="pre">std::array</span></code></a></li>
+<li><a :data-current="activeSection === '#std-deque'" class="reference internal" href="#std-deque"><code class="docutils literal notranslate"><span class="pre">std::deque</span></code></a></li>
 </ul>
 </li>
 <li><a :data-current="activeSection === '#random-number-generation'" class="reference internal" href="#random-number-generation">Random Number Generation</a></li>
