@@ -522,13 +522,16 @@ Only log messages written to this level or higher will actulaly be displayed.
    }
    
    
-Templates and STL
-^^^^^^^^^^^^^^^^^^
+Essential Template Classes in STL
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+The C++ Standard Template Library (STL) is a powerful (and comprehensive) set of template classes and functions, providing common data structures and algorithms. The STL is an integral part of the C++ Standard Library. 
 
-std::vector
-""""""""""""
+Let's start with the most commonly needed ``std::vector`` and ``std::map``.
 
-`std::vector` is a dynamic array data structure in C++ that provides efficient memory management and flexible storage of elements, and it is important in scientific computing for its ability to handle large amounts of data efficiently.
+``std::vector``: The Standard All-in-One Vector Type
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+`std::vector` is a dynamic all-in-one array data structure in C++ (similar to a Python list) that provides efficient memory management and flexible storage of elements, and it is important in scientific computing for its ability to handle large amounts of data efficiently.
 
 Using `std::vector` is preferable to using a C pointer based equivalent array because it provides automatic memory management, better safety and convenience, and improved performance for dynamic resizing and storage of elements.
 
@@ -735,8 +738,10 @@ Testing using "print" statements is not ideal. Here is how to rewrite the above 
    }
    
    
-std::map
-""""""""""""
+``std::map``: The Standard All-in-One Associative Array/Dictionary Type
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+``std::map`` is a dynamic all-in-one array data structure in C++ (similar to a Python dictionary) that supports an associative array, where keys of any type can be mapped to values of any type.
 
 Here are the top 10 most common std::map methods and a brief explanation of their functionality:
 
@@ -752,7 +757,6 @@ Here are the top 10 most common std::map methods and a brief explanation of thei
 - `end()`: Returns an iterator past the last element in the map.
 
 These methods provide essential functionality for managing key-value pairs in a map, and are widely used in various domains of programming, such as data processing, game development, and system programming, among others.
-
 
 In the following exmaple, we demonsrate the use of these most popular methods and use simple print statements to show that each method works as expected.
 
@@ -927,7 +931,94 @@ Testing using "print" statements is not ideal. Here is how to rewrite the above 
        }
        ASSERT_EQ(3, count);
    }
+
+Other Useful Template Classes beyond ``std::vector`` and ``std::map``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+There are several other essential modern template classes in the STL that are highly useful for various programming tasks. Many of these are useful to advanced systems programming, so we will introduce them briefly here and provide examples of each that are appropriate for our tutorial.
+
+- **`std::array`**: A container that encapsulates fixed-size arrays. It offers similar functionality to plain arrays but with added benefits of standard container functions like `.size()` and iterators.
+
+- **`std::deque`**: Double-ended queue that allows insertion and deletion at both ends. It's useful when you need dynamic array behavior but with efficient insertion/removal from the front and back.
+
+- **`std::list`** and **`std::forward_list`**: Implementations of doubly-linked and singly-linked lists, respectively. They offer constant time insertion and deletion of elements but do not provide random access.
+
+- **`std::set`** and **`std::multiset`**: Containers that store unique elements following a specific order. `std::multiset` differs in allowing multiple elements to have equivalent values.
+
+- **`std::unordered_set`** and **`std::unordered_multiset`**: Implementations of hash set and multiset. They provide faster lookup, insertion, and deletion compared to `std::set`/`std::multiset` at the cost of not maintaining order.
+
+- **`std::stack`** and **`std::queue`**: Adaptor containers. `std::stack` provides LIFO (last-in, first-out) data structure, and `std::queue` offers FIFO (first-in, first-out) data structure.
+
+- **`std::priority_queue`**: A container adaptor that provides constant time lookup of the largest (or smallest, if you customize) element.
+
+- **`std::map`** and **`std::multimap`**: Associative containers that store elements formed by a combination of a key value and a mapped value, following a specific order. The `std::multimap` allows multiple entries for a single key.
+
+- **`std::unordered_map`** and **`std::unordered_multimap`**: Implementations of hash map and hash multimap. They allow for faster access than `std::map`/`std::multimap` but do not keep elements in any specific order.
+
+- **`std::optional`**: A wrapper for values that may or may not be present. Introduced in C++17, it's useful for functions that may or may not return a value in a safe manner.
+
+- **`std::variant`**: Also introduced in C++17, this is a type-safe union class, which can hold one of several specified types but only one at a time.
+
+- **`std::tuple`**: A fixed-size collection of heterogeneous values. It's a generalization of `std::pair`.
+
+- **`std::function`**: A general-purpose polymorphic function wrapper. It can store, move, and invoke any Callable target—functions, lambda expressions, bind expressions, or other function objects.
+
+- **`std::thread`**: Represents a single thread of execution and introduced in C++11. It allows for more straightforward and portable multithreading.
+
+- **`std::future`** and **`std::promise`**: Introduced in C++11, these classes are used for asynchronous programming. They provide mechanisms to access the result of asynchronous operations.
+
+Understanding and effectively using these template classes can significantly enhance the efficiency, reliability, and readability of your C++ code. Each of these classes serves a particular purpose and can be chosen based on the specific requirements of your program.
    
+``std::array``
+""""""""""""""""
+
+This example demonstrates the basics of working with ``std::array``. 
+It also demonstrates how to initialize it with an underlying pointer to an array.
+
+.. code-block:: cpp
+
+    #include <array>
+    #include <iostream>
+
+    int main() {
+        int rawArray[3] = {1, 2, 3};
+        std::array<int, 3> arr = {1, 2, 3};
+
+        std::cout << "First element: " << arr.front() << "\n";
+        std::cout << "Last element: " << arr.back() << "\n";
+        arr.fill(5); // Fill array with 5
+        for (auto& e : arr) std::cout << e << " "; // This uses a range expression on the underlying array
+        std::cout << "\nSize: " << arr.size() << "\n"; 
+    }
+
+``std::deque``
+""""""""""""""""""
+
+A *deque* is a doubly-ended queue data structure.
+It assures excellent performance when retrieving items from either side of th deque.
+
+The following show how to insert items at either end and remove items from either end.
+It also shows how to iterate the contents of the deque in natural order.
+
+.. code-block:: cpp
+
+    #include <deque>
+    #include <iostream>
+
+    int main() {
+        std::deque<int> dq = {2, 3, 4};
+
+        dq.push_front(1);
+        dq.push_back(5);
+        std::cout << "Front: " << dq.front() << "\n";
+        std::cout << "Back: " << dq.back() << "\n";
+        
+        dq.pop_front();
+        dq.pop_back();
+
+        for (auto& e : dq) std::cout << e << " ";
+    }
+
 
 Random Number Generation
 ^^^^^^^^^^^^^^^^^^^^^^^^^
