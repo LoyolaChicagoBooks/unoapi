@@ -1245,6 +1245,33 @@ Here's an example of how you might use std::optional for reading a line from a f
 
 .. todo:: George still working on this section. More to come.
     
+
+A Look at Expected Run-time Performance
+""""""""""""""""""""""""""""""""""""""""""""
+
+.. note:: Workign on this! -GKT
+
+.. csv-table:: STL Containers Method Time Complexity
+   :header: "Method", "std::vector", "std::deque", "std::list", "std::forward_list", "std::set/multiset", "std::unordered_set/multiset"
+   :widths: 20, 15, 15, 15, 20, 20, 30
+
+   "size", ":math:`O(1)`", ":math:`O(1)`", ":math:`O(1)`", ":math:`O(1)`", ":math:`O(1)`", ":math:`O(1)`"
+   "empty", ":math:`O(1)`", ":math:`O(1)`", ":math:`O(1)`", ":math:`O(1)`", ":math:`O(1)`", ":math:`O(1)`"
+   "insert", ":math:`O(n)`", ":math:`O(1)`", ":math:`O(1)`", ":math:`O(1)`", ":math:`O(\log n)`", ":math:`O(1)`"
+   "erase", ":math:`O(n)`", ":math:`O(1)`", ":math:`O(1)`", ":math:`O(1)`", ":math:`O(\log n)`", ":math:`O(1)`"
+   "push_back", ":math:`O(1)`", ":math:`O(1)`", ":math:`O(1)`", "-", "-", "-"
+   "pop_back", ":math:`O(1)`", ":math:`O(1)`", ":math:`O(1)`", "-", "-", "-"
+   "push_front", "-", ":math:`O(1)`", ":math:`O(1)`", ":math:`O(1)`", "-", "-"
+   "pop_front", "-", ":math:`O(1)`", ":math:`O(1)`", ":math:`O(1)`", "-", "-"
+   "front", ":math:`O(1)`", ":math:`O(1)`", ":math:`O(1)`", ":math:`O(1)`", "-", "-"
+   "back", ":math:`O(1)`", ":math:`O(1)`", ":math:`O(1)`", "-", "-", "-"
+   "clear", ":math:`O(n)`", ":math:`O(n)`", ":math:`O(n)`", ":math:`O(n)`", ":math:`O(n)`", ":math:`O(n)`"
+   "find", ":math:`O(n)`", ":math:`O(n)`", ":math:`O(n)`", ":math:`O(n)`", ":math:`O(\log n)`", ":math:`O(1)`"
+   "count", ":math:`O(n)`", ":math:`O(n)`", ":math:`O(n)`", ":math:`O(n)`", ":math:`O(\log n) + O(k)`", ":math:`O(1)`"
+   "operator[]", ":math:`O(1)`", ":math:`O(1)`", "-", "-", "-", "-"
+   "at", ":math:`O(1)`", ":math:`O(1)`", "-", "-", "-", "-"
+
+
 Random Number Generation
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 

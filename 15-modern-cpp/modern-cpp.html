@@ -31,6 +31,7 @@
 <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
 <script src="../_static/doctools.js"></script>
 <script src="../_static/sphinx_highlight.js"></script>
+<script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <script defer="" src="../_static/theme.4ea23184acb23c5e9294.js"></script>
 </head>
 <body :class="{ 'overflow-hidden': showSidebar }" class="min-h-screen font-sans antialiased bg-background text-foreground" x-data="{ showSidebar: false }">
@@ -1494,6 +1495,232 @@ int main() {
 <p>George still working on this section. More to come.</p>
 </div>
 </section>
+<section id="a-look-at-expected-run-time-performance">
+<h4>A Look at Expected Run-time Performance<a class="headerlink" href="#a-look-at-expected-run-time-performance" title="Permalink to this heading">¶</a></h4>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Workign on this! -GKT</p>
+</div>
+<table class="docutils align-default" id="id2">
+<caption><span class="caption-text">STL Containers Method Time Complexity</span><a class="headerlink" href="#id2" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 15%"/>
+<col style="width: 11%"/>
+<col style="width: 11%"/>
+<col style="width: 11%"/>
+<col style="width: 15%"/>
+<col style="width: 15%"/>
+<col style="width: 22%"/>
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Method</p></th>
+<th class="head"><p>std::vector</p></th>
+<th class="head"><p>std::deque</p></th>
+<th class="head"><p>std::list</p></th>
+<th class="head"><p>std::forward_list</p></th>
+<th class="head"><p>std::set/multiset</p></th>
+<th class="head"><p>std::unordered_set/multiset</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>size</p></td>
+<td><p><span class="math notranslate nohighlight">\(O(1)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(O(1)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(O(1)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(O(1)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(O(1)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(O(1)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>empty</p></td>
+<td><p><span class="math notranslate nohighlight">\(O(1)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(O(1)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(O(1)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(O(1)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(O(1)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(O(1)\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>insert</p></td>
+<td><p><span class="math notranslate nohighlight">\(O(n)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(O(1)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(O(1)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(O(1)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(O(\log n)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(O(1)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>erase</p></td>
+<td><p><span class="math notranslate nohighlight">\(O(n)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(O(1)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(O(1)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(O(1)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(O(\log n)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(O(1)\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>push_back</p></td>
+<td><p><span class="math notranslate nohighlight">\(O(1)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(O(1)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(O(1)\)</span></p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>pop_back</p></td>
+<td><p><span class="math notranslate nohighlight">\(O(1)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(O(1)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(O(1)\)</span></p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td><p>push_front</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p><span class="math notranslate nohighlight">\(O(1)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(O(1)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(O(1)\)</span></p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>pop_front</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p><span class="math notranslate nohighlight">\(O(1)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(O(1)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(O(1)\)</span></p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td><p>front</p></td>
+<td><p><span class="math notranslate nohighlight">\(O(1)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(O(1)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(O(1)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(O(1)\)</span></p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>back</p></td>
+<td><p><span class="math notranslate nohighlight">\(O(1)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(O(1)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(O(1)\)</span></p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td><p>clear</p></td>
+<td><p><span class="math notranslate nohighlight">\(O(n)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(O(n)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(O(n)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(O(n)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(O(n)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(O(n)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>find</p></td>
+<td><p><span class="math notranslate nohighlight">\(O(n)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(O(n)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(O(n)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(O(n)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(O(\log n)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(O(1)\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>count</p></td>
+<td><p><span class="math notranslate nohighlight">\(O(n)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(O(n)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(O(n)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(O(n)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(O(\log n) + O(k)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(O(1)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>operator[]</p></td>
+<td><p><span class="math notranslate nohighlight">\(O(1)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(O(1)\)</span></p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td><p>at</p></td>
+<td><p><span class="math notranslate nohighlight">\(O(1)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(O(1)\)</span></p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
 </section>
 <section id="random-number-generation">
 <h3>Random Number Generation<a class="headerlink" href="#random-number-generation" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#random-number-generation'">¶</a></h3>
@@ -1971,6 +2198,7 @@ The following shows how to create four co-routines that sleep for random amounts
 <li><a :data-current="activeSection === '#std-multiset'" class="reference internal" href="#std-multiset"><code class="docutils literal notranslate"><span class="pre">std::multiset</span></code></a></li>
 <li><a :data-current="activeSection === '#std-priority-queue'" class="reference internal" href="#std-priority-queue"><code class="docutils literal notranslate"><span class="pre">std::priority_queue</span></code></a></li>
 <li><a :data-current="activeSection === '#std-optional'" class="reference internal" href="#std-optional"><code class="docutils literal notranslate"><span class="pre">std::optional</span></code></a></li>
+<li><a :data-current="activeSection === '#a-look-at-expected-run-time-performance'" class="reference internal" href="#a-look-at-expected-run-time-performance">A Look at Expected Run-time Performance</a></li>
 </ul>
 </li>
 <li><a :data-current="activeSection === '#random-number-generation'" class="reference internal" href="#random-number-generation">Random Number Generation</a></li>
