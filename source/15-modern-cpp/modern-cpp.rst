@@ -932,6 +932,10 @@ Testing using "print" statements is not ideal. Here is how to rewrite the above 
        ASSERT_EQ(3, count);
    }
 
+.. index::
+   single: C++ Standard Library; overview of key template classess
+
+
 Other Useful Template Classes beyond ``std::vector`` and ``std::map``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -971,8 +975,13 @@ Understanding and effectively using these template classes can significantly enh
 
 In the remaining, we show minimium viable examples of these, while focusing on the most commonly used (5) methods.
 
-``std::array``
-""""""""""""""""
+
+.. index::
+   single: C++ Standard Library; std::array
+
+
+``std::array``: The alternative to pointer or static array declarations
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 This example demonstrates the basics of working with ``std::array``. 
 It also demonstrates how to initialize it with an underlying pointer to an array.
@@ -993,11 +1002,15 @@ It also demonstrates how to initialize it with an underlying pointer to an array
         std::cout << "\nSize: " << arr.size() << "\n"; 
     }
 
-``std::deque``
-""""""""""""""""""
+.. index::
+   single: C++ Standard Library; std::deque
+
+
+``std::deque``: The all-in-one list type
+""""""""""""""""""""""""""""""""""""""""""""""""
 
 A *deque* is a doubly-ended queue data structure.
-It assures excellent performance when retrieving items from either side of th deque.
+It assures excellent performance when retrieving items from either side of the deque.
 
 The following show how to insert items at either end and remove items from either end.
 It also shows how to iterate the contents of the deque in natural order.
@@ -1020,6 +1033,11 @@ It also shows how to iterate the contents of the deque in natural order.
 
         for (auto& e : dq) std::cout << e << " ";
     }
+
+
+.. index::
+   single: C++ Standard Library; std::forward_list
+
 
 
 ``std:forward_list``: When a ``deque`` is not needed
@@ -1053,8 +1071,13 @@ If you do not need a ``deque`` and can do with a simple forward linked list, con
     }
 
 
-``std::set``
-"""""""""""""""
+.. index::
+   single: C++ Standard Library; std::set
+
+
+
+``std::set``: The ordered set
+"""""""""""""""""""""""""""""""""
 
 This an example focusing only on ``std::set`` in C++ and highlight its top (10) commonly-used methods. ``std::set`` is a sorted associative container that contains unique elements.
 
@@ -1099,8 +1122,13 @@ This an example focusing only on ``std::set`` in C++ and highlight its top (10) 
     }
 
 
-``std::multiset``
-""""""""""""""""""
+.. index::
+   single: C++ Standard Library; std::multi_set
+
+
+
+``std::multiset``: The ordered set that keeps count
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 A std::multiset in C++ is similar to a std::set, but it allows multiple instances of the same value. This distinction enables some additional capabilities, particularly regarding element counts and handling of duplicates. Here's an example showcasing std::multiset with a focus on its unique properties and methods:
 
@@ -1148,8 +1176,13 @@ This is a reworked version of the ``set`` example that highlights the additional
     }
 
 
-``std::priority_queue``
-""""""""""""""""""""""""""""
+.. index::
+   single: C++ Standard Library; std::priority_queue
+
+
+
+``std::priority_queue``: Ordering items in a queue by a given priority level
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 Priority queues are often used in systems.
 
@@ -1198,13 +1231,16 @@ Here's a basic example demonstrating this. First, we'll define a Job struct that
         return 0;
     }
 
+.. index::
+   single: C++ Standard Library; std::optional
 
-``std::optional``
-""""""""""""""""""""
 
-std::optional is a great choice for situations where a function might or might not return a value. In the context of reading a line of input, std::optional can be used to represent the outcome of the *read* operation: it contains a value if the read was successful, and it's empty (std::nullopt) if the read failed (for example, if the end of file is reached).
+``std::optional``: Handling situations where a function returns or fails to return a value
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-Here's an example of how you might use std::optional for reading a line from a file:
+``std::optional`` is a great choice for situations where a function might or might not return a value. In the context of reading a line of input, ``std::optional`` can be used to represent the outcome of the *read* operation: it contains a value if the read was successful, and it's empty (``std::nullopt``) if the read failed (for example, if the end of file is reached).
+
+Here's an example of how you might use ``std::optional`` for reading a line from a file:
 
 .. code-block:: cpp
     
@@ -1242,11 +1278,25 @@ Here's an example of how you might use std::optional for reading a line from a f
         return 0;
     }
 
-.. todo:: George still working on this section. More to come.
-    
+.. index::
+   single: Time Complexity; std::vector
+   single: Time Complexity; std::deque
+   single: Time Complexity; std::list
+   single: Time Complexity; std::forward_list
+   single: Time Complexity; std::set
+   single: Time Complexity; std::multiset
+   single: Time Complexity; std::unordered_set
+   single: Time Complexity; std::unordered_multiset
+
+
 
 A Look at Expected Run-time Performance
 """"""""""""""""""""""""""""""""""""""""""""
+
+Traditional algorithms and data structures courses emphasize the importance of time (and space) complexity.
+While knowledge of these structures--and how to implement them--is still of value, it is vitallyimportant to know how make "good choices" when it comes to performance when it comes to the common methods avaiable in all classes. 
+
+The following table shows the expected time complexity when it comes to each of the standard library template classes. When left blank, it means that the method is either not available or not appropriate for the standard template class.
 
 .. note:: Workign on this! -GKT
 
@@ -1343,6 +1393,10 @@ While ``std::pair`` and ``std::tuple`` can seem similar (especially since a ``st
 In summary, ``std::pair`` and ``std::tuple`` serve similar purposes but are not interchangeable. ``std::pair`` is simpler and more straightforward for handling pairs of elements, while ``std::tuple`` offers more flexibility and is suited for handling a fixed collection of several (greater than two in practice) elements.
 
 
+.. index::
+   single: C++ Standard Library; std::pair 
+   single: C++ Standard Library; std::tuple
+
 Utility Functions for working with ``std::pair`` and ``std::tuple``
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -1362,7 +1416,12 @@ will create a ``std::tuple<int, std::string, double>``. This function is particu
 handy for creating tuples without having to explicitly specify the type of each element,
 thus allowing for more concise and flexible code.
 
-Convertin between  ``std::pair`` and ``std::tuple``
+.. index::
+   single: std::pair; convert to std::tuple
+   single: std::tuple; convert to std::pair
+
+
+Converting between  ``std::pair`` and ``std::tuple``
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 Here is how to convert a ``std::tuple`` to ``std:pair``:
@@ -1402,6 +1461,9 @@ Here is how to convert a ``std::pair`` to ``std:tuple``:
 
         return 0;
     }
+
+.. index::
+   single: C++ Code Refactoring; Using auto
 
 These can also be written using ``auto`` where the type information is automatically inferred:
 
