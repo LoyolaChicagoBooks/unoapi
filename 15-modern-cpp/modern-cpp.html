@@ -7,9 +7,9 @@
 <meta content="white" media="(prefers-color-scheme: light)" name="theme-color"/>
 <meta content="black" metia="(prefers-color-scheme: dark)" name="theme-color"/>
 <meta content="Docutils 0.18.1: http://docutils.sourceforge.net/" name="generator"/>
-<title>Modern C++ as a Better C (and C++) | UnoAPI: updated 2023.11.25</title>
-<meta content="Modern C++ as a Better C (and C++) | UnoAPI: updated 2023.11.25" property="og:title"/>
-<meta content="Modern C++ as a Better C (and C++) | UnoAPI: updated 2023.11.25" name="twitter:title"/>
+<title>Modern C++ as a Better C (and C++) | UnoAPI: updated 2023.11.26</title>
+<meta content="Modern C++ as a Better C (and C++) | UnoAPI: updated 2023.11.26" property="og:title"/>
+<meta content="Modern C++ as a Better C (and C++) | UnoAPI: updated 2023.11.26" name="twitter:title"/>
 <link href="../_static/pygments.css" rel="stylesheet"/>
 <link href="../_static/theme.47abdafeea10b5ccf58b.css" rel="stylesheet"/>
 <link href="../search.html" rel="search" title="Search"/>
@@ -40,7 +40,7 @@
     </a>
 <header class="sticky top-0 z-40 w-full border-b shadow-sm border-border supports-backdrop-blur:bg-background/60 bg-background/95 backdrop-blur"><div class="container flex items-center h-14">
 <div class="hidden mr-4 md:flex">
-<a class="flex items-center mr-6" href="../index.html"><span class="hidden font-bold sm:inline-block text-clip whitespace-nowrap">UnoAPI: updated 2023.11.25</span>
+<a class="flex items-center mr-6" href="../index.html"><span class="hidden font-bold sm:inline-block text-clip whitespace-nowrap">UnoAPI: updated 2023.11.26</span>
 </a></div><button @click="showSidebar = true" class="inline-flex items-center justify-center h-10 px-0 py-2 mr-2 text-base font-medium transition-colors rounded-md hover:text-accent-foreground hover:bg-transparent md:hidden" type="button">
 <svg aria-hidden="true" fill="currentColor" height="24" viewbox="0 96 960 960" width="24" xmlns="http://www.w3.org/2000/svg">
 <path d="M152.587 825.087q-19.152 0-32.326-13.174t-13.174-32.326q0-19.152 13.174-32.326t32.326-13.174h440q19.152 0 32.326 13.174t13.174 32.326q0 19.152-13.174 32.326t-32.326 13.174h-440Zm0-203.587q-19.152 0-32.326-13.174T107.087 576q0-19.152 13.174-32.326t32.326-13.174h320q19.152 0 32.326 13.174T518.087 576q0 19.152-13.174 32.326T472.587 621.5h-320Zm0-203.587q-19.152 0-32.326-13.174t-13.174-32.326q0-19.152 13.174-32.326t32.326-13.174h440q19.152 0 32.326 13.174t13.174 32.326q0 19.152-13.174 32.326t-32.326 13.174h-440ZM708.913 576l112.174 112.174q12.674 12.674 12.674 31.826t-12.674 31.826Q808.413 764.5 789.261 764.5t-31.826-12.674l-144-144Q600 594.391 600 576t13.435-31.826l144-144q12.674-12.674 31.826-12.674t31.826 12.674q12.674 12.674 12.674 31.826t-12.674 31.826L708.913 576Z"></path>
@@ -71,7 +71,7 @@
 </div>
 </header>
 <div class="flex-1"><div class="container flex-1 items-start md:grid md:grid-cols-[220px_minmax(0,1fr)] md:gap-6 lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-10"><aside :aria-hidden="!showSidebar" :class="{ 'translate-x-0': showSidebar }" class="fixed inset-y-0 left-0 md:top-14 z-50 md:z-30 bg-background md:bg-transparent transition-all duration-100 -translate-x-full md:translate-x-0 ml-0 p-6 md:p-0 md:-ml-2 md:h-[calc(100vh-3.5rem)] w-5/6 md:w-full shrink-0 overflow-y-auto border-r border-border md:sticky" id="left-sidebar">
-<a class="!justify-start text-sm md:!hidden bg-background" href="../index.html"><span class="font-bold text-clip whitespace-nowrap">UnoAPI: updated 2023.11.25</span>
+<a class="!justify-start text-sm md:!hidden bg-background" href="../index.html"><span class="font-bold text-clip whitespace-nowrap">UnoAPI: updated 2023.11.26</span>
 </a>
 <div class="relative overflow-hidden md:overflow-auto my-4 md:my-0 h-[calc(100vh-8rem)] md:h-auto">
 <div class="overflow-y-auto h-full w-full relative pr-6"><nav class="table w-full min-w-full my-6 lg:my-8">
@@ -99,7 +99,7 @@
 <div class="w-full min-w-0 mx-auto">
 <nav aria-label="breadcrumbs" class="flex items-center mb-4 space-x-1 text-sm text-muted-foreground">
 <a class="overflow-hidden text-ellipsis whitespace-nowrap hover:text-foreground" href="../index.html">
-<span class="hidden md:inline">UnoAPI: updated 2023.11.25</span>
+<span class="hidden md:inline">UnoAPI: updated 2023.11.26</span>
 <svg aria-label="Home" class="md:hidden" fill="currentColor" height="18" stroke="none" viewbox="0 96 960 960" width="18" xmlns="http://www.w3.org/2000/svg">
 <path d="M240 856h120V616h240v240h120V496L480 316 240 496v360Zm-80 80V456l320-240 320 240v480H520V696h-80v240H160Zm320-350Z"></path>
 </svg>
@@ -741,13 +741,13 @@ An flag-style argument is created for each data type with a default value that w
 </section>
 <section id="better-generics-for-mathematical-functions">
 <h3>Better Generics for Mathematical Functions<a class="headerlink" href="#better-generics-for-mathematical-functions" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#better-generics-for-mathematical-functions'">¶</a></h3>
-<p>In the following  example, we define a minimum function that takes two generic input parameters <cite>x</cite> and <cite>y</cite> of type <cite>T</cite>. We use <cite>std::enable_if</cite> with the condition <cite>std::is_arithmetic&lt;T&gt;::value</cite> to enable the function only for arithmetic types (i.e., integer and floating point types).</p>
-<p>The second template parameter is a default value for a pointer type that is enabled only when the first condition is met. The default value is set to <cite>nullptr</cite> to allow the function to have a return type, even when <cite>std::enable_if</cite> disables the function.</p>
+<p>In the following  example, we define a minimum function that takes two generic input parameters <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> of type <code class="docutils literal notranslate"><span class="pre">T</span></code>. We use <code class="docutils literal notranslate"><span class="pre">std::enable_if</span></code> with the condition <code class="docutils literal notranslate"><span class="pre">std::is_arithmetic&lt;T&gt;::value</span></code> to enable the function only for arithmetic types (i.e., integer and floating point types).</p>
+<p>The second template parameter is a default value for a pointer type that is enabled only when the first condition is met. The default value is set to <code class="docutils literal notranslate"><span class="pre">nullptr</span></code> to allow the function to have a return type, even when <code class="docutils literal notranslate"><span class="pre">std::enable_if</span></code> disables the function.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This is known as a “substitution failure is not an error” technique.</p>
 </div>
-<p>Inside the function, we use the ternary operator to return the smaller of the two input parameters <cite>x</cite> and <cite>y</cite>.</p>
+<p>Inside the function, we use the ternary operator to return the smaller of the two input parameters <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code>.</p>
 <p>This minimum function can be used with any integer or floating point type, including int, double, float, long, long long, etc.</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;type_traits&gt;</span>
 
@@ -850,21 +850,21 @@ Only log messages written to this level or higher will actulaly be displayed.</p
 <p>Let’s start with the most commonly needed <code class="docutils literal notranslate"><span class="pre">std::vector</span></code> and <code class="docutils literal notranslate"><span class="pre">std::map</span></code>.</p>
 <section id="std-vector-the-standard-all-in-one-vector-type">
 <h4><code class="docutils literal notranslate"><span class="pre">std::vector</span></code>: The Standard All-in-One Vector Type<a class="headerlink" href="#std-vector-the-standard-all-in-one-vector-type" title="Permalink to this heading">¶</a></h4>
-<p><cite>std::vector</cite> is a dynamic all-in-one array data structure in C++ (similar to a Python list) that provides efficient memory management and flexible storage of elements, and it is important in scientific computing for its ability to handle large amounts of data efficiently.</p>
-<p>Using <cite>std::vector</cite> is preferable to using a C pointer based equivalent array because it provides automatic memory management, better safety and convenience, and improved performance for dynamic resizing and storage of elements.</p>
-<p>The advantages of using <cite>std::vector</cite> therefore outweigh any disadvantages, especially if you care about the balance of performance and safety as we do.</p>
+<p><code class="docutils literal notranslate"><span class="pre">std::vector</span></code> is a dynamic all-in-one array data structure in C++ (similar to a Python list) that provides efficient memory management and flexible storage of elements, and it is important in scientific computing for its ability to handle large amounts of data efficiently.</p>
+<p>Using <code class="docutils literal notranslate"><span class="pre">std::vector</span></code> is preferable to using a C pointer based equivalent array because it provides automatic memory management, better safety and convenience, and improved performance for dynamic resizing and storage of elements.</p>
+<p>The advantages of using <code class="docutils literal notranslate"><span class="pre">std::vector</span></code> therefore outweigh any disadvantages, especially if you care about the balance of performance and safety as we do.</p>
 <p>The top 10 operations include:</p>
 <ul class="simple">
-<li><p><cite>push_back()</cite>: This function adds an element to the end of the vector.</p></li>
-<li><p><cite>pop_back()</cite>: This function removes the last element from the vector.</p></li>
-<li><p><cite>size()</cite>: This function returns the current number of elements in the vector.</p></li>
-<li><p><cite>resize()</cite>: This function resizes the vector to the specified number of elements. If the new size is larger than the current size, new elements are added with their default values. If the new size is smaller than the current size, excess elements are removed.</p></li>
-<li><p><cite>clear()</cite>: This function removes all elements from the vector.</p></li>
-<li><p><cite>empty()</cite>: This function returns true if the vector is empty, i.e., if it has no elements.</p></li>
-<li><p><cite>reserve()</cite>: This function reserves space in the vector for a certain number of elements. This can be useful when you know the approximate size of the vector in advance and want to avoid frequent reallocations.</p></li>
-<li><p><cite>begin()</cite> and end(): These functions return iterators that point to the first and one-past-the-last elements of the vector, respectively. You can use these iterators to traverse the elements of the vector.</p></li>
-<li><p><cite>at()</cite>: This function provides bounds checking when accessing elements of the vector. It throws an exception if the index is out of range.</p></li>
-<li><p><cite>operator[]</cite>: This function provides direct access to the elements of the vector using the square bracket notation. It does not perform bounds checking, so you need to be careful not to access elements out of range.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">push_back()</span></code>: This function adds an element to the end of the vector.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pop_back()</span></code>: This function removes the last element from the vector.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">size()</span></code>: This function returns the current number of elements in the vector.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">resize()</span></code>: This function resizes the vector to the specified number of elements. If the new size is larger than the current size, new elements are added with their default values. If the new size is smaller than the current size, excess elements are removed.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">clear()</span></code>: This function removes all elements from the vector.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">empty()</span></code>: This function returns true if the vector is empty, i.e., if it has no elements.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">reserve()</span></code>: This function reserves space in the vector for a certain number of elements. This can be useful when you know the approximate size of the vector in advance and want to avoid frequent reallocations.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">begin()</span></code> and end(): These functions return iterators that point to the first and one-past-the-last elements of the vector, respectively. You can use these iterators to traverse the elements of the vector.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">at()</span></code>: This function provides bounds checking when accessing elements of the vector. It throws an exception if the index is out of range.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">operator[]</span></code>: This function provides direct access to the elements of the vector using the square bracket notation. It does not perform bounds checking, so you need to be careful not to access elements out of range.</p></li>
 </ul>
 <p>In the following exmaple, we demonsrate the use of these most popular methods and use simple print statements to show that each method works as expected.</p>
 <p>We make use of the built-in support for random number generation. Uniform random numbers are generated between 0.0 and 1.0.</p>
@@ -1226,21 +1226,21 @@ Only log messages written to this level or higher will actulaly be displayed.</p
 <h3>Other Useful Template Classes beyond <code class="docutils literal notranslate"><span class="pre">std::vector</span></code> and <code class="docutils literal notranslate"><span class="pre">std::map</span></code><a class="headerlink" href="#other-useful-template-classes-beyond-std-vector-and-std-map" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#other-useful-template-classes-beyond-std-vector-and-std-map'">¶</a></h3>
 <p>There are several other essential modern template classes in the STL that are highly useful for various programming tasks. Many of these are useful to advanced systems programming, so we will introduce them briefly here and provide examples of each that are appropriate for our tutorial.</p>
 <ul class="simple">
-<li><p><strong>`std::array`</strong>: A container that encapsulates fixed-size arrays. It offers similar functionality to plain arrays but with added benefits of standard container functions like <cite>.size()</cite> and iterators.</p></li>
-<li><p><strong>`std::deque`</strong>: Double-ended queue that allows insertion and deletion at both ends. It’s useful when you need dynamic array behavior but with efficient insertion/removal from the front and back.</p></li>
-<li><p><strong>`std::list`</strong> and <strong>`std::forward_list`</strong>: Implementations of doubly-linked and singly-linked lists, respectively. They offer constant time insertion and deletion of elements but do not provide random access.</p></li>
-<li><p><strong>`std::set`</strong> and <strong>`std::multiset`</strong>: Containers that store unique elements following a specific order. <cite>std::multiset</cite> differs in allowing multiple elements to have equivalent values.</p></li>
-<li><p><strong>`std::unordered_set`</strong> and <strong>`std::unordered_multiset`</strong>: Implementations of hash set and multiset. They provide faster lookup, insertion, and deletion compared to <cite>std::set</cite>/<cite>std::multiset</cite> at the cost of not maintaining order.</p></li>
-<li><p><strong>`std::stack`</strong> and <strong>`std::queue`</strong>: Adaptor containers. <cite>std::stack</cite> provides LIFO (last-in, first-out) data structure, and <cite>std::queue</cite> offers FIFO (first-in, first-out) data structure.</p></li>
-<li><p><strong>`std::priority_queue`</strong>: A container adaptor that provides constant time lookup of the largest (or smallest, if you customize) element.</p></li>
-<li><p><strong>`std::map`</strong> and <strong>`std::multimap`</strong>: Associative containers that store elements formed by a combination of a key value and a mapped value, following a specific order. The <cite>std::multimap</cite> allows multiple entries for a single key.</p></li>
-<li><p><strong>`std::unordered_map`</strong> and <strong>`std::unordered_multimap`</strong>: Implementations of hash map and hash multimap. They allow for faster access than <cite>std::map</cite>/<cite>std::multimap</cite> but do not keep elements in any specific order.</p></li>
-<li><p><strong>`std::optional`</strong>: A wrapper for values that may or may not be present. Introduced in C++17, it’s useful for functions that may or may not return a value in a safe manner.</p></li>
-<li><p><strong>`std::variant`</strong>: Also introduced in C++17, this is a type-safe union class, which can hold one of several specified types but only one at a time.</p></li>
-<li><p><strong>`std::tuple`</strong>: A fixed-size collection of heterogeneous values. It’s a generalization of <cite>std::pair</cite>.</p></li>
-<li><p><strong>`std::function`</strong>: A general-purpose polymorphic function wrapper. It can store, move, and invoke any Callable target—functions, lambda expressions, bind expressions, or other function objects.</p></li>
-<li><p><strong>`std::thread`</strong>: Represents a single thread of execution and introduced in C++11. It allows for more straightforward and portable multithreading.</p></li>
-<li><p><strong>`std::future`</strong> and <strong>`std::promise`</strong>: Introduced in C++11, these classes are used for asynchronous programming. They provide mechanisms to access the result of asynchronous operations.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">std::array</span></code>: A container that encapsulates fixed-size arrays. It offers similar functionality to plain arrays but with added benefits of standard container functions like <code class="docutils literal notranslate"><span class="pre">.size()</span></code> and iterators.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">std::deque</span></code>: Double-ended queue that allows insertion and deletion at both ends. It’s useful when you need dynamic array behavior but with efficient insertion/removal from the front and back.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">std::list</span></code> and <code class="docutils literal notranslate"><span class="pre">std::forward_list</span></code>: Implementations of doubly-linked and singly-linked lists, respectively. They offer constant time insertion and deletion of elements but do not provide random access.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">std::set</span></code> and <code class="docutils literal notranslate"><span class="pre">std::multiset</span></code>: Containers that store unique elements following a specific order. <code class="docutils literal notranslate"><span class="pre">std::multiset</span></code> differs in allowing multiple elements to have equivalent values.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">std::unordered_set</span></code> and <code class="docutils literal notranslate"><span class="pre">std::unordered_multiset</span></code>: Implementations of hash set and multiset. They provide faster lookup, insertion, and deletion compared to <code class="docutils literal notranslate"><span class="pre">std::set</span></code>/<code class="docutils literal notranslate"><span class="pre">std::multiset`</span></code> at the cost of not maintaining order.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">std::stack</span></code> and <code class="docutils literal notranslate"><span class="pre">std::queue</span></code>: Adaptor containers. <code class="docutils literal notranslate"><span class="pre">std::stack</span></code> provides LIFO (last-in, first-out) data structure, and <code class="docutils literal notranslate"><span class="pre">std::queue</span></code> offers FIFO (first-in, first-out) data structure.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">std::priority_queue</span></code>: A container adaptor that provides constant time lookup of the largest (or smallest, if you customize) element.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">std::map</span></code> and <code class="docutils literal notranslate"><span class="pre">std::multimap</span></code>: Associative containers that store elements formed by a combination of a key value and a mapped value, following a specific order. The <code class="docutils literal notranslate"><span class="pre">std::multimap</span></code> allows multiple entries for a single key.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">std::unordered_map</span></code> and <code class="docutils literal notranslate"><span class="pre">std::unordered_multimap</span></code>: Implementations of hash map and hash multimap. They allow for faster access than <code class="docutils literal notranslate"><span class="pre">std::map</span></code>/ <code class="docutils literal notranslate"><span class="pre">std::multimap</span></code> but do not keep elements in any specific order.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">std::optional</span></code>: A wrapper for values that may or may not be present. Introduced in C++17, it’s useful for functions that may or may not return a value in a safe manner.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">std::variant</span></code>: Also introduced in C++17, this is a type-safe union class, which can hold one of several specified types but only one at a time.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">std::tuple</span></code>: A fixed-size collection of heterogeneous values. It’s a generalization of <code class="docutils literal notranslate"><span class="pre">std::pair</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">std::function</span></code>: A general-purpose polymorphic function wrapper. It can store, move, and invoke any Callable target—functions, lambda expressions, bind expressions, or other function objects.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">std::thread</span></code>: Represents a single thread of execution and introduced in C++11. It allows for more straightforward and portable multithreading.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">std::future</span></code> and <code class="docutils literal notranslate"><span class="pre">std::promise</span></code>: Introduced in C++11, these classes are used for asynchronous programming. They provide mechanisms to access the result of asynchronous operations.</p></li>
 </ul>
 <p>Understanding and effectively using these template classes can significantly enhance the efficiency, reliability, and readability of your C++ code. Each of these classes serves a particular purpose and can be chosen based on the specific requirements of your program.</p>
 <p>In the remaining, we show minimium viable examples of these, while focusing on the most commonly used (5) methods.</p>
@@ -1721,6 +1721,158 @@ int main() {
 </tbody>
 </table>
 </section>
+<section id="std-pair-and-std-tuple">
+<h4><code class="docutils literal notranslate"><span class="pre">std::pair</span></code> and <code class="docutils literal notranslate"><span class="pre">std::tuple</span></code><a class="headerlink" href="#std-pair-and-std-tuple" title="Permalink to this heading">¶</a></h4>
+<p><code class="docutils literal notranslate"><span class="pre">std::pair</span></code> and <code class="docutils literal notranslate"><span class="pre">std::tuple</span></code> are both utility classes in the C++ Standard Library that store a fixed set of elements, but they serve slightly different purposes.</p>
+<p><code class="docutils literal notranslate"><span class="pre">std::pair</span></code> – a longstanding STL class – is specifically designed to store two elements, while std::tuple is more general and can store any number of elements.</p>
+<p>Let’s begin with a simple example of <code class="docutils literal notranslate"><span class="pre">std::pair</span></code>.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;utility&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Creating a pair of int and std::string</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">myPair</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">"Hello"</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Accessing elements</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"First: "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">myPair</span><span class="p">.</span><span class="n">first</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">", Second: "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">myPair</span><span class="p">.</span><span class="n">second</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Modifying elements</span>
+<span class="w">    </span><span class="n">myPair</span><span class="p">.</span><span class="n">first</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="w">    </span><span class="n">myPair</span><span class="p">.</span><span class="n">second</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"World"</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"First: "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">myPair</span><span class="p">.</span><span class="n">first</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">", Second: "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">myPair</span><span class="p">.</span><span class="n">second</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>When you need to group more than two values together, consider <code class="docutils literal notranslate"><span class="pre">std::tuple</span></code>:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;tuple&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Creating a tuple of int, std::string, and float</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">tuple</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="o">&gt;</span><span class="w"> </span><span class="n">myTuple</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">"Hello"</span><span class="p">,</span><span class="w"> </span><span class="mf">3.14f</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Accessing elements using std::get</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"First: "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">get</span><span class="o">&lt;</span><span class="mi">0</span><span class="o">&gt;</span><span class="p">(</span><span class="n">myTuple</span><span class="p">)</span>
+<span class="w">            </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">", Second: "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">get</span><span class="o">&lt;</span><span class="mi">1</span><span class="o">&gt;</span><span class="p">(</span><span class="n">myTuple</span><span class="p">)</span>
+<span class="w">            </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">", Third: "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">get</span><span class="o">&lt;</span><span class="mi">2</span><span class="o">&gt;</span><span class="p">(</span><span class="n">myTuple</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Modifying elements</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">get</span><span class="o">&lt;</span><span class="mi">0</span><span class="o">&gt;</span><span class="p">(</span><span class="n">myTuple</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">get</span><span class="o">&lt;</span><span class="mi">1</span><span class="o">&gt;</span><span class="p">(</span><span class="n">myTuple</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"World"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">get</span><span class="o">&lt;</span><span class="mi">2</span><span class="o">&gt;</span><span class="p">(</span><span class="n">myTuple</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.59f</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"First: "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">get</span><span class="o">&lt;</span><span class="mi">0</span><span class="o">&gt;</span><span class="p">(</span><span class="n">myTuple</span><span class="p">)</span>
+<span class="w">            </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">", Second: "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">get</span><span class="o">&lt;</span><span class="mi">1</span><span class="o">&gt;</span><span class="p">(</span><span class="n">myTuple</span><span class="p">)</span>
+<span class="w">            </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">", Third: "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">get</span><span class="o">&lt;</span><span class="mi">2</span><span class="o">&gt;</span><span class="p">(</span><span class="n">myTuple</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">std::pair</span></code> and <code class="docutils literal notranslate"><span class="pre">std::tuple</span></code> are both utility classes in the C++ Standard Library that store a fixed set of elements, but they serve slightly different purposes. <code class="docutils literal notranslate"><span class="pre">std::pair</span></code> is specifically designed to store two elements, while <code class="docutils literal notranslate"><span class="pre">std::tuple</span></code> is more general and can store any number of elements.</p>
+<p>It is worth asking the question: Are <code class="docutils literal notranslate"><span class="pre">std::pair</span></code> and <code class="docutils literal notranslate"><span class="pre">std::tuple</span></code> Equivalent?</p>
+<p>While <code class="docutils literal notranslate"><span class="pre">std::pair</span></code> and <code class="docutils literal notranslate"><span class="pre">std::tuple</span></code> can seem similar (especially since a <code class="docutils literal notranslate"><span class="pre">std::tuple</span></code> with two elements can act like a <code class="docutils literal notranslate"><span class="pre">std::pair</span></code>), they are <strong>not</strong> equivalent:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">std::pair</span></code> is limited to exactly two elements and is often used in contexts where two related values need to be grouped together, such as key-value pairs in maps.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">std::tuple</span></code> is more versatile and can hold any number of elements. It is useful in scenarios where you need to group a fixed, but arbitrary number of different types together.</p></li>
+<li><p>In <code class="docutils literal notranslate"><span class="pre">std::pair</span></code>, elements are accessed using <code class="docutils literal notranslate"><span class="pre">.first</span></code> and <code class="docutils literal notranslate"><span class="pre">.second</span></code>. In <code class="docutils literal notranslate"><span class="pre">std::tuple</span></code>, elements are accessed using <code class="docutils literal notranslate"><span class="pre">std::get&lt;&gt;</span></code>, with the index of the element as a template parameter.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">std::tuple</span></code> can be seen as a generalization of <code class="docutils literal notranslate"><span class="pre">std::pair</span></code> but does not replace it, for pragmatic reasons.</p></li>
+</ul>
+<p>In summary, <code class="docutils literal notranslate"><span class="pre">std::pair</span></code> and <code class="docutils literal notranslate"><span class="pre">std::tuple</span></code> serve similar purposes but are not interchangeable. <code class="docutils literal notranslate"><span class="pre">std::pair</span></code> is simpler and more straightforward for handling pairs of elements, while <code class="docutils literal notranslate"><span class="pre">std::tuple</span></code> offers more flexibility and is suited for handling a fixed collection of several (greater than two in practice) elements.</p>
+</section>
+<section id="utility-functions-for-working-with-std-pair-and-std-tuple">
+<h4>Utility Functions for working with <code class="docutils literal notranslate"><span class="pre">std::pair</span></code> and <code class="docutils literal notranslate"><span class="pre">std::tuple</span></code><a class="headerlink" href="#utility-functions-for-working-with-std-pair-and-std-tuple" title="Permalink to this heading">¶</a></h4>
+<p>In C++, <code class="docutils literal notranslate"><span class="pre">std::make_pair</span></code> is a utility function that simplifies the
+creation of <code class="docutils literal notranslate"><span class="pre">std::pair</span></code> objects. It takes two arguments and returns a
+<code class="docutils literal notranslate"><span class="pre">std::pair</span></code> constructed with those two values. This function is
+particularly useful because it infers the types of the pair’s elements
+from the types of the arguments passed to it, making the code more concise
+and readable. For example, <code class="docutils literal notranslate"><span class="pre">std::make_pair(1,</span> <span class="pre">"Hello")</span></code> creates a
+<code class="docutils literal notranslate"><span class="pre">std::pair&lt;int,</span> <span class="pre">std::string&gt;</span></code> without needing to explicitly specify these types.</p>
+<p>On the other hand, <code class="docutils literal notranslate"><span class="pre">std::make_tuple</span></code> is used for creating <code class="docutils literal notranslate"><span class="pre">std::tuple</span></code> objects.
+Similar to <code class="docutils literal notranslate"><span class="pre">std::make_pair</span></code>, it infers the types of the tuple’s elements from its arguments.
+You can pass any number of arguments to <code class="docutils literal notranslate"><span class="pre">std::make_tuple</span></code>, and it will return a tuple
+containing those values. For instance, <code class="docutils literal notranslate"><span class="pre">std::make_tuple(1,</span> <span class="pre">"Hello",</span> <span class="pre">3.14)</span></code>
+will create a <code class="docutils literal notranslate"><span class="pre">std::tuple&lt;int,</span> <span class="pre">std::string,</span> <span class="pre">double&gt;</span></code>. This function is particularly
+handy for creating tuples without having to explicitly specify the type of each element,
+thus allowing for more concise and flexible code.</p>
+</section>
+<section id="convertin-between-std-pair-and-std-tuple">
+<h4>Convertin between  <code class="docutils literal notranslate"><span class="pre">std::pair</span></code> and <code class="docutils literal notranslate"><span class="pre">std::tuple</span></code><a class="headerlink" href="#convertin-between-std-pair-and-std-tuple" title="Permalink to this heading">¶</a></h4>
+<p>Here is how to convert a <code class="docutils literal notranslate"><span class="pre">std::tuple</span></code> to <code class="docutils literal notranslate"><span class="pre">std:pair</span></code>:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;tuple&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;utility&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">tuple</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">myTuple</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_tuple</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">"Hello"</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Convert tuple to pair</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">myPair</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_pair</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">get</span><span class="o">&lt;</span><span class="mi">0</span><span class="o">&gt;</span><span class="p">(</span><span class="n">myTuple</span><span class="p">),</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">get</span><span class="o">&lt;</span><span class="mi">1</span><span class="o">&gt;</span><span class="p">(</span><span class="n">myTuple</span><span class="p">));</span>
+
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Pair: "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">myPair</span><span class="p">.</span><span class="n">first</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">", "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">myPair</span><span class="p">.</span><span class="n">second</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Here is how to convert a <code class="docutils literal notranslate"><span class="pre">std::pair</span></code> to <code class="docutils literal notranslate"><span class="pre">std:tuple</span></code>:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;tuple&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;utility&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">myPair</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_pair</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">"Hello"</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Convert pair to tuple</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">tuple</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">myTuple</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">myPair</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Tuple: "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">get</span><span class="o">&lt;</span><span class="mi">0</span><span class="o">&gt;</span><span class="p">(</span><span class="n">myTuple</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">", "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">get</span><span class="o">&lt;</span><span class="mi">1</span><span class="o">&gt;</span><span class="p">(</span><span class="n">myTuple</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>These can also be written using <code class="docutils literal notranslate"><span class="pre">auto</span></code> where the type information is automatically inferred:</p>
+<p>Here is how to convert a <code class="docutils literal notranslate"><span class="pre">std::tuple</span></code> to <code class="docutils literal notranslate"><span class="pre">std:pair</span></code> using auto:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;tuple&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;utility&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">myTuple</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_tuple</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">"Hello"</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Convert tuple to pair</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">myPair</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_pair</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">get</span><span class="o">&lt;</span><span class="mi">0</span><span class="o">&gt;</span><span class="p">(</span><span class="n">myTuple</span><span class="p">),</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">get</span><span class="o">&lt;</span><span class="mi">1</span><span class="o">&gt;</span><span class="p">(</span><span class="n">myTuple</span><span class="p">));</span>
+
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Pair: "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">myPair</span><span class="p">.</span><span class="n">first</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">", "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">myPair</span><span class="p">.</span><span class="n">second</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Here is how to convert a <code class="docutils literal notranslate"><span class="pre">std::pair</span></code> to <code class="docutils literal notranslate"><span class="pre">std:tuple</span></code> using auto:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;tuple&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;utility&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">myPair</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_pair</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">"Hello"</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Using auto to infer the type of std::tuple from std::pair</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">myTuple</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">tuple</span><span class="p">(</span><span class="n">myPair</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"Tuple: "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">get</span><span class="o">&lt;</span><span class="mi">0</span><span class="o">&gt;</span><span class="p">(</span><span class="n">myTuple</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">", "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">get</span><span class="o">&lt;</span><span class="mi">1</span><span class="o">&gt;</span><span class="p">(</span><span class="n">myTuple</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
 </section>
 <section id="random-number-generation">
 <h3>Random Number Generation<a class="headerlink" href="#random-number-generation" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#random-number-generation'">¶</a></h3>
@@ -2199,6 +2351,9 @@ The following shows how to create four co-routines that sleep for random amounts
 <li><a :data-current="activeSection === '#std-priority-queue'" class="reference internal" href="#std-priority-queue"><code class="docutils literal notranslate"><span class="pre">std::priority_queue</span></code></a></li>
 <li><a :data-current="activeSection === '#std-optional'" class="reference internal" href="#std-optional"><code class="docutils literal notranslate"><span class="pre">std::optional</span></code></a></li>
 <li><a :data-current="activeSection === '#a-look-at-expected-run-time-performance'" class="reference internal" href="#a-look-at-expected-run-time-performance">A Look at Expected Run-time Performance</a></li>
+<li><a :data-current="activeSection === '#std-pair-and-std-tuple'" class="reference internal" href="#std-pair-and-std-tuple"><code class="docutils literal notranslate"><span class="pre">std::pair</span></code> and <code class="docutils literal notranslate"><span class="pre">std::tuple</span></code></a></li>
+<li><a :data-current="activeSection === '#utility-functions-for-working-with-std-pair-and-std-tuple'" class="reference internal" href="#utility-functions-for-working-with-std-pair-and-std-tuple">Utility Functions for working with <code class="docutils literal notranslate"><span class="pre">std::pair</span></code> and <code class="docutils literal notranslate"><span class="pre">std::tuple</span></code></a></li>
+<li><a :data-current="activeSection === '#convertin-between-std-pair-and-std-tuple'" class="reference internal" href="#convertin-between-std-pair-and-std-tuple">Convertin between  <code class="docutils literal notranslate"><span class="pre">std::pair</span></code> and <code class="docutils literal notranslate"><span class="pre">std::tuple</span></code></a></li>
 </ul>
 </li>
 <li><a :data-current="activeSection === '#random-number-generation'" class="reference internal" href="#random-number-generation">Random Number Generation</a></li>
