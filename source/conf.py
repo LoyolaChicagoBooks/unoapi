@@ -12,6 +12,7 @@
 # serve to show the default.
 
 import sys, os
+import subprocess
 from datetime import date
 
 
@@ -47,13 +48,21 @@ master_doc = 'index'
 project = u'UnoAPI'
 copyright = u'2013-2019, UnoAPI Software Systems Laboratory'
 
-# The version info for the project you're documenting, acts as replacement for
-# |version| and |release|, also used in various other places throughout the
-# built documents.
-#
-# The short X.Y version.
-#version = 'v0.1'
-version = date.today().strftime("%Y.%m.%d")
+def get_git_tag():
+    try:
+        return subprocess.check_output(["git", "describe", "--tags", "--abbrev=0"]).strip().decode('utf-8')
+    except subprocess.CalledProcessError:
+        # Handle cases where the git command fails
+        return "Unknown"
+
+# Assign the latest tag to a variable
+latest_git_tag = get_git_tag()
+
+# Use 'latest_git_tag' in your Sphinx documentation
+version = latest_git_tag
+release = latest_git_tag
+
+#version = date.today().strftime("%Y.%m.%d")
 # The full version, including alpha/beta/rc tags.
 release = version
 
