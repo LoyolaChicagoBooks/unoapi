@@ -622,13 +622,13 @@ Another aspect of this argument against Amdahl’s law is that, as the problem s
    pair: Amdahl's Law; comparison with Gustafson's Law
    pair: Gustafson's Law; comparison with Amdahl's Law
 
-Beyond Amdahl - Gustafson's Law
+Gustafson's Law: Looking Beyond Amdahl's Law
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Gustafson's Law, proposed by John Gustafson in 1988, presents a significant
 principle in the field of parallel computing, fundamentally differing from
 Amdahl's Law in its approach to evaluating the benefits of parallelization.
-This difference has significant merit and is one well worth exploring, even if tthe ideas of Amdahl's Law remain of importance.
+This difference has significant merit and is one well worth exploring, even as the ideas of Amdahl's Law remain of importance. After all, many problems, including intractable ones, cannot run on any number of nodes. (Quantum computing may change that. But we're not there yet!)
 
 Gustafson's Law reframes the problem of parallelization by suggesting that
 with more processors, we typically choose to solve larger problems, rather

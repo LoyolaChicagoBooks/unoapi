@@ -566,12 +566,12 @@ slower the program runs. And for weather forecasting, if the calculation takes t
 <p>which approaches the parallel fraction as the number of processors increases. In this for- mulation, there is no theoretical limit on speedup. As long as we scale the problem size to the size of the machine, we will not run into limits.</p>
 <p>Another aspect of this argument against Amdahl’s law is that, as the problem size increases, the serial fraction may decrease. Consider a program that reads in two N-by-N matrices, multiplies them, and writes out the result. The serial I/O time grows as <span class="math notranslate nohighlight">\(N^2\)</span>, while the multiplication, which is highly parallelizable, grows as <span class="math notranslate nohighlight">\(N^3\)</span>.</p>
 </section>
-<section id="beyond-amdahl-gustafson-s-law">
-<span id="index-11"></span><h3>Beyond Amdahl - Gustafson’s Law<a class="headerlink" href="#beyond-amdahl-gustafson-s-law" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#beyond-amdahl-gustafson-s-law'">¶</a></h3>
+<section id="gustafson-s-law-looking-beyond-amdahl-s-law">
+<span id="index-11"></span><h3>Gustafson’s Law: Looking Beyond Amdahl’s Law<a class="headerlink" href="#gustafson-s-law-looking-beyond-amdahl-s-law" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#gustafson-s-law-looking-beyond-amdahl-s-law'">¶</a></h3>
 <p>Gustafson’s Law, proposed by John Gustafson in 1988, presents a significant
 principle in the field of parallel computing, fundamentally differing from
 Amdahl’s Law in its approach to evaluating the benefits of parallelization.
-This difference has significant merit and is one well worth exploring, even if tthe ideas of Amdahl’s Law remain of importance.</p>
+This difference has significant merit and is one well worth exploring, even as the ideas of Amdahl’s Law remain of importance. After all, many problems, including intractable ones, cannot run on any number of nodes. (Quantum computing may change that. But we’re not there yet!)</p>
 <p>Gustafson’s Law reframes the problem of parallelization by suggesting that
 with more processors, we typically choose to solve larger problems, rather
 than solving the same problem faster–a view strongly justified by modern practice of distinguishing <em>strong</em> vs. <em>weak</em> scaling (not covered here–yet).</p>
@@ -721,7 +721,7 @@ We can assign blocks of rows to nodes, as in (1) and (2), but guarantee that no 
 <li><a :data-current="activeSection === '#speedup-vs-efficiency'" class="reference internal" href="#speedup-vs-efficiency">Speedup vs. Efficiency</a></li>
 <li><a :data-current="activeSection === '#amdahls-law'" class="reference internal" href="#amdahls-law">Amdahl’s Law</a></li>
 <li><a :data-current="activeSection === '#scalability'" class="reference internal" href="#scalability">Scalability</a></li>
-<li><a :data-current="activeSection === '#beyond-amdahl-gustafson-s-law'" class="reference internal" href="#beyond-amdahl-gustafson-s-law">Beyond Amdahl - Gustafson’s Law</a></li>
+<li><a :data-current="activeSection === '#gustafson-s-law-looking-beyond-amdahl-s-law'" class="reference internal" href="#gustafson-s-law-looking-beyond-amdahl-s-law">Gustafson’s Law: Looking Beyond Amdahl’s Law</a></li>
 <li><a :data-current="activeSection === '#granularity'" class="reference internal" href="#granularity">Granularity</a></li>
 <li><a :data-current="activeSection === '#starvation-and-deadlock'" class="reference internal" href="#starvation-and-deadlock">Starvation and deadlock</a></li>
 <li><a :data-current="activeSection === '#flooding-throttling'" class="reference internal" href="#flooding-throttling">Flooding/Throttling</a></li>
