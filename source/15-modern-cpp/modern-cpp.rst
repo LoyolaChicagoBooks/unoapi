@@ -1301,7 +1301,7 @@ The following table shows the expected time complexity when it comes to each of 
 .. note:: Workign on this! -GKT
 
 .. csv-table:: STL Containers Method Time Complexity
-   :header: "Method", "std::vector", "std::deque", "std::list", "std::forward_list", "std::set/multiset", "std::unordered_set/multiset"
+   :header: "Method", "vector", "deque", "list", "forward_list", "set|multiset", "unordered_set"
    :widths: 20, 15, 15, 15, 20, 20, 30
 
    "size", ":math:`O(1)`", ":math:`O(1)`", ":math:`O(1)`", ":math:`O(1)`", ":math:`O(1)`", ":math:`O(1)`"
