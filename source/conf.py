@@ -46,7 +46,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'UnoAPI Book'
-copyright = u'2013-2019, UnoAPI Software Systems Laboratory'
+copyright = u'2013-2019, Software Systems Laboratory at Loyola University Chicago'
 
 def get_git_tag():
     try:
@@ -230,7 +230,7 @@ latex_elements = {
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
   ('index', 'UnoAPI.tex', u'UnoAPI Book',
-   u'UnoAPI Software Systems Laboratory', 'manual'),
+   u'Software Systems Laboratory at Loyola University Chicago', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -260,7 +260,7 @@ latex_documents = [
 # (source start file, name, description, authors, manual section).
 man_pages = [
     ('index', 'unoapi', u'UnoAPI Book',
-     [u'UnoAPI Software Systems Laboratory'], 1)
+     [u'Software Systems Laboratory at Loyola University Chicago'], 1)
 ]
 
 # If true, show URL addresses after external links.
@@ -274,7 +274,7 @@ man_pages = [
 #  dir menu entry, description, category)
 texinfo_documents = [
   ('index', 'UnoAPI', u'UnoAPI Book',
-   u'UnoAPI Software Systems Laboratory', 'UnoAPI', 'One line description of project.',
+   u'Software Systems Laboratory at Loyola University Chicago', 'UnoAPI', 'One line description of project.',
    'Miscellaneous'),
 ]
 
@@ -292,9 +292,9 @@ texinfo_documents = [
 
 # Bibliographic Dublin Core info.
 epub_title = u'UnoAPI'
-epub_author = u'UnoAPI Software Systems Laboratory'
-epub_publisher = u'UnoAPI Software Systems Laboratory'
-epub_copyright = u'2013, UnoAPI Software Systems Laboratory'
+epub_author = u'Software Systems Laboratory at Loyola University Chicago'
+epub_publisher = u'Software Systems Laboratory at Loyola University Chicago'
+epub_copyright = u'2013, Software Systems Laboratory at Loyola University Chicago'
 
 # The language of the text. It defaults to the language option
 # or en if the language is not set.
