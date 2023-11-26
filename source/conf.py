@@ -45,7 +45,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'UnoAPI'
+project = u'UnoAPI Book'
 copyright = u'2013-2019, UnoAPI Software Systems Laboratory'
 
 def get_git_tag():
