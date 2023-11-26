@@ -229,7 +229,7 @@ latex_elements = {
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-  ('index', 'UnoAPI.tex', u'UnoAPI Tutorial',
+  ('index', 'UnoAPI.tex', u'UnoAPI Book',
    u'UnoAPI Software Systems Laboratory', 'manual'),
 ]
 
@@ -259,7 +259,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'unoapi', u'UnoAPI Tutorial',
+    ('index', 'unoapi', u'UnoAPI Book',
      [u'UnoAPI Software Systems Laboratory'], 1)
 ]
 
@@ -273,7 +273,7 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  ('index', 'UnoAPI', u'UnoAPI Tutorial',
+  ('index', 'UnoAPI', u'UnoAPI Book',
    u'UnoAPI Software Systems Laboratory', 'UnoAPI', 'One line description of project.',
    'Miscellaneous'),
 ]
