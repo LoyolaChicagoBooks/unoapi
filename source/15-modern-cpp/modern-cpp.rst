@@ -1298,27 +1298,30 @@ While knowledge of these structures--and how to implement them--is still of valu
 
 The following table shows the expected time complexity when it comes to each of the standard library template classes. When left blank, it means that the method is either not available or not appropriate for the standard template class.
 
-.. note:: Workign on this! -GKT
-
-.. csv-table:: STL Containers Method Time Complexity
-   :header: "Method", "vector", "deque", "list", "forward_list", "set|multiset", "unordered_set"
+.. csv-table:: STL Containers Method Time Complexity [Prelimiary Analysis]
+   :header: "Method", "std::vector", "std::deque", "std::list", "std::forward_list", "std::set/multiset", "std::unordered_set/multiset"
    :widths: 20, 15, 15, 15, 20, 20, 30
 
-   "size", ":math:`O(1)`", ":math:`O(1)`", ":math:`O(1)`", ":math:`O(1)`", ":math:`O(1)`", ":math:`O(1)`"
-   "empty", ":math:`O(1)`", ":math:`O(1)`", ":math:`O(1)`", ":math:`O(1)`", ":math:`O(1)`", ":math:`O(1)`"
-   "insert", ":math:`O(n)`", ":math:`O(1)`", ":math:`O(1)`", ":math:`O(1)`", ":math:`O(\log n)`", ":math:`O(1)`"
-   "erase", ":math:`O(n)`", ":math:`O(1)`", ":math:`O(1)`", ":math:`O(1)`", ":math:`O(\log n)`", ":math:`O(1)`"
-   "push_back", ":math:`O(1)`", ":math:`O(1)`", ":math:`O(1)`", "-", "-", "-"
-   "pop_back", ":math:`O(1)`", ":math:`O(1)`", ":math:`O(1)`", "-", "-", "-"
-   "push_front", "-", ":math:`O(1)`", ":math:`O(1)`", ":math:`O(1)`", "-", "-"
-   "pop_front", "-", ":math:`O(1)`", ":math:`O(1)`", ":math:`O(1)`", "-", "-"
-   "front", ":math:`O(1)`", ":math:`O(1)`", ":math:`O(1)`", ":math:`O(1)`", "-", "-"
-   "back", ":math:`O(1)`", ":math:`O(1)`", ":math:`O(1)`", "-", "-", "-"
-   "clear", ":math:`O(n)`", ":math:`O(n)`", ":math:`O(n)`", ":math:`O(n)`", ":math:`O(n)`", ":math:`O(n)`"
-   "find", ":math:`O(n)`", ":math:`O(n)`", ":math:`O(n)`", ":math:`O(n)`", ":math:`O(\log n)`", ":math:`O(1)`"
-   "count", ":math:`O(n)`", ":math:`O(n)`", ":math:`O(n)`", ":math:`O(n)`", ":math:`O(\log n) + O(k)`", ":math:`O(1)`"
-   "operator[]", ":math:`O(1)`", ":math:`O(1)`", "-", "-", "-", "-"
-   "at", ":math:`O(1)`", ":math:`O(1)`", "-", "-", "-", "-"
+   "size", "O(1)", "O(1)", "O(1)", "O(1)", "O(1)", "O(1)"
+   "empty", "O(1)", "O(1)", "O(1)", "O(1)", "O(1)", "O(1)"
+   "insert", "O(n)", "O(1)*", "O(1)", "O(1)", "O(log n)", "O(1)*"
+   "erase", "O(n)", "O(1)*", "O(1)", "O(1)", "O(log n)", "O(1)*"
+   "push_back", "O(1)*", "O(1)", "O(1)", "Not Applicable", "Not Applicable", "Not Applicable"
+   "pop_back", "O(1)", "O(1)", "O(1)", "Not Applicable", "Not Applicable", "Not Applicable"
+   "push_front", "Not Applicable", "O(1)", "O(1)", "O(1)", "Not Applicable", "Not Applicable"
+   "pop_front", "Not Applicable", "O(1)", "O(1)", "O(1)", "Not Applicable", "Not Applicable"
+   "front", "O(1)", "O(1)", "O(1)", "O(1)", "Not Applicable", "Not Applicable"
+   "back", "O(1)", "O(1)", "O(1)", "Not Applicable", "Not Applicable", "Not Applicable"
+   "clear", "O(n)", "O(n)", "O(n)", "O(n)", "O(n)", "O(n)"
+   "find", "O(n)", "O(n)", "O(n)", "O(n)", "O(log n)", "O(1)*"
+   "count", "O(n)", "O(n)", "O(n)", "O(n)", "O(log n) + O(k)", "O(1)*"
+   "operator[]", "O(1)", "O(1)", "Not Applicable", "Not Applicable", "Not Applicable", "Not Applicable"
+   "at", "O(1)", "O(1)", "Not Applicable", "Not Applicable", "Not Applicable", "Not Applicable"
+
+
+- Entries with "Not Applicable" are for operations that do not apply to certain container types. For example, operations like ``push_back`` and ``pop_back`` are not applicable to associative containers (``std::set``, ``std::multiset``, ``std::unordered_set``, ``std::unordered_multiset``) and ``std::forward_list``.
+- For ``std::vector``, operations such as ``insert`` and ``erase`` have a worst-case time complexity of ``O(n)`` due to potential element shifting.
+- The asterisks indicate operations with amortized time complexity, particularly relevant for ``std::vector`` and ``std::unordered_set/multiset`` where certain operations may involve occasional resizing or rehashing.
 
 ``std::pair`` and ``std::tuple``
 """"""""""""""""""""""""""""""""""""
