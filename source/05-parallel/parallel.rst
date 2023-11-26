@@ -554,6 +554,9 @@ Suppose that, on the other hand, you calculate how long you would expect it to t
 
 The efficiency would be the ratio of execution time with linear speedup to observed execution time. If speedup is no greater than linear, efficiency will be less than or equal to 1.
 
+.. index::
+   pair: Amdahl's Law; parallel computing
+
 Amdahl’s Law
 ^^^^^^^^^^^^
 
@@ -612,6 +615,47 @@ Another aspect of this argument against Amdahl’s law is that, as the problem s
 
 .. Strong/Weak scaling [new topic]
 .. ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+.. index::
+   pair: Gustafson's Law; parallel computing
+   pair: Amdahl's Law; comparison with Gustafson's Law
+   pair: Gustafson's Law; comparison with Amdahl's Law
+
+Beyond Amdahl - Gustafson's Law
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Gustafson's Law, proposed by John Gustafson in 1988, presents a significant
+principle in the field of parallel computing, fundamentally differing from
+Amdahl's Law in its approach to evaluating the benefits of parallelization.
+This difference has significant merit and is one well worth exploring, even if tthe ideas of Amdahl's Law remain of importance.
+
+Gustafson's Law reframes the problem of parallelization by suggesting that
+with more processors, we typically choose to solve larger problems, rather
+than solving the same problem faster--a view strongly justified by modern practice of distinguishing *strong* vs. *weak* scaling (not covered here--yet).
+
+This reflects a realistic approach to
+how computational resources are often used in practice. The law posits that
+the speedup of a parallel system is linearly proportional to the number of
+processors, as it emphasizes the increased problem size that can be handled.
+Mathematically, Gustafson's Law is represented as :math:`S = B + (1 - B) \times P`,
+where :math:`S` is the speedup, :math:`B` is the non-parallelizable portion
+of the task, and :math:`P` is the number of processors.
+
+In contrast to Amdahl's Law, which focuses on a fixed problem size and analyzes
+the speedup achieved by parallelizing parts of the problem, Gustafson's Law
+considers the *increase in problem size* with more available resources. While Amdahl’s Law
+can be construed as more pessimistic about the benefits of parallelization, emphasizing
+the bottleneck due to the serial portion of a task, Gustafson’s Law provides a
+more optimistic view by shifting focus to the parallelizable portion and its
+expansion to available resources. Gustafson's Law is often considered more reflective of real-world
+scenarios, where computing power is used to tackle more extensive and complex
+problems over time.
+
+In summary, Amdahl's Law provides a theoretical limit on the speedup for a
+*fixed-size problem*, but Gustafson's Law offers a different perspective,
+aligning more closely with practical applications and the evolving nature of
+computational tasks in parallel computing environments.
 
 Granularity
 ^^^^^^^^^^^^^
