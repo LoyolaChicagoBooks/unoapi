@@ -18,6 +18,7 @@ Please get started by reading :doc:`00-preliminaries/preliminaries`.
    10-software-engineering/software-engineering.rst
    15-modern-cpp/modern-cpp.rst
    18-dpcpp/dpcpp.rst
+   20-quant-finance/qfi.rst
    30-performance/performance.rst
    80-running/running.rst
    99-sandbox/issues.rst
