@@ -21,9 +21,7 @@ Please get started by reading :doc:`00-preliminaries/preliminaries`.
    20-quant-finance/qfi.rst
    30-performance/performance.rst
    80-running/running.rst
-   99-sandbox/issues.rst
 
-.. Bring this back later.
 .. 40-going-distributed/distributed.rst
 
 Repository
