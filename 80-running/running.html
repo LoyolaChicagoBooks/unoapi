@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 
-<html :class="{'dark': darkMode === 'dark' || (darkMode === 'system' &amp;&amp; window.matchMedia('(prefers-color-scheme: dark)').matches)}" class="scroll-smooth" lang="en" x-data="{ darkMode: localStorage.getItem('darkMode') || localStorage.setItem('darkMode', 'system'), activeSection: '' }" x-init="$watch('darkMode', val =&gt; localStorage.setItem('darkMode', val))">
+<html :class="{'dark': darkMode === 'dark' || (darkMode === 'system' &amp;&amp; window.matchMedia('(prefers-color-scheme: dark)').matches)}" class="scroll-smooth" data-content_root="../" lang="en" x-data="{ darkMode: localStorage.getItem('darkMode') || localStorage.setItem('darkMode', 'system'), activeSection: '' }" x-init="$watch('darkMode', val =&gt; localStorage.setItem('darkMode', val))">
 <head>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <meta charset="utf-8"/>
 <meta content="white" media="(prefers-color-scheme: light)" name="theme-color"/>
 <meta content="black" metia="(prefers-color-scheme: dark)" name="theme-color"/>
-<meta content="Docutils 0.18.1: http://docutils.sourceforge.net/" name="generator"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
 <title>Compiling and Running oneAPI programs | UnoAPI Book v0.3.2</title>
 <meta content="Compiling and Running oneAPI programs | UnoAPI Book v0.3.2" property="og:title"/>
 <meta content="Compiling and Running oneAPI programs | UnoAPI Book v0.3.2" name="twitter:title"/>
-<link href="../_static/pygments.css" rel="stylesheet"/>
-<link href="../_static/theme.47abdafeea10b5ccf58b.css" rel="stylesheet"/>
+<link href="../_static/pygments.css?v=fa44fd50" rel="stylesheet" type="text/css"/>
+<link href="../_static/theme.css?v=7112734b" rel="stylesheet" type="text/css"/>
 <link href="../search.html" rel="search" title="Search"/>
 <link href="../genindex.html" rel="index" title="Index"/>
 <link href="../99-sandbox/issues.html" rel="next" title="Issues"/>
@@ -28,10 +28,6 @@
       }
       if (!userPreference) {localStorage.setItem('darkMode', mode)}
     </script>
-<script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-<script src="../_static/doctools.js"></script>
-<script src="../_static/sphinx_highlight.js"></script>
-<script defer="" src="../_static/theme.4ea23184acb23c5e9294.js"></script>
 </head>
 <body :class="{ 'overflow-hidden': showSidebar }" class="min-h-screen font-sans antialiased bg-background text-foreground" x-data="{ showSidebar: false }">
 <div @click.self="showSidebar = false" class="fixed inset-0 z-50 overflow-hidden bg-background/80 backdrop-blur-sm" x-cloak="" x-show="showSidebar"></div><div class="relative flex flex-col min-h-screen" id="page"><a class="absolute top-0 left-0 z-[100] block bg-background p-4 text-xl transition -translate-x-full opacity-0 focus:translate-x-0 focus:opacity-100" href="#content">
@@ -47,13 +43,12 @@
 <span class="sr-only">Toggle navigation menu</span>
 </button>
 <div class="flex items-center justify-between flex-1 space-x-2 sm:space-x-4 md:justify-end">
-<div class="flex-1 w-full md:w-auto md:flex-none">
-<form @keydown.k.window.meta="$refs.search.focus()" action="../search.html" class="relative flex items-center group" id="searchbox" method="get">
+<div class="flex-1 w-full md:w-auto md:flex-none"><form @keydown.k.window.meta="$refs.search.focus()" action="../search.html" class="relative flex items-center group" id="searchbox" method="get">
 <input aria-label="Search the docs" class="inline-flex items-center font-medium transition-colors bg-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background border border-input hover:bg-accent focus:bg-accent hover:text-accent-foreground focus:text-accent-foreground hover:placeholder-accent-foreground py-2 px-4 relative h-9 w-full justify-start rounded-[0.5rem] text-sm text-muted-foreground sm:pr-12 md:w-40 lg:w-64" id="search-input" name="q" placeholder="Search ..." type="search" x-ref="search"/>
 <kbd class="pointer-events-none absolute right-1.5 top-2 hidden h-5 select-none text-muted-foreground items-center gap-1 rounded border border-border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex group-hover:bg-accent group-hover:text-accent-foreground">
 <span class="text-xs">⌘</span>
-      K
-    </kbd>
+    K
+  </kbd>
 </form>
 </div>
 <nav class="flex items-center space-x-1">
@@ -108,13 +103,13 @@
 </nav>
 <div id="content" role="main">
 <section id="compiling-and-running-oneapi-programs">
-<h1>Compiling and Running oneAPI programs<a class="headerlink" href="#compiling-and-running-oneapi-programs" title="Permalink to this heading">¶</a></h1>
+<h1>Compiling and Running oneAPI programs<a class="headerlink" href="#compiling-and-running-oneapi-programs" title="Link to this heading">¶</a></h1>
 <p>Our examples are CMake-based CPP projects along with unit tests in source form.
 They are publicly available as a GitHub repository under the Apache 2.0 open-source license at <a class="reference external" href="https://github.com/LoyolaChicagoCode/unoapi-dpcpp-examples">github.com/LoyolaChicagoCode/unoapi-dpcpp-examples</a>.</p>
 <p>The examples include a README file with instructions for building and running on Debian-based Linux systems (including Ubuntu), as well as the scripts needed to run the experiments described in this paper.</p>
 <p>The full documentation of the LLVM-based oneAPI DPC++ compilation toolchain is available at <a class="reference external" href="https://intel.github.io/llvm-docs">intel.github.io/llvm-docs</a>.</p>
 <section id="running-the-examples-on-github-as-a-fork-of-the-original-repo-browser-based">
-<h2>Running the examples on GitHub as a fork of the original repo (browser-based)<a class="headerlink" href="#running-the-examples-on-github-as-a-fork-of-the-original-repo-browser-based" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#running-the-examples-on-github-as-a-fork-of-the-original-repo-browser-based'">¶</a></h2>
+<h2>Running the examples on GitHub as a fork of the original repo (browser-based)<a class="headerlink" href="#running-the-examples-on-github-as-a-fork-of-the-original-repo-browser-based" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#running-the-examples-on-github-as-a-fork-of-the-original-repo-browser-based'">¶</a></h2>
 <p>The repository is configured with continuous integration (CI) using the following GitHub Actions workflow:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="linenos">19</span><span class="w">    </span>steps:
 <span class="linenos">20</span><span class="w">    </span>-<span class="w"> </span>name:<span class="w"> </span>Checkout<span class="w"> </span>project<span class="w"> </span>code
@@ -175,7 +170,7 @@ This option is subject to limitations in devices available through the actual CI
 </ul>
 </section>
 <section id="running-the-examples-locally">
-<h2>Running the examples locally<a class="headerlink" href="#running-the-examples-locally" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#running-the-examples-locally'">¶</a></h2>
+<h2>Running the examples locally<a class="headerlink" href="#running-the-examples-locally" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#running-the-examples-locally'">¶</a></h2>
 <p>This option requires a physical or virtual Debian-based system on Intel hardware, which may include an accelerator, such as a GPU.
 The specific steps are documented in the top-level README file in the GitHub repository.
 The artifact’s main executable is self-documenting using the <code class="docutils literal notranslate"><span class="pre">-h</span></code> or <code class="docutils literal notranslate"><span class="pre">–help</span></code> CLI option.</p>
@@ -183,7 +178,7 @@ The artifact’s main executable is self-documenting using the <code class="docu
 It is possible to develop DPC++ applications on Intel-based MacOS computers by doing so within a Linux virtual machine.</p>
 </section>
 <section id="running-the-examples-on-the-intel-devcloud">
-<h2>Running the examples on the Intel DevCloud<a class="headerlink" href="#running-the-examples-on-the-intel-devcloud" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#running-the-examples-on-the-intel-devcloud'">¶</a></h2>
+<h2>Running the examples on the Intel DevCloud<a class="headerlink" href="#running-the-examples-on-the-intel-devcloud" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#running-the-examples-on-the-intel-devcloud'">¶</a></h2>
 <p>This option requires a (free) account on Intel’s DevCloud for working with oneAPI and provides access to various types of accelerators, such as GPUs based on the gen9 architecture we’ve used for the sample runs shown above; it thereby provides a highe degree of reproducibility.
 Once access to DevCloud has been established, the specific steps are documented in the top-level README file in the GitHub repository.</p>
 <p>Concretely, on a DevCloud compute node, one can use OpenCL’s <code class="docutils literal notranslate"><span class="pre">clinfo</span></code> command to discover the available accelerators:</p>
@@ -205,7 +200,7 @@ Platform #1: Intel(R) OpenCL HD Graphics
 Some accelerators, however, don’t support certain types of data, e.g., 64-bit floating point numbers.</p>
 </section>
 <section id="running-on-cloud-based-virtual-machines">
-<h2>Running on cloud-based virtual machines<a class="headerlink" href="#running-on-cloud-based-virtual-machines" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#running-on-cloud-based-virtual-machines'">¶</a></h2>
+<h2>Running on cloud-based virtual machines<a class="headerlink" href="#running-on-cloud-based-virtual-machines" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#running-on-cloud-based-virtual-machines'">¶</a></h2>
 <p>We can actually run data-parallel code on an Intel-based virtual machine, e.g., Microsoft Azure; in some cases, installing the OpenCL headers might be required in addition to the DPC++ compiler toolchain:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>sudo apt install opencl-clhpp-headers
 </pre></div>
@@ -227,7 +222,7 @@ this environment doesn’t support the execution of data-parallel code, not even
 <p>Accordingly, <code class="docutils literal notranslate"><span class="pre">sycl-ls</span></code> doesn’t return anything.</p>
 </section>
 <section id="running-on-hardware-with-nvidia-gpus">
-<span id="running-on-nvidia"></span><h2>Running on hardware with NVIDIA GPUs<a class="headerlink" href="#running-on-hardware-with-nvidia-gpus" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#running-on-hardware-with-nvidia-gpus'">¶</a></h2>
+<span id="running-on-nvidia"></span><h2>Running on hardware with NVIDIA GPUs<a class="headerlink" href="#running-on-hardware-with-nvidia-gpus" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#running-on-hardware-with-nvidia-gpus'">¶</a></h2>
 <p>The oneAPI plugin for NVIDIA GPUs is currently in beta testing.
 Detailed instructions are <a class="reference external" href="https://developer.codeplay.com/products/oneapi/nvidia/2023.2.1/guides/get-started-guide-nvidia">available from Codeplay</a>.</p>
 <p>In particular, the plugin uses the LLVM-based oneAPI DPC++ toolchain.
@@ -263,10 +258,14 @@ result = 1.0000000000000013
 </div><footer class="py-6 border-t border-border md:py-0">
 <div class="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
 <div class="flex flex-col items-center gap-4 px-8 md:flex-row md:gap-2 md:px-0">
-<p class="text-sm leading-loose text-center text-muted-foreground md:text-left">© 2013-2019, Software Systems Laboratory at Loyola University Chicago Built with <a class="font-medium underline underline-offset-4" href="https://www.sphinx-doc.org" rel="noreferrer">Sphinx 6.2.1</a></p>
+<p class="text-sm leading-loose text-center text-muted-foreground md:text-left">© 2013-2019, Software Systems Laboratory at Loyola University Chicago Built with <a class="font-medium underline underline-offset-4" href="https://www.sphinx-doc.org" rel="noreferrer">Sphinx 7.2.6</a></p>
 </div>
 </div>
 </footer>
 </div>
+<script src="../_static/documentation_options.js?v=8a6d37c9"></script>
+<script src="../_static/doctools.js?v=888ff710"></script>
+<script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+<script defer="defer" src="../_static/theme.js?v=e8bd915e"></script>
 </body>
 </html>

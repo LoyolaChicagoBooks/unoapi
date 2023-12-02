@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 
-<html :class="{'dark': darkMode === 'dark' || (darkMode === 'system' &amp;&amp; window.matchMedia('(prefers-color-scheme: dark)').matches)}" class="scroll-smooth" lang="en" x-data="{ darkMode: localStorage.getItem('darkMode') || localStorage.setItem('darkMode', 'system'), activeSection: '' }" x-init="$watch('darkMode', val =&gt; localStorage.setItem('darkMode', val))">
+<html :class="{'dark': darkMode === 'dark' || (darkMode === 'system' &amp;&amp; window.matchMedia('(prefers-color-scheme: dark)').matches)}" class="scroll-smooth" data-content_root="../" lang="en" x-data="{ darkMode: localStorage.getItem('darkMode') || localStorage.setItem('darkMode', 'system'), activeSection: '' }" x-init="$watch('darkMode', val =&gt; localStorage.setItem('darkMode', val))">
 <head>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <meta charset="utf-8"/>
 <meta content="white" media="(prefers-color-scheme: light)" name="theme-color"/>
 <meta content="black" metia="(prefers-color-scheme: dark)" name="theme-color"/>
-<meta content="Docutils 0.18.1: http://docutils.sourceforge.net/" name="generator"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
 <title>Introduction to Software Engineering | UnoAPI Book v0.3.2</title>
 <meta content="Introduction to Software Engineering | UnoAPI Book v0.3.2" property="og:title"/>
 <meta content="Introduction to Software Engineering | UnoAPI Book v0.3.2" name="twitter:title"/>
-<link href="../_static/pygments.css" rel="stylesheet"/>
-<link href="../_static/theme.47abdafeea10b5ccf58b.css" rel="stylesheet"/>
+<link href="../_static/pygments.css?v=fa44fd50" rel="stylesheet" type="text/css"/>
+<link href="../_static/theme.css?v=7112734b" rel="stylesheet" type="text/css"/>
 <link href="../search.html" rel="search" title="Search"/>
 <link href="../genindex.html" rel="index" title="Index"/>
 <link href="../15-modern-cpp/modern-cpp.html" rel="next" title="Modern C++ as a Better C (and C++)"/>
@@ -28,11 +28,6 @@
       }
       if (!userPreference) {localStorage.setItem('darkMode', mode)}
     </script>
-<script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-<script src="../_static/doctools.js"></script>
-<script src="../_static/sphinx_highlight.js"></script>
-<script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-<script defer="" src="../_static/theme.4ea23184acb23c5e9294.js"></script>
 </head>
 <body :class="{ 'overflow-hidden': showSidebar }" class="min-h-screen font-sans antialiased bg-background text-foreground" x-data="{ showSidebar: false }">
 <div @click.self="showSidebar = false" class="fixed inset-0 z-50 overflow-hidden bg-background/80 backdrop-blur-sm" x-cloak="" x-show="showSidebar"></div><div class="relative flex flex-col min-h-screen" id="page"><a class="absolute top-0 left-0 z-[100] block bg-background p-4 text-xl transition -translate-x-full opacity-0 focus:translate-x-0 focus:opacity-100" href="#content">
@@ -48,13 +43,12 @@
 <span class="sr-only">Toggle navigation menu</span>
 </button>
 <div class="flex items-center justify-between flex-1 space-x-2 sm:space-x-4 md:justify-end">
-<div class="flex-1 w-full md:w-auto md:flex-none">
-<form @keydown.k.window.meta="$refs.search.focus()" action="../search.html" class="relative flex items-center group" id="searchbox" method="get">
+<div class="flex-1 w-full md:w-auto md:flex-none"><form @keydown.k.window.meta="$refs.search.focus()" action="../search.html" class="relative flex items-center group" id="searchbox" method="get">
 <input aria-label="Search the docs" class="inline-flex items-center font-medium transition-colors bg-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background border border-input hover:bg-accent focus:bg-accent hover:text-accent-foreground focus:text-accent-foreground hover:placeholder-accent-foreground py-2 px-4 relative h-9 w-full justify-start rounded-[0.5rem] text-sm text-muted-foreground sm:pr-12 md:w-40 lg:w-64" id="search-input" name="q" placeholder="Search ..." type="search" x-ref="search"/>
 <kbd class="pointer-events-none absolute right-1.5 top-2 hidden h-5 select-none text-muted-foreground items-center gap-1 rounded border border-border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex group-hover:bg-accent group-hover:text-accent-foreground">
 <span class="text-xs">⌘</span>
-      K
-    </kbd>
+    K
+  </kbd>
 </form>
 </div>
 <nav class="flex items-center space-x-1">
@@ -109,7 +103,7 @@
 </nav>
 <div id="content" role="main">
 <section id="introduction-to-software-engineering">
-<h1>Introduction to Software Engineering<a class="headerlink" href="#introduction-to-software-engineering" title="Permalink to this heading">¶</a></h1>
+<h1>Introduction to Software Engineering<a class="headerlink" href="#introduction-to-software-engineering" title="Link to this heading">¶</a></h1>
 <p>Software engineering (SE) is and remains vital to success as a professional software developer / research software engineer.
 While SE principles evoke a wide range of responses, it is possible to embrace many princples from software engineering and ensure impact on your projects without distracting you (entirely) from your day-to-day work. We encourage readers to consult the article <a class="reference external" href="https://ecommons.luc.edu/cs_facpubs/75">Software Engineering Need Not Be Difficult</a> to see how you can apply some of these principles to your work.</p>
 <p>We maintain that there are many software engineering principles that matter in day-to-day life among professional programmers. Here are some of the key ones:</p>
@@ -128,7 +122,7 @@ While SE principles evoke a wide range of responses, it is possible to embrace m
 <p>While there are other practices that give the <em>full</em> software engineering experience, we think these can be a helpful starting point to ensure success in developing research software (the kind of software you are likely doing if you’re reading about SYCL and oneAPI).</p>
 <p>We are going to take a look at some of the more <em>technical</em> aspects of software engineering: testing, documentation, version control, security/privacy (by discouraging unsafe practices, e.g. explicit pointer usage), and professionalism/ethics. As scientific computing is something used to drive scientific progress, we need to write software that users can trust (“trust science”), which results, in part, from taking all possible steps to ensure reliability and reproducibility.</p>
 <section id="testing">
-<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#testing'">¶</a></h2>
+<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#testing'">¶</a></h2>
 <p>Testing is a vast software engineering topic in itself, encompassing various levels—primarily unit testing, integration testing, system testing, and acceptance testing—along with many testing types, techniques, and tactics. For an overview of the subject of testing, please refer to the corresponding <a class="reference external" href="https://en.wikipedia.org/wiki/Software_testing">Wikipedia article</a>.</p>
 <p>The main value proposition of <a class="reference external" href="https://en.wikipedia.org/wiki/Test-driven_development">automated unit testing</a> is that it encourages frequent regression testing by making it painless.
 During the last two decades, this “test-infected” mindset has gradually entered the mainstream including introductory computer science courses.
@@ -155,7 +149,7 @@ A typical floating-point correctness test looks like this:</p>
 </ul>
 </section>
 <section id="build-and-configuration-management">
-<h2>Build and Configuration Management<a class="headerlink" href="#build-and-configuration-management" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#build-and-configuration-management'">¶</a></h2>
+<h2>Build and Configuration Management<a class="headerlink" href="#build-and-configuration-management" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#build-and-configuration-management'">¶</a></h2>
 <p>A key portability challenge results from differences across users’ development and production environments, such as different versions of operating systems, compilers, libraries, and other tools.
 Among several efforts to abstract away these differences and support building a project on any environment meeting certain minimum criteria, (modern) <a class="reference external" href="https://cmake.org">CMake</a> has emerged as the most painless choice, especially for C/C++-based projects.</p>
 <p>CMake enables us to use C/C++ similar to other languages, such as Java, Scala, Python, JavaScript/Node, by managing external library dependencies declaratively and fetching them dynamically.
@@ -196,7 +190,7 @@ cmake<span class="w"> </span>--build<span class="w"> </span>build
 <p>This is the type of build we use for our performance measurements (see also <a class="reference internal" href="../30-performance/performance.html"><span class="doc">Performance Essentials</span></a>.</p>
 </section>
 <section id="version-control">
-<h2>Version Control<a class="headerlink" href="#version-control" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#version-control'">¶</a></h2>
+<h2>Version Control<a class="headerlink" href="#version-control" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#version-control'">¶</a></h2>
 <p>Version control, especially distributed, hosted services such as GitHub, GitLab, and Bitbucket, are one of the foundations of modern software engineering practice.
 Version control allows a development team to keep their code in a secure place and enables collaboration following numerous different models and cultures.</p>
 <ul class="simple">
@@ -208,7 +202,7 @@ Version control allows a development team to keep their code in a secure place a
 </ul>
 </section>
 <section id="continuous-integration">
-<h2>Continuous Integration<a class="headerlink" href="#continuous-integration" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#continuous-integration'">¶</a></h2>
+<h2>Continuous Integration<a class="headerlink" href="#continuous-integration" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#continuous-integration'">¶</a></h2>
 <p>There are various choices for adding continuous integration to a software project, such as setting up a dedicated server or connecting to an external provider.
 Even more conveniently, major hosted version control services already include support for continuous integration.
 In practice, automated builds (workflow runs) are triggered every time a project contributor commits changes to the code base.
@@ -258,7 +252,7 @@ This gives us some degree of reproducibility “for free,” subject to limitati
 Accordingly, the last step of our CI workflow invokes all discovered executable tests.</p>
 </section>
 <section id="rootless-package-management-for-libraries-and-tools">
-<h2>Rootless Package Management for Libraries and Tools<a class="headerlink" href="#rootless-package-management-for-libraries-and-tools" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#rootless-package-management-for-libraries-and-tools'">¶</a></h2>
+<h2>Rootless Package Management for Libraries and Tools<a class="headerlink" href="#rootless-package-management-for-libraries-and-tools" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#rootless-package-management-for-libraries-and-tools'">¶</a></h2>
 <p>On publicly accessible HPC clusters, such as Intel’s DevCloud and those run by some national laboratories, users don’t typically have root access (administrative privileges).
 This precludes them from using native package management, such as <code class="docutils literal notranslate"><span class="pre">apt</span></code> on Ubuntu, to install missing packages or newer versions of outdated packages.</p>
 <p>During the last decade or so, userland package management tools have emerged as a complement to native package management.
@@ -266,7 +260,7 @@ These tools, such as Homebrew on MacOS and Linux and Chocolatey on Windows, allo
 <p>Rootless package managers often utilize user-specific directories, such as a user’s home directory, to store and manage libraries and tools, thereby avoiding conflicts and ensuring that software management operations remain user-specific and don’t affect the entire system or other users.</p>
 </section>
 <section id="additional-references">
-<h2>Additional References<a class="headerlink" href="#additional-references" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#additional-references'">¶</a></h2>
+<h2>Additional References<a class="headerlink" href="#additional-references" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#additional-references'">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://www.computer.org/education/bodies-of-knowledge/software-engineering">Software Engineering Book of Knowledge (SWEBOK)</a></p></li>
 <li><p><a class="reference external" href="https://www.acm.org/code-of-ethics">ACM Code of Ethics and Professional Conduct</a></p></li>
@@ -291,10 +285,15 @@ These tools, such as Homebrew on MacOS and Linux and Chocolatey on Windows, allo
 </div><footer class="py-6 border-t border-border md:py-0">
 <div class="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
 <div class="flex flex-col items-center gap-4 px-8 md:flex-row md:gap-2 md:px-0">
-<p class="text-sm leading-loose text-center text-muted-foreground md:text-left">© 2013-2019, Software Systems Laboratory at Loyola University Chicago Built with <a class="font-medium underline underline-offset-4" href="https://www.sphinx-doc.org" rel="noreferrer">Sphinx 6.2.1</a></p>
+<p class="text-sm leading-loose text-center text-muted-foreground md:text-left">© 2013-2019, Software Systems Laboratory at Loyola University Chicago Built with <a class="font-medium underline underline-offset-4" href="https://www.sphinx-doc.org" rel="noreferrer">Sphinx 7.2.6</a></p>
 </div>
 </div>
 </footer>
 </div>
+<script src="../_static/documentation_options.js?v=8a6d37c9"></script>
+<script src="../_static/doctools.js?v=888ff710"></script>
+<script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+<script defer="defer" src="../_static/theme.js?v=e8bd915e"></script>
+<script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </body>
 </html>

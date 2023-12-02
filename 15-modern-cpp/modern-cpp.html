@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 
-<html :class="{'dark': darkMode === 'dark' || (darkMode === 'system' &amp;&amp; window.matchMedia('(prefers-color-scheme: dark)').matches)}" class="scroll-smooth" lang="en" x-data="{ darkMode: localStorage.getItem('darkMode') || localStorage.setItem('darkMode', 'system'), activeSection: '' }" x-init="$watch('darkMode', val =&gt; localStorage.setItem('darkMode', val))">
+<html :class="{'dark': darkMode === 'dark' || (darkMode === 'system' &amp;&amp; window.matchMedia('(prefers-color-scheme: dark)').matches)}" class="scroll-smooth" data-content_root="../" lang="en" x-data="{ darkMode: localStorage.getItem('darkMode') || localStorage.setItem('darkMode', 'system'), activeSection: '' }" x-init="$watch('darkMode', val =&gt; localStorage.setItem('darkMode', val))">
 <head>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <meta charset="utf-8"/>
 <meta content="white" media="(prefers-color-scheme: light)" name="theme-color"/>
 <meta content="black" metia="(prefers-color-scheme: dark)" name="theme-color"/>
-<meta content="Docutils 0.18.1: http://docutils.sourceforge.net/" name="generator"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
 <title>Modern C++ as a Better C (and C++) | UnoAPI Book v0.3.2</title>
 <meta content="Modern C++ as a Better C (and C++) | UnoAPI Book v0.3.2" property="og:title"/>
 <meta content="Modern C++ as a Better C (and C++) | UnoAPI Book v0.3.2" name="twitter:title"/>
-<link href="../_static/pygments.css" rel="stylesheet"/>
-<link href="../_static/theme.47abdafeea10b5ccf58b.css" rel="stylesheet"/>
+<link href="../_static/pygments.css?v=fa44fd50" rel="stylesheet" type="text/css"/>
+<link href="../_static/theme.css?v=7112734b" rel="stylesheet" type="text/css"/>
 <link href="../search.html" rel="search" title="Search"/>
 <link href="../genindex.html" rel="index" title="Index"/>
 <link href="../18-dpcpp/dpcpp.html" rel="next" title="Data-Parallel C++ with oneAPI/SYCL"/>
@@ -28,10 +28,6 @@
       }
       if (!userPreference) {localStorage.setItem('darkMode', mode)}
     </script>
-<script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-<script src="../_static/doctools.js"></script>
-<script src="../_static/sphinx_highlight.js"></script>
-<script defer="" src="../_static/theme.4ea23184acb23c5e9294.js"></script>
 </head>
 <body :class="{ 'overflow-hidden': showSidebar }" class="min-h-screen font-sans antialiased bg-background text-foreground" x-data="{ showSidebar: false }">
 <div @click.self="showSidebar = false" class="fixed inset-0 z-50 overflow-hidden bg-background/80 backdrop-blur-sm" x-cloak="" x-show="showSidebar"></div><div class="relative flex flex-col min-h-screen" id="page"><a class="absolute top-0 left-0 z-[100] block bg-background p-4 text-xl transition -translate-x-full opacity-0 focus:translate-x-0 focus:opacity-100" href="#content">
@@ -47,13 +43,12 @@
 <span class="sr-only">Toggle navigation menu</span>
 </button>
 <div class="flex items-center justify-between flex-1 space-x-2 sm:space-x-4 md:justify-end">
-<div class="flex-1 w-full md:w-auto md:flex-none">
-<form @keydown.k.window.meta="$refs.search.focus()" action="../search.html" class="relative flex items-center group" id="searchbox" method="get">
+<div class="flex-1 w-full md:w-auto md:flex-none"><form @keydown.k.window.meta="$refs.search.focus()" action="../search.html" class="relative flex items-center group" id="searchbox" method="get">
 <input aria-label="Search the docs" class="inline-flex items-center font-medium transition-colors bg-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background border border-input hover:bg-accent focus:bg-accent hover:text-accent-foreground focus:text-accent-foreground hover:placeholder-accent-foreground py-2 px-4 relative h-9 w-full justify-start rounded-[0.5rem] text-sm text-muted-foreground sm:pr-12 md:w-40 lg:w-64" id="search-input" name="q" placeholder="Search ..." type="search" x-ref="search"/>
 <kbd class="pointer-events-none absolute right-1.5 top-2 hidden h-5 select-none text-muted-foreground items-center gap-1 rounded border border-border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex group-hover:bg-accent group-hover:text-accent-foreground">
 <span class="text-xs">⌘</span>
-      K
-    </kbd>
+    K
+  </kbd>
 </form>
 </div>
 <nav class="flex items-center space-x-1">
@@ -108,12 +103,12 @@
 </nav>
 <div id="content" role="main">
 <section id="modern-c-as-a-better-c-and-c">
-<h1>Modern C++ as a Better C (and C++)<a class="headerlink" href="#modern-c-as-a-better-c-and-c" title="Permalink to this heading">¶</a></h1>
+<h1>Modern C++ as a Better C (and C++)<a class="headerlink" href="#modern-c-as-a-better-c-and-c" title="Link to this heading">¶</a></h1>
 <p>If you want to learn SYCL and oneAPI <em>properly</em>, you will need to come up to speed with Modern C++.  In our experience, we know many people–including ourselves–who say they “know” C++.  C++ has undergone numerous changes since it was introduced in the 1980s and 1990s.  While the original syntax remains intact, if you have not kept up with the changes since then (notably, C++ 11), you should take steps to refresh your knowlege of the language, since many of its recent features make it virtually <em>unrecognizable</em> from its earlier incarnations.</p>
 <p>We are particularly impressed with how C++ has incorporated features from modern object-functional languages, some of which we will cover here.  Please let us know if you think other features are worthy of inclusion. As this section is still in draft status, we realize our list may not be exhaustive.</p>
 <p>In the remaining discussion, we focus our energy on on language features that are likely to appear in oneAPI/SYCL code examples in our tutorial.</p>
 <section id="overview-of-modern-c">
-<h2>Overview of Modern C++<a class="headerlink" href="#overview-of-modern-c" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#overview-of-modern-c'">¶</a></h2>
+<h2>Overview of Modern C++<a class="headerlink" href="#overview-of-modern-c" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#overview-of-modern-c'">¶</a></h2>
 <p>If you already know some Object-Oriented Programming (OOP) concepts and want to learn modern C++, here are some topics that are worthy of exploration:</p>
 <p><strong>Standard Library</strong>: The C++ Standard Library provides a wide range of pre-built classes and functions that can be used to perform common tasks. You should learn about the different components of the Standard Library, such as containers, algorithms, and iterators, and how to use them effectively. We avoid using C-style pointer-based data structures in favor of STL classes. We also avoid external C++ data structures whenever the STL classes are most appropriate (and they often are).</p>
 <p><strong>Templates</strong>: Templates allow you to write generic code that works with any data type. This can save you a lot of time and effort by reducing code duplication. You should learn how to write function templates and class templates. Class templates are already well employed in STL. We often make use of function templates in our examples.</p>
@@ -127,9 +122,9 @@
 <p>These topics will allow you to become proficient in modern C++ programming and write efficient, maintainable, and scalable code.</p>
 </section>
 <section id="language-features">
-<h2>Language Features<a class="headerlink" href="#language-features" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#language-features'">¶</a></h2>
+<h2>Language Features<a class="headerlink" href="#language-features" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#language-features'">¶</a></h2>
 <section id="the-modern-c-class">
-<h3>The Modern C++ Class<a class="headerlink" href="#the-modern-c-class" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#the-modern-c-class'">¶</a></h3>
+<h3>The Modern C++ Class<a class="headerlink" href="#the-modern-c-class" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#the-modern-c-class'">¶</a></h3>
 <p>Even if you programmed with C++ in the past, you need to understand that C++ has changed a great deal since its debut in the late-1980s and early 1990s.</p>
 <p>Here’s an example implementation of the familiar Point class with <code class="docutils literal notranslate"><span class="pre">x</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code>, and <code class="docutils literal notranslate"><span class="pre">z</span></code> parameters in modern C++ with support for move semantics:</p>
 <p>You can assume that this code can be placed in a C++ header file (e.g. Point.h) as a header-only solution:</p>
@@ -218,7 +213,7 @@
 </div>
 </section>
 <section id="move-semantics">
-<h3>Move Semantics<a class="headerlink" href="#move-semantics" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#move-semantics'">¶</a></h3>
+<h3>Move Semantics<a class="headerlink" href="#move-semantics" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#move-semantics'">¶</a></h3>
 <p>So it is natural to wonder: What does <code class="docutils literal notranslate"><span class="pre">std::move()</span></code> actually do?</p>
 <p><code class="docutils literal notranslate"><span class="pre">std::move()</span></code> is a C++ Standard Library function defined in the <code class="docutils literal notranslate"><span class="pre">&lt;utility&gt;</span></code> header file. It is used to cast an l-value reference to an r-value reference, which enables move semantics.</p>
 <p>When an object is moved (using move semantics), its resources (such as dynamically allocated memory) are transferred to the new object instead of being copied. This can lead to more efficient code by avoiding unnecessary copying of objects.</p>
@@ -272,11 +267,11 @@
 <p>Note that <code class="docutils literal notranslate"><span class="pre">std::move</span></code> does not actually move anything by itself; it simply enables move semantics by casting an l-value reference to an r-value reference. It is up to the move constructor or move assignment operator to actually perform the move operation.</p>
 </section>
 <section id="lambda-expressions">
-<h3>Lambda Expressions<a class="headerlink" href="#lambda-expressions" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#lambda-expressions'">¶</a></h3>
+<h3>Lambda Expressions<a class="headerlink" href="#lambda-expressions" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#lambda-expressions'">¶</a></h3>
 <p>Lambda expressions in C++ allow you to define anonymous functions directly within your code.
 Readers familiar with lambda expressions from other functional or object/functional languages should note that C++ lambda functions differ, fundamentally, in how they manage <em>closures</em> and, in particular, how and whether variables from the enclosing scope can be accessed and or modified.</p>
 <section id="basic-lambda-with-no-parameters">
-<h4>Basic Lambda with No Parameters<a class="headerlink" href="#basic-lambda-with-no-parameters" title="Permalink to this heading">¶</a></h4>
+<h4>Basic Lambda with No Parameters<a class="headerlink" href="#basic-lambda-with-no-parameters" title="Link to this heading">¶</a></h4>
 <p>In the following example, <code class="docutils literal notranslate"><span class="pre">sayHello</span></code> is a lambda function with no parameters, and when we call it, it will print “Hello from lambda!”.</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
 
@@ -292,7 +287,7 @@ Readers familiar with lambda expressions from other functional or object/functio
 </div>
 </section>
 <section id="lambda-with-parameters">
-<h4>Lambda with Parameters<a class="headerlink" href="#lambda-with-parameters" title="Permalink to this heading">¶</a></h4>
+<h4>Lambda with Parameters<a class="headerlink" href="#lambda-with-parameters" title="Link to this heading">¶</a></h4>
 <p>In the following example, the <code class="docutils literal notranslate"><span class="pre">add</span></code> lambda takes two integer parameters and returns their sum.</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
 
@@ -309,7 +304,7 @@ Readers familiar with lambda expressions from other functional or object/functio
 </div>
 </section>
 <section id="lambda-with-explicit-return-type">
-<h4>Lambda with Explicit Return Type<a class="headerlink" href="#lambda-with-explicit-return-type" title="Permalink to this heading">¶</a></h4>
+<h4>Lambda with Explicit Return Type<a class="headerlink" href="#lambda-with-explicit-return-type" title="Link to this heading">¶</a></h4>
 <p>And in the following, The <code class="docutils literal notranslate"><span class="pre">divide</span></code> lambda has an explicit return type of <code class="docutils literal notranslate"><span class="pre">double</span></code>.</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
 
@@ -326,7 +321,7 @@ Readers familiar with lambda expressions from other functional or object/functio
 </div>
 </section>
 <section id="lambda-with-closures">
-<h4>Lambda with Closures<a class="headerlink" href="#lambda-with-closures" title="Permalink to this heading">¶</a></h4>
+<h4>Lambda with Closures<a class="headerlink" href="#lambda-with-closures" title="Link to this heading">¶</a></h4>
 <p>Closures allow lambdas to capture variables from their enclosing scope.</p>
 <p>The following shows how to capture variables by value:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
@@ -401,7 +396,7 @@ Readers familiar with lambda expressions from other functional or object/functio
 </section>
 </section>
 <section id="naming-conventions">
-<h3>Naming Conventions<a class="headerlink" href="#naming-conventions" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#naming-conventions'">¶</a></h3>
+<h3>Naming Conventions<a class="headerlink" href="#naming-conventions" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#naming-conventions'">¶</a></h3>
 <p>What naming convention uses _ at the end of member variable names?</p>
 <p>The convention of using an underscore at the end of member variable names is often used to distinguish them from other identifiers in the code, such as local variables or function parameters. This convention is often referred to as “trailing underscore” or “trailing underscore convention”.</p>
 <p>It is important to note that this naming convention is not part of the C++ language standard, and different coding styles or organizations may have different conventions for naming member variables. Some coding standards discourage the use of trailing underscores altogether, as they can make the code less readable and harder to maintain.</p>
@@ -477,7 +472,7 @@ Readers familiar with lambda expressions from other functional or object/functio
 </div>
 </section>
 <section id="adding-this-to-a-cmake-folder">
-<h3>Adding this to a CMake folder<a class="headerlink" href="#adding-this-to-a-cmake-folder" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#adding-this-to-a-cmake-folder'">¶</a></h3>
+<h3>Adding this to a CMake folder<a class="headerlink" href="#adding-this-to-a-cmake-folder" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#adding-this-to-a-cmake-folder'">¶</a></h3>
 <p>Here is how put the <cite>Point</cite> class (header) in a Cmake project with a folder named point_example and a cmake rule to build it:</p>
 <div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span><span class="w"> </span><span class="s">3.5</span><span class="p">)</span>
 
@@ -500,7 +495,7 @@ Readers familiar with lambda expressions from other functional or object/functio
 <p>To use this <cite>CMakeLists.txt</cite> file, you would create a folder named <cite>point_example</cite> in your project directory, and place the <cite>Point.h</cite> header file and the <cite>main.cpp</cite> source file in that folder.</p>
 </section>
 <section id="automatic-variables">
-<h3>Automatic variables<a class="headerlink" href="#automatic-variables" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#automatic-variables'">¶</a></h3>
+<h3>Automatic variables<a class="headerlink" href="#automatic-variables" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#automatic-variables'">¶</a></h3>
 <p>The auto keyword was introduced in C++11 as part of the language’s support for type inference.
 auto is used to declare a variable whose type is automatically inferred from its initializer (the right hand side of the assignment).
 auto can simplify the syntax of variable declarations and make code more concise and readable.
@@ -570,7 +565,7 @@ We also demonstrate how to initialize more complex structures such as an STL gen
 </div>
 </section>
 <section id="constants-and-constant-expressions">
-<h3>Constants and Constant Expressions<a class="headerlink" href="#constants-and-constant-expressions" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#constants-and-constant-expressions'">¶</a></h3>
+<h3>Constants and Constant Expressions<a class="headerlink" href="#constants-and-constant-expressions" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#constants-and-constant-expressions'">¶</a></h3>
 <p>In this example, we define a pythagorean function using constexpr and lambda expressions.
 The function takes two arguments a and b representing the lengths of the two sides of a right-angled triangle, and calculates the length of the hypotenuse using the Pythagorean theorem.</p>
 <p>We then define two const variables a and b, which have values of 3.0 and 4.0 respectively. Since a and b are const, we cannot change their values once they have been initialized.</p>
@@ -599,7 +594,7 @@ The function takes two arguments a and b representing the lengths of the two sid
 </div>
 </section>
 <section id="initializer-expressions">
-<h3>initializer expressions<a class="headerlink" href="#initializer-expressions" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#initializer-expressions'">¶</a></h3>
+<h3>initializer expressions<a class="headerlink" href="#initializer-expressions" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#initializer-expressions'">¶</a></h3>
 <p>Initializer expressions are a modern C++ feature that is powerful when combined with <cite>auto</cite>.
 You’ll probably find yourself making greater use of them, even when initializing the simplest of variables.
 We rely on these extensively in our C++ examples throughout this book.</p>
@@ -649,7 +644,7 @@ The syntax for an initializer expression is {} or = {}, and it can be used to in
 <p>Overall, using initializer expressions is a good practice in C++ programming, and can help make code more concise, readable, and robust.</p>
 </section>
 <section id="format-and-fmt">
-<h3>Format and fmt<a class="headerlink" href="#format-and-fmt" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#format-and-fmt'">¶</a></h3>
+<h3>Format and fmt<a class="headerlink" href="#format-and-fmt" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#format-and-fmt'">¶</a></h3>
 <p>C++ 20 draft support for formatted strings (useful feature found in many modern languages, including Python).</p>
 <p>Add this to your CMakeFile</p>
 <div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">FetchContent_Declare</span><span class="p">(</span>
@@ -663,7 +658,7 @@ The syntax for an initializer expression is {} or = {}, and it can be used to in
 <p>Simple usage</p>
 </section>
 <section id="command-line-argument-handling">
-<h3>Command-line Argument Handling<a class="headerlink" href="#command-line-argument-handling" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#command-line-argument-handling'">¶</a></h3>
+<h3>Command-line Argument Handling<a class="headerlink" href="#command-line-argument-handling" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#command-line-argument-handling'">¶</a></h3>
 <p>It is virtually impossible to do any sort of scaling experiments in parallel computing withou making your applications <em>parametric</em>. The Unix tradition is built around the command line as a user interface.
 To this end, thinking about how to make a command-line interface without the drudgery of writing your own command line parser from scratch is essential to making command-line applications and interfaces.</p>
 <p>The following shows how to use the well-established CLI11 framework.
@@ -740,7 +735,7 @@ An flag-style argument is created for each data type with a default value that w
 </div>
 </section>
 <section id="better-generics-for-mathematical-functions">
-<h3>Better Generics for Mathematical Functions<a class="headerlink" href="#better-generics-for-mathematical-functions" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#better-generics-for-mathematical-functions'">¶</a></h3>
+<h3>Better Generics for Mathematical Functions<a class="headerlink" href="#better-generics-for-mathematical-functions" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#better-generics-for-mathematical-functions'">¶</a></h3>
 <p>In the following  example, we define a minimum function that takes two generic input parameters <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> of type <code class="docutils literal notranslate"><span class="pre">T</span></code>. We use <code class="docutils literal notranslate"><span class="pre">std::enable_if</span></code> with the condition <code class="docutils literal notranslate"><span class="pre">std::is_arithmetic&lt;T&gt;::value</span></code> to enable the function only for arithmetic types (i.e., integer and floating point types).</p>
 <p>The second template parameter is a default value for a pointer type that is enabled only when the first condition is met. The default value is set to <code class="docutils literal notranslate"><span class="pre">nullptr</span></code> to allow the function to have a return type, even when <code class="docutils literal notranslate"><span class="pre">std::enable_if</span></code> disables the function.</p>
 <div class="admonition note">
@@ -759,7 +754,7 @@ An flag-style argument is created for each data type with a default value that w
 </div>
 </section>
 <section id="logging">
-<h3>Logging<a class="headerlink" href="#logging" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#logging'">¶</a></h3>
+<h3>Logging<a class="headerlink" href="#logging" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#logging'">¶</a></h3>
 <p>The use of named logging levels can be traced back to the early days of UNIX, specifically to the syslog system, which was first introduced in the 1970s.
 Syslog was a logging mechanism that allowed different programs to send log messages to a central system log, which could then be analyzed and monitored by system administrators.
 Syslog introduced the concept of different logging levels, which were initially represented as numeric values from 0 to 7, with 0 being the most severe and 7 being the least severe.
@@ -845,11 +840,11 @@ Only log messages written to this level or higher will actulaly be displayed.</p
 </div>
 </section>
 <section id="essential-template-classes-in-stl">
-<h3>Essential Template Classes in STL<a class="headerlink" href="#essential-template-classes-in-stl" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#essential-template-classes-in-stl'">¶</a></h3>
+<h3>Essential Template Classes in STL<a class="headerlink" href="#essential-template-classes-in-stl" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#essential-template-classes-in-stl'">¶</a></h3>
 <p>The C++ Standard Template Library (STL) is a powerful (and comprehensive) set of template classes and functions, providing common data structures and algorithms. The STL is an integral part of the C++ Standard Library.</p>
 <p>Let’s start with the most commonly needed <code class="docutils literal notranslate"><span class="pre">std::vector</span></code> and <code class="docutils literal notranslate"><span class="pre">std::map</span></code>.</p>
 <section id="std-vector-the-standard-all-in-one-vector-type">
-<h4><code class="docutils literal notranslate"><span class="pre">std::vector</span></code>: The Standard All-in-One Vector Type<a class="headerlink" href="#std-vector-the-standard-all-in-one-vector-type" title="Permalink to this heading">¶</a></h4>
+<h4><code class="docutils literal notranslate"><span class="pre">std::vector</span></code>: The Standard All-in-One Vector Type<a class="headerlink" href="#std-vector-the-standard-all-in-one-vector-type" title="Link to this heading">¶</a></h4>
 <p><code class="docutils literal notranslate"><span class="pre">std::vector</span></code> is a dynamic all-in-one array data structure in C++ (similar to a Python list) that provides efficient memory management and flexible storage of elements, and it is important in scientific computing for its ability to handle large amounts of data efficiently.</p>
 <p>Using <code class="docutils literal notranslate"><span class="pre">std::vector</span></code> is preferable to using a C pointer based equivalent array because it provides automatic memory management, better safety and convenience, and improved performance for dynamic resizing and storage of elements.</p>
 <p>The advantages of using <code class="docutils literal notranslate"><span class="pre">std::vector</span></code> therefore outweigh any disadvantages, especially if you care about the balance of performance and safety as we do.</p>
@@ -1037,7 +1032,7 @@ Only log messages written to this level or higher will actulaly be displayed.</p
 </div>
 </section>
 <section id="std-map-the-standard-all-in-one-associative-array-dictionary-type">
-<h4><code class="docutils literal notranslate"><span class="pre">std::map</span></code>: The Standard All-in-One Associative Array/Dictionary Type<a class="headerlink" href="#std-map-the-standard-all-in-one-associative-array-dictionary-type" title="Permalink to this heading">¶</a></h4>
+<h4><code class="docutils literal notranslate"><span class="pre">std::map</span></code>: The Standard All-in-One Associative Array/Dictionary Type<a class="headerlink" href="#std-map-the-standard-all-in-one-associative-array-dictionary-type" title="Link to this heading">¶</a></h4>
 <p><code class="docutils literal notranslate"><span class="pre">std::map</span></code> is a dynamic all-in-one array data structure in C++ (similar to a Python dictionary) that supports an associative array, where keys of any type can be mapped to values of any type.</p>
 <p>Here are the top 10 most common std::map methods and a brief explanation of their functionality:</p>
 <ul class="simple">
@@ -1223,7 +1218,7 @@ Only log messages written to this level or higher will actulaly be displayed.</p
 </section>
 </section>
 <section id="other-useful-template-classes-beyond-std-vector-and-std-map">
-<span id="index-0"></span><h3>Other Useful Template Classes beyond <code class="docutils literal notranslate"><span class="pre">std::vector</span></code> and <code class="docutils literal notranslate"><span class="pre">std::map</span></code><a class="headerlink" href="#other-useful-template-classes-beyond-std-vector-and-std-map" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#other-useful-template-classes-beyond-std-vector-and-std-map'">¶</a></h3>
+<span id="index-0"></span><h3>Other Useful Template Classes beyond <code class="docutils literal notranslate"><span class="pre">std::vector</span></code> and <code class="docutils literal notranslate"><span class="pre">std::map</span></code><a class="headerlink" href="#other-useful-template-classes-beyond-std-vector-and-std-map" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#other-useful-template-classes-beyond-std-vector-and-std-map'">¶</a></h3>
 <p>There are several other essential modern template classes in the STL that are highly useful for various programming tasks. Many of these are useful to advanced systems programming, so we will introduce them briefly here and provide examples of each that are appropriate for our tutorial.</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">std::array</span></code>: A container that encapsulates fixed-size arrays. It offers similar functionality to plain arrays but with added benefits of standard container functions like <code class="docutils literal notranslate"><span class="pre">.size()</span></code> and iterators.</p></li>
@@ -1245,7 +1240,7 @@ Only log messages written to this level or higher will actulaly be displayed.</p
 <p>Understanding and effectively using these template classes can significantly enhance the efficiency, reliability, and readability of your C++ code. Each of these classes serves a particular purpose and can be chosen based on the specific requirements of your program.</p>
 <p>In the remaining, we show minimium viable examples of these, while focusing on the most commonly used (5) methods.</p>
 <section id="std-array-the-alternative-to-pointer-or-static-array-declarations">
-<span id="index-1"></span><h4><code class="docutils literal notranslate"><span class="pre">std::array</span></code>: The alternative to pointer or static array declarations<a class="headerlink" href="#std-array-the-alternative-to-pointer-or-static-array-declarations" title="Permalink to this heading">¶</a></h4>
+<span id="index-1"></span><h4><code class="docutils literal notranslate"><span class="pre">std::array</span></code>: The alternative to pointer or static array declarations<a class="headerlink" href="#std-array-the-alternative-to-pointer-or-static-array-declarations" title="Link to this heading">¶</a></h4>
 <p>This example demonstrates the basics of working with <code class="docutils literal notranslate"><span class="pre">std::array</span></code>.
 It also demonstrates how to initialize it with an underlying pointer to an array.</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;array&gt;</span>
@@ -1265,7 +1260,7 @@ It also demonstrates how to initialize it with an underlying pointer to an array
 </div>
 </section>
 <section id="std-deque-the-all-in-one-list-type">
-<span id="index-2"></span><h4><code class="docutils literal notranslate"><span class="pre">std::deque</span></code>: The all-in-one list type<a class="headerlink" href="#std-deque-the-all-in-one-list-type" title="Permalink to this heading">¶</a></h4>
+<span id="index-2"></span><h4><code class="docutils literal notranslate"><span class="pre">std::deque</span></code>: The all-in-one list type<a class="headerlink" href="#std-deque-the-all-in-one-list-type" title="Link to this heading">¶</a></h4>
 <p>A <em>deque</em> is a doubly-ended queue data structure.
 It assures excellent performance when retrieving items from either side of the deque.</p>
 <p>The following show how to insert items at either end and remove items from either end.
@@ -1290,7 +1285,7 @@ It also shows how to iterate the contents of the deque in natural order.</p>
 </div>
 </section>
 <section id="std-forward-list-when-a-deque-is-not-needed">
-<span id="index-3"></span><h4><code class="docutils literal notranslate"><span class="pre">std:forward_list</span></code>: When a <code class="docutils literal notranslate"><span class="pre">deque</span></code> is not needed<a class="headerlink" href="#std-forward-list-when-a-deque-is-not-needed" title="Permalink to this heading">¶</a></h4>
+<span id="index-3"></span><h4><code class="docutils literal notranslate"><span class="pre">std:forward_list</span></code>: When a <code class="docutils literal notranslate"><span class="pre">deque</span></code> is not needed<a class="headerlink" href="#std-forward-list-when-a-deque-is-not-needed" title="Link to this heading">¶</a></h4>
 <p>If you do not need a <code class="docutils literal notranslate"><span class="pre">deque</span></code> and can do with a simple forward linked list, consider <code class="docutils literal notranslate"><span class="pre">std::forward_list</span></code>.</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;forward_list&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
@@ -1318,7 +1313,7 @@ It also shows how to iterate the contents of the deque in natural order.</p>
 </div>
 </section>
 <section id="std-set-the-ordered-set">
-<span id="index-4"></span><h4><code class="docutils literal notranslate"><span class="pre">std::set</span></code>: The ordered set<a class="headerlink" href="#std-set-the-ordered-set" title="Permalink to this heading">¶</a></h4>
+<span id="index-4"></span><h4><code class="docutils literal notranslate"><span class="pre">std::set</span></code>: The ordered set<a class="headerlink" href="#std-set-the-ordered-set" title="Link to this heading">¶</a></h4>
 <p>This an example focusing only on <code class="docutils literal notranslate"><span class="pre">std::set</span></code> in C++ and highlight its top (10) commonly-used methods. <code class="docutils literal notranslate"><span class="pre">std::set</span></code> is a sorted associative container that contains unique elements.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>#include &lt;iostream&gt;
 #include &lt;set&gt;
@@ -1361,7 +1356,7 @@ int main() {
 </div>
 </section>
 <section id="std-multiset-the-ordered-set-that-keeps-count">
-<span id="index-5"></span><h4><code class="docutils literal notranslate"><span class="pre">std::multiset</span></code>: The ordered set that keeps count<a class="headerlink" href="#std-multiset-the-ordered-set-that-keeps-count" title="Permalink to this heading">¶</a></h4>
+<span id="index-5"></span><h4><code class="docutils literal notranslate"><span class="pre">std::multiset</span></code>: The ordered set that keeps count<a class="headerlink" href="#std-multiset-the-ordered-set-that-keeps-count" title="Link to this heading">¶</a></h4>
 <p>A std::multiset in C++ is similar to a std::set, but it allows multiple instances of the same value. This distinction enables some additional capabilities, particularly regarding element counts and handling of duplicates. Here’s an example showcasing std::multiset with a focus on its unique properties and methods:</p>
 <p>This is a reworked version of the <code class="docutils literal notranslate"><span class="pre">set</span></code> example that highlights the additional capabilities of <code class="docutils literal notranslate"><span class="pre">multisset</span></code>.</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
@@ -1406,7 +1401,7 @@ int main() {
 </div>
 </section>
 <section id="std-priority-queue-ordering-items-in-a-queue-by-a-given-priority-level">
-<span id="index-6"></span><h4><code class="docutils literal notranslate"><span class="pre">std::priority_queue</span></code>: Ordering items in a queue by a given priority level<a class="headerlink" href="#std-priority-queue-ordering-items-in-a-queue-by-a-given-priority-level" title="Permalink to this heading">¶</a></h4>
+<span id="index-6"></span><h4><code class="docutils literal notranslate"><span class="pre">std::priority_queue</span></code>: Ordering items in a queue by a given priority level<a class="headerlink" href="#std-priority-queue-ordering-items-in-a-queue-by-a-given-priority-level" title="Link to this heading">¶</a></h4>
 <p>Priority queues are often used in systems.</p>
 <p>To use a std::priority_queue to schedule jobs in Shortest Job First (SJF) fashion, you can create a priority queue that sorts jobs based on their length (in seconds). In SJF scheduling, the job with the shortest duration is selected next.</p>
 <p>Here’s a basic example demonstrating this. First, we’ll define a Job struct that includes a job ID and its length in seconds. Then, we’ll use a std::priority_queue with a custom comparator to ensure that jobs with shorter lengths are given higher priority.</p>
@@ -1452,7 +1447,7 @@ int main() {
 </div>
 </section>
 <section id="std-optional-handling-situations-where-a-function-returns-or-fails-to-return-a-value">
-<span id="index-7"></span><h4><code class="docutils literal notranslate"><span class="pre">std::optional</span></code>: Handling situations where a function returns or fails to return a value<a class="headerlink" href="#std-optional-handling-situations-where-a-function-returns-or-fails-to-return-a-value" title="Permalink to this heading">¶</a></h4>
+<span id="index-7"></span><h4><code class="docutils literal notranslate"><span class="pre">std::optional</span></code>: Handling situations where a function returns or fails to return a value<a class="headerlink" href="#std-optional-handling-situations-where-a-function-returns-or-fails-to-return-a-value" title="Link to this heading">¶</a></h4>
 <p><code class="docutils literal notranslate"><span class="pre">std::optional</span></code> is a great choice for situations where a function might or might not return a value. In the context of reading a line of input, <code class="docutils literal notranslate"><span class="pre">std::optional</span></code> can be used to represent the outcome of the <em>read</em> operation: it contains a value if the read was successful, and it’s empty (<code class="docutils literal notranslate"><span class="pre">std::nullopt</span></code>) if the read failed (for example, if the end of file is reached).</p>
 <p>Here’s an example of how you might use <code class="docutils literal notranslate"><span class="pre">std::optional</span></code> for reading a line from a file:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
@@ -1492,20 +1487,20 @@ int main() {
 </div>
 </section>
 <section id="a-look-at-expected-run-time-performance">
-<span id="index-8"></span><h4>A Look at Expected Run-time Performance<a class="headerlink" href="#a-look-at-expected-run-time-performance" title="Permalink to this heading">¶</a></h4>
+<span id="index-8"></span><h4>A Look at Expected Run-time Performance<a class="headerlink" href="#a-look-at-expected-run-time-performance" title="Link to this heading">¶</a></h4>
 <p>Traditional algorithms and data structures courses emphasize the importance of time (and space) complexity.
 While knowledge of these structures–and how to implement them–is still of value, it is vitallyimportant to know how make “good choices” when it comes to performance when it comes to the common methods avaiable in all classes.</p>
 <p>The following table shows the expected time complexity when it comes to each of the standard library template classes. When left blank, it means that the method is either not available or not appropriate for the standard template class.</p>
 <table class="docutils align-default" id="id1">
-<caption><span class="caption-text">STL Containers Method Time Complexity [Prelimiary Analysis]</span><a class="headerlink" href="#id1" title="Permalink to this table">¶</a></caption>
+<caption><span class="caption-text">STL Containers Method Time Complexity [Prelimiary Analysis]</span><a class="headerlink" href="#id1" title="Link to this table">¶</a></caption>
 <colgroup>
-<col style="width: 15%"/>
-<col style="width: 11%"/>
-<col style="width: 11%"/>
-<col style="width: 11%"/>
-<col style="width: 15%"/>
-<col style="width: 15%"/>
-<col style="width: 22%"/>
+<col style="width: 14.8%"/>
+<col style="width: 11.1%"/>
+<col style="width: 11.1%"/>
+<col style="width: 11.1%"/>
+<col style="width: 14.8%"/>
+<col style="width: 14.8%"/>
+<col style="width: 22.2%"/>
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>Method</p></th>
@@ -1647,7 +1642,7 @@ While knowledge of these structures–and how to implement them–is still of va
 </ul>
 </section>
 <section id="std-pair-and-std-tuple">
-<h4><code class="docutils literal notranslate"><span class="pre">std::pair</span></code> and <code class="docutils literal notranslate"><span class="pre">std::tuple</span></code><a class="headerlink" href="#std-pair-and-std-tuple" title="Permalink to this heading">¶</a></h4>
+<h4><code class="docutils literal notranslate"><span class="pre">std::pair</span></code> and <code class="docutils literal notranslate"><span class="pre">std::tuple</span></code><a class="headerlink" href="#std-pair-and-std-tuple" title="Link to this heading">¶</a></h4>
 <p><code class="docutils literal notranslate"><span class="pre">std::pair</span></code> and <code class="docutils literal notranslate"><span class="pre">std::tuple</span></code> are both utility classes in the C++ Standard Library that store a fixed set of elements, but they serve slightly different purposes.</p>
 <p><code class="docutils literal notranslate"><span class="pre">std::pair</span></code> – a longstanding STL class – is specifically designed to store two elements, while std::tuple is more general and can store any number of elements.</p>
 <p>Let’s begin with a simple example of <code class="docutils literal notranslate"><span class="pre">std::pair</span></code>.</p>
@@ -1710,7 +1705,7 @@ While knowledge of these structures–and how to implement them–is still of va
 <p>In summary, <code class="docutils literal notranslate"><span class="pre">std::pair</span></code> and <code class="docutils literal notranslate"><span class="pre">std::tuple</span></code> serve similar purposes but are not interchangeable. <code class="docutils literal notranslate"><span class="pre">std::pair</span></code> is simpler and more straightforward for handling pairs of elements, while <code class="docutils literal notranslate"><span class="pre">std::tuple</span></code> offers more flexibility and is suited for handling a fixed collection of several (greater than two in practice) elements.</p>
 </section>
 <section id="utility-functions-for-working-with-std-pair-and-std-tuple">
-<span id="index-9"></span><h4>Utility Functions for working with <code class="docutils literal notranslate"><span class="pre">std::pair</span></code> and <code class="docutils literal notranslate"><span class="pre">std::tuple</span></code><a class="headerlink" href="#utility-functions-for-working-with-std-pair-and-std-tuple" title="Permalink to this heading">¶</a></h4>
+<span id="index-9"></span><h4>Utility Functions for working with <code class="docutils literal notranslate"><span class="pre">std::pair</span></code> and <code class="docutils literal notranslate"><span class="pre">std::tuple</span></code><a class="headerlink" href="#utility-functions-for-working-with-std-pair-and-std-tuple" title="Link to this heading">¶</a></h4>
 <p>In C++, <code class="docutils literal notranslate"><span class="pre">std::make_pair</span></code> is a utility function that simplifies the
 creation of <code class="docutils literal notranslate"><span class="pre">std::pair</span></code> objects. It takes two arguments and returns a
 <code class="docutils literal notranslate"><span class="pre">std::pair</span></code> constructed with those two values. This function is
@@ -1727,7 +1722,7 @@ handy for creating tuples without having to explicitly specify the type of each 
 thus allowing for more concise and flexible code.</p>
 </section>
 <section id="converting-between-std-pair-and-std-tuple">
-<span id="index-10"></span><h4>Converting between  <code class="docutils literal notranslate"><span class="pre">std::pair</span></code> and <code class="docutils literal notranslate"><span class="pre">std::tuple</span></code><a class="headerlink" href="#converting-between-std-pair-and-std-tuple" title="Permalink to this heading">¶</a></h4>
+<span id="index-10"></span><h4>Converting between  <code class="docutils literal notranslate"><span class="pre">std::pair</span></code> and <code class="docutils literal notranslate"><span class="pre">std::tuple</span></code><a class="headerlink" href="#converting-between-std-pair-and-std-tuple" title="Link to this heading">¶</a></h4>
 <p>Here is how to convert a <code class="docutils literal notranslate"><span class="pre">std::tuple</span></code> to <code class="docutils literal notranslate"><span class="pre">std:pair</span></code>:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;tuple&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;utility&gt;</span>
@@ -1800,7 +1795,7 @@ thus allowing for more concise and flexible code.</p>
 </section>
 </section>
 <section id="random-number-generation">
-<h3>Random Number Generation<a class="headerlink" href="#random-number-generation" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#random-number-generation'">¶</a></h3>
+<h3>Random Number Generation<a class="headerlink" href="#random-number-generation" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#random-number-generation'">¶</a></h3>
 <p>Scientific computing depends on random number generation in many domains.
 We use it in a number of our programming examples.</p>
 <p><code class="docutils literal notranslate"><span class="pre">std::mt19937</span></code> is one of the many built-in random number generators provided by the C++ standard library. Here are some of the other commonly used random number generators in the standard library.</p>
@@ -1916,7 +1911,7 @@ We use lambda expressions to select points in each quadrant, subject to what the
 </div>
 </section>
 <section id="ranges">
-<h3>Ranges<a class="headerlink" href="#ranges" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#ranges'">¶</a></h3>
+<h3>Ranges<a class="headerlink" href="#ranges" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#ranges'">¶</a></h3>
 <p>In this example, we use the <code class="docutils literal notranslate"><span class="pre">std::views::iota</span></code> function to create a range of integers from 1 to 10. We then use a range-based for loop to iterate over the range and print each value.</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;ranges&gt;</span>
@@ -2063,10 +2058,10 @@ We first implement the extension method <code class="docutils literal notranslat
 </div>
 </section>
 <section id="threading">
-<h3>Threading<a class="headerlink" href="#threading" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#threading'">¶</a></h3>
+<h3>Threading<a class="headerlink" href="#threading" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#threading'">¶</a></h3>
 </section>
 <section id="co-routines">
-<h3>Co-routines<a class="headerlink" href="#co-routines" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#co-routines'">¶</a></h3>
+<h3>Co-routines<a class="headerlink" href="#co-routines" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#co-routines'">¶</a></h3>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Co-routines are a fairly new C++ feature and may not be supported by your compiler. This is not needed for our oneAPI tutorial.</p>
@@ -2295,10 +2290,14 @@ The following shows how to create four co-routines that sleep for random amounts
 </div><footer class="py-6 border-t border-border md:py-0">
 <div class="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
 <div class="flex flex-col items-center gap-4 px-8 md:flex-row md:gap-2 md:px-0">
-<p class="text-sm leading-loose text-center text-muted-foreground md:text-left">© 2013-2019, Software Systems Laboratory at Loyola University Chicago Built with <a class="font-medium underline underline-offset-4" href="https://www.sphinx-doc.org" rel="noreferrer">Sphinx 6.2.1</a></p>
+<p class="text-sm leading-loose text-center text-muted-foreground md:text-left">© 2013-2019, Software Systems Laboratory at Loyola University Chicago Built with <a class="font-medium underline underline-offset-4" href="https://www.sphinx-doc.org" rel="noreferrer">Sphinx 7.2.6</a></p>
 </div>
 </div>
 </footer>
 </div>
+<script src="../_static/documentation_options.js?v=8a6d37c9"></script>
+<script src="../_static/doctools.js?v=888ff710"></script>
+<script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+<script defer="defer" src="../_static/theme.js?v=e8bd915e"></script>
 </body>
 </html>

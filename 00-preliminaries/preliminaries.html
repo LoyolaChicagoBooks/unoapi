@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 
-<html :class="{'dark': darkMode === 'dark' || (darkMode === 'system' &amp;&amp; window.matchMedia('(prefers-color-scheme: dark)').matches)}" class="scroll-smooth" lang="en" x-data="{ darkMode: localStorage.getItem('darkMode') || localStorage.setItem('darkMode', 'system'), activeSection: '' }" x-init="$watch('darkMode', val =&gt; localStorage.setItem('darkMode', val))">
+<html :class="{'dark': darkMode === 'dark' || (darkMode === 'system' &amp;&amp; window.matchMedia('(prefers-color-scheme: dark)').matches)}" class="scroll-smooth" data-content_root="../" lang="en" x-data="{ darkMode: localStorage.getItem('darkMode') || localStorage.setItem('darkMode', 'system'), activeSection: '' }" x-init="$watch('darkMode', val =&gt; localStorage.setItem('darkMode', val))">
 <head>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <meta charset="utf-8"/>
 <meta content="white" media="(prefers-color-scheme: light)" name="theme-color"/>
 <meta content="black" metia="(prefers-color-scheme: dark)" name="theme-color"/>
-<meta content="Docutils 0.18.1: http://docutils.sourceforge.net/" name="generator"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
 <title>About the Book | UnoAPI Book v0.3.2</title>
 <meta content="About the Book | UnoAPI Book v0.3.2" property="og:title"/>
 <meta content="About the Book | UnoAPI Book v0.3.2" name="twitter:title"/>
-<link href="../_static/pygments.css" rel="stylesheet"/>
-<link href="../_static/theme.47abdafeea10b5ccf58b.css" rel="stylesheet"/>
+<link href="../_static/pygments.css?v=fa44fd50" rel="stylesheet" type="text/css"/>
+<link href="../_static/theme.css?v=7112734b" rel="stylesheet" type="text/css"/>
 <link href="../search.html" rel="search" title="Search"/>
 <link href="../genindex.html" rel="index" title="Index"/>
 <link href="../05-parallel/parallel.html" rel="next" title="Introduction to Parallel Programming"/>
@@ -28,10 +28,6 @@
       }
       if (!userPreference) {localStorage.setItem('darkMode', mode)}
     </script>
-<script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-<script src="../_static/doctools.js"></script>
-<script src="../_static/sphinx_highlight.js"></script>
-<script defer="" src="../_static/theme.4ea23184acb23c5e9294.js"></script>
 </head>
 <body :class="{ 'overflow-hidden': showSidebar }" class="min-h-screen font-sans antialiased bg-background text-foreground" x-data="{ showSidebar: false }">
 <div @click.self="showSidebar = false" class="fixed inset-0 z-50 overflow-hidden bg-background/80 backdrop-blur-sm" x-cloak="" x-show="showSidebar"></div><div class="relative flex flex-col min-h-screen" id="page"><a class="absolute top-0 left-0 z-[100] block bg-background p-4 text-xl transition -translate-x-full opacity-0 focus:translate-x-0 focus:opacity-100" href="#content">
@@ -47,13 +43,12 @@
 <span class="sr-only">Toggle navigation menu</span>
 </button>
 <div class="flex items-center justify-between flex-1 space-x-2 sm:space-x-4 md:justify-end">
-<div class="flex-1 w-full md:w-auto md:flex-none">
-<form @keydown.k.window.meta="$refs.search.focus()" action="../search.html" class="relative flex items-center group" id="searchbox" method="get">
+<div class="flex-1 w-full md:w-auto md:flex-none"><form @keydown.k.window.meta="$refs.search.focus()" action="../search.html" class="relative flex items-center group" id="searchbox" method="get">
 <input aria-label="Search the docs" class="inline-flex items-center font-medium transition-colors bg-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background border border-input hover:bg-accent focus:bg-accent hover:text-accent-foreground focus:text-accent-foreground hover:placeholder-accent-foreground py-2 px-4 relative h-9 w-full justify-start rounded-[0.5rem] text-sm text-muted-foreground sm:pr-12 md:w-40 lg:w-64" id="search-input" name="q" placeholder="Search ..." type="search" x-ref="search"/>
 <kbd class="pointer-events-none absolute right-1.5 top-2 hidden h-5 select-none text-muted-foreground items-center gap-1 rounded border border-border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex group-hover:bg-accent group-hover:text-accent-foreground">
 <span class="text-xs">⌘</span>
-      K
-    </kbd>
+    K
+  </kbd>
 </form>
 </div>
 <nav class="flex items-center space-x-1">
@@ -108,16 +103,16 @@
 </nav>
 <div id="content" role="main">
 <section id="about-the-book">
-<h1>About the Book<a class="headerlink" href="#about-the-book" title="Permalink to this heading">¶</a></h1>
+<h1>About the Book<a class="headerlink" href="#about-the-book" title="Link to this heading">¶</a></h1>
 <p>One of the key goals in high-performance and distributed software engineering is to leverage the specific capabilities of the target hardware to the extent possible. Today’s systems are typically heterogeneous, where one or more architectures may be present within a single system, such as conventional CPU cores combined with accelerators such as GPUs and FPGAs. Although parallel computing itself has reached a high level of maturity, as we move toward exascale computing and beyond, challenges similar to those that plagued the earliest days of parallel and distributed computing are beginning to resurface: Leveraging heterogeneity while balancing performance, software portability, and developer productivity (P3).</p>
 <p>This tutorial–delivered as a Python Sphinx book that rebuilds on all changes to the text and underlying source code–provides hands-on experience in developing high-performance and embedded software for heterogeneous architectures using Intel’s oneAPI reference implementation of the Khronos SYCL standard in conjunction with state-of-the-art software engineering methods. By raising the abstraction level via its unified application programming interface (API), oneAPI makes it easier to develop portable high-performance software for systems with embedded hardware accelerators, such as GPUs and FPGAs.</p>
 <section id="build-status">
-<h2>Build Status<a class="headerlink" href="#build-status" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#build-status'">¶</a></h2>
+<h2>Build Status<a class="headerlink" href="#build-status" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#build-status'">¶</a></h2>
 <a class="reference external image-reference" href="https://github.com/LoyolaChicagoBooks/unoapi/actions/workflows/main.yml"><img alt="GitHub Pages and Release PDF" src="https://github.com/LoyolaChicagoBooks/unoapi/actions/workflows/main.yml/badge.svg"/></a>
 <p>See <a class="reference external" href="https://github.com/LoyolaChicagoBooks/unoapi/actions">https://github.com/LoyolaChicagoBooks/unoapi/actions</a></p>
 </section>
 <section id="distribution">
-<h2>Distribution<a class="headerlink" href="#distribution" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#distribution'">¶</a></h2>
+<h2>Distribution<a class="headerlink" href="#distribution" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#distribution'">¶</a></h2>
 <dl class="simple">
 <dt>Web Version</dt><dd><p>See <a class="reference external" href="https://unoapi.org/">https://unoapi.org/</a></p>
 </dd>
@@ -137,7 +132,7 @@
 </ul>
 </section>
 <section id="citation">
-<h2>Citation<a class="headerlink" href="#citation" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#citation'">¶</a></h2>
+<h2>Citation<a class="headerlink" href="#citation" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#citation'">¶</a></h2>
 <dl class="simple">
 <dt>Cite [completely optional but appreciated]</dt><dd><p>Konstantin Läufer and George K. Thiruvathukal, <em>UnoAPI: Balancing Performance, Portability, and Productivity (P3) in HPC Education</em>, 2022 IEEE/ACM International Workshop on Education for High Performance Computing (EduHPC), Dallas, TX, USA, 2022, pp. 1-10, doi: 10.1109/EduHPC56719.2022.00006.</p>
 </dd>
@@ -151,7 +146,7 @@ If you don’t find our work useful, please consider citing the above paper.
 Please do not hesitate to contact us with any questions, regardless of whether you find us useful or not.</p>
 </section>
 <section id="motivation-for-our-work">
-<h2>Motivation for Our Work<a class="headerlink" href="#motivation-for-our-work" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#motivation-for-our-work'">¶</a></h2>
+<h2>Motivation for Our Work<a class="headerlink" href="#motivation-for-our-work" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#motivation-for-our-work'">¶</a></h2>
 <p>This is not all-inclusive.</p>
 <p>Tenets:</p>
 <ul class="simple">
@@ -167,25 +162,25 @@ Please do not hesitate to contact us with any questions, regardless of whether y
 </ul>
 </section>
 <section id="contributors">
-<h2>Contributors<a class="headerlink" href="#contributors" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#contributors'">¶</a></h2>
+<h2>Contributors<a class="headerlink" href="#contributors" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#contributors'">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://gkt.sh">George K. Thiruvathukal (project lead)</a></p></li>
 <li><p><a class="reference external" href="https://laufer.cs.luc.edu">Konstantin Läufer</a></p></li>
 </ul>
 </section>
 <section id="ai-disclosure">
-<h2>AI Disclosure<a class="headerlink" href="#ai-disclosure" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#ai-disclosure'">¶</a></h2>
+<h2>AI Disclosure<a class="headerlink" href="#ai-disclosure" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#ai-disclosure'">¶</a></h2>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This text contains a mix of original writing and programming with strategic use of Chat-GPT4 via intelligent/clever prompting. All examples will be available in our repository with an appropriate <strong>cmake</strong> build file and tests. We will also make our prompts and analysis available, similar to what we have done for our recent ongoing study of Chat-GPT4 and Systems Programming. See <a class="reference external" href="https://doi.org/10.6084/m9.figshare.22257274">https://doi.org/10.6084/m9.figshare.22257274</a>.</p>
 </div>
 </section>
 <section id="acknowledgements">
-<h2>Acknowledgements<a class="headerlink" href="#acknowledgements" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#acknowledgements'">¶</a></h2>
+<h2>Acknowledgements<a class="headerlink" href="#acknowledgements" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#acknowledgements'">¶</a></h2>
 <p>Thanks to Intel Corporation for their support of our work (George Silva, Omar Toral, Ben Odom).</p>
 </section>
 <section id="topics">
-<h2>Topics<a class="headerlink" href="#topics" title="Permalink to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#topics'">¶</a></h2>
+<h2>Topics<a class="headerlink" href="#topics" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#topics'">¶</a></h2>
 <p>These are the planned chapters:</p>
 <ul class="simple">
 <li><p>Parallel Programming Principles</p></li>
@@ -219,10 +214,14 @@ Please do not hesitate to contact us with any questions, regardless of whether y
 </div><footer class="py-6 border-t border-border md:py-0">
 <div class="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
 <div class="flex flex-col items-center gap-4 px-8 md:flex-row md:gap-2 md:px-0">
-<p class="text-sm leading-loose text-center text-muted-foreground md:text-left">© 2013-2019, Software Systems Laboratory at Loyola University Chicago Built with <a class="font-medium underline underline-offset-4" href="https://www.sphinx-doc.org" rel="noreferrer">Sphinx 6.2.1</a></p>
+<p class="text-sm leading-loose text-center text-muted-foreground md:text-left">© 2013-2019, Software Systems Laboratory at Loyola University Chicago Built with <a class="font-medium underline underline-offset-4" href="https://www.sphinx-doc.org" rel="noreferrer">Sphinx 7.2.6</a></p>
 </div>
 </div>
 </footer>
 </div>
+<script src="../_static/documentation_options.js?v=8a6d37c9"></script>
+<script src="../_static/doctools.js?v=888ff710"></script>
+<script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+<script defer="defer" src="../_static/theme.js?v=e8bd915e"></script>
 </body>
 </html>
