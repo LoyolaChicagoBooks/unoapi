@@ -140,18 +140,33 @@ This corresponds to a speedup of about 320 compared to sequential execution or a
 Observed scaling
 ----------------
 
-In this section, we'll share some observations of scaling in terms of the number of trapezoids n and the unit workload factor (number of repetitions) w.
-Each chart shows wall time in seconds and unit time in nanoseconds per total problem size (n times w).
+In this section, we'll share our high-level observations of scaling in terms of the total workload (number of trapezoids) n and the grain size (number of inner, always sequential trapezoids) g, for our three execution modes:
 
-.. figure:: ../images/walltime-fixed-n.png
+- sequential execution
+- parallel execution on a single NVIDIA RTX A6000 GPU
+- parallel execution on a dual AMD EPYC 9354 32-Core Processor
 
-For a reasonably high, fixed number of trapezoids, wall time increases sublinearly, while unit time decreases substantially for higher workload factors.
+Each chart shows a scatter plot with several color-coded series corresponding to total workload.
+The x-axis shows grain size, and the y-axis shows wall time in seconds.
+Axis ranges and series colors are consistent across charts, thereby allowing a direct comparison of measurements for a given workload and grain size.
 
-.. figure:: ../images/walltime-fixed-workload.png
+.. figure:: ../images/walltime-seq.svg
 
-For a reasonably high, fixed workload, wall time increases sublinearly (very gradually), while unit time is mostly flat.
+As expected, for sequential execution, wall time is proportional to total workload and independent of grain size.
+(We discontinued the experiment for the highest workload only to save some time.)
 
-In addition, our raw performance data is `available in this spreadsheet <https://docs.google.com/spreadsheets/d/1g6oeu2-ABbHGwrdyisv4kE2KKr-Wf9zjQLVnjsDn4_s>`_.
+.. figure:: ../images/walltime-gpu.svg
+
+For parallel execution on the GPU, we are achieving a speedup of about 10 (one full order of magnitude).
+Otherwise, wall time is still proportional to total workload and mostly independent of grain size; excessive grain size, however, appears to overload GPU cores and can even result in a slowdown relative to sequential execution.
+In this and the next chart, the missing data points for smaller grain sizes are caused by the resulting range of the ``parallel_for`` becoming larger than ``INT_MAX``.
+
+.. figure:: ../images/walltime-cpu.svg
+
+For parallel execution on the CPU, we are achieving of almost three orders of magnitude relative to sequential execution, and almost two orders of magnitude relative to parallel execution on the GPU.
+Otherwise, wall time proportional (slightly sublinear) to total workload and mostly independent of grain size, except for a certain overhead for small grain sizes that put an insufficient load on each processor core.
+
+In addition, our raw performance data are `available in this spreadsheet <https://docs.google.com/spreadsheets/d/1NUD_yqfwgUr9XYucRgMykKDrgUAETmvC4mzOMVDxDZY>`_.
 
 
 .. TODO chapter conclusion
