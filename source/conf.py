@@ -12,6 +12,7 @@
 # serve to show the default.
 
 import sys, os
+import subprocess
 from datetime import date
 
 
@@ -44,16 +45,24 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'UnoAPI'
-copyright = u'2013-2019, UnoAPI Software Systems Laboratory'
+project = u'UnoAPI Book'
+copyright = u'2013-2019, Software Systems Laboratory at Loyola University Chicago'
 
-# The version info for the project you're documenting, acts as replacement for
-# |version| and |release|, also used in various other places throughout the
-# built documents.
-#
-# The short X.Y version.
-#version = 'v0.1'
-version = date.today().strftime("%Y.%m.%d")
+def get_git_tag():
+    try:
+        return subprocess.check_output(["git", "describe", "--tags", "--abbrev=0"]).strip().decode('utf-8')
+    except subprocess.CalledProcessError:
+        # Handle cases where the git command fails
+        return "Unknown"
+
+# Assign the latest tag to a variable
+latest_git_tag = get_git_tag()
+
+# Use 'latest_git_tag' in your Sphinx documentation
+version = latest_git_tag
+release = latest_git_tag
+
+#version = date.today().strftime("%Y.%m.%d")
 # The full version, including alpha/beta/rc tags.
 release = version
 
@@ -140,7 +149,7 @@ html_theme_options = {
 
 # The name for this set of Sphinx documents.  If None, it defaults to
 # "<project> v<release> documentation".
-html_title = " ".join([project +  ": updated", release])
+html_title = " ".join([project, release])
 
 # A shorter title for the navigation bar.  Default is the same as html_title.
 #html_short_title = "UnoAPI <release>"
@@ -220,8 +229,8 @@ latex_elements = {
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-  ('index', 'UnoAPI.tex', u'UnoAPI Tutorial',
-   u'UnoAPI Software Systems Laboratory', 'manual'),
+  ('index', 'UnoAPI.tex', u'UnoAPI Book',
+   u'Software Systems Laboratory at Loyola University Chicago', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -250,8 +259,8 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'unoapi', u'UnoAPI Tutorial',
-     [u'UnoAPI Software Systems Laboratory'], 1)
+    ('index', 'unoapi', u'UnoAPI Book',
+     [u'Software Systems Laboratory at Loyola University Chicago'], 1)
 ]
 
 # If true, show URL addresses after external links.
@@ -264,8 +273,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  ('index', 'UnoAPI', u'UnoAPI Tutorial',
-   u'UnoAPI Software Systems Laboratory', 'UnoAPI', 'One line description of project.',
+  ('index', 'UnoAPI', u'UnoAPI Book',
+   u'Software Systems Laboratory at Loyola University Chicago', 'UnoAPI', 'One line description of project.',
    'Miscellaneous'),
 ]
 
@@ -283,9 +292,9 @@ texinfo_documents = [
 
 # Bibliographic Dublin Core info.
 epub_title = u'UnoAPI'
-epub_author = u'UnoAPI Software Systems Laboratory'
-epub_publisher = u'UnoAPI Software Systems Laboratory'
-epub_copyright = u'2013, UnoAPI Software Systems Laboratory'
+epub_author = u'Software Systems Laboratory at Loyola University Chicago'
+epub_publisher = u'Software Systems Laboratory at Loyola University Chicago'
+epub_copyright = u'2013, Software Systems Laboratory at Loyola University Chicago'
 
 # The language of the text. It defaults to the language option
 # or en if the language is not set.

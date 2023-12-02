@@ -406,13 +406,13 @@ To use the above code, you'll need to add the following to your CMakeLists.txt f
 Better Generics for Mathematical Functions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-In the following  example, we define a minimum function that takes two generic input parameters `x` and `y` of type `T`. We use `std::enable_if` with the condition `std::is_arithmetic<T>::value` to enable the function only for arithmetic types (i.e., integer and floating point types).
+In the following  example, we define a minimum function that takes two generic input parameters ``x`` and ``y`` of type ``T``. We use ``std::enable_if`` with the condition ``std::is_arithmetic<T>::value`` to enable the function only for arithmetic types (i.e., integer and floating point types).
 
-The second template parameter is a default value for a pointer type that is enabled only when the first condition is met. The default value is set to `nullptr` to allow the function to have a return type, even when `std::enable_if` disables the function.
+The second template parameter is a default value for a pointer type that is enabled only when the first condition is met. The default value is set to ``nullptr`` to allow the function to have a return type, even when ``std::enable_if`` disables the function.
 
 .. note:: This is known as a "substitution failure is not an error" technique.
 
-Inside the function, we use the ternary operator to return the smaller of the two input parameters `x` and `y`.
+Inside the function, we use the ternary operator to return the smaller of the two input parameters ``x`` and ``y``.
 
 This minimum function can be used with any integer or floating point type, including int, double, float, long, long long, etc.
 
@@ -522,39 +522,42 @@ Only log messages written to this level or higher will actulaly be displayed.
    }
    
    
-Templates and STL
-^^^^^^^^^^^^^^^^^^
+Essential Template Classes in STL
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+The C++ Standard Template Library (STL) is a powerful (and comprehensive) set of template classes and functions, providing common data structures and algorithms. The STL is an integral part of the C++ Standard Library. 
 
-std::vector
-""""""""""""
+Let's start with the most commonly needed ``std::vector`` and ``std::map``.
 
-`std::vector` is a dynamic array data structure in C++ that provides efficient memory management and flexible storage of elements, and it is important in scientific computing for its ability to handle large amounts of data efficiently.
+``std::vector``: The Standard All-in-One Vector Type
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-Using `std::vector` is preferable to using a C pointer based equivalent array because it provides automatic memory management, better safety and convenience, and improved performance for dynamic resizing and storage of elements.
+``std::vector`` is a dynamic all-in-one array data structure in C++ (similar to a Python list) that provides efficient memory management and flexible storage of elements, and it is important in scientific computing for its ability to handle large amounts of data efficiently.
 
-The advantages of using `std::vector` therefore outweigh any disadvantages, especially if you care about the balance of performance and safety as we do.
+Using ``std::vector`` is preferable to using a C pointer based equivalent array because it provides automatic memory management, better safety and convenience, and improved performance for dynamic resizing and storage of elements.
+
+The advantages of using ``std::vector`` therefore outweigh any disadvantages, especially if you care about the balance of performance and safety as we do.
 
 The top 10 operations include:
 
-- `push_back()`: This function adds an element to the end of the vector.
+- ``push_back()``: This function adds an element to the end of the vector.
  
-- `pop_back()`: This function removes the last element from the vector.
+- ``pop_back()``: This function removes the last element from the vector.
  
-- `size()`: This function returns the current number of elements in the vector.
+- ``size()``: This function returns the current number of elements in the vector.
  
-- `resize()`: This function resizes the vector to the specified number of elements. If the new size is larger than the current size, new elements are added with their default values. If the new size is smaller than the current size, excess elements are removed.
+- ``resize()``: This function resizes the vector to the specified number of elements. If the new size is larger than the current size, new elements are added with their default values. If the new size is smaller than the current size, excess elements are removed.
  
-- `clear()`: This function removes all elements from the vector.
+- ``clear()``: This function removes all elements from the vector.
  
-- `empty()`: This function returns true if the vector is empty, i.e., if it has no elements.
+- ``empty()``: This function returns true if the vector is empty, i.e., if it has no elements.
  
-- `reserve()`: This function reserves space in the vector for a certain number of elements. This can be useful when you know the approximate size of the vector in advance and want to avoid frequent reallocations.
+- ``reserve()``: This function reserves space in the vector for a certain number of elements. This can be useful when you know the approximate size of the vector in advance and want to avoid frequent reallocations.
  
-- `begin()` and end(): These functions return iterators that point to the first and one-past-the-last elements of the vector, respectively. You can use these iterators to traverse the elements of the vector.
+- ``begin()`` and end(): These functions return iterators that point to the first and one-past-the-last elements of the vector, respectively. You can use these iterators to traverse the elements of the vector.
  
-- `at()`: This function provides bounds checking when accessing elements of the vector. It throws an exception if the index is out of range.
+- ``at()``: This function provides bounds checking when accessing elements of the vector. It throws an exception if the index is out of range.
  
-- `operator[]`: This function provides direct access to the elements of the vector using the square bracket notation. It does not perform bounds checking, so you need to be careful not to access elements out of range.
+- ``operator[]``: This function provides direct access to the elements of the vector using the square bracket notation. It does not perform bounds checking, so you need to be careful not to access elements out of range.
  
 
 In the following exmaple, we demonsrate the use of these most popular methods and use simple print statements to show that each method works as expected.
@@ -735,8 +738,10 @@ Testing using "print" statements is not ideal. Here is how to rewrite the above 
    }
    
    
-std::map
-""""""""""""
+``std::map``: The Standard All-in-One Associative Array/Dictionary Type
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+``std::map`` is a dynamic all-in-one array data structure in C++ (similar to a Python dictionary) that supports an associative array, where keys of any type can be mapped to values of any type.
 
 Here are the top 10 most common std::map methods and a brief explanation of their functionality:
 
@@ -752,7 +757,6 @@ Here are the top 10 most common std::map methods and a brief explanation of thei
 - `end()`: Returns an iterator past the last element in the map.
 
 These methods provide essential functionality for managing key-value pairs in a map, and are widely used in various domains of programming, such as data processing, game development, and system programming, among others.
-
 
 In the following exmaple, we demonsrate the use of these most popular methods and use simple print statements to show that each method works as expected.
 
@@ -927,7 +931,583 @@ Testing using "print" statements is not ideal. Here is how to rewrite the above 
        }
        ASSERT_EQ(3, count);
    }
-   
+
+.. index::
+   single: C++ Standard Library; overview of key template classess
+
+
+Other Useful Template Classes beyond ``std::vector`` and ``std::map``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+There are several other essential modern template classes in the STL that are highly useful for various programming tasks. Many of these are useful to advanced systems programming, so we will introduce them briefly here and provide examples of each that are appropriate for our tutorial.
+
+- ``std::array``: A container that encapsulates fixed-size arrays. It offers similar functionality to plain arrays but with added benefits of standard container functions like ``.size()`` and iterators.
+
+- ``std::deque``: Double-ended queue that allows insertion and deletion at both ends. It's useful when you need dynamic array behavior but with efficient insertion/removal from the front and back.
+
+- ``std::list`` and ``std::forward_list``: Implementations of doubly-linked and singly-linked lists, respectively. They offer constant time insertion and deletion of elements but do not provide random access.
+
+- ``std::set`` and ``std::multiset``: Containers that store unique elements following a specific order. ``std::multiset`` differs in allowing multiple elements to have equivalent values.
+
+- ``std::unordered_set`` and ``std::unordered_multiset``: Implementations of hash set and multiset. They provide faster lookup, insertion, and deletion compared to ``std::set``/``std::multiset``` at the cost of not maintaining order.
+
+- ``std::stack`` and ``std::queue``: Adaptor containers. ``std::stack`` provides LIFO (last-in, first-out) data structure, and ``std::queue`` offers FIFO (first-in, first-out) data structure.
+
+- ``std::priority_queue``: A container adaptor that provides constant time lookup of the largest (or smallest, if you customize) element.
+
+- ``std::map`` and ``std::multimap``: Associative containers that store elements formed by a combination of a key value and a mapped value, following a specific order. The ``std::multimap`` allows multiple entries for a single key.
+
+- ``std::unordered_map`` and ``std::unordered_multimap``: Implementations of hash map and hash multimap. They allow for faster access than ``std::map``/ ``std::multimap`` but do not keep elements in any specific order.
+
+- ``std::optional``: A wrapper for values that may or may not be present. Introduced in C++17, it's useful for functions that may or may not return a value in a safe manner.
+
+- ``std::variant``: Also introduced in C++17, this is a type-safe union class, which can hold one of several specified types but only one at a time.
+
+- ``std::tuple``: A fixed-size collection of heterogeneous values. It's a generalization of ``std::pair``.
+
+- ``std::function``: A general-purpose polymorphic function wrapper. It can store, move, and invoke any Callable target—functions, lambda expressions, bind expressions, or other function objects.
+
+- ``std::thread``: Represents a single thread of execution and introduced in C++11. It allows for more straightforward and portable multithreading.
+
+- ``std::future`` and ``std::promise``: Introduced in C++11, these classes are used for asynchronous programming. They provide mechanisms to access the result of asynchronous operations.
+
+Understanding and effectively using these template classes can significantly enhance the efficiency, reliability, and readability of your C++ code. Each of these classes serves a particular purpose and can be chosen based on the specific requirements of your program.
+
+In the remaining, we show minimium viable examples of these, while focusing on the most commonly used (5) methods.
+
+
+.. index::
+   single: C++ Standard Library; std::array
+
+
+``std::array``: The alternative to pointer or static array declarations
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+This example demonstrates the basics of working with ``std::array``. 
+It also demonstrates how to initialize it with an underlying pointer to an array.
+
+.. code-block:: cpp
+
+    #include <array>
+    #include <iostream>
+
+    int main() {
+        int rawArray[3] = {1, 2, 3};
+        std::array<int, 3> arr = {1, 2, 3};
+
+        std::cout << "First element: " << arr.front() << "\n";
+        std::cout << "Last element: " << arr.back() << "\n";
+        arr.fill(5); // Fill array with 5
+        for (auto& e : arr) std::cout << e << " "; // This uses a range expression on the underlying array
+        std::cout << "\nSize: " << arr.size() << "\n"; 
+    }
+
+.. index::
+   single: C++ Standard Library; std::deque
+
+
+``std::deque``: The all-in-one list type
+""""""""""""""""""""""""""""""""""""""""""""""""
+
+A *deque* is a doubly-ended queue data structure.
+It assures excellent performance when retrieving items from either side of the deque.
+
+The following show how to insert items at either end and remove items from either end.
+It also shows how to iterate the contents of the deque in natural order.
+
+.. code-block:: cpp
+
+    #include <deque>
+    #include <iostream>
+
+    int main() {
+        std::deque<int> dq = {2, 3, 4};
+
+        dq.push_front(1);
+        dq.push_back(5);
+        std::cout << "Front: " << dq.front() << "\n";
+        std::cout << "Back: " << dq.back() << "\n";
+        
+        dq.pop_front();
+        dq.pop_back();
+
+        for (auto& e : dq) std::cout << e << " ";
+    }
+
+
+.. index::
+   single: C++ Standard Library; std::forward_list
+
+
+
+``std:forward_list``: When a ``deque`` is not needed
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+If you do not need a ``deque`` and can do with a simple forward linked list, consider ``std::forward_list``.
+
+.. code-block:: cpp
+
+    #include <forward_list>
+    #include <iostream>
+
+    int main() {
+        std::forward_list<int> flst = {1, 2, 3, 4};
+        flst.push_front(0); 
+        flst.pop_front(); 
+        std::cout << "Forward List: ";
+        for (auto& e : flst) {
+            std::cout << e << " ";
+        }
+        std::cout << std::endl;
+        auto it = flst.begin(); // Iterator to the start of the list
+        flst.insert_after(it, 5); // Insert '5' after the first element
+        flst.remove(3); // Removes all elements with the value '3'
+        std::cout << "Modified Forward List: ";
+        for (auto& e : flst) {
+            std::cout << e << " ";
+        }
+        std::cout << std::endl;
+        return 0;
+    }
+
+
+.. index::
+   single: C++ Standard Library; std::set
+
+
+
+``std::set``: The ordered set
+"""""""""""""""""""""""""""""""""
+
+This an example focusing only on ``std::set`` in C++ and highlight its top (10) commonly-used methods. ``std::set`` is a sorted associative container that contains unique elements.
+
+.. code-block::
+
+    #include <iostream>
+    #include <set>
+    #include <iterator>
+    #include <algorithm>
+
+    int main() {
+        std::set<int> s = {4, 1, 3, 5, 2};
+
+        s.insert(6);
+        s.erase(4);
+        auto it = s.find(3); 
+
+        if (s.count(3)) {
+            std::cout << "3 is in the set\n";
+        }
+
+        std::cout << "First element: " << *s.begin() << "\n";
+        std::cout << "Last element: " << *s.rbegin() << "\n";
+
+        std::cout << "Size: " << s.size() << "\n";
+
+        if (!s.empty()) {
+            std::cout << "Set is not empty\n";
+        }
+
+        s.clear();
+
+        // This shows how to re-initialize the set members (w/o constructor)
+        s = {1, 2, 3, 4, 5};
+        std::cout << "Elements in set: ";
+        for (const auto& e : s) {
+            std::cout << e << " ";
+        }
+        std::cout << std::endl;
+
+        return 0;
+    }
+
+
+.. index::
+   single: C++ Standard Library; std::multi_set
+
+
+
+``std::multiset``: The ordered set that keeps count
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+A std::multiset in C++ is similar to a std::set, but it allows multiple instances of the same value. This distinction enables some additional capabilities, particularly regarding element counts and handling of duplicates. Here's an example showcasing std::multiset with a focus on its unique properties and methods:
+
+This is a reworked version of the ``set`` example that highlights the additional capabilities of ``multisset``.
+
+.. code-block:: cpp
+
+    #include <iostream>
+    #include <set>
+
+    int main() {
+        std::multiset<int> ms = {4, 1, 3, 1, 2, 3, 3};
+
+        ms.insert(2); // Inserts another '2' (hence the "muliti")
+
+        // Erase elements by value (erases all instances)
+        ms.erase(1); // Erases all elements with value '1'
+
+        auto it = ms.find(3); // Finds first element with value '3'
+
+        std::cout << "Number of instances of 3: " << ms.count(3) << "\n";
+
+        ms.insert({5, 5, 6}); // Inserts '5' twice and '6' once (hence the "multiset")
+
+        std::cout << "Size: " << ms.size() << "\n";
+
+        auto it_erase = ms.find(5);
+        if (it_erase != ms.end()) {
+            ms.erase(it_erase); // Erases one instance of '5'
+        }
+
+        if (!ms.empty()) {
+            std::cout << "Multiset is not empty\n";
+        }
+
+        std::cout << "Elements in multiset: ";
+        for (const auto& e : ms) {
+            std::cout << e << " ";
+        }
+        std::cout << std::endl;
+
+        ms.clear(); // Removes all elements
+
+        return 0;
+    }
+
+
+.. index::
+   single: C++ Standard Library; std::priority_queue
+
+
+
+``std::priority_queue``: Ordering items in a queue by a given priority level
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+Priority queues are often used in systems.
+
+To use a std::priority_queue to schedule jobs in Shortest Job First (SJF) fashion, you can create a priority queue that sorts jobs based on their length (in seconds). In SJF scheduling, the job with the shortest duration is selected next.
+
+Here's a basic example demonstrating this. First, we'll define a Job struct that includes a job ID and its length in seconds. Then, we'll use a std::priority_queue with a custom comparator to ensure that jobs with shorter lengths are given higher priority.
+
+.. code-block:: cpp
+
+    #include <iostream>
+    #include <queue>
+    #include <vector>
+
+    struct Job {
+        int id;
+        int length; // Length of the job in seconds
+
+        Job(int id, int length) : id(id), length(length) {}
+
+        // Define the < operator for sorting. Inverse logic because priority_queue
+        // is a max-heap by default, but we need a min-heap for SJF.
+        bool operator<(const Job& other) const {
+            return length > other.length;
+        }
+    };
+
+    int main() {
+        // Priority queue for SJF scheduling
+        std::priority_queue<Job> jobQueue;
+
+        // Add jobs to the queue
+        jobQueue.emplace(1, 5); // Job ID 1, length 5 seconds
+        jobQueue.emplace(2, 3); // Job ID 2, length 3 seconds
+        jobQueue.emplace(3, 10); // Job ID 3, length 10 seconds
+
+        std::cout << "Job execution order (SJF): \n";
+
+        // Process jobs in SJF order
+        while (!jobQueue.empty()) {
+            Job currentJob = jobQueue.top();
+            jobQueue.pop();
+
+            std::cout << "Job ID: " << currentJob.id << ", Length: " << currentJob.length << " seconds\n";
+        }
+
+        return 0;
+    }
+
+.. index::
+   single: C++ Standard Library; std::optional
+
+
+``std::optional``: Handling situations where a function returns or fails to return a value
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+``std::optional`` is a great choice for situations where a function might or might not return a value. In the context of reading a line of input, ``std::optional`` can be used to represent the outcome of the *read* operation: it contains a value if the read was successful, and it's empty (``std::nullopt``) if the read failed (for example, if the end of file is reached).
+
+Here's an example of how you might use ``std::optional`` for reading a line from a file:
+
+.. code-block:: cpp
+    
+    #include <iostream>
+    #include <fstream>
+    #include <string>
+    #include <optional>
+
+    std::optional<std::string> readLine(std::ifstream& file) {
+        std::string line;
+        if (std::getline(file, line)) {
+            return line; // success
+        } else {
+            return std::nullopt; // fail
+        }
+    }
+
+    int main() {
+        std::ifstream file("example.txt");
+        if (!file.is_open()) {
+            std::cerr << "Error opening file\n";
+            return 1;
+        }
+
+        while (true) {
+            auto line = readLine(file);
+            if (line) {
+                std::cout << "Read line: " << *line << std::endl;
+            } else {
+                break;
+            }
+        }
+
+        file.close();
+        return 0;
+    }
+
+.. index::
+   single: Time Complexity; std::vector
+   single: Time Complexity; std::deque
+   single: Time Complexity; std::list
+   single: Time Complexity; std::forward_list
+   single: Time Complexity; std::set
+   single: Time Complexity; std::multiset
+   single: Time Complexity; std::unordered_set
+   single: Time Complexity; std::unordered_multiset
+
+
+
+A Look at Expected Run-time Performance
+""""""""""""""""""""""""""""""""""""""""""""
+
+Traditional algorithms and data structures courses emphasize the importance of time (and space) complexity.
+While knowledge of these structures--and how to implement them--is still of value, it is vitallyimportant to know how make "good choices" when it comes to performance when it comes to the common methods avaiable in all classes. 
+
+The following table shows the expected time complexity when it comes to each of the standard library template classes. When left blank, it means that the method is either not available or not appropriate for the standard template class.
+
+.. csv-table:: STL Containers Method Time Complexity [Prelimiary Analysis]
+   :header: "Method", "std::vector", "std::deque", "std::list", "std::forward_list", "std::set/multiset", "std::unordered_set/multiset"
+   :widths: 20, 15, 15, 15, 20, 20, 30
+
+   "size", "O(1)", "O(1)", "O(1)", "O(1)", "O(1)", "O(1)"
+   "empty", "O(1)", "O(1)", "O(1)", "O(1)", "O(1)", "O(1)"
+   "insert", "O(n)", "O(1)*", "O(1)", "O(1)", "O(log n)", "O(1)*"
+   "erase", "O(n)", "O(1)*", "O(1)", "O(1)", "O(log n)", "O(1)*"
+   "push_back", "O(1)*", "O(1)", "O(1)", "Not Applicable", "Not Applicable", "Not Applicable"
+   "pop_back", "O(1)", "O(1)", "O(1)", "Not Applicable", "Not Applicable", "Not Applicable"
+   "push_front", "Not Applicable", "O(1)", "O(1)", "O(1)", "Not Applicable", "Not Applicable"
+   "pop_front", "Not Applicable", "O(1)", "O(1)", "O(1)", "Not Applicable", "Not Applicable"
+   "front", "O(1)", "O(1)", "O(1)", "O(1)", "Not Applicable", "Not Applicable"
+   "back", "O(1)", "O(1)", "O(1)", "Not Applicable", "Not Applicable", "Not Applicable"
+   "clear", "O(n)", "O(n)", "O(n)", "O(n)", "O(n)", "O(n)"
+   "find", "O(n)", "O(n)", "O(n)", "O(n)", "O(log n)", "O(1)*"
+   "count", "O(n)", "O(n)", "O(n)", "O(n)", "O(log n) + O(k)", "O(1)*"
+   "operator[]", "O(1)", "O(1)", "Not Applicable", "Not Applicable", "Not Applicable", "Not Applicable"
+   "at", "O(1)", "O(1)", "Not Applicable", "Not Applicable", "Not Applicable", "Not Applicable"
+
+
+- Entries with "Not Applicable" are for operations that do not apply to certain container types. For example, operations like ``push_back`` and ``pop_back`` are not applicable to associative containers (``std::set``, ``std::multiset``, ``std::unordered_set``, ``std::unordered_multiset``) and ``std::forward_list``.
+- For ``std::vector``, operations such as ``insert`` and ``erase`` have a worst-case time complexity of ``O(n)`` due to potential element shifting.
+- The asterisks indicate operations with amortized time complexity, particularly relevant for ``std::vector`` and ``std::unordered_set/multiset`` where certain operations may involve occasional resizing or rehashing.
+
+``std::pair`` and ``std::tuple``
+""""""""""""""""""""""""""""""""""""
+
+``std::pair`` and ``std::tuple`` are both utility classes in the C++ Standard Library that store a fixed set of elements, but they serve slightly different purposes.
+
+``std::pair`` -- a longstanding STL class -- is specifically designed to store two elements, while std::tuple is more general and can store any number of elements.
+
+Let's begin with a simple example of ``std::pair``. 
+
+.. code-block:: cpp
+
+    #include <iostream>
+    #include <utility>
+
+    int main() {
+        // Creating a pair of int and std::string
+        std::pair<int, std::string> myPair(1, "Hello");
+
+        // Accessing elements
+        std::cout << "First: " << myPair.first << ", Second: " << myPair.second << std::endl;
+
+        // Modifying elements
+        myPair.first = 2;
+        myPair.second = "World";
+
+        std::cout << "First: " << myPair.first << ", Second: " << myPair.second << std::endl;
+
+        return 0;
+    }
+
+When you need to group more than two values together, consider ``std::tuple``:
+
+.. code-block:: cpp
+
+    #include <iostream>
+    #include <tuple>
+    #include <string>
+
+    int main() {
+        // Creating a tuple of int, std::string, and float
+        std::tuple<int, std::string, float> myTuple(1, "Hello", 3.14f);
+
+        // Accessing elements using std::get
+        std::cout << "First: " << std::get<0>(myTuple) 
+                << ", Second: " << std::get<1>(myTuple) 
+                << ", Third: " << std::get<2>(myTuple) << std::endl;
+
+        // Modifying elements
+        std::get<0>(myTuple) = 2;
+        std::get<1>(myTuple) = "World";
+        std::get<2>(myTuple) = 1.59f;
+
+        std::cout << "First: " << std::get<0>(myTuple) 
+                << ", Second: " << std::get<1>(myTuple) 
+                << ", Third: " << std::get<2>(myTuple) << std::endl;
+
+        return 0;
+    }
+
+``std::pair`` and ``std::tuple`` are both utility classes in the C++ Standard Library that store a fixed set of elements, but they serve slightly different purposes. ``std::pair`` is specifically designed to store two elements, while ``std::tuple`` is more general and can store any number of elements.
+
+It is worth asking the question: Are ``std::pair`` and ``std::tuple`` Equivalent?
+
+While ``std::pair`` and ``std::tuple`` can seem similar (especially since a ``std::tuple`` with two elements can act like a ``std::pair``), they are **not** equivalent:
+
+- ``std::pair`` is limited to exactly two elements and is often used in contexts where two related values need to be grouped together, such as key-value pairs in maps.
+- ``std::tuple`` is more versatile and can hold any number of elements. It is useful in scenarios where you need to group a fixed, but arbitrary number of different types together.
+- In ``std::pair``, elements are accessed using ``.first`` and ``.second``. In ``std::tuple``, elements are accessed using ``std::get<>``, with the index of the element as a template parameter.
+- ``std::tuple`` can be seen as a generalization of ``std::pair`` but does not replace it, for pragmatic reasons.
+
+In summary, ``std::pair`` and ``std::tuple`` serve similar purposes but are not interchangeable. ``std::pair`` is simpler and more straightforward for handling pairs of elements, while ``std::tuple`` offers more flexibility and is suited for handling a fixed collection of several (greater than two in practice) elements.
+
+
+.. index::
+   single: C++ Standard Library; std::pair 
+   single: C++ Standard Library; std::tuple
+
+Utility Functions for working with ``std::pair`` and ``std::tuple``
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+In C++, ``std::make_pair`` is a utility function that simplifies the
+creation of ``std::pair`` objects. It takes two arguments and returns a
+``std::pair`` constructed with those two values. This function is
+particularly useful because it infers the types of the pair's elements
+from the types of the arguments passed to it, making the code more concise
+and readable. For example, ``std::make_pair(1, "Hello")`` creates a
+``std::pair<int, std::string>`` without needing to explicitly specify these types.
+
+On the other hand, ``std::make_tuple`` is used for creating ``std::tuple`` objects.
+Similar to ``std::make_pair``, it infers the types of the tuple's elements from its arguments.
+You can pass any number of arguments to ``std::make_tuple``, and it will return a tuple
+containing those values. For instance, ``std::make_tuple(1, "Hello", 3.14)``
+will create a ``std::tuple<int, std::string, double>``. This function is particularly
+handy for creating tuples without having to explicitly specify the type of each element,
+thus allowing for more concise and flexible code.
+
+.. index::
+   single: std::pair; convert to std::tuple
+   single: std::tuple; convert to std::pair
+
+
+Converting between  ``std::pair`` and ``std::tuple``
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+Here is how to convert a ``std::tuple`` to ``std:pair``:
+
+.. code-block:: cpp
+
+    #include <tuple>
+    #include <utility>
+    #include <iostream>
+
+    int main() {
+        std::tuple<int, std::string> myTuple = std::make_tuple(1, "Hello");
+
+        // Convert tuple to pair
+        std::pair<int, std::string> myPair = std::make_pair(std::get<0>(myTuple), std::get<1>(myTuple));
+
+        std::cout << "Pair: " << myPair.first << ", " << myPair.second << std::endl;
+
+        return 0;
+    }
+
+Here is how to convert a ``std::pair`` to ``std:tuple``:
+
+.. code-block:: cpp
+
+    #include <tuple>
+    #include <utility>
+    #include <iostream>
+
+    int main() {
+        std::pair<int, std::string> myPair = std::make_pair(1, "Hello");
+
+        // Convert pair to tuple
+        std::tuple<int, std::string> myTuple = myPair;
+
+        std::cout << "Tuple: " << std::get<0>(myTuple) << ", " << std::get<1>(myTuple) << std::endl;
+
+        return 0;
+    }
+
+.. index::
+   single: C++ Code Refactoring; Using auto
+
+These can also be written using ``auto`` where the type information is automatically inferred:
+
+Here is how to convert a ``std::tuple`` to ``std:pair`` using auto:
+
+.. code-block:: cpp
+
+    #include <tuple>
+    #include <utility>
+    #include <iostream>
+
+    int main() {
+        auto myTuple = std::make_tuple(1, "Hello");
+
+        // Convert tuple to pair
+        auto myPair = std::make_pair(std::get<0>(myTuple), std::get<1>(myTuple));
+
+        std::cout << "Pair: " << myPair.first << ", " << myPair.second << std::endl;
+
+        return 0;
+    }
+
+Here is how to convert a ``std::pair`` to ``std:tuple`` using auto:
+
+.. code-block:: cpp
+
+    #include <tuple>
+    #include <utility>
+    #include <iostream>
+
+    int main() {
+        auto myPair = std::make_pair(1, "Hello");
+
+        // Using auto to infer the type of std::tuple from std::pair
+        auto myTuple = std::tuple(myPair);
+
+        std::cout << "Tuple: " << std::get<0>(myTuple) << ", " << std::get<1>(myTuple) << std::endl;
+
+        return 0;
+    }
+
 
 Random Number Generation
 ^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -1117,18 +1697,18 @@ In terms of the original AoC sample input,
 
     1000
     2000
-    3000
+    3000 <- sum = 6000
 
-    4000
+    4000 <- sum = 4000
 
     5000
-    6000
+    6000 <- sum = 11000
 
     7000
     8000
-    9000
+    9000 <- sum = 24000
 
-    10000    
+    10000 <- sum = 10000
 
 the fourth, third, and fifth block would be the three largest, with sums of 24,000, 11,000, and 10,000, respectively, and total sum of 45,000.
 The answer consists of the largest sum and the grand total the three largest sums, i.e., the pair of 24,000 and 45,000.

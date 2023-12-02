@@ -25,3 +25,6 @@
 [submodule "examples/unoapi-fortran-examples"]
 	path = examples/unoapi-fortran-examples
 	url = https://github.com/LoyolaChicagoCode/unoapi-fortran-examples
+[submodule "examples/quant-finance-stocks-python"]
+	path = examples/quant-finance-stocks-python
+	url = git@github.com:LoyolaChicagoCode/quant-finance-stocks-python.git

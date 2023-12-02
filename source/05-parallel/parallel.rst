@@ -1,4 +1,4 @@
-
+.. index::
    single: Parallel Computing; Introduction
    single: Parallel Programming; Concepts
    single: Performance Evaluation; Parallel Computing
@@ -231,7 +231,7 @@ CUDA (Compute Unified Device Architecture) is a parallel computing platform and 
 
 CUDA became popular due to several key factors. First, NVIDIA GPUs had already gained a significant market share in graphics rendering, providing a large user base to leverage for parallel computing. Second, CUDA offered substantial performance acceleration by harnessing the massive parallel architecture of GPUs, allowing developers to offload computationally intensive tasks and achieve significant speedups. Third, CUDA provided a developer-friendly programming model, extending the C language with directives and APIs that made it easier to express parallelism and utilize GPU resources. Fourth, NVIDIA's support ecosystem was comprehensive, offering tools, libraries, and documentation to aid CUDA development. The diverse range of application domains, including scientific simulations, data analytics, machine learning, and image processing, further contributed to CUDA's popularity. Lastly, the availability of NVIDIA's powerful GPU hardware across various price points enabled wider accessibility and adoption of CUDA in different industries and research fields.
 
-Here's the CUDA code example for computing the vector dot product in reStructuredText format:
+Here's the CUDA code example for computing the vector dot product:
 
 .. code-block:: cuda
 
@@ -554,6 +554,9 @@ Suppose that, on the other hand, you calculate how long you would expect it to t
 
 The efficiency would be the ratio of execution time with linear speedup to observed execution time. If speedup is no greater than linear, efficiency will be less than or equal to 1.
 
+.. index::
+   pair: Amdahl's Law; parallel computing
+
 Amdahl’s Law
 ^^^^^^^^^^^^
 
@@ -612,6 +615,47 @@ Another aspect of this argument against Amdahl’s law is that, as the problem s
 
 .. Strong/Weak scaling [new topic]
 .. ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+.. index::
+   pair: Gustafson's Law; parallel computing
+   pair: Amdahl's Law; comparison with Gustafson's Law
+   pair: Gustafson's Law; comparison with Amdahl's Law
+
+Gustafson's Law: Looking Beyond Amdahl's Law
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Gustafson's Law, proposed by John Gustafson in 1988, presents a significant
+principle in the field of parallel computing, fundamentally differing from
+Amdahl's Law in its approach to evaluating the benefits of parallelization.
+This difference has significant merit and is one well worth exploring, even as the ideas of Amdahl's Law remain of importance. After all, many problems, including intractable ones, cannot run on any number of nodes. (Quantum computing may change that. But we're not there yet!)
+
+Gustafson's Law reframes the problem of parallelization by suggesting that
+with more processors, we typically choose to solve larger problems, rather
+than solving the same problem faster--a view strongly justified by modern practice of distinguishing *strong* vs. *weak* scaling (not covered here--yet).
+
+This reflects a realistic approach to
+how computational resources are often used in practice. The law posits that
+the speedup of a parallel system is linearly proportional to the number of
+processors, as it emphasizes the increased problem size that can be handled.
+Mathematically, Gustafson's Law is represented as :math:`S = B + (1 - B) \times P`,
+where :math:`S` is the speedup, :math:`B` is the non-parallelizable portion
+of the task, and :math:`P` is the number of processors.
+
+In contrast to Amdahl's Law, which focuses on a fixed problem size and analyzes
+the speedup achieved by parallelizing parts of the problem, Gustafson's Law
+considers the *increase in problem size* with more available resources. While Amdahl’s Law
+can be construed as more pessimistic about the benefits of parallelization, emphasizing
+the bottleneck due to the serial portion of a task, Gustafson’s Law provides a
+more optimistic view by shifting focus to the parallelizable portion and its
+expansion to available resources. Gustafson's Law is often considered more reflective of real-world
+scenarios, where computing power is used to tackle more extensive and complex
+problems over time.
+
+In summary, Amdahl's Law provides a theoretical limit on the speedup for a
+*fixed-size problem*, but Gustafson's Law offers a different perspective,
+aligning more closely with practical applications and the evolving nature of
+computational tasks in parallel computing environments.
 
 Granularity
 ^^^^^^^^^^^^^
