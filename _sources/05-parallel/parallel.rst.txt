@@ -1,4 +1,4 @@
-
+.. index::
    single: Parallel Computing; Introduction
    single: Parallel Programming; Concepts
    single: Performance Evaluation; Parallel Computing
