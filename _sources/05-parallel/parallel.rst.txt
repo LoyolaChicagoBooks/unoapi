@@ -231,7 +231,7 @@ CUDA (Compute Unified Device Architecture) is a parallel computing platform and 
 
 CUDA became popular due to several key factors. First, NVIDIA GPUs had already gained a significant market share in graphics rendering, providing a large user base to leverage for parallel computing. Second, CUDA offered substantial performance acceleration by harnessing the massive parallel architecture of GPUs, allowing developers to offload computationally intensive tasks and achieve significant speedups. Third, CUDA provided a developer-friendly programming model, extending the C language with directives and APIs that made it easier to express parallelism and utilize GPU resources. Fourth, NVIDIA's support ecosystem was comprehensive, offering tools, libraries, and documentation to aid CUDA development. The diverse range of application domains, including scientific simulations, data analytics, machine learning, and image processing, further contributed to CUDA's popularity. Lastly, the availability of NVIDIA's powerful GPU hardware across various price points enabled wider accessibility and adoption of CUDA in different industries and research fields.
 
-Here's the CUDA code example for computing the vector dot product in reStructuredText format:
+Here's the CUDA code example for computing the vector dot product:
 
 .. code-block:: cuda
 
