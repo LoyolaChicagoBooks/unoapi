@@ -159,7 +159,7 @@ As expected, for sequential execution, wall time is proportional to total worklo
 
 For parallel execution on the GPU, we are achieving a speedup of about 10 (one full order of magnitude).
 Otherwise, wall time is still proportional to total workload and mostly independent of grain size; excessive grain size, however, appears to overload GPU cores and can even result in a slowdown relative to sequential execution.
-In this and the next chart, the missing data points for smaller grain sizes are caused by the resulting range of the ``parallel_for`` 
+In this and the next chart, the missing data points for smaller grain sizes are caused by the resulting range of the ``parallel_for`` becoming larger than ``INT_MAX``.
 
 .. figure:: ../images/walltime-cpu.svg
 
