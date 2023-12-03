@@ -1331,56 +1331,17 @@ The following table shows the expected time complexity when it comes to each of 
 ``std::pair`` -- a longstanding STL class -- is specifically designed to store two elements, while std::tuple is more general and can store any number of elements.
 
 Let's begin with a simple example of ``std::pair``. 
+This shows how to use ``std::make_pair()`` and use ``auto`` to infer the correct type.
 
-.. code-block:: cpp
-
-    #include <iostream>
-    #include <utility>
-
-    int main() {
-        // Creating a pair of int and std::string
-        std::pair<int, std::string> myPair(1, "Hello");
-
-        // Accessing elements
-        std::cout << "First: " << myPair.first << ", Second: " << myPair.second << std::endl;
-
-        // Modifying elements
-        myPair.first = 2;
-        myPair.second = "World";
-
-        std::cout << "First: " << myPair.first << ", Second: " << myPair.second << std::endl;
-
-        return 0;
-    }
+.. literalinclude:: ../../examples/modern-cpp-examples/modern-cpp/std-pair.cpp
+   :language: cpp
 
 When you need to group more than two values together, consider ``std::tuple``:
+This shows how to use ``std::make_tuple()`` and use ``auto`` to infer the correct type.
 
-.. code-block:: cpp
+.. literalinclude:: ../../examples/modern-cpp-examples/modern-cpp/std-tuple.cpp
+   :language: cpp
 
-    #include <iostream>
-    #include <tuple>
-    #include <string>
-
-    int main() {
-        // Creating a tuple of int, std::string, and float
-        std::tuple<int, std::string, float> myTuple(1, "Hello", 3.14f);
-
-        // Accessing elements using std::get
-        std::cout << "First: " << std::get<0>(myTuple) 
-                << ", Second: " << std::get<1>(myTuple) 
-                << ", Third: " << std::get<2>(myTuple) << std::endl;
-
-        // Modifying elements
-        std::get<0>(myTuple) = 2;
-        std::get<1>(myTuple) = "World";
-        std::get<2>(myTuple) = 1.59f;
-
-        std::cout << "First: " << std::get<0>(myTuple) 
-                << ", Second: " << std::get<1>(myTuple) 
-                << ", Third: " << std::get<2>(myTuple) << std::endl;
-
-        return 0;
-    }
 
 ``std::pair`` and ``std::tuple`` are both utility classes in the C++ Standard Library that store a fixed set of elements, but they serve slightly different purposes. ``std::pair`` is specifically designed to store two elements, while ``std::tuple`` is more general and can store any number of elements.
 
