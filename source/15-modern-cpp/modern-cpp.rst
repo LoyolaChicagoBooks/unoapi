@@ -245,46 +245,8 @@ We rely on these extensively in our C++ examples throughout this book.
 In this version of the code, we use initializer expressions for each variable declaration.
 The syntax for an initializer expression is {} or = {}, and it can be used to initialize a variable with an explicit value.
 
-.. code-block:: cpp
-
-   #include <iostream>
-   #include <vector>
-   #include <list>
-   #include <map>
-   #include <set>
-   #include <string>
-   #include <fmt/core.h>
-   
-   int main() {
-       auto i{42};
-       auto d1{1.23}, d2{4.56};
-       auto f1{0.123f}, f2{6.789f};
-       auto b1{true}, b2{false};
-       auto c1{'c'}, c2{'d'};
-   
-       auto v1{std::vector<int>{1, 2, 3, 4, 5}};
-       auto l1{std::list<double>{d1, d2, d1, d2, d1}};
-       auto m1{std::map<float, bool>{{f1, b1}, {f2, b2}, {f1, b2}}};
-       auto s1{std::set<char>{c1, c2, c1, c2}};
-       auto str1{std::string{"Hello, world!"}};
-   
-       fmt::print("i = {}\n", i);
-       fmt::print("d1 = {}\n", d1);
-       fmt::print("d2 = {}\n", d2);
-       fmt::print("f1 = {}\n", f1);
-       fmt::print("f2 = {}\n", f2);
-       fmt::print("b1 = {}\n", b1);
-       fmt::print("b2 = {}\n", b2);
-       fmt::print("c1 = '{}'\n", c1);
-       fmt::print("c2 = '{}'\n", c2);
-       fmt::print("v1 = {}\n", fmt::join(v1, ", "));
-       fmt::print("l1 = {}\n", fmt::join(l1, ", "));
-       fmt::print("m1 = {{{}, {}}}\n", m1.begin()->first, m1.begin()->second);
-       fmt::print("s1 = {{{}}}\n", fmt::join(s1, ", "));
-       fmt::print("str1 = \"{}\"\n", str1);
-   
-       return 0;
-   }
+.. literalinclude:: ../../examples/modern-cpp-examples/modern-cpp/auto-mva.cpp
+   :language: cpp
 
 Using initializer expressions can make the code more concise and improve readability, since each variable is initialized with an explicit value. Additionally, initializer expressions can help prevent bugs caused by uninitialized variables, since each variable is guaranteed to have a value at the point of initialization.
 
@@ -323,46 +285,8 @@ To this end, thinking about how to make a command-line interface without the dru
 The following shows how to use the well-established CLI11 framework.
 An flag-style argument is created for each data type with a default value that will be set, if not present on the command line.
 
-.. code-block:: cpp
-
-   #include <iostream>
-   #include <string>
-   #include "CLI/CLI.hpp"
-   #include "fmt/format.h"
-   
-   int main(int argc, char* argv[]) {
-       CLI::App app{"Command-line interface example"};
-   
-       // Add arguments for each built-in data type
-       int i = 42;
-       app.add_option("-i,--int", i, "Integer argument");
-   
-       double d = 3.14;
-       app.add_option("-d,--double", d, "Double argument");
-   
-       float f = 2.71;
-       app.add_option("-f,--float", f, "Float argument");
-   
-       bool b = true;
-       app.add_flag("-b,--bool", b, "Boolean argument");
-   
-       std::string s = "Hello, world!";
-       app.add_option("-s,--string", s, "String argument");
-   
-       // Parse the command-line arguments
-       CLI11_PARSE(app, argc, argv);
-   
-       // Print the parsed arguments
-       fmt::print("Parsed arguments:\n");
-       fmt::print("  int: {}\n", i);
-       fmt::print("  double: {}\n", d);
-       fmt::print("  float: {}\n", f);
-       fmt::print("  bool: {}\n", b);
-       fmt::print("  string: {}\n", s);
-   
-       return 0;
-   }
-   
+.. literalinclude:: ../../examples/modern-cpp-examples/modern-cpp/cli11-mva.cpp
+   :language: cpp
 
 In this example, we create a CLI::App object to represent our command-line interface. We then add an argument for each built-in data type using the CLI::App::add_option() and CLI::App::add_flag() functions. Each argument has a default value that is appropriate for that type.
 
@@ -416,6 +340,8 @@ Inside the function, we use the ternary operator to return the smaller of the tw
 
 This minimum function can be used with any integer or floating point type, including int, double, float, long, long long, etc.
 
+.. todo:: Needs to be externalized.
+
 .. code-block:: cpp
 
    #include <type_traits>
@@ -460,66 +386,9 @@ You can override the message by using one of the levels, e.g. ``--debug "This is
 In addition, you can specify the default level to show. In this case, the default level is set to "info" (corresponding to **INFO** above).
 Only log messages written to this level or higher will actulaly be displayed.
 
-.. code-block:: cpp
 
-   #include <iostream>
-   #include <string>
-   #include "CLI/CLI.hpp"
-   #include "spdlog/spdlog.h"
-   
-   int main(int argc, char** argv) {
-   
-       CLI::App app("CLI11 Logging Example");
-       
-       std::string trace_message;
-       std::string debug_message;
-       std::string info_message;
-       std::string warn_message;
-       std::string error_message;
-       std::string fatal_message;
-       
-       // add options for each logging level
-       app.add_option("--trace", trace_message, "Log a trace message");
-       app.add_option("--debug", debug_message, "Log a debug message");
-       app.add_option("--info", info_message, "Log an info message");
-       app.add_option("--warn", warn_message, "Log a warn message");
-       app.add_option("--error", error_message, "Log an error message");
-       app.add_option("--fatal", fatal_message, "Log a fatal message");
-   
-       // add option to set the log level
-       std::vector<std::string> allowed_log_levels = {"trace", "debug", "info", "warn", "error", "fatal"};
-       std::string log_level = "info";
-       app.add_option("--log-level", log_level, "Set the log level")->check(CLI::IsMember(allowed_log_levels))->default_val(log_level);
-   
-       // parse the command line arguments
-       CLI11_PARSE(app, argc, argv);
-   
-       // configure the logger
-       auto logger = spdlog::stdout_color_mt("console");
-       logger->set_level(spdlog::level::from_str(log_level));
-   
-       // log the message at the appropriate level
-       if (!trace_message.empty()) {
-           SPDLOG_TRACE(logger, trace_message);
-       }
-       if (!debug_message.empty()) {
-           SPDLOG_DEBUG(logger, debug_message);
-       }
-       if (!info_message.empty()) {
-           SPDLOG_INFO(logger, info_message);
-       }
-       if (!warn_message.empty()) {
-           SPDLOG_WARN(logger, warn_message);
-       }
-       if (!error_message.empty()) {
-           SPDLOG_ERROR(logger, error_message);
-       }
-       if (!fatal_message.empty()) {
-           SPDLOG_CRITICAL(logger, fatal_message);
-       }
-   
-       return 0;
-   }
+.. literalinclude:: ../../examples/modern-cpp-examples/modern-cpp/spdlog-mva.cpp
+   :language: cpp
    
    
 Essential Template Classes in STL
