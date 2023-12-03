@@ -79,6 +79,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../20-quant-finance/qfi.html">Quantitative Finance</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Performance Essentials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../80-running/running.html">Compiling and Running oneAPI programs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome to the UnoAPI Curricular Project</a></li>
 </ul>
 </nav>
 </div>
@@ -218,17 +219,23 @@ This corresponds to a speedup of about 320 compared to sequential execution or a
 </section>
 <section id="observed-scaling">
 <h2>Observed scaling<a class="headerlink" href="#observed-scaling" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#observed-scaling'">¶</a></h2>
-<p>In this section, we’ll share some observations of scaling in terms of the number of trapezoids n and the unit workload factor (number of repetitions) w.
-Each chart shows wall time in seconds and unit time in nanoseconds per total problem size (n times w).</p>
-<figure class="align-default">
-<img alt="../_images/walltime-fixed-n.png" src="../_images/walltime-fixed-n.png"/>
-</figure>
-<p>For a reasonably high, fixed number of trapezoids, wall time increases sublinearly, while unit time decreases substantially for higher workload factors.</p>
-<figure class="align-default">
-<img alt="../_images/walltime-fixed-workload.png" src="../_images/walltime-fixed-workload.png"/>
-</figure>
-<p>For a reasonably high, fixed workload, wall time increases sublinearly (very gradually), while unit time is mostly flat.</p>
-<p>In addition, our raw performance data is <a class="reference external" href="https://docs.google.com/spreadsheets/d/1g6oeu2-ABbHGwrdyisv4kE2KKr-Wf9zjQLVnjsDn4_s">available in this spreadsheet</a>.</p>
+<p>In this section, we’ll share our high-level observations of scaling in terms of the total workload (number of trapezoids) n and the grain size (number of inner, always sequential trapezoids) g, for our three execution modes:</p>
+<ul class="simple">
+<li><p>sequential execution</p></li>
+<li><p>parallel execution on a single NVIDIA RTX A6000 GPU</p></li>
+<li><p>parallel execution on a dual AMD EPYC 9354 32-Core Processor</p></li>
+</ul>
+<p>Each chart shows a scatter plot with several color-coded series corresponding to total workload.
+The x-axis shows grain size, and the y-axis shows wall time in seconds.
+Axis ranges and series colors are consistent across charts, thereby allowing a direct comparison of measurements for a given workload and grain size.</p>
+<p>As expected, for sequential execution, wall time is proportional to total workload and independent of grain size.
+(We discontinued the experiment for the highest workload only to save some time.)</p>
+<p>For parallel execution on the GPU, we are achieving a speedup of about 10 (one full order of magnitude).
+Otherwise, wall time is still proportional to total workload and mostly independent of grain size; excessive grain size, however, appears to overload GPU cores and can even result in a slowdown relative to sequential execution.
+In this and the next chart, the missing data points for smaller grain sizes are caused by the resulting range of the <code class="docutils literal notranslate"><span class="pre">parallel_for</span></code> becoming larger than <code class="docutils literal notranslate"><span class="pre">INT_MAX</span></code>.</p>
+<p>For parallel execution on the CPU, we are achieving of almost three orders of magnitude relative to sequential execution, and almost two orders of magnitude relative to parallel execution on the GPU.
+Otherwise, wall time proportional (slightly sublinear) to total workload and mostly independent of grain size, except for a certain overhead for small grain sizes that put an insufficient load on each processor core.</p>
+<p>In addition, our raw performance data are <a class="reference external" href="https://docs.google.com/spreadsheets/d/1NUD_yqfwgUr9XYucRgMykKDrgUAETmvC4mzOMVDxDZY">available in this spreadsheet</a>.</p>
 </section>
 </section>
 </div></div><aside class="hidden text-sm xl:block" id="right-sidebar">

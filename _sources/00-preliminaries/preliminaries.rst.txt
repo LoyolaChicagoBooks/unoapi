@@ -75,6 +75,8 @@ In addition:
 Contributors
 --------------
 
+.. note:: We welcome folks who wish to contribute. Please reach out to either George or Konstantin. We will be happy to add a placeholder chapter for you. We have not yet established contribution guidelines but plan to do so soon as we have been approached by others. You can start by forking our repository and working from pull requests. Once we accept a pull request, we include you as an additional contributor.
+
 - `George K. Thiruvathukal (project lead) <https://gkt.sh>`__
 - `Konstantin Läufer <https://laufer.cs.luc.edu>`__
 
