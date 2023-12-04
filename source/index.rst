@@ -1,6 +1,6 @@
 
-Welcome to the UnoAPI Curricular Project
-========================================
+UnoAPI: Modern Parallel C++ Programming with SYCL and oneAPI 
+==============================================================
 
 .. note:: UnoAPI is now hosted at https://unoapi.org.
 
