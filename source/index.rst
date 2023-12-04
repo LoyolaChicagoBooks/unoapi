@@ -1,5 +1,4 @@
-
-UnoAPI: Modern Parallel C++ Programming with SYCL and oneAPI 
+UnoAPI: Modern Parallel C++ Programming with SYCL and oneAPI
 ==============================================================
 
 .. note:: UnoAPI is now hosted at https://unoapi.org.
@@ -25,11 +24,15 @@ Please get started by reading :doc:`00-preliminaries/preliminaries`.
 
 .. 40-going-distributed/distributed.rst
 
+Latest Version
+   |version|
+
 Repository
    `github.com/LoyolaChicagoBooks/unoapi <https://github.com/LoyolaChicagoBooks/unoapi>`_
 
 Releases
-   `github.com/LoyolaChicagoBooks/unoapi/releases/latest <https://github.com/LoyolaChicagoBooks/unoapi/releases/latest>`_
+   The current book (|version|) in PDF is available at
+   `GitHub Releases <https://github.com/LoyolaChicagoBooks/unoapi/releases/latest>`__
 
 Topics
 
