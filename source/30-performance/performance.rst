@@ -9,8 +9,6 @@ Measuring time performance
 We can use the ``chrono`` section of the C++ Standard Library for measuring performance at various points during program execution.
 
 .. code-block:: cpp
-  :linenos:
-  :lineno-start: 7
 
    void mark_time(
      ts_vector & timestamps,
@@ -38,22 +36,39 @@ As discussed in the previous chapter, at the core of data parallelism lies the a
 Beyond Amdah's law, there is a tradeoff between the speedup gained through parallelization and the additional overhead of shipping data back and forth between the host computer and the accelerator.
 To understand this tradeoff, we are separately measuring the various phases of program execution as shown above.
 
-For the following experiments, we are going to make our integrand (function to be integrated) even more inefficient than before.
-In this way, the actual effort becomes significantly greater than the overhead from setup, so we are likely to observe a greater benefit from parallelization.
-
-Concretely, we're going make the integrand `f` 1000 times more inefficient by redoing the (already inefficient) computation as many times:
+For the following experiments, we are going use the following integrand (function to be integrated):
 
 .. code-block:: cpp
 		
    double f(const double x) {
-       auto result = 1.0;
-       for (auto n = 0; n < 1000; n++) {
-	   result *= cos(x) * cos(x) + sin(x) * sin(x);
-       }
-       return result;
+       return 3 * pow(x, 2);
    }
 
+In addition, we have factored out the following function to compute (sequentially) a single outer trapezoid from as many inner trapezoids as the grain size, which we can specify as a command-line argument.
+We invoke this common function from both the outer sequential loop and the outer vectorized ``parallel_for`` construct.
+
+.. code-block:: cpp
+
+   double compute_outer_trapezoid(
+      const int grain_size,
+      const double x_pos,
+      const double dx_inner,
+      const double half_dx_inner
+   ) {
+      auto area{0.0};
+      auto y_left{f(x_pos)};
+      for (auto j{0UL}; j < grain_size; j++) {
+         auto y_right{f(x_pos + (j + 1) * dx_inner)};
+         area += trapezoid(y_left, y_right, half_dx_inner);
+         y_left = y_right;
+      }
+      return area;
+   }
+  
+In this way, the actual effort becomes significantly greater than the overhead from setup, so we are likely to observe a greater benefit from parallelization.
+
 We will now compare wall clock execution times on a node available to us through Intel's Developer Cloud, a cloud-based infrastructure of systems with different types of accelerators.
+
 
 Sequential execution
 ^^^^^^^^^^^^^^^^^^^^
@@ -62,20 +77,20 @@ We start with strictly sequential execution on the node's CPU using the `-s` opt
 
 .. code-block:: text
 
-   u204386@s001-n141:~/Work/unoapi-dpcpp-examples$ ./build/bin/integration -s -n 10000000
-   [2023-10-05 13:08:59.649] [info] integrating function from 0 to 1 using 10000000 trapezoid(s), dx = 1e-07
-   [2023-10-05 13:08:59.695] [info] starting sequential integration
-   [2023-10-05 13:12:33.593] [info] result should be available now
-   result = 0.99999999975017
-   [2023-10-05 13:12:33.597] [info] all done for now
+   ❯ ./build/bin/integration -n 100000000000 -g 100 -s
+   [2023-12-02 09:53:18.563] [info] integrating function from 0 to 1 using 100000000000 trapezoid(s) with grain size 100, dx = 1e-09
+   [2023-12-02 09:53:20.463] [info] starting sequential integration
+   [2023-12-02 09:58:46.057] [info] result should be available now
+   result = 1.0000000000000597
+   [2023-12-02 09:58:46.202] [info] all done for now
    TIME,DELTA,UNIT,DEVICE,PHASE
-   1387106620763,0,ns,sequential,Start
-   1387152751270,46130507,ns,sequential,Memory allocation
-   1601050897104,213898145834,ns,sequential,Integration
-   1601054456984,3559880,ns,sequential,DONE
-   1601054456984,213947836221,ns,sequential,TOTAL
+   68410926133405,0,ns,sequential,Start
+   68412826265635,1900132230,ns,sequential,Memory allocation
+   68738419748223,325593482588,ns,sequential,Integration
+   68738565342993,145594770,ns,sequential,DONE
+   68738565342993,327639209588,ns,sequential,TOTAL
 		
-The total wall time for this sequential run was about 214 seconds.
+The total wall time for this sequential run was about 328 seconds.
 
 
 Parallel execution on an accelerator
@@ -85,24 +100,24 @@ Next, we allow our integration code to select and utilize the available accelera
 
 .. code-block:: text
 
-   u204386@s001-n141:~/Work/unoapi-dpcpp-examples$ ./build/bin/integration -n 10000000
-   [2023-10-05 13:07:20.616] [info] integrating function from 0 to 1 using 10000000 trapezoid(s), dx = 1e-07
-   [2023-10-05 13:07:20.616] [info] preparing for vectorized integration
-   [2023-10-05 13:07:20.670] [info] Device: Intel(R) UHD Graphics P630 [0x3e96]
-   [2023-10-05 13:07:21.475] [info] done submitting to queue...waiting for results
-   [2023-10-05 13:07:23.805] [info] result should be available now
-   result = 1.0000000000000266
-   [2023-10-05 13:07:23.806] [info] all done for now
+   ❯ ./build-nvidia/bin/integration -n 100000000000 -g 100
+   [2023-12-02 00:42:30.267] [info] integrating function from 0 to 1 using 100000000000 trapezoid(s) with grain size 100, dx = 1e-09
+   [2023-12-02 00:42:30.267] [info] preparing for vectorized integration
+   [2023-12-02 00:42:30.832] [info] Device: NVIDIA RTX A6000
+   [2023-12-02 00:42:30.837] [info] done submitting to queue...waiting for results
+   [2023-12-02 00:43:03.964] [info] result should be available now
+   result = 1.0000000000000002
+   [2023-12-02 00:43:03.971] [info] all done for now
    TIME,DELTA,UNIT,DEVICE,PHASE
-   1288073741984,0,ns,Intel(R) UHD Graphics P630 [0x3e96],Start
-   1288073757723,15739,ns,Intel(R) UHD Graphics P630 [0x3e96],Memory allocation
-   1288127582056,53824333,ns,Intel(R) UHD Graphics P630 [0x3e96],Queue creation
-   1291261937903,3134355847,ns,Intel(R) UHD Graphics P630 [0x3e96],Integration
-   1291263543190,1605287,ns,Intel(R) UHD Graphics P630 [0x3e96],DONE
-   1291263543190,3189801206,ns,Intel(R) UHD Graphics P630 [0x3e96],TOTAL
+   35362630446292,0,ns,NVIDIA RTX A6000,Start
+   35362630466323,20031,ns,NVIDIA RTX A6000,Memory allocation
+   35363195459619,564993296,ns,NVIDIA RTX A6000,Queue creation
+   35396327471267,33132011648,ns,NVIDIA RTX A6000,Integration
+   35396333911606,6440339,ns,NVIDIA RTX A6000,DONE
+   35396333911606,33703465314,ns,NVIDIA RTX A6000,TOTAL
 		
-The total wall time for this run was about 3.2 seconds, including the overhead for preparing the task queue and shipping any required data back and forth.
-This corresponds to a speedup of about 67 compared to sequential execution.
+The total wall time for this run was about 33.7 seconds, including the overhead for preparing the task queue and shipping any required data back and forth.
+This corresponds to a speedup of about 10 compared to sequential execution.
 
 These measurements lead to various insights on what is going “under the hood” during program execution, to name a few:
 
@@ -117,24 +132,24 @@ This is reasonable when the CPU already has multiple cores.
 
 .. code-block:: text
 
-   u204386@s001-n141:~/Work/unoapi-dpcpp-examples$ ./build/bin/integration -c -n 10000000
-   [2023-10-05 13:06:20.645] [info] integrating function from 0 to 1 using 10000000 trapezoid(s), dx = 1e-07
-   [2023-10-05 13:06:20.645] [info] preparing for vectorized integration
-   [2023-10-05 13:06:20.754] [info] Device: Intel(R) Xeon(R) E-2176G CPU @ 3.70GHz
-   [2023-10-05 13:06:21.009] [info] done submitting to queue...waiting for results
-   [2023-10-05 13:06:21.306] [info] result should be available now
-   result = 1.0000000000001883
-   [2023-10-05 13:06:21.309] [info] all done for now
+   ❯ ./build/bin/integration -n 100000000000 -g 100 -c
+   [2023-12-03 22:34:05.010] [info] integrating function from 0 to 1 using 100000000000 trapezoid(s) with grain size 100, dx = 1e-09
+   [2023-12-03 22:34:05.010] [info] preparing for vectorized integration
+   [2023-12-03 22:34:05.582] [info] Device: AMD EPYC 9354 32-Core Processor
+   [2023-12-03 22:34:05.803] [info] done submitting to queue...waiting for results
+   [2023-12-03 22:34:06.578] [info] result should be available now
+   result = 1.0000000000000009
+   [2023-12-03 22:34:06.967] [info] all done for now
    TIME,DELTA,UNIT,DEVICE,PHASE
-   1228102597488,0,ns,Intel(R) Xeon(R) E-2176G CPU @ 3.70GHz,Start
-   1228102606002,8514,ns,Intel(R) Xeon(R) E-2176G CPU @ 3.70GHz,Memory allocation
-   1228211703518,109097516,ns,Intel(R) Xeon(R) E-2176G CPU @ 3.70GHz,Queue creation
-   1228763275054,551571536,ns,Intel(R) Xeon(R) E-2176G CPU @ 3.70GHz,Integration
-   1228766647826,3372772,ns,Intel(R) Xeon(R) E-2176G CPU @ 3.70GHz,DONE
-   1228766647826,664050338,ns,Intel(R) Xeon(R) E-2176G CPU @ 3.70GHz,TOTAL
+   200457373084707,0,ns,AMD EPYC 9354 32-Core Processor,Start
+   200457373102067,17360,ns,AMD EPYC 9354 32-Core Processor,Memory allocation
+   200457945058810,571956743,ns,AMD EPYC 9354 32-Core Processor,Queue creation
+   200458940879950,995821140,ns,AMD EPYC 9354 32-Core Processor,Integration
+   200459329758480,388878530,ns,AMD EPYC 9354 32-Core Processor,DONE
+   200459329758480,1956673773,ns,AMD EPYC 9354 32-Core Processor,TOTAL
 
-The total wall time for this run was about 0.66 seconds, including the overhead for preparing the task queue on the host CPU.
-This corresponds to a speedup of about 320 compared to sequential execution or a speedup of about 5 compared to execution on the GPU, possibly because of the better support for 64-bit floating point arithmetic on the CPU.
+The total wall time for this run was about 1.96 seconds, including the overhead for preparing the task queue on the host CPU.
+This corresponds to a speedup of about 165 compared to sequential execution or a speedup of about 17 compared to execution on the GPU, possibly because of the better support for 64-bit floating point arithmetic on the CPU.
 
 
 Observed scaling
