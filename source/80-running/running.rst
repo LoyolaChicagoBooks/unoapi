@@ -16,16 +16,12 @@ The repository is configured with continuous integration (CI) using the followin
 
 .. literalinclude:: ../snippets/snip-UnoAPI-github-workflow.tex
   :language: bash
-  :linenos: 
-  :lineno-start: 19
   :lines: 3-28
 
 It relies on this prerequisite installation script, which one can also invoke manually on a local workstation:
 
 .. literalinclude:: ../snippets/snip-UnoAPI-install-dpcpp.tex
   :language: bash
-  :linenos: 
-  :lineno-start: 5
   :lines: 3-17
 
 Every commit or pull request to the repository triggers a build and results in an indication of successful or unsuccessful completion of the build, including execution of the unit test suite.

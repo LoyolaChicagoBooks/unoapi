@@ -18,6 +18,8 @@ We can use the ``chrono`` section of the C++ Standard Library for measuring perf
        std::chrono::steady_clock::now()));
    }
 
+.. todo:: use code snippet instead
+
 Every time we want to add a timestamp, we invoke ``mark_time`` with a suitable string label for each phase whose performance we are measuring:
 
 - memory allocation
@@ -44,6 +46,8 @@ For the following experiments, we are going use the following integrand (functio
        return 3 * pow(x, 2);
    }
 
+.. todo:: use code snippet instead
+
 In addition, we have factored out the following function to compute (sequentially) a single outer trapezoid from as many inner trapezoids as the grain size, which we can specify as a command-line argument.
 We invoke this common function from both the outer sequential loop and the outer vectorized ``parallel_for`` construct.
 
@@ -65,9 +69,14 @@ We invoke this common function from both the outer sequential loop and the outer
       return area;
    }
   
+.. todo:: use code snippet instead
+
 In this way, the actual effort becomes significantly greater than the overhead from setup, so we are likely to observe a greater benefit from parallelization.
 
-We will now compare wall clock execution times on a node available to us through Intel's Developer Cloud, a cloud-based infrastructure of systems with different types of accelerators.
+We will now compare wall clock execution times on our academic department's compute server with the following characteristics:
+
+- dual AMD EPYC 9354 32-Core processors
+- six NVIDIA RTX A6000 GPUs (though we will be using only one at a time for now)
 
 
 Sequential execution
@@ -77,7 +86,7 @@ We start with strictly sequential execution on the node's CPU using the `-s` opt
 
 .. code-block:: text
 
-   ❯ ./build/bin/integration -n 100000000000 -g 100 -s
+   > ./build/bin/integration -n 100000000000 -g 100 -s
    [2023-12-02 09:53:18.563] [info] integrating function from 0 to 1 using 100000000000 trapezoid(s) with grain size 100, dx = 1e-09
    [2023-12-02 09:53:20.463] [info] starting sequential integration
    [2023-12-02 09:58:46.057] [info] result should be available now
@@ -100,7 +109,7 @@ Next, we allow our integration code to select and utilize the available accelera
 
 .. code-block:: text
 
-   ❯ ./build-nvidia/bin/integration -n 100000000000 -g 100
+   > ./build-nvidia/bin/integration -n 100000000000 -g 100
    [2023-12-02 00:42:30.267] [info] integrating function from 0 to 1 using 100000000000 trapezoid(s) with grain size 100, dx = 1e-09
    [2023-12-02 00:42:30.267] [info] preparing for vectorized integration
    [2023-12-02 00:42:30.832] [info] Device: NVIDIA RTX A6000
@@ -132,7 +141,7 @@ This is reasonable when the CPU already has multiple cores.
 
 .. code-block:: text
 
-   ❯ ./build/bin/integration -n 100000000000 -g 100 -c
+   > ./build/bin/integration -n 100000000000 -g 100 -c
    [2023-12-03 22:34:05.010] [info] integrating function from 0 to 1 using 100000000000 trapezoid(s) with grain size 100, dx = 1e-09
    [2023-12-03 22:34:05.010] [info] preparing for vectorized integration
    [2023-12-03 22:34:05.582] [info] Device: AMD EPYC 9354 32-Core Processor
@@ -159,7 +168,7 @@ In this section, we'll share our high-level observations of scaling in terms of 
 
 - sequential execution
 - parallel execution on a single NVIDIA RTX A6000 GPU
-- parallel execution on a dual AMD EPYC 9354 32-Core Processor
+- parallel execution on dual AMD EPYC 9354 32-Core processors
 
 Each chart shows a scatter plot with several color-coded series corresponding to total workload.
 The x-axis shows grain size, and the y-axis shows wall time in seconds.
