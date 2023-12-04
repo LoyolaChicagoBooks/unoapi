@@ -220,10 +220,12 @@ latex_elements = {
 #'papersize': 'letterpaper',
 
 # The font size ('10pt', '11pt' or '12pt').
-#'pointsize': '10pt',
+'pointsize': '10pt',
 
-# Additional stuff for the LaTeX preamble.
-#'preamble': '',
+# ttAdditional stuff for the LaTeX preamble.
+#'preamble': r'''\usepackage[inner=1.2in,papersize={7.5in,9.25in}]{geometry}
+'preamble': '''\geometry{papersize={7.5in,9.25in}}
+''',
 }
 
 # Grouping the document tree into LaTeX files. List of tuples
