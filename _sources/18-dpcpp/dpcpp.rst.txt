@@ -39,8 +39,6 @@ The exemplar’s sequential version illustrates the underlying fused-loop map-re
 
 .. literalinclude:: ../snippets/snip-UnoAPI-main-sequential-option.tex
   :language: cpp
-  :linenos: 
-  :lineno-start: 65
   :lines: 3-15
 
 We’ll see shortly how to write the data-parallel version of this algorithm in DPC++.
@@ -62,16 +60,12 @@ In our exemplar, the user can choose between running the code on the host CPU an
 
 .. literalinclude:: ../snippets/snip-UnoAPI-main-parallel-devices.tex
   :language: cpp
-  :linenos: 
-  :lineno-start: 99
   :lines: 3-5
 
 The interface between the programmer and the chosen device is a *queue*, to which we can later submit *commands* for execution on the device.
 
 .. literalinclude:: ../snippets/snip-UnoAPI-main-parallel-inorder-q.tex
   :language: cpp
-  :linenos: 
-  :lineno-start: 110
   :lines: 3-9
 
 If we do not explicitly specify a device when creating our queue, the queue will automatically select the most suitable available device on the current hardware.
@@ -94,8 +88,6 @@ By not explicitly backing a buffer by a host-allocated standard vector, the data
 
 .. literalinclude:: ../snippets/snip-UnoAPI-main-parallel-buffers.tex
   :language: cpp
-  :linenos: 
-  :lineno-start: 92
   :lines: 3-4
 
 
@@ -107,8 +99,6 @@ While also providing varying degrees of control over splitting up the workload a
 
 .. literalinclude:: ../snippets/snip-UnoAPI-main-parallel-submit-parallel-for.tex
   :language: cpp
-  :linenos: 
-  :lineno-start: 116
   :lines: 3-8
 
 In this example, ``f()`` represents the computation we perform in parallel on each data item.
@@ -118,8 +108,6 @@ To combine the trapezoids' areas into a single result, while allowing SYCL to ma
 
 .. literalinclude:: ../snippets/snip-UnoAPI-main-parallel-submit-reduce.tex
   :language: cpp
-  :linenos: 
-  :lineno-start: 126
   :lines: 3-15
 
 
@@ -135,16 +123,12 @@ To be able to separately compile the function and call it inside a DPC++ kernel,
 
 .. literalinclude:: ../snippets/snip-UnoAPI-sycl-external-interface.tex
   :language: c
-  :linenos: 
-  :lineno-start: 6
   :lines: 3-5
 
 To observe a speedup when using ``parallel_for``, we define ``f`` as an intentionally inefficient way to compute the unit value:
 
 .. literalinclude:: ../snippets/snip-UnoAPI-f-implementation.tex
   :language: cpp
-  :linenos: 
-  :lineno-start: 4
   :lines: 3-5
 
 
@@ -155,6 +139,8 @@ This example follows a similar pattern as the trapezoidal integration one.
 Conceptually, each player throws a given number of darts, where those that fall within the quarter circle are counted toward the calculation of :math:`\pi`.
 The various players operates in parallel with and independently of all other players
 To improve randomization, each player's random number generator instance starts with a differen seed offset.
+
+.. todo:: use code snippets instead
 
 .. code-block:: cpp
 
@@ -181,7 +167,6 @@ To improve randomization, each player's random number generator instance starts 
           c[index] = darts_within_circle;
       });
   });
-
 
 After all the players are done, we perform a reduction to combine the number of darts within the quarter circle.
 
