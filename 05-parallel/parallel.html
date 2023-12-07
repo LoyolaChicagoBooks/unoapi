@@ -135,22 +135,22 @@ The concept of connecting multiple computers together to work in parallel emerge
 <p>Accelerators and co-processors play a crucial role in enhancing the computational capabilities of central processing units (CPUs). These specialized hardware components are designed to offload specific tasks or types of computations from the CPU, thereby accelerating the overall performance of a system. By leveraging parallel processing techniques and tailored architectures, accelerators such as graphics processing units (GPUs), field-programmable gate arrays (FPGAs), and application-specific integrated circuits (ASICs) excel at performing repetitive and data-intensive operations.</p>
 <p>GPUs, originally developed for rendering graphics, have found widespread use in areas such as scientific simulations, machine learning, and cryptocurrency mining. FPGAs offer reconfigurability and low power consumption, making them suitable for prototyping and custom logic implementation. ASICs, on the other hand, are highly optimized for specific applications and deliver exceptional performance and efficiency. Incorporating accelerators and co-processors alongside CPUs enables a heterogeneous computing environment, allowing for more efficient and specialized processing tailored to the demands of modern workloads.</p>
 <p>Among the most common accelerators are the following:</p>
-<ol class="arabic simple">
+<ul class="simple">
 <li><p>Graphics Processing Units (GPUs): Originally designed for rendering graphics, GPUs have become immensely popular for their parallel computing capabilities. They excel in tasks such as scientific computing, deep learning, data analytics, and image processing.</p></li>
 <li><p>Tensor Processing Units (TPUs): Developed by Google, TPUs are specialized hardware accelerators designed specifically for machine learning workloads. They offer high-speed matrix operations and optimized support for neural networks, making them ideal for AI-related tasks.</p></li>
 <li><p>Field-Programmable Gate Arrays (FPGAs): FPGAs provide customizable hardware acceleration, allowing users to design and implement custom logic circuits to accelerate specific workloads. They are used in various domains, including high-frequency trading, network processing, and real-time data analysis.</p></li>
 <li><p>Application-Specific Integrated Circuits (ASICs): ASICs are custom-built chips tailored for specific applications. They deliver exceptional performance and power efficiency by optimizing hardware for a particular task. Examples include Bitmain’s ASICs for cryptocurrency mining and Google’s custom ASICs for artificial intelligence.</p></li>
 <li><p>Intel Xeon Phi: The Intel Xeon Phi, based on the Many Integrated Core (MIC) architecture, is designed for highly parallel workloads. It provides a large number of cores and high memory bandwidth, making it suitable for scientific simulations, molecular dynamics, and other computationally intensive tasks.</p></li>
 <li><p>Dataflow Processing Units (DPUs): DPUs are emerging accelerators focused on accelerating data-intensive workloads such as networking, security, and storage. They offload tasks related to packet processing, encryption, and compression, improving overall system performance and efficiency.</p></li>
-</ol>
+</ul>
 <p>It’s worth noting that the field of accelerators is rapidly evolving, and new innovations and technologies continue to emerge, catering to specific application domains and computing needs.</p>
 <p>The first historical examples of accelerators can be traced back to the early days of computing when specialized hardware components were developed to enhance the performance of computer systems. Here are a few notable examples:</p>
-<ol class="arabic simple">
+<ul class="simple">
 <li><p>Floating-Point Units (FPUs): In the 1970s, separate floating-point units were introduced as co-processors to CPUs. These dedicated units were designed to handle floating-point arithmetic operations more efficiently, improving the computational capabilities of the system. They played a significant role in scientific and engineering applications that required extensive floating-point calculations.</p></li>
 <li><p>Math Co-processors: In the 1980s, math co-processors emerged as additional chips that could be added to the CPU to offload mathematical computations. Intel’s 8087 math co-processor, for example, provided hardware acceleration for floating-point arithmetic, enabling faster and more precise mathematical calculations on compatible systems.</p></li>
 <li><p>Graphics Co-processors: The development of graphics co-processors in the 1980s marked a milestone in accelerating graphical computations. Companies like IBM and Texas Instruments introduced graphics co-processors that worked alongside CPUs to offload the processing required for displaying graphics, resulting in smoother and faster graphical user interfaces.</p></li>
 <li><p>Sound Blaster Cards: Sound Blaster cards, introduced by Creative Labs in the late 1980s and early 1990s, acted as accelerators for audio processing in personal computers. They provided dedicated hardware for sound synthesis, audio playback, and enhanced sound effects, freeing up the CPU from intensive audio processing tasks.</p></li>
-</ol>
+</ul>
 <p>These early accelerators paved the way for the development of more specialized and powerful hardware accelerators that emerged later, such as GPUs, FPGAs, and ASICs, to address the growing demands of specific computational tasks and domains.</p>
 </section>
 <section id="vector-machines-cray">
@@ -342,11 +342,11 @@ The concept of connecting multiple computers together to work in parallel emerge
 <h3>OpenMP<a class="headerlink" href="#openmp" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#openmp'">¶</a></h3>
 <p>OpenMP (Open Multi-Processing) is a portable API (Application Programming Interface) for shared-memory parallel programming in C, C++, and Fortran. It was developed in the late 1990s by various hardware and software vendors, aiming to create a standardized and user-friendly programming model for shared-memory parallelism. The initial release, OpenMP 1.0, came out in 1997, offering basic parallelism constructs. Subsequent versions, including OpenMP 2.0 (1998) and OpenMP 3.0 (2008), introduced additional features such as task parallelism and nested parallelism. OpenMP gained widespread adoption in high-performance computing due to its simplicity, portability, and compatibility with existing codebases. OpenMP 5.0, released in 2018, brought advanced features like improved accelerator offloading, enhanced tasking capabilities, and SIMD programming support. It remains actively developed and maintained by a consortium of vendors, researchers, and users. OpenMP enables developers to leverage multi-core processors and parallel architectures for enhanced performance and scalability in their applications.</p>
 <p>C, C++, and Fortran, are the primary languages directly supported by OpenMP. OpenMP offers language extensions, compiler directives, and runtime libraries specific to each language to facilitate parallel programming and exploit shared-memory parallelism:</p>
-<ol class="arabic simple">
+<ul class="simple">
 <li><p>C: OpenMP directives and runtime library routines can be used directly within C programs to express parallelism and control the execution of parallel regions.</p></li>
 <li><p>C++: OpenMP can be utilized within C++ programs, providing directives and library routines to enable shared-memory parallel programming.</p></li>
 <li><p>Fortran: OpenMP is natively supported in Fortran, allowing Fortran programmers to express parallelism through directives and runtime routines for efficient parallel execution.</p></li>
-</ol>
+</ul>
 <p>Here is an example of an OpenMP program that computes the dot product of two vectors.</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span>

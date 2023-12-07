@@ -83,29 +83,29 @@ GPUs, originally developed for rendering graphics, have found widespread use in 
 
 Among the most common accelerators are the following:
 
-1. Graphics Processing Units (GPUs): Originally designed for rendering graphics, GPUs have become immensely popular for their parallel computing capabilities. They excel in tasks such as scientific computing, deep learning, data analytics, and image processing.
+- Graphics Processing Units (GPUs): Originally designed for rendering graphics, GPUs have become immensely popular for their parallel computing capabilities. They excel in tasks such as scientific computing, deep learning, data analytics, and image processing.
 
-2. Tensor Processing Units (TPUs): Developed by Google, TPUs are specialized hardware accelerators designed specifically for machine learning workloads. They offer high-speed matrix operations and optimized support for neural networks, making them ideal for AI-related tasks.
+- Tensor Processing Units (TPUs): Developed by Google, TPUs are specialized hardware accelerators designed specifically for machine learning workloads. They offer high-speed matrix operations and optimized support for neural networks, making them ideal for AI-related tasks.
 
-3. Field-Programmable Gate Arrays (FPGAs): FPGAs provide customizable hardware acceleration, allowing users to design and implement custom logic circuits to accelerate specific workloads. They are used in various domains, including high-frequency trading, network processing, and real-time data analysis.
 
-4. Application-Specific Integrated Circuits (ASICs): ASICs are custom-built chips tailored for specific applications. They deliver exceptional performance and power efficiency by optimizing hardware for a particular task. Examples include Bitmain's ASICs for cryptocurrency mining and Google's custom ASICs for artificial intelligence.
+- Field-Programmable Gate Arrays (FPGAs): FPGAs provide customizable hardware acceleration, allowing users to design and implement custom logic circuits to accelerate specific workloads. They are used in various domains, including high-frequency trading, network processing, and real-time data analysis.
 
-5. Intel Xeon Phi: The Intel Xeon Phi, based on the Many Integrated Core (MIC) architecture, is designed for highly parallel workloads. It provides a large number of cores and high memory bandwidth, making it suitable for scientific simulations, molecular dynamics, and other computationally intensive tasks.
+- Application-Specific Integrated Circuits (ASICs): ASICs are custom-built chips tailored for specific applications. They deliver exceptional performance and power efficiency by optimizing hardware for a particular task. Examples include Bitmain's ASICs for cryptocurrency mining and Google's custom ASICs for artificial intelligence.
 
-6. Dataflow Processing Units (DPUs): DPUs are emerging accelerators focused on accelerating data-intensive workloads such as networking, security, and storage. They offload tasks related to packet processing, encryption, and compression, improving overall system performance and efficiency.
+- Intel Xeon Phi: The Intel Xeon Phi, based on the Many Integrated Core (MIC) architecture, is designed for highly parallel workloads. It provides a large number of cores and high memory bandwidth, making it suitable for scientific simulations, molecular dynamics, and other computationally intensive tasks.
+
+- Dataflow Processing Units (DPUs): DPUs are emerging accelerators focused on accelerating data-intensive workloads such as networking, security, and storage. They offload tasks related to packet processing, encryption, and compression, improving overall system performance and efficiency.
 
 It's worth noting that the field of accelerators is rapidly evolving, and new innovations and technologies continue to emerge, catering to specific application domains and computing needs.
 
 The first historical examples of accelerators can be traced back to the early days of computing when specialized hardware components were developed to enhance the performance of computer systems. Here are a few notable examples:
 
-1. Floating-Point Units (FPUs): In the 1970s, separate floating-point units were introduced as co-processors to CPUs. These dedicated units were designed to handle floating-point arithmetic operations more efficiently, improving the computational capabilities of the system. They played a significant role in scientific and engineering applications that required extensive floating-point calculations.
+- Floating-Point Units (FPUs): In the 1970s, separate floating-point units were introduced as co-processors to CPUs. These dedicated units were designed to handle floating-point arithmetic operations more efficiently, improving the computational capabilities of the system. They played a significant role in scientific and engineering applications that required extensive floating-point calculations.
 
-2. Math Co-processors: In the 1980s, math co-processors emerged as additional chips that could be added to the CPU to offload mathematical computations. Intel's 8087 math co-processor, for example, provided hardware acceleration for floating-point arithmetic, enabling faster and more precise mathematical calculations on compatible systems.
+- Math Co-processors: In the 1980s, math co-processors emerged as additional chips that could be added to the CPU to offload mathematical computations. Intel's 8087 math co-processor, for example, provided hardware acceleration for floating-point arithmetic, enabling faster and more precise mathematical calculations on compatible systems.
+- Graphics Co-processors: The development of graphics co-processors in the 1980s marked a milestone in accelerating graphical computations. Companies like IBM and Texas Instruments introduced graphics co-processors that worked alongside CPUs to offload the processing required for displaying graphics, resulting in smoother and faster graphical user interfaces.
 
-3. Graphics Co-processors: The development of graphics co-processors in the 1980s marked a milestone in accelerating graphical computations. Companies like IBM and Texas Instruments introduced graphics co-processors that worked alongside CPUs to offload the processing required for displaying graphics, resulting in smoother and faster graphical user interfaces.
-
-4. Sound Blaster Cards: Sound Blaster cards, introduced by Creative Labs in the late 1980s and early 1990s, acted as accelerators for audio processing in personal computers. They provided dedicated hardware for sound synthesis, audio playback, and enhanced sound effects, freeing up the CPU from intensive audio processing tasks.
+- Sound Blaster Cards: Sound Blaster cards, introduced by Creative Labs in the late 1980s and early 1990s, acted as accelerators for audio processing in personal computers. They provided dedicated hardware for sound synthesis, audio playback, and enhanced sound effects, freeing up the CPU from intensive audio processing tasks.
 
 These early accelerators paved the way for the development of more specialized and powerful hardware accelerators that emerged later, such as GPUs, FPGAs, and ASICs, to address the growing demands of specific computational tasks and domains.
 
@@ -316,11 +316,11 @@ OpenMP (Open Multi-Processing) is a portable API (Application Programming Interf
 
 C, C++, and Fortran, are the primary languages directly supported by OpenMP. OpenMP offers language extensions, compiler directives, and runtime libraries specific to each language to facilitate parallel programming and exploit shared-memory parallelism:
 
-1. C: OpenMP directives and runtime library routines can be used directly within C programs to express parallelism and control the execution of parallel regions.
+- C: OpenMP directives and runtime library routines can be used directly within C programs to express parallelism and control the execution of parallel regions.
 
-2. C++: OpenMP can be utilized within C++ programs, providing directives and library routines to enable shared-memory parallel programming.
+- C++: OpenMP can be utilized within C++ programs, providing directives and library routines to enable shared-memory parallel programming.
 
-3. Fortran: OpenMP is natively supported in Fortran, allowing Fortran programmers to express parallelism through directives and runtime routines for efficient parallel execution.
+- Fortran: OpenMP is natively supported in Fortran, allowing Fortran programmers to express parallelism through directives and runtime routines for efficient parallel execution.
 
 Here is an example of an OpenMP program that computes the dot product of two vectors.
 
