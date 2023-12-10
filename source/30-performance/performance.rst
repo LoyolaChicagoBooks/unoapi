@@ -8,17 +8,10 @@ Measuring time performance
 
 We can use the ``chrono`` section of the C++ Standard Library for measuring performance at various points during program execution.
 
-.. code-block:: cpp
-
-   void mark_time(
-     ts_vector & timestamps,
-     const std::string_view label)
-   {
-     timestamps.push_back(std::pair(label.data(),
-       std::chrono::steady_clock::now()));
-   }
-
-.. todo:: use code snippet instead
+.. literalinclude:: ../../examples/unoapi-dpcpp-examples/integration/timestamps.cpp
+  :language: cpp
+  :start-after: UnoAPI:timestamps-mark-time:begin
+  :end-before: UnoAPI:timestamps-mark-time:end
 
 Every time we want to add a timestamp, we invoke ``mark_time`` with a suitable string label for each phase whose performance we are measuring:
 
@@ -40,36 +33,18 @@ To understand this tradeoff, we are separately measuring the various phases of p
 
 For the following experiments, we are going use the following integrand (function to be integrated):
 
-.. code-block:: cpp
-		
-   double f(const double x) {
-       return 3 * pow(x, 2);
-   }
-
-.. todo:: use code snippet instead
+.. literalinclude:: ../../examples/unoapi-dpcpp-examples/integration/f.cpp
+  :language: cpp
+  :start-after: UnoAPI:f-implementation:begin
+  :end-before: UnoAPI:f-implementation:end
 
 In addition, we have factored out the following function to compute (sequentially) a single outer trapezoid from as many inner trapezoids as the grain size, which we can specify as a command-line argument.
 We invoke this common function from both the outer sequential loop and the outer vectorized ``parallel_for`` construct.
 
-.. code-block:: cpp
-
-   double compute_outer_trapezoid(
-      const int grain_size,
-      const double x_pos,
-      const double dx_inner,
-      const double half_dx_inner
-   ) {
-      auto area{0.0};
-      auto y_left{f(x_pos)};
-      for (auto j{0UL}; j < grain_size; j++) {
-         auto y_right{f(x_pos + (j + 1) * dx_inner)};
-         area += trapezoid(y_left, y_right, half_dx_inner);
-         y_left = y_right;
-      }
-      return area;
-   }
-  
-.. todo:: use code snippet instead
+.. literalinclude:: ../../examples/unoapi-dpcpp-examples/integration/trapezoid.cpp
+  :language: cpp
+  :start-after: UnoAPI:trapezoid-compute-outer:begin
+  :end-before: UnoAPI:trapezoid-compute-outer:end
 
 In this way, the actual effort becomes significantly greater than the overhead from setup, so we are likely to observe a greater benefit from parallelization.
 

@@ -147,49 +147,17 @@ Conceptually, each player throws a given number of darts, where those that fall 
 The various players operates in parallel with and independently of all other players
 To improve randomization, each player's random number generator instance starts with a differen seed offset.
 
-.. todo:: use code snippets instead
-
-.. code-block:: cpp
-
-  q.submit([&](auto &h) {
-      const auto c = c_buf.get_access<sycl::access_mode::write>(h);
-
-      h.parallel_for(number_of_players, [=](const auto index) {
-          const auto offset = 37 * index.get_linear_id() + 13;
-          oneapi::dpl::minstd_rand minstd(seed, offset);
-          oneapi::dpl::ranlux48 ranlux(seed, offset);
-
-          constexpr uint64_t R{3037000493UL}; // largest prime <= sqrt(ULONG_MAX / 2)
-          oneapi::dpl::uniform_int_distribution<uint64_t> distr(0, R);
-          const auto r_square{R * R};
-
-          auto darts_within_circle{0UL};
-          for (auto i{0UL}; i < number_of_darts; i++) {
-              const auto x{use_ranlux ? distr(ranlux) : distr(minstd)};
-              const auto y{use_ranlux ? distr(ranlux) : distr(minstd)};
-              const auto d_square{x * x + y * y};
-              if (d_square <= r_square)
-                  darts_within_circle++;
-          }
-          c[index] = darts_within_circle;
-      });
-  });
+.. literalinclude:: ../../examples/unoapi-dpcpp-examples/montecarlo/main.cpp
+  :language: cpp
+  :start-after: UnoAPI:montecarlo-queue-dart-throwing:begin
+  :end-before: UnoAPI:montecarlo-queue-dart-throwing:end
 
 After all the players are done, we perform a reduction to combine the number of darts within the quarter circle.
 
-.. code-block:: cpp
-
-  q.submit([&](auto &h) {
-      const auto c{c_buf.get_access<sycl::access_mode::read>(h)};
-      const auto sum_reduction{sycl::reduction(s_buf, h, sycl::plus<>())};
-
-      h.parallel_for(
-        sycl::range<1>{number_of_players}, 
-        sum_reduction, 
-        [=](const auto index, auto &sum) {
-          sum.combine(c[index]);
-      });
-  });
+.. literalinclude:: ../../examples/unoapi-dpcpp-examples/montecarlo/main.cpp
+  :language: cpp
+  :start-after: UnoAPI:montecarlo-queue-reduce:begin
+  :end-before: UnoAPI:montecarlo-queue-reduce:end
 
 A sample run looks like this:
 

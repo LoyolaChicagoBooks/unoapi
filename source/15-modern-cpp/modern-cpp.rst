@@ -340,7 +340,7 @@ Inside the function, we use the ternary operator to return the smaller of the tw
 
 This minimum function can be used with any integer or floating point type, including int, double, float, long, long long, etc.
 
-.. todo:: Needs to be externalized.
+.. todo:: use code snippet instead
 
 .. code-block:: cpp
 
