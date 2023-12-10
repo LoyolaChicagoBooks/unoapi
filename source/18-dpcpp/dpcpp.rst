@@ -127,9 +127,9 @@ Separate Compilation and External Functions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Separate compilation of source files helps us decompose a software system into smaller modules.
-This has multiple benefits, including separation of concerns, unit testing, easier collaborative development, and the ability to defer certain decisions (e.g., what we’re integrating) until build time.
+This has multiple benefits, including separation of concerns, unit testing, easier collaborative development, and the ability to defer certain decisions (e.g., what function we’re integrating) until build time.
 
-In our exemplar, we’ll want to unit-test the function to be integrated and defer choosing a specific implementation of that function until build time.
+In our exemplar, we’ll want to unit-test the integrand ``f`` and defer choosing a specific implementation of that function until build time.
 To be able to separately compile the function and call it inside a DPC++ kernel, we declare it in this SYCL-specific way:
 
 .. literalinclude:: ../../examples/unoapi-dpcpp-examples/integration/f.h
@@ -138,13 +138,23 @@ To be able to separately compile the function and call it inside a DPC++ kernel,
   :end-before: UnoAPI:f-interface:end  
   :dedent:
 
-To observe a speedup when using ``parallel_for``, we define ``f`` as an intentionally inefficient way to compute the unit value:
+The following cube function is the specific integrand we use in our performance experiments:
 
 .. literalinclude:: ../../examples/unoapi-dpcpp-examples/integration/f.cpp
   :language: cpp
   :start-after: UnoAPI:f-implementation:begin
   :end-before: UnoAPI:f-implementation:end
   :dedent:
+
+In addition, for testability, we have modularized the functions for computing a single trapezoid and an outer trapezoid (corresponding to the parallel grain size).
+Conceptually, the ``outer_trapezoid`` function is parametric in the integrand ``f``.
+Because SYCL does not support passing a function pointer to a kernel task, however, this parametricity is implicit based on the build-time choice of a specific implementation of ``f``.
+The corresponding header file looks like this, with ``f`` not appearing as a formal argument to ``outer_trapezoid``.
+
+.. literalinclude:: ../../examples/unoapi-dpcpp-examples/integration/trapezoid.h
+  :language: c
+
+We show the implementation of these functions in the chapter on performance below; it is also available `here <https://github.com/LoyolaChicagoCode/unoapi-dpcpp-examples/blob/main/integration/trapezoid.cpp>`_.
 
 
 Another Example: Calulating Pi using the Monte Carlo Method
