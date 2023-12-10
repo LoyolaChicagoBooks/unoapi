@@ -40,7 +40,8 @@ The exemplar’s sequential version illustrates the underlying fused-loop map-re
 .. literalinclude:: ../../examples/unoapi-dpcpp-examples/integration/main.cpp
   :language: cpp
   :start-after: UnoAPI:main-sequential-option:begin
-  :end-before: UnoAPI:main-sequential-option:end  
+  :end-before: UnoAPI:main-sequential-option:end
+  :dedent:
 
 We’ll see shortly how to write the data-parallel version of this algorithm in DPC++.
 
@@ -63,6 +64,7 @@ In our exemplar, the user can choose between running the code on the host CPU an
   :language: cpp
   :start-after: UnoAPI:main-parallel-devices:begin
   :end-before: UnoAPI:main-parallel-devices:end  
+  :dedent:
 
 The interface between the programmer and the chosen device is a *queue*, to which we can later submit *commands* for execution on the device.
 
@@ -70,6 +72,7 @@ The interface between the programmer and the chosen device is a *queue*, to whic
   :language: cpp
   :start-after: UnoAPI:main-parallel-queue:begin
   :end-before: UnoAPI:main-parallel-queue:end  
+  :dedent:
 
 If we do not explicitly specify a device when creating our queue, the queue will automatically select the most suitable available device on the current hardware.
 Also, we can choose between a simple in-order queue or, as we have done here, we can have the queue figure out the best order for executing the submitted commands without deadlocking.
@@ -93,6 +96,7 @@ By not explicitly backing a buffer by a host-allocated standard vector, the data
   :language: cpp
   :start-after: UnoAPI:main-parallel-buffers:begin
   :end-before: UnoAPI:main-parallel-buffers:end  
+  :dedent:
 
 
 parallel_for() Construct
@@ -105,6 +109,7 @@ While also providing varying degrees of control over splitting up the workload a
   :language: cpp
   :start-after: UnoAPI:main-parallel-submit-parallel-for-trapezoids:begin
   :end-before: UnoAPI:main-parallel-submit-parallel-for-trapezoids:end  
+  :dedent:
 
 In this example, ``f()`` represents the computation we perform in parallel on each data item.
 As shown below, separating ``f`` into its own compilation unit enables us to unit-test it, as well as choose a specific implementation of ``f`` at build time.
@@ -115,6 +120,7 @@ To combine the trapezoids' areas into a single result, while allowing SYCL to ma
   :language: cpp
   :start-after: UnoAPI:main-parallel-submit-reduce:begin
   :end-before: UnoAPI:main-parallel-submit-reduce:end  
+  :dedent:
 
 
 Separate Compilation and External Functions
@@ -130,6 +136,7 @@ To be able to separately compile the function and call it inside a DPC++ kernel,
   :language: c
   :start-after: UnoAPI:f-interface:begin
   :end-before: UnoAPI:f-interface:end  
+  :dedent:
 
 To observe a speedup when using ``parallel_for``, we define ``f`` as an intentionally inefficient way to compute the unit value:
 
@@ -137,6 +144,7 @@ To observe a speedup when using ``parallel_for``, we define ``f`` as an intentio
   :language: cpp
   :start-after: UnoAPI:f-implementation:begin
   :end-before: UnoAPI:f-implementation:end
+  :dedent:
 
 
 Another Example: Calulating Pi using the Monte Carlo Method
@@ -151,6 +159,7 @@ To improve randomization, each player's random number generator instance starts 
   :language: cpp
   :start-after: UnoAPI:montecarlo-queue-dart-throwing:begin
   :end-before: UnoAPI:montecarlo-queue-dart-throwing:end
+  :dedent:
 
 After all the players are done, we perform a reduction to combine the number of darts within the quarter circle.
 
@@ -158,6 +167,7 @@ After all the players are done, we perform a reduction to combine the number of 
   :language: cpp
   :start-after: UnoAPI:montecarlo-queue-reduce:begin
   :end-before: UnoAPI:montecarlo-queue-reduce:end
+  :dedent:
 
 A sample run looks like this:
 

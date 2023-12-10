@@ -18,6 +18,7 @@ The repository is configured with continuous integration (CI) using the followin
   :language: bash
   :start-after: UnoAPI:github-workflow-specific:begin
   :end-before: UnoAPI:github-workflow-specific:end  
+  :dedent:
 
 It relies on this prerequisite installation script, which one can also invoke manually on a local workstation:
 

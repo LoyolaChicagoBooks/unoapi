@@ -12,6 +12,7 @@ We can use the ``chrono`` section of the C++ Standard Library for measuring perf
   :language: cpp
   :start-after: UnoAPI:timestamps-mark-time:begin
   :end-before: UnoAPI:timestamps-mark-time:end
+  :dedent:
 
 Every time we want to add a timestamp, we invoke ``mark_time`` with a suitable string label for each phase whose performance we are measuring:
 
@@ -37,6 +38,7 @@ For the following experiments, we are going use the following integrand (functio
   :language: cpp
   :start-after: UnoAPI:f-implementation:begin
   :end-before: UnoAPI:f-implementation:end
+  :dedent:
 
 In addition, we have factored out the following function to compute (sequentially) a single outer trapezoid from as many inner trapezoids as the grain size, which we can specify as a command-line argument.
 We invoke this common function from both the outer sequential loop and the outer vectorized ``parallel_for`` construct.
@@ -45,6 +47,7 @@ We invoke this common function from both the outer sequential loop and the outer
   :language: cpp
   :start-after: UnoAPI:trapezoid-compute-outer:begin
   :end-before: UnoAPI:trapezoid-compute-outer:end
+  :dedent:
 
 In this way, the actual effort becomes significantly greater than the overhead from setup, so we are likely to observe a greater benefit from parallelization.
 
