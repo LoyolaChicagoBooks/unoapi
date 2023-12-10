@@ -14,15 +14,15 @@ Running the examples on GitHub as a fork of the original repo (browser-based)
 
 The repository is configured with continuous integration (CI) using the following GitHub Actions workflow:
 
-.. literalinclude:: ../snippets/snip-UnoAPI-github-workflow.tex
+.. literalinclude:: ../../examples/unoapi-dpcpp-examples/.github/workflows/oneapi-cmake.yml
   :language: bash
-  :lines: 3-28
+  :start-after: UnoAPI:github-workflow-specific:begin
+  :end-before: UnoAPI:github-workflow-specific:end  
 
 It relies on this prerequisite installation script, which one can also invoke manually on a local workstation:
 
-.. literalinclude:: ../snippets/snip-UnoAPI-install-dpcpp.tex
+.. literalinclude:: ../../examples/unoapi-dpcpp-examples/install-dpcpp.sh
   :language: bash
-  :lines: 3-17
 
 Every commit or pull request to the repository triggers a build and results in an indication of successful or unsuccessful completion of the build, including execution of the unit test suite.
 This option is subject to limitations in devices available through the actual CI container (i.e., not usually accelerators).

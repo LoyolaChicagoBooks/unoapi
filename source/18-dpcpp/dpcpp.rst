@@ -37,9 +37,10 @@ Although the example is embarrassingly parallel, it nevertheless exhibits variou
 
 The exemplar’s sequential version illustrates the underlying fused-loop map-reduce algorithm, which maps each adjacent pair of function values to a trapezoid area and, in the same loop body, reduces (adds) the area to the cumulative result.
 
-.. literalinclude:: ../snippets/snip-UnoAPI-main-sequential-option.tex
+.. literalinclude:: ../../examples/unoapi-dpcpp-examples/integration/main.cpp
   :language: cpp
-  :lines: 3-15
+  :start-after: UnoAPI:main-sequential-option:begin
+  :end-before: UnoAPI:main-sequential-option:end  
 
 We’ll see shortly how to write the data-parallel version of this algorithm in DPC++.
 
@@ -58,18 +59,20 @@ Device Selection and Task Queues
 A typical DPC++ program starts with the selection of one or more accelerator devices based on criteria of varying specificity.
 In our exemplar, the user can choose between running the code on the host CPU and an available accelerator:
 
-.. literalinclude:: ../snippets/snip-UnoAPI-main-parallel-devices.tex
+.. literalinclude:: ../../examples/unoapi-dpcpp-examples/integration/main.cpp
   :language: cpp
-  :lines: 3-5
+  :start-after: UnoAPI:main-parallel-devices:begin
+  :end-before: UnoAPI:main-parallel-devices:end  
 
 The interface between the programmer and the chosen device is a *queue*, to which we can later submit *commands* for execution on the device.
 
-.. literalinclude:: ../snippets/snip-UnoAPI-main-parallel-inorder-q.tex
+.. literalinclude:: ../../examples/unoapi-dpcpp-examples/integration/main.cpp
   :language: cpp
-  :lines: 3-9
+  :start-after: UnoAPI:main-parallel-queue:begin
+  :end-before: UnoAPI:main-parallel-queue:end  
 
 If we do not explicitly specify a device when creating our queue, the queue will automatically select the most suitable available device on the current hardware.
-Also, we can choose between a simple in-order queue, as we have done here, or we can have the queue figure out the best order for executing the submitted commands without deadlocking.
+Also, we can choose between a simple in-order queue or, as we have done here, we can have the queue figure out the best order for executing the submitted commands without deadlocking.
 
 In addition to programmatic device selection through the API, setting the ``ONEAPI_DEVICE_SELECTOR`` environment variable may be required to help oneAPI find specific accelerators; 
 the section :ref:`running_on_nvidia` shows an example of this mechanism.
@@ -86,9 +89,10 @@ This might require copying substantial amounts of data between host and device a
 Instead, a *buffer* is a higher-level data container that allows SYCL to determine where best to allocate the corresponding memory; a *range* represents a 1, 2, or 3-dimensional index range for a buffer.
 By not explicitly backing a buffer by a host-allocated standard vector, the data can remain on the device for faster access during kernel execution—until we may need to access it on the host later.
 
-.. literalinclude:: ../snippets/snip-UnoAPI-main-parallel-buffers.tex
+.. literalinclude:: ../../examples/unoapi-dpcpp-examples/integration/main.cpp
   :language: cpp
-  :lines: 3-4
+  :start-after: UnoAPI:main-parallel-buffers:begin
+  :end-before: UnoAPI:main-parallel-buffers:end  
 
 
 parallel_for() Construct
@@ -97,19 +101,20 @@ parallel_for() Construct
 At the heart of SYCL’s support for data parallelism lies the ``parallel_for()`` construct, which allows us to express the instructions that should execute in parallel.
 While also providing varying degrees of control over splitting up the workload and assigning it to the accelerator device, SYCL is able to come up with a suitable assignment that maximizes parallelism based on the capabilities of the device.
 
-.. literalinclude:: ../snippets/snip-UnoAPI-main-parallel-submit-parallel-for.tex
+.. literalinclude:: ../../examples/unoapi-dpcpp-examples/integration/main.cpp
   :language: cpp
-  :lines: 3-8
+  :start-after: UnoAPI:main-parallel-submit-parallel-for-trapezoids:begin
+  :end-before: UnoAPI:main-parallel-submit-parallel-for-trapezoids:end  
 
 In this example, ``f()`` represents the computation we perform in parallel on each data item.
 As shown below, separating ``f`` into its own compilation unit enables us to unit-test it, as well as choose a specific implementation of ``f`` at build time.
 
 To combine the trapezoids' areas into a single result, while allowing SYCL to maximize parallelism, we can use ``parallel_for()`` along with a suitable reduction operation, i.e., ``sycl::plus<>()``.
 
-.. literalinclude:: ../snippets/snip-UnoAPI-main-parallel-submit-reduce.tex
+.. literalinclude:: ../../examples/unoapi-dpcpp-examples/integration/main.cpp
   :language: cpp
-  :lines: 3-15
-
+  :start-after: UnoAPI:main-parallel-submit-reduce:begin
+  :end-before: UnoAPI:main-parallel-submit-reduce:end  
 
 
 Separate Compilation and External Functions
@@ -121,15 +126,17 @@ This has multiple benefits, including separation of concerns, unit testing, easi
 In our exemplar, we’ll want to unit-test the function to be integrated and defer choosing a specific implementation of that function until build time.
 To be able to separately compile the function and call it inside a DPC++ kernel, we declare it in this SYCL-specific way:
 
-.. literalinclude:: ../snippets/snip-UnoAPI-sycl-external-interface.tex
+.. literalinclude:: ../../examples/unoapi-dpcpp-examples/integration/f.h
   :language: c
-  :lines: 3-5
+  :start-after: UnoAPI:f-interface:begin
+  :end-before: UnoAPI:f-interface:end  
 
 To observe a speedup when using ``parallel_for``, we define ``f`` as an intentionally inefficient way to compute the unit value:
 
-.. literalinclude:: ../snippets/snip-UnoAPI-f-implementation.tex
+.. literalinclude:: ../../examples/unoapi-dpcpp-examples/integration/f.cpp
   :language: cpp
-  :lines: 3-5
+  :start-after: UnoAPI:f-implementation:begin
+  :end-before: UnoAPI:f-implementation:end
 
 
 Another Example: Calulating Pi using the Monte Carlo Method

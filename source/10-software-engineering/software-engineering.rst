@@ -43,11 +43,10 @@ We argue that it can benefit and integrate seamlessly with HPC education.
 Support for unit testing in C/C++ has improved considerably, and we prefer `GoogleTest <https://google.github.io/googletest/>`_ for this purpose.
 A typical floating-point correctness test looks like this:
 
-.. literalinclude:: ../snippets/snip-UnoAPI-integration-test-simple3.tex
+.. literalinclude:: ../../examples/unoapi-dpcpp-examples/integration/test.cpp
   :language: cpp
-  :linenos:
-  :lineno-start: 36
-  :lines: 3-5
+  :start-after: UnoAPI:integration-test-simple3:begin
+  :end-before: UnoAPI:integration-test-simple3:end  
 
 At the unit testing level, the following techniques are of particular interest:
 
@@ -76,28 +75,24 @@ This encourages parametric thinking and makes it possible to develop adaptable H
 
 The following settings consistently ensure a specific language standard:
 
-.. literalinclude:: ../snippets/snip-UnoAPI-CMakeLists-language-settings.tex
+.. literalinclude:: ../../examples/unoapi-dpcpp-examples/CMakeLists.txt
   :language: cmake
-  :linenos:
-  :lineno-start: 10
-  :lines: 3-5
+  :start-after: UnoAPI:CMakeLists-language-settings:begin
+  :end-before: UnoAPI:CMakeLists-language-settings:end  
 
 This section is an example of declaring an external dependency that gets included into the build process at source level.
 
-.. literalinclude:: ../snippets/snip-UnoAPI-CMakeLists-fetchcontent.tex 
+.. literalinclude:: ../../examples/unoapi-dpcpp-examples/CMakeLists.txt
   :language: cmake
-  :linenos:
-  :lineno-start: 18
-  :lines: 3-8
+  :start-after: UnoAPI:CMakeLists-fetchcontent:begin
+  :end-before: UnoAPI:CMakeLists-fetchcontent:end  
 
 The external dependencies declared in this way then become available for linking into the executable(s).
 
-.. literalinclude:: ../snippets/snip-UnoAPI-CMakeLists-targetlibraries.tex
+.. literalinclude:: ../../examples/unoapi-dpcpp-examples/integration/CMakeLists.txt
   :language: cmake
-  :linenos:
-  :lineno-start: 1
-  :lines: 3-8
-
+  :start-after: UnoAPI:CMakeLists-targetlibraries:begin
+  :end-before: UnoAPI:CMakeLists-targetlibraries:end  
    
 With our CMake build configuration in place, we normally perform the following to steps to configure a debug build:
 
@@ -155,11 +150,8 @@ This gives us some degree of reproducibility “for free,” subject to limitati
 
 These are the steps of our GitHub Actions CI workflow (see also the full script `here <https://github.com/LoyolaChicagoCode/unoapi-dpcpp-examples/blob/main/.github/workflows/oneapi-cmake.yml>`_).
 
-.. literalinclude:: ../snippets/snip-UnoAPI-github-workflow.tex
+.. literalinclude:: ../../examples/unoapi-dpcpp-examples/.github/workflows/oneapi-cmake.yml
   :language: bash
-  :linenos:
-  :lineno-start: 19
-  :lines: 3-28
 
 Automated testing usually takes place as part of the continuous integration process.  
 Accordingly, the last step of our CI workflow invokes all discovered executable tests.
