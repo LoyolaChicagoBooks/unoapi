@@ -108,18 +108,10 @@
 <section id="measuring-time-performance">
 <h2>Measuring time performance<a class="headerlink" href="#measuring-time-performance" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#measuring-time-performance'">¶</a></h2>
 <p>We can use the <code class="docutils literal notranslate"><span class="pre">chrono</span></code> section of the C++ Standard Library for measuring performance at various points during program execution.</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">mark_time</span><span class="p">(</span>
-<span class="w">  </span><span class="n">ts_vector</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">timestamps</span><span class="p">,</span>
-<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string_view</span><span class="w"> </span><span class="n">label</span><span class="p">)</span>
-<span class="p">{</span>
-<span class="w">  </span><span class="n">timestamps</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="p">(</span><span class="n">label</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span>
-<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">steady_clock</span><span class="o">::</span><span class="n">now</span><span class="p">()));</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">mark_time</span><span class="p">(</span><span class="n">ts_vector</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">timestamps</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string_view</span><span class="w"> </span><span class="n">label</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">timestamps</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="p">(</span><span class="n">label</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">steady_clock</span><span class="o">::</span><span class="n">now</span><span class="p">()));</span>
 <span class="p">}</span>
 </pre></div>
-</div>
-<div class="admonition-todo admonition" id="id1">
-<p class="admonition-title">Todo</p>
-<p>use code snippet instead</p>
 </div>
 <p>Every time we want to add a timestamp, we invoke <code class="docutils literal notranslate"><span class="pre">mark_time</span></code> with a suitable string label for each phase whose performance we are measuring:</p>
 <ul class="simple">
@@ -142,32 +134,26 @@ To understand this tradeoff, we are separately measuring the various phases of p
 <span class="p">}</span>
 </pre></div>
 </div>
-<div class="admonition-todo admonition" id="id2">
-<p class="admonition-title">Todo</p>
-<p>use code snippet instead</p>
-</div>
 <p>In addition, we have factored out the following function to compute (sequentially) a single outer trapezoid from as many inner trapezoids as the grain size, which we can specify as a command-line argument.
 We invoke this common function from both the outer sequential loop and the outer vectorized <code class="docutils literal notranslate"><span class="pre">parallel_for</span></code> construct.</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">double</span><span class="w"> </span><span class="nf">compute_outer_trapezoid</span><span class="p">(</span>
-<span class="w">   </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">grain_size</span><span class="p">,</span>
-<span class="w">   </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">x_pos</span><span class="p">,</span>
-<span class="w">   </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">dx_inner</span><span class="p">,</span>
-<span class="w">   </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">half_dx_inner</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// common function to compute a single outer trapezoid</span>
+<span class="c1">// from as many inner trapezoids as the grain size</span>
+<span class="kt">double</span><span class="w"> </span><span class="nf">outer_trapezoid</span><span class="p">(</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">grain_size</span><span class="p">,</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">x_pos</span><span class="p">,</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">dx_inner</span><span class="p">,</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">half_dx_inner</span>
 <span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">   </span><span class="k">auto</span><span class="w"> </span><span class="n">area</span><span class="p">{</span><span class="mf">0.0</span><span class="p">};</span>
-<span class="w">   </span><span class="k">auto</span><span class="w"> </span><span class="n">y_left</span><span class="p">{</span><span class="n">f</span><span class="p">(</span><span class="n">x_pos</span><span class="p">)};</span>
-<span class="w">   </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="n">j</span><span class="p">{</span><span class="mi">0UL</span><span class="p">};</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">grain_size</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="k">auto</span><span class="w"> </span><span class="n">y_right</span><span class="p">{</span><span class="n">f</span><span class="p">(</span><span class="n">x_pos</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">j</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">dx_inner</span><span class="p">)};</span>
-<span class="w">      </span><span class="n">area</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">trapezoid</span><span class="p">(</span><span class="n">y_left</span><span class="p">,</span><span class="w"> </span><span class="n">y_right</span><span class="p">,</span><span class="w"> </span><span class="n">half_dx_inner</span><span class="p">);</span>
-<span class="w">      </span><span class="n">y_left</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y_right</span><span class="p">;</span>
-<span class="w">   </span><span class="p">}</span>
-<span class="w">   </span><span class="k">return</span><span class="w"> </span><span class="n">area</span><span class="p">;</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">area</span><span class="p">{</span><span class="mf">0.0</span><span class="p">};</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">y_left</span><span class="p">{</span><span class="n">f</span><span class="p">(</span><span class="n">x_pos</span><span class="p">)};</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="n">j</span><span class="p">{</span><span class="mi">0UL</span><span class="p">};</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">grain_size</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">y_right</span><span class="p">{</span><span class="n">f</span><span class="p">(</span><span class="n">x_pos</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">j</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">dx_inner</span><span class="p">)};</span>
+<span class="w">        </span><span class="n">area</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">single_trapezoid</span><span class="p">(</span><span class="n">y_left</span><span class="p">,</span><span class="w"> </span><span class="n">y_right</span><span class="p">,</span><span class="w"> </span><span class="n">half_dx_inner</span><span class="p">);</span>
+<span class="w">        </span><span class="n">y_left</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y_right</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">area</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
-</div>
-<div class="admonition-todo admonition" id="id3">
-<p class="admonition-title">Todo</p>
-<p>use code snippet instead</p>
 </div>
 <p>In this way, the actual effort becomes significantly greater than the overhead from setup, so we are likely to observe a greater benefit from parallelization.</p>
 <p>We will now compare wall clock execution times on our academic department’s compute server with the following characteristics:</p>

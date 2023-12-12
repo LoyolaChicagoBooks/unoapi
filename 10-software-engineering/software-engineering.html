@@ -129,9 +129,9 @@ During the last two decades, this “test-infected” mindset has gradually ente
 We argue that it can benefit and integrate seamlessly with HPC education.</p>
 <p>Support for unit testing in C/C++ has improved considerably, and we prefer <a class="reference external" href="https://google.github.io/googletest/">GoogleTest</a> for this purpose.
 A typical floating-point correctness test looks like this:</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="linenos">36</span><span class="n">TEST_F</span><span class="p">(</span><span class="n">IntegrationTest</span><span class="p">,</span><span class="w"> </span><span class="n">Simple3</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="linenos">37</span><span class="w">  </span><span class="n">EXPECT_NEAR</span><span class="p">(</span><span class="n">trapezoid</span><span class="p">(</span><span class="mi">-1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">EPS</span><span class="p">);</span>
-<span class="linenos">38</span><span class="p">}</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">TEST_F</span><span class="p">(</span><span class="n">IntegrationTest</span><span class="p">,</span><span class="w"> </span><span class="n">Simple3</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">EXPECT_NEAR</span><span class="p">(</span><span class="n">single_trapezoid</span><span class="p">(</span><span class="mi">-1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">EPS</span><span class="p">);</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <p>At the unit testing level, the following techniques are of particular interest:</p>
@@ -155,27 +155,23 @@ Among several efforts to abstract away these differences and support building a 
 <p>CMake enables us to use C/C++ similar to other languages, such as Java, Scala, Python, JavaScript/Node, by managing external library dependencies declaratively and fetching them dynamically.
 This encourages parametric thinking and makes it possible to develop adaptable HPC codes.</p>
 <p>The following settings consistently ensure a specific language standard:</p>
-<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="linenos">10</span><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_CXX_STANDARD</span><span class="w"> </span><span class="s">17</span><span class="p">)</span>
-<span class="linenos">11</span><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_CXX_STANDARD_REQUIRED</span><span class="w"> </span><span class="s">ON</span><span class="p">)</span>
-<span class="linenos">12</span><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_CXX_EXTENSIONS</span><span class="w"> </span><span class="s">OFF</span><span class="p">)</span>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_CXX_STANDARD</span><span class="w"> </span><span class="s">17</span><span class="p">)</span>
+<span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_CXX_STANDARD_REQUIRED</span><span class="w"> </span><span class="s">ON</span><span class="p">)</span>
+<span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_CXX_EXTENSIONS</span><span class="w"> </span><span class="s">OFF</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>This section is an example of declaring an external dependency that gets included into the build process at source level.</p>
-<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="linenos">18</span><span class="nb">FetchContent_Declare</span><span class="p">(</span>
-<span class="linenos">19</span><span class="w">  </span><span class="s">fmt</span>
-<span class="linenos">20</span><span class="w">  </span><span class="s">GIT_REPOSITORY</span><span class="w"> </span><span class="s">https://github.com/fmtlib/fmt.git</span>
-<span class="linenos">21</span><span class="w">  </span><span class="s">GIT_TAG</span><span class="w">        </span><span class="s">8.1.1</span>
-<span class="linenos">22</span><span class="p">)</span>
-<span class="linenos">23</span><span class="nb">FetchContent_MakeAvailable</span><span class="p">(</span><span class="s">fmt</span><span class="p">)</span>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">FetchContent_Declare</span><span class="p">(</span>
+<span class="w">        </span><span class="s">fmt</span>
+<span class="w">        </span><span class="s">GIT_REPOSITORY</span><span class="w"> </span><span class="s">https://github.com/fmtlib/fmt.git</span>
+<span class="w">        </span><span class="s">GIT_TAG</span><span class="w">        </span><span class="s">8.1.1</span>
+<span class="p">)</span>
+<span class="nb">FetchContent_MakeAvailable</span><span class="p">(</span><span class="s">fmt</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The external dependencies declared in this way then become available for linking into the executable(s).</p>
-<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="nb">add_executable</span><span class="p">(</span><span class="s">integration</span><span class="w"> </span>
-<span class="linenos">2</span><span class="w">  </span><span class="s">main.cpp</span><span class="w"> </span><span class="s">f.cpp</span><span class="w"> </span><span class="s">trapezoid.cpp</span><span class="w"> </span><span class="s">timestamps.cpp</span>
-<span class="linenos">3</span><span class="p">)</span>
-<span class="linenos">4</span><span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">integration</span><span class="w"> </span>
-<span class="linenos">5</span><span class="w">  </span><span class="s">fmt::fmt</span><span class="w"> </span><span class="s">spdlog::spdlog</span><span class="w"> </span><span class="s">CLI11::CLI11</span>
-<span class="linenos">6</span><span class="p">)</span>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">add_executable</span><span class="p">(</span><span class="s">integration</span><span class="w"> </span><span class="s">main.cpp</span><span class="w"> </span><span class="s">f.cpp</span><span class="w"> </span><span class="s">trapezoid.cpp</span><span class="w"> </span><span class="s">timestamps.cpp</span><span class="p">)</span>
+<span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">integration</span><span class="w"> </span><span class="s">fmt::fmt</span><span class="w"> </span><span class="s">spdlog::spdlog</span><span class="w"> </span><span class="s">CLI11::CLI11</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>With our CMake build configuration in place, we normally perform the following to steps to configure a debug build:</p>
@@ -220,32 +216,51 @@ In addition, build automation results in almost immediate feedback on an incorre
 The CI workflow then runs on that user’s fork of the project.
 This gives us some degree of reproducibility “for free,” subject to limitations in devices available through the actual CI container (i.e., not usually accelerators).</p>
 <p>These are the steps of our GitHub Actions CI workflow (see also the full script <a class="reference external" href="https://github.com/LoyolaChicagoCode/unoapi-dpcpp-examples/blob/main/.github/workflows/oneapi-cmake.yml">here</a>).</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="linenos">19</span><span class="w">    </span>steps:
-<span class="linenos">20</span><span class="w">    </span>-<span class="w"> </span>name:<span class="w"> </span>Checkout<span class="w"> </span>project<span class="w"> </span>code
-<span class="linenos">21</span><span class="w">      </span>uses:<span class="w"> </span>actions/checkout@v2
-<span class="linenos">22</span>
-<span class="linenos">23</span><span class="w">    </span>-<span class="w"> </span>name:<span class="w"> </span>Install<span class="w"> </span>Intel<span class="w"> </span>oneAPI
-<span class="linenos">24</span><span class="w">      </span>timeout-minutes:<span class="w"> </span><span class="m">5</span>
-<span class="linenos">25</span><span class="w">      </span>run:<span class="w"> </span><span class="p">|</span>
-<span class="linenos">26</span><span class="w">        </span>./install-dpcpp.sh
-<span class="linenos">27</span>
-<span class="linenos">28</span><span class="w">    </span>-<span class="w"> </span>name:<span class="w"> </span>Set<span class="w"> </span>oneAPI<span class="w"> </span>environment
-<span class="linenos">29</span><span class="w">      </span>run:<span class="w"> </span><span class="p">|</span>
-<span class="linenos">30</span><span class="w">        </span><span class="nb">source</span><span class="w"> </span>./setvars.sh
-<span class="linenos">31</span><span class="w">        </span>printenv<span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="nv">$GITHUB_ENV</span>
-<span class="linenos">32</span><span class="w">        </span><span class="nb">echo</span><span class="w"> </span>/opt/intel/oneapi/compiler/latest/linux/bin-llvm<span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="nv">$GITHUB_PATH</span>
-<span class="linenos">33</span>
-<span class="linenos">34</span><span class="w">    </span>-<span class="w"> </span>name:<span class="w"> </span>CMake<span class="w"> </span>configure
-<span class="linenos">35</span><span class="w">      </span>run:<span class="w"> </span>cmake<span class="w"> </span>-DCMAKE_BUILD_TYPE<span class="o">=</span>Debug<span class="w"> </span>-S<span class="w"> </span>.<span class="w"> </span>-B<span class="w"> </span><span class="nv">$BUILD_DIR</span>
-<span class="linenos">36</span>
-<span class="linenos">37</span><span class="w">    </span>-<span class="w"> </span>name:<span class="w"> </span>CMake<span class="w"> </span>build
-<span class="linenos">38</span><span class="w">      </span>run:<span class="w"> </span>cmake<span class="w"> </span>--build<span class="w"> </span><span class="nv">$BUILD_DIR</span>
-<span class="linenos">39</span>
-<span class="linenos">40</span><span class="w">    </span>-<span class="w"> </span>name:<span class="w"> </span>CMake<span class="w"> </span><span class="nb">test</span>
-<span class="linenos">41</span><span class="w">      </span>run:<span class="w"> </span><span class="p">|</span>
-<span class="linenos">42</span><span class="w">        </span><span class="k">for</span><span class="w"> </span>test_bin<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nv">$BUILD_DIR</span>/bin/*tests<span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span>
-<span class="linenos">43</span><span class="w">          </span><span class="s2">"./</span><span class="nv">$test_bin</span><span class="s2">"</span>
-<span class="linenos">44</span><span class="w">        </span><span class="k">done</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>name:<span class="w"> </span>OneAPI<span class="w"> </span>CI<span class="w"> </span>with<span class="w"> </span>CMake
+
+on:
+<span class="w">  </span>push:
+<span class="w">    </span>branches:<span class="w"> </span><span class="o">[</span><span class="w"> </span>main<span class="w"> </span><span class="o">]</span>
+<span class="w">  </span>pull_request:
+<span class="w">    </span>branches:<span class="w"> </span><span class="o">[</span><span class="w"> </span>main<span class="w"> </span><span class="o">]</span>
+
+jobs:
+
+<span class="w">  </span>linux-intel-oneapi:
+<span class="w">    </span>runs-on:<span class="w"> </span>ubuntu-latest
+<span class="w">    </span>env:
+<span class="w">      </span>BUILD_DIR:<span class="w"> </span>cmake-build-debug
+
+<span class="c1"># UnoAPI:github-workflow-specific:begin</span>
+<span class="w">    </span>steps:
+<span class="w">    </span>-<span class="w"> </span>name:<span class="w"> </span>Checkout<span class="w"> </span>project<span class="w"> </span>code
+<span class="w">      </span>uses:<span class="w"> </span>actions/checkout@v2
+
+<span class="w">    </span>-<span class="w"> </span>name:<span class="w"> </span>Install<span class="w"> </span>Intel<span class="w"> </span>oneAPI
+<span class="w">      </span>timeout-minutes:<span class="w"> </span><span class="m">5</span>
+<span class="w">      </span>run:<span class="w"> </span><span class="p">|</span>
+<span class="w">        </span>./install-dpcpp.sh
+
+<span class="w">    </span>-<span class="w"> </span>name:<span class="w"> </span>Set<span class="w"> </span>oneAPI<span class="w"> </span>environment
+<span class="w">      </span>run:<span class="w"> </span><span class="p">|</span>
+<span class="w">        </span><span class="nb">source</span><span class="w"> </span>./setvars.sh
+<span class="w">        </span>printenv<span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="nv">$GITHUB_ENV</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span>/opt/intel/oneapi/compiler/latest/linux/bin-llvm<span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="nv">$GITHUB_PATH</span>
+
+<span class="w">    </span>-<span class="w"> </span>name:<span class="w"> </span>CMake<span class="w"> </span>configure
+<span class="w">      </span>run:<span class="w"> </span>cmake<span class="w"> </span>-DCMAKE_BUILD_TYPE<span class="o">=</span>Debug<span class="w"> </span>-S<span class="w"> </span>.<span class="w"> </span>-B<span class="w"> </span><span class="nv">$BUILD_DIR</span>
+
+<span class="w">    </span>-<span class="w"> </span>name:<span class="w"> </span>CMake<span class="w"> </span>build
+<span class="w">      </span>run:<span class="w"> </span>cmake<span class="w"> </span>--build<span class="w"> </span><span class="nv">$BUILD_DIR</span>
+
+<span class="w">    </span>-<span class="w"> </span>name:<span class="w"> </span>CMake<span class="w"> </span><span class="nb">test</span>
+<span class="w">      </span>run:<span class="w"> </span><span class="p">|</span>
+<span class="w">        </span><span class="nv">$BUILD_DIR</span>/bin/integration
+<span class="w">        </span><span class="nv">$BUILD_DIR</span>/bin/matrix_mul_dpc
+<span class="w">        </span><span class="nv">$BUILD_DIR</span>/bin/montecarlo
+<span class="w">        </span><span class="c1"># eventually keep only this loop for discovering all tests</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span>test_bin<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nv">$BUILD_DIR</span>/bin/*tests<span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="s2">"./</span><span class="nv">$test_bin</span><span class="s2">"</span><span class="p">;</span><span class="w"> </span><span class="k">done</span>
+<span class="c1"># UnoAPI:github-workflow-specific:end</span>
 </pre></div>
 </div>
 <p>Automated testing usually takes place as part of the continuous integration process.
