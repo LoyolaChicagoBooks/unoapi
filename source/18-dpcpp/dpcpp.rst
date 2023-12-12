@@ -37,9 +37,11 @@ Although the example is embarrassingly parallel, it nevertheless exhibits variou
 
 The exemplar’s sequential version illustrates the underlying fused-loop map-reduce algorithm, which maps each adjacent pair of function values to a trapezoid area and, in the same loop body, reduces (adds) the area to the cumulative result.
 
-.. literalinclude:: ../snippets/snip-UnoAPI-main-sequential-option.tex
+.. literalinclude:: ../../examples/unoapi-dpcpp-examples/integration/main.cpp
   :language: cpp
-  :lines: 3-15
+  :start-after: UnoAPI:main-sequential-option:begin
+  :end-before: UnoAPI:main-sequential-option:end
+  :dedent:
 
 We’ll see shortly how to write the data-parallel version of this algorithm in DPC++.
 
@@ -58,18 +60,22 @@ Device Selection and Task Queues
 A typical DPC++ program starts with the selection of one or more accelerator devices based on criteria of varying specificity.
 In our exemplar, the user can choose between running the code on the host CPU and an available accelerator:
 
-.. literalinclude:: ../snippets/snip-UnoAPI-main-parallel-devices.tex
+.. literalinclude:: ../../examples/unoapi-dpcpp-examples/integration/main.cpp
   :language: cpp
-  :lines: 3-5
+  :start-after: UnoAPI:main-parallel-devices:begin
+  :end-before: UnoAPI:main-parallel-devices:end  
+  :dedent:
 
 The interface between the programmer and the chosen device is a *queue*, to which we can later submit *commands* for execution on the device.
 
-.. literalinclude:: ../snippets/snip-UnoAPI-main-parallel-inorder-q.tex
+.. literalinclude:: ../../examples/unoapi-dpcpp-examples/integration/main.cpp
   :language: cpp
-  :lines: 3-9
+  :start-after: UnoAPI:main-parallel-queue:begin
+  :end-before: UnoAPI:main-parallel-queue:end  
+  :dedent:
 
 If we do not explicitly specify a device when creating our queue, the queue will automatically select the most suitable available device on the current hardware.
-Also, we can choose between a simple in-order queue, as we have done here, or we can have the queue figure out the best order for executing the submitted commands without deadlocking.
+Also, we can choose between a simple in-order queue or, as we have done here, we can have the queue figure out the best order for executing the submitted commands without deadlocking.
 
 In addition to programmatic device selection through the API, setting the ``ONEAPI_DEVICE_SELECTOR`` environment variable may be required to help oneAPI find specific accelerators; 
 the section :ref:`running_on_nvidia` shows an example of this mechanism.
@@ -86,9 +92,11 @@ This might require copying substantial amounts of data between host and device a
 Instead, a *buffer* is a higher-level data container that allows SYCL to determine where best to allocate the corresponding memory; a *range* represents a 1, 2, or 3-dimensional index range for a buffer.
 By not explicitly backing a buffer by a host-allocated standard vector, the data can remain on the device for faster access during kernel execution—until we may need to access it on the host later.
 
-.. literalinclude:: ../snippets/snip-UnoAPI-main-parallel-buffers.tex
+.. literalinclude:: ../../examples/unoapi-dpcpp-examples/integration/main.cpp
   :language: cpp
-  :lines: 3-4
+  :start-after: UnoAPI:main-parallel-buffers:begin
+  :end-before: UnoAPI:main-parallel-buffers:end  
+  :dedent:
 
 
 parallel_for() Construct
@@ -97,39 +105,56 @@ parallel_for() Construct
 At the heart of SYCL’s support for data parallelism lies the ``parallel_for()`` construct, which allows us to express the instructions that should execute in parallel.
 While also providing varying degrees of control over splitting up the workload and assigning it to the accelerator device, SYCL is able to come up with a suitable assignment that maximizes parallelism based on the capabilities of the device.
 
-.. literalinclude:: ../snippets/snip-UnoAPI-main-parallel-submit-parallel-for.tex
+.. literalinclude:: ../../examples/unoapi-dpcpp-examples/integration/main.cpp
   :language: cpp
-  :lines: 3-8
+  :start-after: UnoAPI:main-parallel-submit-parallel-for-trapezoids:begin
+  :end-before: UnoAPI:main-parallel-submit-parallel-for-trapezoids:end  
+  :dedent:
 
 In this example, ``f()`` represents the computation we perform in parallel on each data item.
 As shown below, separating ``f`` into its own compilation unit enables us to unit-test it, as well as choose a specific implementation of ``f`` at build time.
 
 To combine the trapezoids' areas into a single result, while allowing SYCL to maximize parallelism, we can use ``parallel_for()`` along with a suitable reduction operation, i.e., ``sycl::plus<>()``.
 
-.. literalinclude:: ../snippets/snip-UnoAPI-main-parallel-submit-reduce.tex
+.. literalinclude:: ../../examples/unoapi-dpcpp-examples/integration/main.cpp
   :language: cpp
-  :lines: 3-15
-
+  :start-after: UnoAPI:main-parallel-submit-reduce:begin
+  :end-before: UnoAPI:main-parallel-submit-reduce:end  
+  :dedent:
 
 
 Separate Compilation and External Functions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Separate compilation of source files helps us decompose a software system into smaller modules.
-This has multiple benefits, including separation of concerns, unit testing, easier collaborative development, and the ability to defer certain decisions (e.g., what we’re integrating) until build time.
+This has multiple benefits, including separation of concerns, unit testing, easier collaborative development, and the ability to defer certain decisions (e.g., what function we’re integrating) until build time.
 
-In our exemplar, we’ll want to unit-test the function to be integrated and defer choosing a specific implementation of that function until build time.
+In our exemplar, we’ll want to unit-test the integrand ``f`` and defer choosing a specific implementation of that function until build time.
 To be able to separately compile the function and call it inside a DPC++ kernel, we declare it in this SYCL-specific way:
 
-.. literalinclude:: ../snippets/snip-UnoAPI-sycl-external-interface.tex
+.. literalinclude:: ../../examples/unoapi-dpcpp-examples/integration/f.h
   :language: c
-  :lines: 3-5
+  :start-after: UnoAPI:f-interface:begin
+  :end-before: UnoAPI:f-interface:end  
+  :dedent:
 
-To observe a speedup when using ``parallel_for``, we define ``f`` as an intentionally inefficient way to compute the unit value:
+The following cube function is the specific integrand we use in our performance experiments:
 
-.. literalinclude:: ../snippets/snip-UnoAPI-f-implementation.tex
+.. literalinclude:: ../../examples/unoapi-dpcpp-examples/integration/f.cpp
   :language: cpp
-  :lines: 3-5
+  :start-after: UnoAPI:f-implementation:begin
+  :end-before: UnoAPI:f-implementation:end
+  :dedent:
+
+In addition, for testability, we have modularized the functions for computing a single trapezoid and an outer trapezoid (corresponding to the parallel grain size).
+Conceptually, the ``outer_trapezoid`` function is parametric in the integrand ``f``.
+Because SYCL does not support passing a function pointer to a kernel task, however, this parametricity is implicit based on the build-time choice of a specific implementation of ``f``.
+The corresponding header file looks like this, with ``f`` not appearing as a formal argument to ``outer_trapezoid``.
+
+.. literalinclude:: ../../examples/unoapi-dpcpp-examples/integration/trapezoid.h
+  :language: c
+
+We show the implementation of these functions in the chapter on performance below; it is also available `here <https://github.com/LoyolaChicagoCode/unoapi-dpcpp-examples/blob/main/integration/trapezoid.cpp>`_.
 
 
 Another Example: Calulating Pi using the Monte Carlo Method
@@ -140,49 +165,19 @@ Conceptually, each player throws a given number of darts, where those that fall 
 The various players operates in parallel with and independently of all other players
 To improve randomization, each player's random number generator instance starts with a differen seed offset.
 
-.. todo:: use code snippets instead
-
-.. code-block:: cpp
-
-  q.submit([&](auto &h) {
-      const auto c = c_buf.get_access<sycl::access_mode::write>(h);
-
-      h.parallel_for(number_of_players, [=](const auto index) {
-          const auto offset = 37 * index.get_linear_id() + 13;
-          oneapi::dpl::minstd_rand minstd(seed, offset);
-          oneapi::dpl::ranlux48 ranlux(seed, offset);
-
-          constexpr uint64_t R{3037000493UL}; // largest prime <= sqrt(ULONG_MAX / 2)
-          oneapi::dpl::uniform_int_distribution<uint64_t> distr(0, R);
-          const auto r_square{R * R};
-
-          auto darts_within_circle{0UL};
-          for (auto i{0UL}; i < number_of_darts; i++) {
-              const auto x{use_ranlux ? distr(ranlux) : distr(minstd)};
-              const auto y{use_ranlux ? distr(ranlux) : distr(minstd)};
-              const auto d_square{x * x + y * y};
-              if (d_square <= r_square)
-                  darts_within_circle++;
-          }
-          c[index] = darts_within_circle;
-      });
-  });
+.. literalinclude:: ../../examples/unoapi-dpcpp-examples/montecarlo/main.cpp
+  :language: cpp
+  :start-after: UnoAPI:montecarlo-queue-dart-throwing:begin
+  :end-before: UnoAPI:montecarlo-queue-dart-throwing:end
+  :dedent:
 
 After all the players are done, we perform a reduction to combine the number of darts within the quarter circle.
 
-.. code-block:: cpp
-
-  q.submit([&](auto &h) {
-      const auto c{c_buf.get_access<sycl::access_mode::read>(h)};
-      const auto sum_reduction{sycl::reduction(s_buf, h, sycl::plus<>())};
-
-      h.parallel_for(
-        sycl::range<1>{number_of_players}, 
-        sum_reduction, 
-        [=](const auto index, auto &sum) {
-          sum.combine(c[index]);
-      });
-  });
+.. literalinclude:: ../../examples/unoapi-dpcpp-examples/montecarlo/main.cpp
+  :language: cpp
+  :start-after: UnoAPI:montecarlo-queue-reduce:begin
+  :end-before: UnoAPI:montecarlo-queue-reduce:end
+  :dedent:
 
 A sample run looks like this:
 
