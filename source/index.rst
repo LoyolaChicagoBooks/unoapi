@@ -1,7 +1,7 @@
 UnoAPI: Modern Parallel C++ Programming with SYCL and oneAPI
 ==============================================================
 
-.. note:: UnoAPI is now hosted at https://unoapi.org.
+.. note:: UnoAPI is now hosted at `unoapi.org <https://unoapi.org>`_.
 
 This is tutorial on oneAPI (based on SYCL), a promising direction to support modern high-performance computing on heterogeneous architectures using the C++ language and its ever-improving ecosystem.
 
