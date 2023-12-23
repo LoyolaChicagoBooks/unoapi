@@ -15,17 +15,17 @@ Build Status
          :alt: GitHub Pages and Release PDF
 
 
-      See https://github.com/LoyolaChicagoBooks/unoapi/actions
+      See `github.com/LoyolaChicagoBooks/unoapi/actions <https://github.com/LoyolaChicagoBooks/unoapi/actions>`_
 
 
 Distribution
 -------------
 
 Web Version
-   See https://unoapi.org/
+   See `unoapi.org <https://unoapi.org>`_
 
 Book Version
-   See https://github.com/LoyolaChicagoBooks/unoapi/releases/latest/download/UnoAPI.pdf.
+   See `github.com/LoyolaChicagoBooks/unoapi/releases/latest/download/UnoAPI.pdf <https://github.com/LoyolaChicagoBooks/unoapi/releases/latest/download/UnoAPI.pdf>`_.
 
 Example Source Code
 
