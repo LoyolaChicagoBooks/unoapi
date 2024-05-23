@@ -200,6 +200,58 @@ Platform #1: Intel(R) OpenCL HD Graphics
 <p>At the time of this writing, DevCloud provides well over 200 compute nodes with various types of accelerators, including field-programmable gate arrays (FPGAs).
 Some accelerators, however, don’t support certain types of data, e.g., 64-bit floating point numbers.</p>
 </section>
+<section id="running-on-polaris-supercomputer">
+<h2>Running on Polaris Supercomputer<a class="headerlink" href="#running-on-polaris-supercomputer" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#running-on-polaris-supercomputer'">¶</a></h2>
+<p>Polaris is a supercomputer developed in collaboration with Hewlett Packard Enterprise (HPE), Polaris is a leading-edge system that will give scientists and application developers a platform to test and optimize codes for Aurora, Argonne’s upcoming Intel-HPE exascale supercomputer.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This obve description is verbatim from the <a class="reference external" href="https://www.alcf.anl.gov/polaris/">Polaris</a> web page at Argonne National Laboratory and is intended to provide basic background about this computer. You are encouraged to consult the Polaris documentation for additional details. These are preliminary notes and have not been through-drafted or edited.</p>
+</div>
+<p>The Polaris system makes use of the <strong>modules</strong> system to support additional packages that are not readily available in the default package manager.
+Modules are provided for many things that are of a fast-changing nature and often need to be built from source.
+At the time of writing, the open source compilers for SYCL (and based on LLVM) are compiled from source on Polaris and distributed as module.</p>
+<p>In addition, many of the things we require for this book (e.g. <code class="docutils literal notranslate"><span class="pre">cmake</span></code> support) are also distributed as modules.</p>
+<p>To install the needed modules, do the following:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>module use /soft/modulefiles
+module load oneapi/upstream
+module load nvhpc-mixed
+module load craype-accel-nvidia80
+module unload nvhpc-mixed
+module load spack-pe-base cmake
+</pre></div>
+</div>
+<p>If you are planning to use MPI and SYCL together (we do not in this book yet) then you need to install the following additional modules and set an environment variable to enable GPGPU support within MPI.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>module load mpiwrappers/cray-mpich-oneapi-upstream
+export MPICH_GPU_SUPPORT_ENABLED=1
+</pre></div>
+</div>
+<p>In addition, you will need to set the following variables to allow for building our examples using the NVIDIA support on Polaris (via the above modules):</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>EXTRA_FLAGS="-sycl-std=2020 -O3 -fsycl -fsycl-targets=nvptx64-nvidia-cuda -Xsycl-target-backend --cuda-gpu-arch=sm_80"
+export CFLAGS="-ffp-model=precise"
+export CXXFLAGS="-ffp-model=precise -fsycl $EXTRA_FLAGS"
+export CC=clang
+export CXX=clang++
+</pre></div>
+</div>
+<p>Once you do this, you can build our exaxmples using our <code class="docutils literal notranslate"><span class="pre">cmake</span></code> based build process.</p>
+<p>Then it is a matter of using PBS to schedule your job for execution.  Here is an example of how to schedule a one node job on the debug queue.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>qsub -q debug -A YourAllocationHere -l select=1:system=polaris -l walltime=00:59:00 -l filesystems=home -I
+</pre></div>
+</div>
+<p>The following explains the <code class="docutils literal notranslate"><span class="pre">qsub</span></code> command shown here. For additional details, you will need to read the Polaris documentation.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-q</span> <span class="pre">debug</span></code> selects the debug queue (one GPGPU node only)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-A</span> <span class="pre">YourAllocationHere</span></code> is required, meaning you must have an allocation via an approved project in ALCF. You cannot run jobs without one.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-l</span> <span class="pre">select=1:system=polaris</span></code> is used to specify the selection of nodes (one node on Polaris)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-l</span> <span class="pre">walltime=00:59:00</span></code> is the amount of time you wish to request</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-l</span> <span class="pre">filesystems=home</span></code> is to make your home directory available on each node allocated</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-I</span></code> interactive execution (opens a shell once you get a node; plan to wait a while!)</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We will be providing a job script shortly. We still testing. I also plan to make a video as working with production clusters like Polaris is always tricky when it comes to these rapidly-evolving platforms with so many moving parts.</p>
+</div>
+</section>
 <section id="running-on-cloud-based-virtual-machines">
 <h2>Running on cloud-based virtual machines<a class="headerlink" href="#running-on-cloud-based-virtual-machines" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#running-on-cloud-based-virtual-machines'">¶</a></h2>
 <p>We can actually run data-parallel code on an Intel-based virtual machine, e.g., Microsoft Azure; in some cases, installing the OpenCL headers might be required in addition to the DPC++ compiler toolchain:</p>
@@ -249,6 +301,7 @@ result = 1.0000000000000013
 <li><a :data-current="activeSection === '#running-the-examples-on-github-as-a-fork-of-the-original-repo-browser-based'" class="reference internal" href="#running-the-examples-on-github-as-a-fork-of-the-original-repo-browser-based">Running the examples on GitHub as a fork of the original repo (browser-based)</a></li>
 <li><a :data-current="activeSection === '#running-the-examples-locally'" class="reference internal" href="#running-the-examples-locally">Running the examples locally</a></li>
 <li><a :data-current="activeSection === '#running-the-examples-on-the-intel-devcloud'" class="reference internal" href="#running-the-examples-on-the-intel-devcloud">Running the examples on the Intel DevCloud</a></li>
+<li><a :data-current="activeSection === '#running-on-polaris-supercomputer'" class="reference internal" href="#running-on-polaris-supercomputer">Running on Polaris Supercomputer</a></li>
 <li><a :data-current="activeSection === '#running-on-cloud-based-virtual-machines'" class="reference internal" href="#running-on-cloud-based-virtual-machines">Running on cloud-based virtual machines</a></li>
 <li><a :data-current="activeSection === '#running-on-hardware-with-nvidia-gpus'" class="reference internal" href="#running-on-hardware-with-nvidia-gpus">Running on hardware with NVIDIA GPUs</a></li>
 </ul>

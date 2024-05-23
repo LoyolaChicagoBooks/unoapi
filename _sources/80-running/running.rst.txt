@@ -78,6 +78,69 @@ Better yet, after running the oneAPI setvars.sh script, one can use SYCL's ``syc
 At the time of this writing, DevCloud provides well over 200 compute nodes with various types of accelerators, including field-programmable gate arrays (FPGAs).
 Some accelerators, however, don't support certain types of data, e.g., 64-bit floating point numbers.
 
+Running on Polaris Supercomputer
+----------------------------------
+
+Polaris is a supercomputer developed in collaboration with Hewlett Packard Enterprise (HPE), Polaris is a leading-edge system that will give scientists and application developers a platform to test and optimize codes for Aurora, Argonne's upcoming Intel-HPE exascale supercomputer.
+
+.. note:: This obve description is verbatim from the `Polaris <https://www.alcf.anl.gov/polaris/>`__ web page at Argonne National Laboratory and is intended to provide basic background about this computer. You are encouraged to consult the Polaris documentation for additional details. These are preliminary notes and have not been through-drafted or edited.
+
+The Polaris system makes use of the **modules** system to support additional packages that are not readily available in the default package manager.
+Modules are provided for many things that are of a fast-changing nature and often need to be built from source.
+At the time of writing, the open source compilers for SYCL (and based on LLVM) are compiled from source on Polaris and distributed as module.
+
+In addition, many of the things we require for this book (e.g. ``cmake`` support) are also distributed as modules.
+
+To install the needed modules, do the following:
+
+.. code-block:: text
+
+   module use /soft/modulefiles
+   module load oneapi/upstream
+   module load nvhpc-mixed
+   module load craype-accel-nvidia80
+   module unload nvhpc-mixed
+   module load spack-pe-base cmake
+
+If you are planning to use MPI and SYCL together (we do not in this book yet) then you need to install the following additional modules and set an environment variable to enable GPGPU support within MPI.
+
+.. code-block:: text
+
+   module load mpiwrappers/cray-mpich-oneapi-upstream
+   export MPICH_GPU_SUPPORT_ENABLED=1
+
+
+In addition, you will need to set the following variables to allow for building our examples using the NVIDIA support on Polaris (via the above modules):
+
+.. code-block:: text
+
+   EXTRA_FLAGS="-sycl-std=2020 -O3 -fsycl -fsycl-targets=nvptx64-nvidia-cuda -Xsycl-target-backend --cuda-gpu-arch=sm_80"
+   export CFLAGS="-ffp-model=precise"
+   export CXXFLAGS="-ffp-model=precise -fsycl $EXTRA_FLAGS"
+   export CC=clang
+   export CXX=clang++
+
+Once you do this, you can build our exaxmples using our ``cmake`` based build process.
+
+Then it is a matter of using PBS to schedule your job for execution.  Here is an example of how to schedule a one node job on the debug queue.
+
+.. code-block:: text
+
+   qsub -q debug -A YourAllocationHere -l select=1:system=polaris -l walltime=00:59:00 -l filesystems=home -I
+
+The following explains the ``qsub`` command shown here. For additional details, you will need to read the Polaris documentation.
+
+- ``-q debug`` selects the debug queue (one GPGPU node only)
+- ``-A YourAllocationHere`` is required, meaning you must have an allocation via an approved project in ALCF. You cannot run jobs without one.
+- ``-l select=1:system=polaris`` is used to specify the selection of nodes (one node on Polaris)
+- ``-l walltime=00:59:00`` is the amount of time you wish to request
+- ``-l filesystems=home`` is to make your home directory available on each node allocated
+- ``-I`` interactive execution (opens a shell once you get a node; plan to wait a while!)
+
+
+.. note:: We will be providing a job script shortly. We still testing. I also plan to make a video as working with production clusters like Polaris is always tricky when it comes to these rapidly-evolving platforms with so many moving parts.
+
+
 
 Running on cloud-based virtual machines
 ---------------------------------------
