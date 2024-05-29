@@ -202,10 +202,10 @@ Some accelerators, however, don’t support certain types of data, e.g., 64-bit 
 </section>
 <section id="running-on-polaris-supercomputer">
 <h2>Running on Polaris Supercomputer<a class="headerlink" href="#running-on-polaris-supercomputer" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#running-on-polaris-supercomputer'">¶</a></h2>
-<p>Polaris is a supercomputer developed in collaboration with Hewlett Packard Enterprise (HPE), Polaris is a leading-edge system that will give scientists and application developers a platform to test and optimize codes for Aurora, Argonne’s upcoming Intel-HPE exascale supercomputer.</p>
+<p>“Polaris is a supercomputer developed in collaboration with Hewlett Packard Enterprise (HPE), Polaris is a leading-edge system that will give scientists and application developers a platform to test and optimize codes for Aurora, Argonne’s upcoming Intel-HPE exascale supercomputer.”</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>This obve description is verbatim from the <a class="reference external" href="https://www.alcf.anl.gov/polaris/">Polaris</a> web page at Argonne National Laboratory and is intended to provide basic background about this computer. You are encouraged to consult the Polaris documentation for additional details. These are preliminary notes and have not been through-drafted or edited.</p>
+<p>The above description is verbatim from the <a class="reference external" href="https://www.alcf.anl.gov/polaris/">Polaris</a> web page at Argonne National Laboratory and is intended to provide basic background about this computer. You are encouraged to consult the Polaris documentation for additional details. These are preliminary notes and have not been through-drafted or edited.</p>
 </div>
 <p>The Polaris system makes use of the <strong>modules</strong> system to support additional packages that are not readily available in the default package manager.
 Modules are provided for many things that are of a fast-changing nature and often need to be built from source.
@@ -220,7 +220,8 @@ module unload nvhpc-mixed
 module load spack-pe-base cmake
 </pre></div>
 </div>
-<p>If you are planning to use MPI and SYCL together (we do not in this book yet) then you need to install the following additional modules and set an environment variable to enable GPGPU support within MPI.</p>
+<p>If you are planning to use MPI and SYCL together (we do not in this book yet) then you need to install the following additional modules and set an environment variable to enable GPGPU support within MPI.
+If you don’t need MPI, the following is not needed (i.e. is optional).</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>module load mpiwrappers/cray-mpich-oneapi-upstream
 export MPICH_GPU_SUPPORT_ENABLED=1
 </pre></div>

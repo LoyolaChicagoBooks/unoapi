@@ -81,9 +81,9 @@ Some accelerators, however, don't support certain types of data, e.g., 64-bit fl
 Running on Polaris Supercomputer
 ----------------------------------
 
-Polaris is a supercomputer developed in collaboration with Hewlett Packard Enterprise (HPE), Polaris is a leading-edge system that will give scientists and application developers a platform to test and optimize codes for Aurora, Argonne's upcoming Intel-HPE exascale supercomputer.
+"Polaris is a supercomputer developed in collaboration with Hewlett Packard Enterprise (HPE), Polaris is a leading-edge system that will give scientists and application developers a platform to test and optimize codes for Aurora, Argonne's upcoming Intel-HPE exascale supercomputer."
 
-.. note:: This obve description is verbatim from the `Polaris <https://www.alcf.anl.gov/polaris/>`__ web page at Argonne National Laboratory and is intended to provide basic background about this computer. You are encouraged to consult the Polaris documentation for additional details. These are preliminary notes and have not been through-drafted or edited.
+.. note:: The above description is verbatim from the `Polaris <https://www.alcf.anl.gov/polaris/>`__ web page at Argonne National Laboratory and is intended to provide basic background about this computer. You are encouraged to consult the Polaris documentation for additional details. These are preliminary notes and have not been through-drafted or edited.
 
 The Polaris system makes use of the **modules** system to support additional packages that are not readily available in the default package manager.
 Modules are provided for many things that are of a fast-changing nature and often need to be built from source.
@@ -103,6 +103,7 @@ To install the needed modules, do the following:
    module load spack-pe-base cmake
 
 If you are planning to use MPI and SYCL together (we do not in this book yet) then you need to install the following additional modules and set an environment variable to enable GPGPU support within MPI.
+If you don't need MPI, the following is not needed (i.e. is optional).
 
 .. code-block:: text
 
