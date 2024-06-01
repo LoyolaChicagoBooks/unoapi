@@ -21,7 +21,7 @@ Please get started by reading :doc:`00-preliminaries/preliminaries`.
    30-performance/performance.rst
    80-running/running.rst
    90-contributions/contributions.rst
-   self
+   91-coc/code-of-conduct.rst
 
 .. 40-going-distributed/distributed.rst
 
