@@ -20,6 +20,7 @@ Please get started by reading :doc:`00-preliminaries/preliminaries`.
    20-quant-finance/qfi.rst
    30-performance/performance.rst
    80-running/running.rst
+   90-contributions/contributions.rst
    self
 
 .. 40-going-distributed/distributed.rst
