@@ -5,13 +5,13 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <meta charset="utf-8"/>
 <meta content="white" media="(prefers-color-scheme: light)" name="theme-color"/>
-<meta content="black" metia="(prefers-color-scheme: dark)" name="theme-color"/>
+<meta content="black" media="(prefers-color-scheme: dark)" name="theme-color"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
 <title>Performance Essentials | UnoAPI: Modern Parallel C++ Programming with SYCL and oneAPI v0.5.1</title>
 <meta content="Performance Essentials | UnoAPI: Modern Parallel C++ Programming with SYCL and oneAPI v0.5.1" property="og:title"/>
 <meta content="Performance Essentials | UnoAPI: Modern Parallel C++ Programming with SYCL and oneAPI v0.5.1" name="twitter:title"/>
 <link href="../_static/pygments.css?v=fa44fd50" rel="stylesheet" type="text/css"/>
-<link href="../_static/theme.css?v=cede9724" rel="stylesheet" type="text/css"/>
+<link href="../_static/theme.css?v=ecdfb4fc" rel="stylesheet" type="text/css"/>
 <link href="../search.html" rel="search" title="Search"/>
 <link href="../genindex.html" rel="index" title="Index"/>
 <link href="../80-running/running.html" rel="next" title="Compiling and Running oneAPI programs"/>
@@ -52,7 +52,7 @@
 </form>
 </div>
 <nav class="flex items-center space-x-1">
-<button @click="darkMode = darkMode === 'light' ? 'dark' : 'light'" class="relative inline-flex items-center justify-center px-0 text-sm font-medium transition-colors rounded-md hover:bg-accent hover:text-accent-foreground h-9 w-9" type="button">
+<button @click="darkMode = darkMode === 'light' ? 'dark' : 'light'" aria-label="Color theme switcher" class="relative inline-flex items-center justify-center px-0 text-sm font-medium transition-colors rounded-md hover:bg-accent hover:text-accent-foreground h-9 w-9" type="button">
 <svg class="absolute transition-all scale-100 rotate-0 dark:-rotate-90 dark:scale-0" fill="currentColor" height="24" viewbox="0 96 960 960" width="24" xmlns="http://www.w3.org/2000/svg">
 <path d="M480 685q45.456 0 77.228-31.772Q589 621.456 589 576q0-45.456-31.772-77.228Q525.456 467 480 467q-45.456 0-77.228 31.772Q371 530.544 371 576q0 45.456 31.772 77.228Q434.544 685 480 685Zm0 91q-83 0-141.5-58.5T280 576q0-83 58.5-141.5T480 376q83 0 141.5 58.5T680 576q0 83-58.5 141.5T480 776ZM80 621.5q-19.152 0-32.326-13.174T34.5 576q0-19.152 13.174-32.326T80 530.5h80q19.152 0 32.326 13.174T205.5 576q0 19.152-13.174 32.326T160 621.5H80Zm720 0q-19.152 0-32.326-13.174T754.5 576q0-19.152 13.174-32.326T800 530.5h80q19.152 0 32.326 13.174T925.5 576q0 19.152-13.174 32.326T880 621.5h-80Zm-320-320q-19.152 0-32.326-13.174T434.5 256v-80q0-19.152 13.174-32.326T480 130.5q19.152 0 32.326 13.174T525.5 176v80q0 19.152-13.174 32.326T480 301.5Zm0 720q-19.152 0-32.326-13.17Q434.5 995.152 434.5 976v-80q0-19.152 13.174-32.326T480 850.5q19.152 0 32.326 13.174T525.5 896v80q0 19.152-13.174 32.33-13.174 13.17-32.326 13.17ZM222.174 382.065l-43-42Q165.5 327.391 166 308.239t13.174-33.065q13.435-13.674 32.587-13.674t32.065 13.674l42.239 43q12.674 13.435 12.555 31.706-.12 18.272-12.555 31.946-12.674 13.674-31.445 13.413-18.772-.261-32.446-13.174Zm494 494.761-42.239-43q-12.674-13.435-12.674-32.087t12.674-31.565Q686.609 756.5 705.38 757q18.772.5 32.446 13.174l43 41.761Q794.5 824.609 794 843.761t-13.174 33.065Q767.391 890.5 748.239 890.5t-32.065-13.674Zm-42-494.761Q660.5 369.391 661 350.62q.5-18.772 13.174-32.446l41.761-43Q728.609 261.5 747.761 262t33.065 13.174q13.674 13.435 13.674 32.587t-13.674 32.065l-43 42.239q-13.435 12.674-31.706 12.555-18.272-.12-31.946-12.555Zm-495 494.761Q165.5 863.391 165.5 844.239t13.674-32.065l43-42.239q13.435-12.674 32.087-12.674t31.565 12.674Q299.5 782.609 299 801.38q-.5 18.772-13.174 32.446l-41.761 43Q231.391 890.5 212.239 890t-33.065-13.174ZM480 576Z"></path>
 </svg>
@@ -81,6 +81,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../80-running/running.html">Compiling and Running oneAPI programs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../90-contributions/contributions.html">Contribution Guildelines</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../91-coc/code-of-conduct.html">Code of Conduct</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../99-chapter-template/chapter-title.html">Chapter Title</a></li>
 </ul>
 </nav>
 </div>
@@ -109,10 +110,10 @@
 <section id="measuring-time-performance">
 <h2>Measuring time performance<a class="headerlink" href="#measuring-time-performance" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#measuring-time-performance'">¶</a></h2>
 <p>We can use the <code class="docutils literal notranslate"><span class="pre">chrono</span></code> section of the C++ Standard Library for measuring performance at various points during program execution.</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">mark_time</span><span class="p">(</span><span class="n">ts_vector</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">timestamps</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string_view</span><span class="w"> </span><span class="n">label</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">timestamps</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="p">(</span><span class="n">label</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">steady_clock</span><span class="o">::</span><span class="n">now</span><span class="p">()));</span>
-<span class="p">}</span>
-</pre></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="kt">void</span><span class="w"> </span><span class="nf">mark_time</span><span class="p">(</span><span class="n">ts_vector</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">timestamps</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string_view</span><span class="w"> </span><span class="n">label</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="line-2"><span class="w">    </span><span class="n">timestamps</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="p">(</span><span class="n">label</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">steady_clock</span><span class="o">::</span><span class="n">now</span><span class="p">()));</span>
+</span><span id="line-3"><span class="p">}</span>
+</span></code></pre></div>
 </div>
 <p>Every time we want to add a timestamp, we invoke <code class="docutils literal notranslate"><span class="pre">mark_time</span></code> with a suitable string label for each phase whose performance we are measuring:</p>
 <ul class="simple">
@@ -130,31 +131,31 @@
 Beyond Amdah’s law, there is a tradeoff between the speedup gained through parallelization and the additional overhead of shipping data back and forth between the host computer and the accelerator.
 To understand this tradeoff, we are separately measuring the various phases of program execution as shown above.</p>
 <p>For the following experiments, we are going use the following integrand (function to be integrated):</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">double</span><span class="w"> </span><span class="nf">f</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">pow</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
-<span class="p">}</span>
-</pre></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="kt">double</span><span class="w"> </span><span class="nf">f</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="line-2"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">pow</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
+</span><span id="line-3"><span class="p">}</span>
+</span></code></pre></div>
 </div>
 <p>In addition, we have factored out the following function to compute (sequentially) a single outer trapezoid from as many inner trapezoids as the grain size, which we can specify as a command-line argument.
 We invoke this common function from both the outer sequential loop and the outer vectorized <code class="docutils literal notranslate"><span class="pre">parallel_for</span></code> construct.</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// common function to compute a single outer trapezoid</span>
-<span class="c1">// from as many inner trapezoids as the grain size</span>
-<span class="kt">double</span><span class="w"> </span><span class="nf">outer_trapezoid</span><span class="p">(</span>
-<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">grain_size</span><span class="p">,</span>
-<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">x_pos</span><span class="p">,</span>
-<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">dx_inner</span><span class="p">,</span>
-<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">half_dx_inner</span>
-<span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">area</span><span class="p">{</span><span class="mf">0.0</span><span class="p">};</span>
-<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">y_left</span><span class="p">{</span><span class="n">f</span><span class="p">(</span><span class="n">x_pos</span><span class="p">)};</span>
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="n">j</span><span class="p">{</span><span class="mi">0UL</span><span class="p">};</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">grain_size</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">y_right</span><span class="p">{</span><span class="n">f</span><span class="p">(</span><span class="n">x_pos</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">j</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">dx_inner</span><span class="p">)};</span>
-<span class="w">        </span><span class="n">area</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">single_trapezoid</span><span class="p">(</span><span class="n">y_left</span><span class="p">,</span><span class="w"> </span><span class="n">y_right</span><span class="p">,</span><span class="w"> </span><span class="n">half_dx_inner</span><span class="p">);</span>
-<span class="w">        </span><span class="n">y_left</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y_right</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">area</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="c1">// common function to compute a single outer trapezoid</span>
+</span><span id="line-2"><span class="c1">// from as many inner trapezoids as the grain size</span>
+</span><span id="line-3"><span class="kt">double</span><span class="w"> </span><span class="nf">outer_trapezoid</span><span class="p">(</span>
+</span><span id="line-4"><span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">grain_size</span><span class="p">,</span>
+</span><span id="line-5"><span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">x_pos</span><span class="p">,</span>
+</span><span id="line-6"><span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">dx_inner</span><span class="p">,</span>
+</span><span id="line-7"><span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">half_dx_inner</span>
+</span><span id="line-8"><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="line-9"><span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">area</span><span class="p">{</span><span class="mf">0.0</span><span class="p">};</span>
+</span><span id="line-10"><span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">y_left</span><span class="p">{</span><span class="n">f</span><span class="p">(</span><span class="n">x_pos</span><span class="p">)};</span>
+</span><span id="line-11"><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="n">j</span><span class="p">{</span><span class="mi">0UL</span><span class="p">};</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">grain_size</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="line-12"><span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">y_right</span><span class="p">{</span><span class="n">f</span><span class="p">(</span><span class="n">x_pos</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">j</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">dx_inner</span><span class="p">)};</span>
+</span><span id="line-13"><span class="w">        </span><span class="n">area</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">single_trapezoid</span><span class="p">(</span><span class="n">y_left</span><span class="p">,</span><span class="w"> </span><span class="n">y_right</span><span class="p">,</span><span class="w"> </span><span class="n">half_dx_inner</span><span class="p">);</span>
+</span><span id="line-14"><span class="w">        </span><span class="n">y_left</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y_right</span><span class="p">;</span>
+</span><span id="line-15"><span class="w">    </span><span class="p">}</span>
+</span><span id="line-16"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">area</span><span class="p">;</span>
+</span><span id="line-17"><span class="p">}</span>
+</span></code></pre></div>
 </div>
 <p>In this way, the actual effort becomes significantly greater than the overhead from setup, so we are likely to observe a greater benefit from parallelization.</p>
 <p>We will now compare wall clock execution times on our academic department’s compute server with the following characteristics:</p>
@@ -165,41 +166,41 @@ We invoke this common function from both the outer sequential loop and the outer
 <section id="sequential-execution">
 <h3>Sequential execution<a class="headerlink" href="#sequential-execution" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#sequential-execution'">¶</a></h3>
 <p>We start with strictly sequential execution on the node’s CPU using the <cite>-s</cite> option of our integration example.</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&gt; ./build/bin/integration -n 100000000000 -g 100 -s
-[2023-12-02 09:53:18.563] [info] integrating function from 0 to 1 using 100000000000 trapezoid(s) with grain size 100, dx = 1e-09
-[2023-12-02 09:53:20.463] [info] starting sequential integration
-[2023-12-02 09:58:46.057] [info] result should be available now
-result = 1.0000000000000597
-[2023-12-02 09:58:46.202] [info] all done for now
-TIME,DELTA,UNIT,DEVICE,PHASE
-68410926133405,0,ns,sequential,Start
-68412826265635,1900132230,ns,sequential,Memory allocation
-68738419748223,325593482588,ns,sequential,Integration
-68738565342993,145594770,ns,sequential,DONE
-68738565342993,327639209588,ns,sequential,TOTAL
-</pre></div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">&gt; ./build/bin/integration -n 100000000000 -g 100 -s
+</span><span id="line-2">[2023-12-02 09:53:18.563] [info] integrating function from 0 to 1 using 100000000000 trapezoid(s) with grain size 100, dx = 1e-09
+</span><span id="line-3">[2023-12-02 09:53:20.463] [info] starting sequential integration
+</span><span id="line-4">[2023-12-02 09:58:46.057] [info] result should be available now
+</span><span id="line-5">result = 1.0000000000000597
+</span><span id="line-6">[2023-12-02 09:58:46.202] [info] all done for now
+</span><span id="line-7">TIME,DELTA,UNIT,DEVICE,PHASE
+</span><span id="line-8">68410926133405,0,ns,sequential,Start
+</span><span id="line-9">68412826265635,1900132230,ns,sequential,Memory allocation
+</span><span id="line-10">68738419748223,325593482588,ns,sequential,Integration
+</span><span id="line-11">68738565342993,145594770,ns,sequential,DONE
+</span><span id="line-12">68738565342993,327639209588,ns,sequential,TOTAL
+</span></code></pre></div>
 </div>
 <p>The total wall time for this sequential run was about 328 seconds.</p>
 </section>
 <section id="parallel-execution-on-an-accelerator">
 <h3>Parallel execution on an accelerator<a class="headerlink" href="#parallel-execution-on-an-accelerator" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#parallel-execution-on-an-accelerator'">¶</a></h3>
 <p>Next, we allow our integration code to select and utilize the available accelerator.</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&gt; ./build-nvidia/bin/integration -n 100000000000 -g 100
-[2023-12-02 00:42:30.267] [info] integrating function from 0 to 1 using 100000000000 trapezoid(s) with grain size 100, dx = 1e-09
-[2023-12-02 00:42:30.267] [info] preparing for vectorized integration
-[2023-12-02 00:42:30.832] [info] Device: NVIDIA RTX A6000
-[2023-12-02 00:42:30.837] [info] done submitting to queue...waiting for results
-[2023-12-02 00:43:03.964] [info] result should be available now
-result = 1.0000000000000002
-[2023-12-02 00:43:03.971] [info] all done for now
-TIME,DELTA,UNIT,DEVICE,PHASE
-35362630446292,0,ns,NVIDIA RTX A6000,Start
-35362630466323,20031,ns,NVIDIA RTX A6000,Memory allocation
-35363195459619,564993296,ns,NVIDIA RTX A6000,Queue creation
-35396327471267,33132011648,ns,NVIDIA RTX A6000,Integration
-35396333911606,6440339,ns,NVIDIA RTX A6000,DONE
-35396333911606,33703465314,ns,NVIDIA RTX A6000,TOTAL
-</pre></div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">&gt; ./build-nvidia/bin/integration -n 100000000000 -g 100
+</span><span id="line-2">[2023-12-02 00:42:30.267] [info] integrating function from 0 to 1 using 100000000000 trapezoid(s) with grain size 100, dx = 1e-09
+</span><span id="line-3">[2023-12-02 00:42:30.267] [info] preparing for vectorized integration
+</span><span id="line-4">[2023-12-02 00:42:30.832] [info] Device: NVIDIA RTX A6000
+</span><span id="line-5">[2023-12-02 00:42:30.837] [info] done submitting to queue...waiting for results
+</span><span id="line-6">[2023-12-02 00:43:03.964] [info] result should be available now
+</span><span id="line-7">result = 1.0000000000000002
+</span><span id="line-8">[2023-12-02 00:43:03.971] [info] all done for now
+</span><span id="line-9">TIME,DELTA,UNIT,DEVICE,PHASE
+</span><span id="line-10">35362630446292,0,ns,NVIDIA RTX A6000,Start
+</span><span id="line-11">35362630466323,20031,ns,NVIDIA RTX A6000,Memory allocation
+</span><span id="line-12">35363195459619,564993296,ns,NVIDIA RTX A6000,Queue creation
+</span><span id="line-13">35396327471267,33132011648,ns,NVIDIA RTX A6000,Integration
+</span><span id="line-14">35396333911606,6440339,ns,NVIDIA RTX A6000,DONE
+</span><span id="line-15">35396333911606,33703465314,ns,NVIDIA RTX A6000,TOTAL
+</span></code></pre></div>
 </div>
 <p>The total wall time for this run was about 33.7 seconds, including the overhead for preparing the task queue and shipping any required data back and forth.
 This corresponds to a speedup of about 10 compared to sequential execution.</p>
@@ -213,22 +214,22 @@ This corresponds to a speedup of about 10 compared to sequential execution.</p>
 <h3>Parallel execution on a multicore CPU<a class="headerlink" href="#parallel-execution-on-a-multicore-cpu" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#parallel-execution-on-a-multicore-cpu'">¶</a></h3>
 <p>Our examples also support a <cite>-c</cite> option for executing data-parallel code on the host CPU itself.
 This is reasonable when the CPU already has multiple cores.</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&gt; ./build/bin/integration -n 100000000000 -g 100 -c
-[2023-12-03 22:34:05.010] [info] integrating function from 0 to 1 using 100000000000 trapezoid(s) with grain size 100, dx = 1e-09
-[2023-12-03 22:34:05.010] [info] preparing for vectorized integration
-[2023-12-03 22:34:05.582] [info] Device: AMD EPYC 9354 32-Core Processor
-[2023-12-03 22:34:05.803] [info] done submitting to queue...waiting for results
-[2023-12-03 22:34:06.578] [info] result should be available now
-result = 1.0000000000000009
-[2023-12-03 22:34:06.967] [info] all done for now
-TIME,DELTA,UNIT,DEVICE,PHASE
-200457373084707,0,ns,AMD EPYC 9354 32-Core Processor,Start
-200457373102067,17360,ns,AMD EPYC 9354 32-Core Processor,Memory allocation
-200457945058810,571956743,ns,AMD EPYC 9354 32-Core Processor,Queue creation
-200458940879950,995821140,ns,AMD EPYC 9354 32-Core Processor,Integration
-200459329758480,388878530,ns,AMD EPYC 9354 32-Core Processor,DONE
-200459329758480,1956673773,ns,AMD EPYC 9354 32-Core Processor,TOTAL
-</pre></div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">&gt; ./build/bin/integration -n 100000000000 -g 100 -c
+</span><span id="line-2">[2023-12-03 22:34:05.010] [info] integrating function from 0 to 1 using 100000000000 trapezoid(s) with grain size 100, dx = 1e-09
+</span><span id="line-3">[2023-12-03 22:34:05.010] [info] preparing for vectorized integration
+</span><span id="line-4">[2023-12-03 22:34:05.582] [info] Device: AMD EPYC 9354 32-Core Processor
+</span><span id="line-5">[2023-12-03 22:34:05.803] [info] done submitting to queue...waiting for results
+</span><span id="line-6">[2023-12-03 22:34:06.578] [info] result should be available now
+</span><span id="line-7">result = 1.0000000000000009
+</span><span id="line-8">[2023-12-03 22:34:06.967] [info] all done for now
+</span><span id="line-9">TIME,DELTA,UNIT,DEVICE,PHASE
+</span><span id="line-10">200457373084707,0,ns,AMD EPYC 9354 32-Core Processor,Start
+</span><span id="line-11">200457373102067,17360,ns,AMD EPYC 9354 32-Core Processor,Memory allocation
+</span><span id="line-12">200457945058810,571956743,ns,AMD EPYC 9354 32-Core Processor,Queue creation
+</span><span id="line-13">200458940879950,995821140,ns,AMD EPYC 9354 32-Core Processor,Integration
+</span><span id="line-14">200459329758480,388878530,ns,AMD EPYC 9354 32-Core Processor,DONE
+</span><span id="line-15">200459329758480,1956673773,ns,AMD EPYC 9354 32-Core Processor,TOTAL
+</span></code></pre></div>
 </div>
 <p>The total wall time for this run was about 1.96 seconds, including the overhead for preparing the task queue on the host CPU.
 This corresponds to a speedup of about 165 compared to sequential execution or a speedup of about 17 compared to execution on the GPU, possibly because of the better support for 64-bit floating point arithmetic on the CPU.</p>
@@ -265,7 +266,7 @@ Otherwise, wall time proportional (slightly sublinear) to total workload and mos
 </section>
 </section>
 </div></div><aside class="hidden text-sm xl:block" id="right-sidebar">
-<div class="sticky top-16 -mt-10 max-h-[calc(var(100vh)-5rem)] overflow-y-auto pt-6 space-y-2"><p class="font-medium">On this page</p>
+<div class="sticky top-16 -mt-10 max-h-[calc(100vh-5rem)] overflow-y-auto pt-6 space-y-2"><p class="font-medium">On this page</p>
 <ul>
 <li><a :data-current="activeSection === '#measuring-time-performance'" class="reference internal" href="#measuring-time-performance">Measuring time performance</a></li>
 <li><a :data-current="activeSection === '#how-to-achieve-speedup'" class="reference internal" href="#how-to-achieve-speedup">How to achieve speedup</a><ul>
@@ -283,14 +284,14 @@ Otherwise, wall time proportional (slightly sublinear) to total workload and mos
 </div><footer class="py-6 border-t border-border md:py-0">
 <div class="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
 <div class="flex flex-col items-center gap-4 px-8 md:flex-row md:gap-2 md:px-0">
-<p class="text-sm leading-loose text-center text-muted-foreground md:text-left">© 2023-Present, George K. Thiruvathukal and Konstantin Läufer Built with <a class="font-medium underline underline-offset-4" href="https://www.sphinx-doc.org" rel="noreferrer">Sphinx 7.2.6</a></p>
+<p class="text-sm leading-loose text-center text-muted-foreground md:text-left">© 2023-Present, George K. Thiruvathukal and Konstantin Läufer Built with <a class="font-medium underline underline-offset-4" href="https://www.sphinx-doc.org" rel="noreferrer">Sphinx 7.3.7</a></p>
 </div>
 </div>
 </footer>
 </div>
 <script src="../_static/documentation_options.js?v=421b0634"></script>
-<script src="../_static/doctools.js?v=888ff710"></script>
+<script src="../_static/doctools.js?v=9a2dae69"></script>
 <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-<script defer="defer" src="../_static/theme.js?v=e8bd915e"></script>
+<script defer="defer" src="../_static/theme.js?v=e82a16a3"></script>
 </body>
 </html>

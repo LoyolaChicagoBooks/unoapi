@@ -22,6 +22,7 @@ Please get started by reading :doc:`00-preliminaries/preliminaries`.
    80-running/running.rst
    90-contributions/contributions.rst
    91-coc/code-of-conduct.rst
+   99-chapter-template/chapter-title.rst
 
 .. 40-going-distributed/distributed.rst
 

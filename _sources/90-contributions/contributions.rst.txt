@@ -38,6 +38,16 @@ Konstantin and George are the lead authors and also serve as editors in chief (E
 
 Regardless of author order, every author is greatly valued.
 
+New Topics
+------------
+
+As all of us know from writing, we have a *better* idea of how to do something. That is what keeps the academy/field moving forward. If this is is your story, please open an issue on the GitHub issue tracker for your new topic and/or example. Include the following:
+
+- Chapter title
+- Rationale for inclusion in the book
+- URL to repository containing your source code (work in progress).
+- Clear statement as to what level of CS, Math, or other specific scienes
+
 When in Doubt
 --------------
 
