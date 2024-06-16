@@ -224,8 +224,7 @@ latex_elements = {
 
 # ttAdditional stuff for the LaTeX preamble.
 #'preamble': r'''\usepackage[inner=1.2in,papersize={7.5in,9.25in}]{geometry}
-'preamble': '''\geometry{papersize={7.5in,9.25in}}
-''',
+'preamble': r'''\geometry{papersize={7.5in,9.25in}}''' + '\n',
 }
 
 # Grouping the document tree into LaTeX files. List of tuples
