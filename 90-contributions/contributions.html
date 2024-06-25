@@ -106,39 +106,48 @@
 <div id="content" role="main">
 <section id="contribution-guildelines">
 <h1>Contribution Guildelines<a class="headerlink" href="#contribution-guildelines" title="Link to this heading">¶</a></h1>
-<div class="admonition-todo admonition" id="id1">
-<p class="admonition-title">Todo</p>
-<p>Konstantin is going to work on drafting the contribution guidelines. None of this is official but is a starting point. All of the following are draft ideas and are subsequent to a full rewrite until further notice.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This is still in draft status.</p>
 </div>
 <section id="orcid">
 <h2>ORCID<a class="headerlink" href="#orcid" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#orcid'">¶</a></h2>
 <p>Our group is primarily focused on academic instituions and research laboratories (academic, industry, or government).
-Although we we weclome all participation, we will not accept contributions from anyone without an ORCID. See <a class="reference external" href="https://orcid.org">https://orcid.org</a>.</p>
+Although we we weclome all participation, we will not accept contributions from anyone without an ORCID. See <a class="reference external" href="https://orcid.org">https://orcid.org</a>.
+We ask for an ORCID since we track all significant scholarly and coding contributions that are included in this work and strive to include everyone who contributes.</p>
 </section>
 <section id="open-source-code">
 <h2>Open Source Code<a class="headerlink" href="#open-source-code" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#open-source-code'">¶</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We are still working to determine a list of approved licenses.</p>
+</div>
 <p>All code must be made available via an approved open source license.</p>
 </section>
 <section id="open-source-creative-commons-writing">
 <h2>Open Source/Creative Commons Writing<a class="headerlink" href="#open-source-creative-commons-writing" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#open-source-creative-commons-writing'">¶</a></h2>
-<p>To be considered an author of the book, you <em>must</em> be willing to make your work available under Creative Commons licensing.
+<p>To be considered an author of the book, you <em>must</em> be willing to make your written work available under Creative Commons licensing.
+You must be associated with at least one content-related request (e.g. a book chapter or major section of the book).
 We will not accept any pull requests from anyone who does not consent to these terms.</p>
 </section>
 <section id="ethical-ai-ethical-contributions">
 <h2>Ethical AI / Ethical Contributions<a class="headerlink" href="#ethical-ai-ethical-contributions" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#ethical-ai-ethical-contributions'">¶</a></h2>
 <p>If you use generative AI, it is permitted. You must disclose that you used it, even if for the most trivial aspects of your coding or writing.
-Please include a <em>transcript</em> (world read-only) link if generative AI played a major role in your contribution. Open AI (and others) provide a mechamism for sharing your prompts and responses.</p>
+Please include a <em>transcript</em> (world read-only) link showing your prompt “thought process” if generative AI played a major role in your contribution.
+Open AI (and others) provide a mechamism for sharing your prompts and responses. You may also organize your transcript into a document (Markdown) and create a Figshare artifact that includes the Markdown and a rendered version in PDF (via Pandoc).</p>
 </section>
 <section id="co-authorship">
 <h2>Co-Authorship<a class="headerlink" href="#co-authorship" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#co-authorship'">¶</a></h2>
 <p>We are a highly inclusive group that is not focused on the number of contributors and/or the size of any individual contribution.
 However, we will use the ACM and/or IEEE guidelines for co-authorship.</p>
 <p>Konstantin and George are the lead authors and also serve as editors in chief (EICs). Remaining authors are listed in alphabetical order.</p>
-<p>Regardless of author order, every author is greatly valued.</p>
+<p>Regardless of author order, every author is greatly valued and will share in the scholarly credit.</p>
+<p>Given the dynamic nature of this work, authors are officially recognized whenever new versions of the book are released.</p>
+<p>We will be using a service like Zenodo to make snapshots of the work available and take all new authors into account.</p>
 </section>
 <section id="new-topics">
 <h2>New Topics<a class="headerlink" href="#new-topics" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#new-topics'">¶</a></h2>
-<p>As all of us know from writing, we have a <em>better</em> idea of how to do something. That is what keeps the academy/field moving forward. If this is is your story, please open an issue on the GitHub issue tracker for your new topic and/or example. Include the following:</p>
+<p>As all of us know from writing, we always have a <em>better</em> idea of how to do something. That is what keeps the academy/field moving forward. If this is is your story, please open an issue on the GitHub issue tracker for your new topic and/or example. Include the following:</p>
 <ul class="simple">
 <li><p>Chapter title</p></li>
 <li><p>Rationale for inclusion in the book</p></li>
@@ -161,10 +170,10 @@ If you see any potential impediments to your participation, we suggest that you 
 <p>Similar to many open source projects, we have our standards that we follow by example.
 We expect any contributions to have the following “goodness” from CS/Software Engineering:</p>
 <ul class="simple">
-<li><p>proper build files using <strong>cmake</strong>. We do not embrace <strong>make</strong>. It had a good run, but modern systems such as <strong>cmake* and **bazel</strong> are well on their way to displacing <em>ad hoc</em> make-centered projects.</p></li>
-<li><p>no matter how big or small, any submodule linked to our book must use continuous integration. We strongly recommend GitHub Actions but will consider other well-maintained solutions. Our main book and example repos all use GitHub Actions</p></li>
+<li><p>proper build script using <strong>cmake</strong>. We do not embrace <strong>make</strong>. It had a good run, but modern systems such as <strong>cmake</strong> and <strong>bazel</strong> are well on their way to displacing <em>ad hoc</em> make-centered projects and embrace clear/concise declarative thinking.</p></li>
+<li><p>no matter how big or small, any submodule linked to our book must use continuous integration or compile cleanly. We strongly recommend GitHub Actions but will consider other well-maintained solutions. Our main book and example repos all use GitHub Actions.</p></li>
 <li><p>Testing is vital. While we personally use unit/property tests, any development workflow that has a separate testing phase (run in gitHub Actions) is considered valid.</p></li>
-<li><p>documentation: If writing is unimportant to you, you do not want to work with us. We ascribe to literate programming principles.</p></li>
+<li><p>Documentation: If writing is unimportant to you, you do not want to work with us. We ascribe to literate programming principles. A well-crafted README and clear attention to good naming practices and modular thinking goes a long way toward meeting this requirement.</p></li>
 </ul>
 </section>
 </section>
