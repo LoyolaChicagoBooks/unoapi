@@ -25,3 +25,6 @@
 [submodule "examples/quant-finance-stocks-python"]
 	path = examples/quant-finance-stocks-python
 	url = git@github.com:LoyolaChicagoCode/quant-finance-stocks-python.git
+[submodule "examples/marching-cubes-unoapi"]
+	path = examples/marching-cubes-unoapi
+	url = https://github.com/epautsch/marching-cubes-unoapi
