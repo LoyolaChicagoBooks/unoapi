@@ -28,3 +28,6 @@
 [submodule "examples/marching-cubes-unoapi"]
 	path = examples/marching-cubes-unoapi
 	url = https://github.com/epautsch/marching-cubes-unoapi
+[submodule "examples/electron-density-unoapi"]
+	path = examples/electron-density-unoapi
+	url = https://github.com/rayhe88/handleWF
