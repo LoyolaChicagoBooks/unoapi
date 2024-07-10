@@ -38,20 +38,15 @@ Other Systems Code Examples - C/C++
 - `COMP 310 Systems Code Examples in C <https://github.com/SoftwareSystemsLaboratory/systems-code-examples>`__
 - `Process Tree in C++ <https://github.com/LoyolaChicagoCode/processtree-cpp>`__
 
-Citation
----------
-
-Cite [completely optional but appreciated]
-   Konstantin Läufer and George K. Thiruvathukal, *UnoAPI: Balancing Performance, Portability, and Productivity (P3) in HPC Education*, 2022 IEEE/ACM International Workshop on Education for High Performance Computing (EduHPC), Dallas, TX, USA, 2022, pp. 1-10, doi: 10.1109/EduHPC56719.2022.00006.
-
-IEEE Xplore [if you have IEEE/ACM digital library subscription]
+Our EduHPC 2022 Paper on UnoAPI
    https://ieeexplore.ieee.org/document/10027537
 
-Figshare [if you cannot access the IEEE/ACM version for *any* reason]
+Preprint of our EduHPC 2022 Paper on UnoAPI
    https://doi.org/10.6084/m9.figshare.21200464.
 
 If you find our work useful, please consider citing the above paper.
-If you don't find our work useful, please consider citing the above paper.
+We will have an updated way of citing this work soon.
+
 Please do not hesitate to contact us with any questions, regardless of whether you find us useful or not.
 
 Motivation for Our Work
@@ -72,13 +67,23 @@ In addition:
 - Research software engineers want to balance performance, portability, and productivity.
 
 
+Editors/Contributors
+----------------------
+
+- `George K. Thiruvathukal (EIC) <https://gkt.sh>`__, Professor and Chairperson, Loyola University Chicago, Computer Science
+- `Konstantin Läufer (AEIC) <https://laufer.cs.luc.edu>`__, Professsor, Loyola University Chicago, Computer Science
+
 Contributors
---------------
+-----------------
 
-.. note:: We welcome folks who wish to contribute. Please reach out to either George or Konstantin. We will be happy to add a placeholder chapter for you. We have not yet established contribution guidelines but plan to do so soon as we have been approached by others. You can start by forking our repository and working from pull requests. Once we accept a pull request, we include you as an additional contributor.
+.. note:: There are others; however, I am waiting for their initial pull requests (for chapters) and ORCIDs
 
-- `George K. Thiruvathukal (project lead) <https://gkt.sh>`__
-- `Konstantin Läufer <https://laufer.cs.luc.edu>`__
+- `Raymundo Hernandez Esparza <https://www.alcf.anl.gov/about/people/raymundo-hernandez-esparza>`__, Postdoctoral Appointee, Argonne National Laboratory, Leadership Computing Facility
+- `Maria Pantoja <https://www.linkedin.com/in/mpantoja/>`__, Associate Professor, CalPoly, Computer Engineering
+- Erik Pautsch, PhD Student, Loyola University Chicago, Compmuter Science
+- `Silvio B. Rizzi <https://www.alcf.anl.gov/about/people/silvio-rizzi>`__, Computer Scientist, Argonne National Laboratory, Leadership Computing Facility
+- `Alvaro Vazquez-Mayagoitia <https://www.alcf.anl.gov/about/people/alvaro-vazquez-mayagoitia>`__, Principal Software Development Specialist, Argonne National Laboratory, Leadership Computing Facility
+- Jorge Velez, Undergraduate CS Student, University of Illinois at Urbana-Champaign, Computer Science
 
 AI Disclosure
 ---------------
