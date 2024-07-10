@@ -80,7 +80,7 @@ Contributors
 
 - `Raymundo Hernandez Esparza <https://www.alcf.anl.gov/about/people/raymundo-hernandez-esparza>`__, Postdoctoral Appointee, Argonne National Laboratory, Leadership Computing Facility
 - `Maria Pantoja <https://www.linkedin.com/in/mpantoja/>`__, Associate Professor, CalPoly, Computer Engineering
-- Erik Pautsch, PhD Student, Loyola University Chicago, Compmuter Science
+- `Erik Pautsch <https://www.erikpautsch.com/>`__, PhD Student, Loyola University Chicago, Compmuter Science
 - `Silvio B. Rizzi <https://www.alcf.anl.gov/about/people/silvio-rizzi>`__, Computer Scientist, Argonne National Laboratory, Leadership Computing Facility
 - `Alvaro Vazquez-Mayagoitia <https://www.alcf.anl.gov/about/people/alvaro-vazquez-mayagoitia>`__, Principal Software Development Specialist, Argonne National Laboratory, Leadership Computing Facility
 - Jorge Velez, Undergraduate CS Student, University of Illinois at Urbana-Champaign, Computer Science
