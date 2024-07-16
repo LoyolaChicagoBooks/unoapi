@@ -38,7 +38,7 @@ the number of vertices it will generate. Let’s breakdown how it works:
 
 .. code:: cpp
 
-   __global__ void classifyVoxel(uint *voxelVerts, uint #voxelOccupied, uchar *volume, uint3 gridSize,
+   __global__ void classifyVoxel(uint *voxelVerts, uint *voxelOccupied, uchar *volume, uint3 gridSize,
    uint3 gridSizeShift, uint3 gridSizeMask, uint numVoxels, float3 voxelSize, float isoValue, cudaTextureObject_t numVertsTex, cudaTextureObject_t volumeTex) {
        // Calculate the unique index for this thread within the entire grid
        uint blockId = __mul24(blockIdx.y, gridDim.x) + blockIdx.x;
@@ -707,7 +707,7 @@ up to, but not including, the element at index ``i``. In mathematical
 terms, given an input array ``A``, the prefix sum array ``B`` is defined
 as:
 
-.. math:: B[i]=∑j=0i−1​A[j]
+.. math:: B[i] = \sum_{j=0}^{i} A[j]
 
 For example, if the input array ``A`` is:
 
