@@ -1,78 +1,160 @@
+
 <!DOCTYPE html>
 
-<html :class="{'dark': darkMode === 'dark' || (darkMode === 'system' &amp;&amp; window.matchMedia('(prefers-color-scheme: dark)').matches)}" class="scroll-smooth" data-content_root="../" lang="en" x-data="{ darkMode: localStorage.getItem('darkMode') || localStorage.setItem('darkMode', 'system'), activeSection: '' }" x-init="$watch('darkMode', val =&gt; localStorage.setItem('darkMode', val))">
-<head>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<meta charset="utf-8"/>
-<meta content="white" media="(prefers-color-scheme: light)" name="theme-color"/>
-<meta content="black" media="(prefers-color-scheme: dark)" name="theme-color"/>
-<meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>Introduction to Parallel Programming | UnoAPI: Modern Parallel C++ Programming with SYCL and oneAPI v0.6</title>
-<meta content="Introduction to Parallel Programming | UnoAPI: Modern Parallel C++ Programming with SYCL and oneAPI v0.6" property="og:title"/>
-<meta content="Introduction to Parallel Programming | UnoAPI: Modern Parallel C++ Programming with SYCL and oneAPI v0.6" name="twitter:title"/>
-<link href="../_static/pygments.css?v=03e43079" rel="stylesheet" type="text/css"/>
-<link href="../_static/theme.css?v=42baaae4" rel="stylesheet" type="text/css"/>
-<link href="../search.html" rel="search" title="Search"/>
-<link href="../genindex.html" rel="index" title="Index"/>
-<link href="../10-software-engineering/software-engineering.html" rel="next" title="Introduction to Software Engineering"/>
-<link href="../00-preliminaries/preliminaries.html" rel="prev" title="About the Book"/>
-<script>
-    <!-- Prevent Flash of wrong theme -->
-      const userPreference = localStorage.getItem('darkMode');
-      let mode;
-      if (userPreference === 'dark' || window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        mode = 'dark';
-        document.documentElement.classList.add('dark');
-      } else {
-        mode = 'light';
-      }
-      if (!userPreference) {localStorage.setItem('darkMode', mode)}
-    </script>
-</head>
-<body :class="{ 'overflow-hidden': showSidebar }" class="min-h-screen font-sans antialiased bg-background text-foreground" x-data="{ showSidebar: false, showScrollTop: false }">
-<div @click.self="showSidebar = false" class="fixed inset-0 z-50 overflow-hidden bg-background/80 backdrop-blur-sm md:hidden" x-cloak="" x-show="showSidebar"></div><div class="relative flex flex-col min-h-screen" id="page"><a class="absolute top-0 left-0 z-[100] block bg-background p-4 text-xl transition -translate-x-full opacity-0 focus:translate-x-0 focus:opacity-100" href="#content">
-      Skip to content
-    </a>
-<header class="sticky top-0 z-40 w-full border-b shadow-sm border-border supports-backdrop-blur:bg-background/60 bg-background/95 backdrop-blur"><div class="container flex items-center h-14">
-<div class="hidden mr-4 md:flex">
-<a class="flex items-center mr-6" href="../index.html"><span class="hidden font-bold sm:inline-block text-clip whitespace-nowrap">UnoAPI: Modern Parallel C++ Programming with SYCL and oneAPI v0.6</span>
-</a></div><button @click="showSidebar = true" class="inline-flex items-center justify-center h-10 px-0 py-2 mr-2 text-base font-medium transition-colors rounded-md hover:text-accent-foreground hover:bg-transparent md:hidden" type="button">
-<svg aria-hidden="true" fill="currentColor" height="24" viewbox="0 96 960 960" width="24" xmlns="http://www.w3.org/2000/svg">
-<path d="M152.587 825.087q-19.152 0-32.326-13.174t-13.174-32.326q0-19.152 13.174-32.326t32.326-13.174h440q19.152 0 32.326 13.174t13.174 32.326q0 19.152-13.174 32.326t-32.326 13.174h-440Zm0-203.587q-19.152 0-32.326-13.174T107.087 576q0-19.152 13.174-32.326t32.326-13.174h320q19.152 0 32.326 13.174T518.087 576q0 19.152-13.174 32.326T472.587 621.5h-320Zm0-203.587q-19.152 0-32.326-13.174t-13.174-32.326q0-19.152 13.174-32.326t32.326-13.174h440q19.152 0 32.326 13.174t13.174 32.326q0 19.152-13.174 32.326t-32.326 13.174h-440ZM708.913 576l112.174 112.174q12.674 12.674 12.674 31.826t-12.674 31.826Q808.413 764.5 789.261 764.5t-31.826-12.674l-144-144Q600 594.391 600 576t13.435-31.826l144-144q12.674-12.674 31.826-12.674t31.826 12.674q12.674 12.674 12.674 31.826t-12.674 31.826L708.913 576Z"></path>
-</svg>
-<span class="sr-only">Toggle navigation menu</span>
-</button>
-<div class="flex items-center justify-between flex-1 space-x-2 sm:space-x-4 md:justify-end">
-<div class="flex-1 w-full md:w-auto md:flex-none"><form @keydown.k.window.meta="$refs.search.focus()" action="../search.html" class="relative flex items-center group" id="searchbox" method="get">
-<input aria-label="Search the docs" class="inline-flex items-center font-medium transition-colors bg-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background border border-input hover:bg-accent focus:bg-accent hover:text-accent-foreground focus:text-accent-foreground hover:placeholder-accent-foreground py-2 px-4 relative h-9 w-full justify-start rounded-[0.5rem] text-sm text-muted-foreground sm:pr-12 md:w-40 lg:w-64" id="search-input" name="q" placeholder="Search ..." type="search" x-ref="search"/>
-<kbd class="pointer-events-none absolute right-1.5 top-2 hidden h-5 select-none text-muted-foreground items-center gap-1 rounded border border-border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex group-hover:bg-accent group-hover:text-accent-foreground">
-<span class="text-xs">⌘</span>
-    K
-  </kbd>
-</form>
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Introduction to Parallel Programming &#8212; UnoAPI: Modern Parallel C++ Programming with SYCL and oneAPI v0.6</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=466cad66"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '05-parallel/parallel';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Introduction to Software Engineering" href="../10-software-engineering/software-engineering.html" />
+    <link rel="prev" title="About the Book" href="../00-preliminaries/preliminaries.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
 </div>
-<nav class="flex items-center space-x-1">
-<button @click="darkMode = darkMode === 'light' ? 'dark' : 'light'" aria-label="Color theme switcher" class="relative inline-flex items-center justify-center px-0 text-sm font-medium transition-colors rounded-md hover:bg-accent hover:text-accent-foreground h-9 w-9" type="button">
-<svg class="absolute transition-all scale-100 rotate-0 dark:-rotate-90 dark:scale-0" fill="currentColor" height="24" viewbox="0 96 960 960" width="24" xmlns="http://www.w3.org/2000/svg">
-<path d="M480 685q45.456 0 77.228-31.772Q589 621.456 589 576q0-45.456-31.772-77.228Q525.456 467 480 467q-45.456 0-77.228 31.772Q371 530.544 371 576q0 45.456 31.772 77.228Q434.544 685 480 685Zm0 91q-83 0-141.5-58.5T280 576q0-83 58.5-141.5T480 376q83 0 141.5 58.5T680 576q0 83-58.5 141.5T480 776ZM80 621.5q-19.152 0-32.326-13.174T34.5 576q0-19.152 13.174-32.326T80 530.5h80q19.152 0 32.326 13.174T205.5 576q0 19.152-13.174 32.326T160 621.5H80Zm720 0q-19.152 0-32.326-13.174T754.5 576q0-19.152 13.174-32.326T800 530.5h80q19.152 0 32.326 13.174T925.5 576q0 19.152-13.174 32.326T880 621.5h-80Zm-320-320q-19.152 0-32.326-13.174T434.5 256v-80q0-19.152 13.174-32.326T480 130.5q19.152 0 32.326 13.174T525.5 176v80q0 19.152-13.174 32.326T480 301.5Zm0 720q-19.152 0-32.326-13.17Q434.5 995.152 434.5 976v-80q0-19.152 13.174-32.326T480 850.5q19.152 0 32.326 13.174T525.5 896v80q0 19.152-13.174 32.33-13.174 13.17-32.326 13.17ZM222.174 382.065l-43-42Q165.5 327.391 166 308.239t13.174-33.065q13.435-13.674 32.587-13.674t32.065 13.674l42.239 43q12.674 13.435 12.555 31.706-.12 18.272-12.555 31.946-12.674 13.674-31.445 13.413-18.772-.261-32.446-13.174Zm494 494.761-42.239-43q-12.674-13.435-12.674-32.087t12.674-31.565Q686.609 756.5 705.38 757q18.772.5 32.446 13.174l43 41.761Q794.5 824.609 794 843.761t-13.174 33.065Q767.391 890.5 748.239 890.5t-32.065-13.674Zm-42-494.761Q660.5 369.391 661 350.62q.5-18.772 13.174-32.446l41.761-43Q728.609 261.5 747.761 262t33.065 13.174q13.674 13.435 13.674 32.587t-13.674 32.065l-43 42.239q-13.435 12.674-31.706 12.555-18.272-.12-31.946-12.555Zm-495 494.761Q165.5 863.391 165.5 844.239t13.674-32.065l43-42.239q13.435-12.674 32.087-12.674t31.565 12.674Q299.5 782.609 299 801.38q-.5 18.772-13.174 32.446l-41.761 43Q231.391 890.5 212.239 890t-33.065-13.174ZM480 576Z"></path>
-</svg>
-<svg class="absolute transition-all scale-0 rotate-90 dark:rotate-0 dark:scale-100" fill="currentColor" height="24" viewbox="0 96 960 960" width="24" xmlns="http://www.w3.org/2000/svg">
-<path d="M480 936q-151 0-255.5-104.5T120 576q0-138 90-239.5T440 218q25-3 39 18t-1 44q-17 26-25.5 55t-8.5 61q0 90 63 153t153 63q31 0 61.5-9t54.5-25q21-14 43-1.5t19 39.5q-14 138-117.5 229T480 936Zm0-80q88 0 158-48.5T740 681q-20 5-40 8t-40 3q-123 0-209.5-86.5T364 396q0-20 3-40t8-40q-78 32-126.5 102T200 576q0 116 82 198t198 82Zm-10-270Z"></path>
-</svg>
-</button>
-</nav>
-</div>
-</div>
-</header>
-<div class="flex-1"><div class="container flex-1 items-start md:grid md:grid-cols-[220px_minmax(0,1fr)] md:gap-6 lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-10"><aside :aria-hidden="!showSidebar" :class="{ 'translate-x-0': showSidebar }" class="fixed inset-y-0 left-0 md:top-14 z-50 md:z-30 bg-background md:bg-transparent transition-all duration-100 -translate-x-full md:translate-x-0 ml-0 p-6 md:p-0 md:-ml-2 md:h-[calc(100vh-3.5rem)] w-5/6 md:w-full shrink-0 overflow-y-auto border-r border-border md:sticky" id="left-sidebar">
-<a class="!justify-start text-sm md:!hidden bg-background" href="../index.html"><span class="font-bold text-clip whitespace-nowrap">UnoAPI: Modern Parallel C++ Programming with SYCL and oneAPI v0.6</span>
-</a>
-<div class="relative overflow-hidden md:overflow-auto my-4 md:my-0 h-[calc(100vh-8rem)] md:h-auto">
-<div class="overflow-y-auto h-full w-full relative pr-6"><nav class="table w-full min-w-full my-6 lg:my-8">
-<p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
-<ul class="current">
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">UnoAPI: Modern Parallel C++ Programming with SYCL and oneAPI v0.6</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../00-preliminaries/preliminaries.html">About the Book</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction to Parallel Programming</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Introduction to Parallel Programming</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../10-software-engineering/software-engineering.html">Introduction to Software Engineering</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../15-modern-cpp/modern-cpp.html">Modern C++ as a Better C (and C++)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../18-dpcpp/dpcpp.html">Data-Parallel C++ with oneAPI/SYCL</a></li>
@@ -85,34 +167,199 @@
 <li class="toctree-l1"><a class="reference internal" href="../93-electron-density/electron-density.html">Electron Density Case Study</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../99-chapter-template/chapter-title.html">Chapter Title</a></li>
 </ul>
-</nav>
-</div>
-</div>
-<button @click="showSidebar = false" class="absolute md:hidden right-4 top-4 rounded-sm opacity-70 transition-opacity hover:opacity-100" type="button">
-<svg class="h-4 w-4" fill="currentColor" height="24" stroke="none" viewbox="0 96 960 960" width="24" xmlns="http://www.w3.org/2000/svg">
-<path d="M480 632 284 828q-11 11-28 11t-28-11q-11-11-11-28t11-28l196-196-196-196q-11-11-11-28t11-28q11-11 28-11t28 11l196 196 196-196q11-11 28-11t28 11q11 11 11 28t-11 28L536 576l196 196q11 11 11 28t-11 28q-11 11-28 11t-28-11L480 632Z"></path>
-</svg>
-</button>
-</aside>
-<main class="relative py-6 lg:gap-10 lg:py-8 xl:grid xl:grid-cols-[1fr_300px]">
-<div class="w-full min-w-0 mx-auto">
-<nav aria-label="breadcrumbs" class="flex items-center mb-4 space-x-1 text-sm text-muted-foreground">
-<a class="overflow-hidden text-ellipsis whitespace-nowrap hover:text-foreground" href="../index.html">
-<span class="hidden md:inline">UnoAPI: Modern Parallel C++ Programming with SYCL and oneAPI v0.6</span>
-<svg aria-label="Home" class="md:hidden" fill="currentColor" height="18" stroke="none" viewbox="0 96 960 960" width="18" xmlns="http://www.w3.org/2000/svg">
-<path d="M240 856h120V616h240v240h120V496L480 316 240 496v360Zm-80 80V456l320-240 320 240v480H520V696h-80v240H160Zm320-350Z"></path>
-</svg>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/05-parallel/parallel.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
 </a>
-<div class="mr-1">/</div><span aria-current="page" class="font-medium text-foreground overflow-hidden text-ellipsis whitespace-nowrap">Introduction to Parallel Programming</span>
-</nav>
-<div id="content" role="main">
-<section id="introduction-to-parallel-programming">
-<span id="index-0"></span><h1>Introduction to Parallel Programming<a class="headerlink" href="#introduction-to-parallel-programming" title="Link to this heading">¶</a></h1>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Introduction to Parallel Programming</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notable-early-parallel-computing-systems">Notable Early Parallel Computing Systems</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cluster-computing">Cluster Computing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accelerators">Accelerators</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vector-machines-cray">Vector machines (Cray)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#connection-machine-thinking-machines">Connection Machine (Thinking Machines)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#systolic-architectures">Systolic architectures</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#loop-parallelism-in-fortran">Loop parallelism in FORTRAN</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-and-data-parallel-c-efforts">C* and Data-Parallel C efforts</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#index-8">CUDA</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#openmp">OpenMP</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parallel-concepts-for-humans">Parallel Concepts for Humans</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#von-neumann-machines-and-their-limits">von Neumann machines and their limits</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#flynn-s-taxonomy">Flynn’s taxonomy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#control-memory-taxonomy">Control-memory taxonomy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#speedup-vs-efficiency">Speedup vs. Efficiency</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#amdahls-law">Amdahl’s Law</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scalability">Scalability</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gustafson-s-law-looking-beyond-amdahl-s-law">Gustafson’s Law: Looking Beyond Amdahl’s Law</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#granularity">Granularity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#starvation-and-deadlock">Starvation and deadlock</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#flooding-throttling">Flooding/Throttling</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#layout">Layout</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#latency">Latency</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scheduling-needed-for-understanding-q-submit">Scheduling [needed for understanding q.submit()]</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="introduction-to-parallel-programming">
+<span id="index-0"></span><h1>Introduction to Parallel Programming<a class="headerlink" href="#introduction-to-parallel-programming" title="Link to this heading">#</a></h1>
 <p>We introduce parallel computing.
 We begin with a discussion of parallel computing history, including a discussion of computing systems and programming techniques.  We then cover key parallel programming concepts, specifically how to categorize parallel computing approaches and evaluate performance.
 Knowing this foundational material remains of timeless importance when it comes to achieving desired results.</p>
 <section id="notable-early-parallel-computing-systems">
-<span id="index-1"></span><h2>Notable Early Parallel Computing Systems<a class="headerlink" href="#notable-early-parallel-computing-systems" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#notable-early-parallel-computing-systems'">¶</a></h2>
+<span id="index-1"></span><h2>Notable Early Parallel Computing Systems<a class="headerlink" href="#notable-early-parallel-computing-systems" title="Link to this heading">#</a></h2>
 <p>The history of parallel computing systems dates nearly to the beginning of modern electronic computing history itself, which featured notable systems such as <a class="reference external" href="https://www.britannica.com/technology/Atanasoff-Berry-Computer">Atanasoff-Berry Computer (ABC)</a> (1939), <a class="reference external" href="https://www.britannica.com/technology/Colossus-computer">Colossus</a> (1943), and <a class="reference external" href="https://www.britannica.com/technology/ENIAC">ENIAC https://www.britannica.com/technology/ENIAC</a> (1945).</p>
 <p>Here is a timeline of key developments in parallel computing, focusing on computers designed for parallel and scientific computing, with an emphasis on on-chip parallelism.</p>
 <ul class="simple">
@@ -124,7 +371,7 @@ Knowing this foundational material remains of timeless importance when it comes 
 <li><p>The IBM SP (1993) featured a distributed-memory architecture and high-speed interconnect network for impressive scientific computing performance. Beyond 1993, parallel computing became more ubiquitous, evolving into a commodity. Clusters, accelerators, and other specialized parallel hardware emerged, which we cover separately in the subsequent section.</p></li>
 </ul>
 <section id="cluster-computing">
-<span id="index-2"></span><h3>Cluster Computing<a class="headerlink" href="#cluster-computing" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#cluster-computing'">¶</a></h3>
+<span id="index-2"></span><h3>Cluster Computing<a class="headerlink" href="#cluster-computing" title="Link to this heading">#</a></h3>
 <p>Cluster computing, also known as high-performance computing (HPC), has its origins in the early days of computing when it became clear that solving complex computational problems required more processing power than a single machine could provide.
 The concept of connecting multiple computers together to work in parallel emerged as a solution and is the basis for modern supercomputers such as those found on the <a class="reference external" href="https://www.top500.org/">Top 500 List</a>.</p>
 <ul class="simple">
@@ -135,7 +382,7 @@ The concept of connecting multiple computers together to work in parallel emerge
 <p>Since then, cluster computing has evolved significantly, becoming a dominant paradigm for high-performance computing, enabling breakthroughs in fields such as weather modeling, drug discovery, and data analysis.</p>
 </section>
 <section id="accelerators">
-<span id="index-3"></span><h3>Accelerators<a class="headerlink" href="#accelerators" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#accelerators'">¶</a></h3>
+<span id="index-3"></span><h3>Accelerators<a class="headerlink" href="#accelerators" title="Link to this heading">#</a></h3>
 <p>Accelerators and co-processors play a crucial role in enhancing the computational capabilities of central processing units (CPUs). These specialized hardware components are designed to offload specific tasks or types of computations from the CPU, thereby accelerating the overall performance of a system. By leveraging parallel processing techniques and tailored architectures, accelerators such as graphics processing units (GPUs), field-programmable gate arrays (FPGAs), and application-specific integrated circuits (ASICs) excel at performing repetitive and data-intensive operations.</p>
 <p>GPUs, originally developed for rendering graphics, have found widespread use in areas such as scientific simulations, machine learning, and cryptocurrency mining. FPGAs offer reconfigurability and low power consumption, making them suitable for prototyping and custom logic implementation. ASICs, on the other hand, are highly optimized for specific applications and deliver exceptional performance and efficiency. Incorporating accelerators and co-processors alongside CPUs enables a heterogeneous computing environment, allowing for more efficient and specialized processing tailored to the demands of modern workloads.</p>
 <p>Among the most common accelerators are the following:</p>
@@ -158,113 +405,113 @@ The concept of connecting multiple computers together to work in parallel emerge
 <p>These early accelerators paved the way for the development of more specialized and powerful hardware accelerators that emerged later, such as GPUs, FPGAs, and ASICs, to address the growing demands of specific computational tasks and domains.</p>
 </section>
 <section id="vector-machines-cray">
-<span id="index-4"></span><h3>Vector machines (Cray)<a class="headerlink" href="#vector-machines-cray" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#vector-machines-cray'">¶</a></h3>
+<span id="index-4"></span><h3>Vector machines (Cray)<a class="headerlink" href="#vector-machines-cray" title="Link to this heading">#</a></h3>
 <p>Cray, a renowned supercomputer company founded by Seymour Cray, played a pivotal role in advancing the field of vector processing. Vector processing is a technique that allows a single instruction to operate on multiple data elements simultaneously, enabling efficient execution of computationally intensive tasks. Cray supercomputers, starting with the Cray-1 in the 1970s, were among the first to incorporate vector processing architecture. By leveraging specialized vector registers and instructions, Cray systems achieved remarkable performance gains in scientific simulations, weather forecasting, and other applications that required large-scale numerical computations. The Cray-1, with its distinctive “C” shape design and liquid cooling system, became an iconic symbol of supercomputing prowess. Subsequent generations of Cray systems, including the Cray-2, Cray X-MP, and Cray Y-MP, continued to refine and enhance vector processing capabilities, pushing the boundaries of computational performance. Even though modern supercomputers have evolved beyond pure vector processing, Cray’s contributions to this field were instrumental in establishing the foundation for high-performance computing and shaping the development of future supercomputer architectures.</p>
 </section>
 <section id="connection-machine-thinking-machines">
-<span id="index-5"></span><h3>Connection Machine (Thinking Machines)<a class="headerlink" href="#connection-machine-thinking-machines" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#connection-machine-thinking-machines'">¶</a></h3>
+<span id="index-5"></span><h3>Connection Machine (Thinking Machines)<a class="headerlink" href="#connection-machine-thinking-machines" title="Link to this heading">#</a></h3>
 <p>The Connection Machine, developed by Danny Hillis and his team at Thinking Machines Corporation in the 1980s, was a highly influential supercomputer known for its parallel processing capabilities. The name “Connection Machine” derived from its unique architectural design, inspired by the concept of massively parallel processing. Instead of relying on a small number of powerful processors, the Connection Machine employed a large number of simpler processors called “nodes” that communicated and coordinated their activities through a high-speed network. Each node had its own local memory, and computations were performed in parallel across multiple nodes, enabling the machine to tackle complex problems through distributed processing. The Connection Machine gained attention for its ability to handle massive amounts of data and execute tasks in parallel, making it suitable for applications like artificial intelligence, pattern recognition, and scientific simulations. This innovative approach to parallel computing made the Connection Machine a groundbreaking contribution to the field of supercomputing.</p>
 </section>
 <section id="systolic-architectures">
-<span id="index-6"></span><h3>Systolic architectures<a class="headerlink" href="#systolic-architectures" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#systolic-architectures'">¶</a></h3>
+<span id="index-6"></span><h3>Systolic architectures<a class="headerlink" href="#systolic-architectures" title="Link to this heading">#</a></h3>
 <p>Systolic array architectures are a type of parallel computing design inspired by the human heart’s rhythmic pumping action. In systolic arrays, data flows through a network of specialized processing elements arranged in a regular grid-like pattern. Each processing element performs a simple computation and passes the results to its neighboring elements. This design facilitates the efficient execution of iterative computations and allows for a high degree of parallelism. However, despite their promising potential, systolic array architectures did not experience widespread adoption. Several factors contributed to this. Firstly, systolic arrays require highly regular data access patterns, making them less suitable for irregular or unpredictable computations. Secondly, the complexity of designing and programming systolic arrays posed significant challenges for developers. Lastly, the advent of other parallel computing architectures, such as SIMD (Single Instruction, Multiple Data) and MIMD (Multiple Instruction, Multiple Data), provided more flexibility and better suited the diverse range of applications. However, it’s worth noting that the spirit of systolic arrays lives on in various forms. Modern incarnations include specialized hardware accelerators, such as TPUs and FPGAs, which employ array-like structures and dataflow architectures to achieve high-performance computing for specific workloads. Additionally, some parallel programming frameworks and languages incorporate systolic-like concepts to optimize data movement and parallel execution in distributed systems.</p>
 </section>
 <section id="loop-parallelism-in-fortran">
-<span id="index-7"></span><h3>Loop parallelism in FORTRAN<a class="headerlink" href="#loop-parallelism-in-fortran" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#loop-parallelism-in-fortran'">¶</a></h3>
+<span id="index-7"></span><h3>Loop parallelism in FORTRAN<a class="headerlink" href="#loop-parallelism-in-fortran" title="Link to this heading">#</a></h3>
 <p>Loop parallelism techniques, including the use of compiler directives like OpenMP, began to appear in the late 1990s and early 2000s. OpenMP, for example, was first introduced in 1997 as an application programming interface (API) specification for shared-memory parallel programming. The initial versions of OpenMP were primarily targeted at Fortran and C/C++ languages. Over the years, OpenMP has evolved and gained wider adoption, becoming a popular choice for parallel programming in scientific and high-performance computing domains. However, it’s important to note that specific implementations and support for loop parallelism may have varied among different compilers and versions during that time.</p>
 <p>In early versions of Fortran, loop parallelism was typically achieved through manual techniques and compiler directives. Here’s an example that demonstrates the computation of the area under a curve and the vector dot product using loop parallelism in Fortran:</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>These examples can be found in the <a class="reference external" href="https://github.com/LoyolaChicagoCode/unoapi-fortran-exmaples">LoyolaChicagoCode/unoapi-fortran-exmaples</a> repository. These examples exist to show the relative merts of using OpenMPI/SYCL vs. lower level methods. This book is not about FORTRAN; however, this history will help to understand the sigificance of  modern C++ efforts.`</p>
 </div>
-<div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="c">! Computation of the area under a curve using loop parallelism</span>
-</span><span id="line-2"><span class="k">program </span><span class="n">AreaUnderCurve</span>
-</span><span id="line-3"><span class="w">  </span><span class="k">implicit none</span>
-</span><span id="line-4"><span class="k">  </span><span class="kt">integer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">n</span>
-</span><span id="line-5"><span class="w">  </span><span class="kt">real</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">dx</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">area</span>
-</span><span id="line-6">
-</span><span id="line-7"><span class="w">  </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1000</span><span class="w">  </span><span class="c">! Number of intervals</span>
-</span><span id="line-8"><span class="w">  </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="w">   </span><span class="c">! Lower limit of integration</span>
-</span><span id="line-9"><span class="w">  </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span><span class="w">   </span><span class="c">! Upper limit of integration</span>
-</span><span id="line-10"><span class="w">  </span><span class="n">dx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">b</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">n</span><span class="w">  </span><span class="c">! Width of each interval</span>
-</span><span id="line-11">
-</span><span id="line-12"><span class="w">  </span><span class="n">area</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span>
-</span><span id="line-13">
-</span><span id="line-14"><span class="w">  </span><span class="c">!$OMP PARALLEL DO DEFAULT(NONE) PRIVATE(x) SHARED(a, dx, n, area)</span>
-</span><span id="line-15"><span class="w">  </span><span class="k">do </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">n</span>
-</span><span id="line-16"><span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">0.5</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">dx</span><span class="w">  </span><span class="c">! Midpoint of the interval</span>
-</span><span id="line-17"><span class="w">    </span><span class="n">area</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">area</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">dx</span>
-</span><span id="line-18"><span class="w">  </span><span class="k">end do</span>
-</span><span id="line-19"><span class="w">  </span><span class="c">!$OMP END PARALLEL DO</span>
-</span><span id="line-20">
-</span><span id="line-21"><span class="w">  </span><span class="k">print</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="s2">"The area under the curve is:"</span><span class="p">,</span><span class="w"> </span><span class="n">area</span>
-</span><span id="line-22">
-</span><span id="line-23"><span class="k">contains</span>
-</span><span id="line-24">
-</span><span id="line-25"><span class="w">  </span><span class="c">! Function representing the curve</span>
-</span><span id="line-26"><span class="w">  </span><span class="k">function </span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-</span><span id="line-27"><span class="w">    </span><span class="kt">real</span><span class="p">,</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">x</span>
-</span><span id="line-28"><span class="w">    </span><span class="kt">real</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">f</span>
-</span><span id="line-29">
-</span><span id="line-30"><span class="w">    </span><span class="n">f</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="w">  </span><span class="c">! Example function: x^2</span>
-</span><span id="line-31"><span class="w">  </span><span class="k">end function </span><span class="n">f</span>
-</span><span id="line-32">
-</span><span id="line-33"><span class="k">end program </span><span class="n">AreaUnderCurve</span>
-</span></code></pre></div>
+<div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="c">! Computation of the area under a curve using loop parallelism</span>
+<span class="k">program </span><span class="n">AreaUnderCurve</span>
+<span class="w">  </span><span class="k">implicit none</span>
+<span class="k">  </span><span class="kt">integer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">n</span>
+<span class="w">  </span><span class="kt">real</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">dx</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">area</span>
+
+<span class="w">  </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1000</span><span class="w">  </span><span class="c">! Number of intervals</span>
+<span class="w">  </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="w">   </span><span class="c">! Lower limit of integration</span>
+<span class="w">  </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span><span class="w">   </span><span class="c">! Upper limit of integration</span>
+<span class="w">  </span><span class="n">dx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">b</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">n</span><span class="w">  </span><span class="c">! Width of each interval</span>
+
+<span class="w">  </span><span class="n">area</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span>
+
+<span class="w">  </span><span class="c">!$OMP PARALLEL DO DEFAULT(NONE) PRIVATE(x) SHARED(a, dx, n, area)</span>
+<span class="w">  </span><span class="k">do </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">n</span>
+<span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">0.5</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">dx</span><span class="w">  </span><span class="c">! Midpoint of the interval</span>
+<span class="w">    </span><span class="n">area</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">area</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">dx</span>
+<span class="w">  </span><span class="k">end do</span>
+<span class="w">  </span><span class="c">!$OMP END PARALLEL DO</span>
+
+<span class="w">  </span><span class="k">print</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;The area under the curve is:&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">area</span>
+
+<span class="k">contains</span>
+
+<span class="w">  </span><span class="c">! Function representing the curve</span>
+<span class="w">  </span><span class="k">function </span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="w">    </span><span class="kt">real</span><span class="p">,</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">x</span>
+<span class="w">    </span><span class="kt">real</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">f</span>
+
+<span class="w">    </span><span class="n">f</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="w">  </span><span class="c">! Example function: x^2</span>
+<span class="w">  </span><span class="k">end function </span><span class="n">f</span>
+
+<span class="k">end program </span><span class="n">AreaUnderCurve</span>
+</pre></div>
 </div>
 <p>This is another example of how to compute the vector dot product in F90.</p>
-<div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="c">! Computation of the dot product of two vectors using loop parallelism</span>
-</span><span id="line-2"><span class="k">program </span><span class="n">VectorDotProduct</span>
-</span><span id="line-3"><span class="w">  </span><span class="k">implicit none</span>
-</span><span id="line-4"><span class="k">  </span><span class="kt">integer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">n</span>
-</span><span id="line-5"><span class="w">  </span><span class="kt">real</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="nb">dot_product</span>
-</span><span id="line-6"><span class="nb">  </span><span class="kt">real</span><span class="p">,</span><span class="w"> </span><span class="k">dimension</span><span class="p">(:),</span><span class="w"> </span><span class="k">allocatable</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">vector1</span><span class="p">,</span><span class="w"> </span><span class="n">vector2</span>
-</span><span id="line-7">
-</span><span id="line-8"><span class="w">  </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10000</span><span class="w">  </span><span class="c">! Number of elements in the vectors</span>
-</span><span id="line-9"><span class="w">  </span><span class="k">allocate</span><span class="p">(</span><span class="n">vector1</span><span class="p">(</span><span class="n">n</span><span class="p">),</span><span class="w"> </span><span class="n">vector2</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
-</span><span id="line-10">
-</span><span id="line-11"><span class="w">  </span><span class="c">! Initialize the vectors (example values)</span>
-</span><span id="line-12"><span class="w">  </span><span class="n">vector1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span>
-</span><span id="line-13"><span class="w">  </span><span class="n">vector2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2.0</span>
-</span><span id="line-14">
-</span><span id="line-15"><span class="w">  </span><span class="nb">dot_product</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span>
-</span><span id="line-16">
-</span><span id="line-17"><span class="w">  </span><span class="c">!$OMP PARALLEL DO DEFAULT(NONE) PRIVATE(i) SHARED(n, vector1, vector2, dot_product)</span>
-</span><span id="line-18"><span class="w">  </span><span class="k">do </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">n</span>
-</span><span id="line-19"><span class="w">    </span><span class="nb">dot_product</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">dot_product</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">vector1</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">vector2</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-</span><span id="line-20"><span class="w">  </span><span class="k">end do</span>
-</span><span id="line-21"><span class="w">  </span><span class="c">!$OMP END PARALLEL DO</span>
-</span><span id="line-22">
-</span><span id="line-23"><span class="w">  </span><span class="k">print</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="s2">"The dot product is:"</span><span class="p">,</span><span class="w"> </span><span class="nb">dot_product</span>
-</span><span id="line-24">
-</span><span id="line-25"><span class="k">end program </span><span class="n">VectorDotProduct</span>
-</span></code></pre></div>
+<div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="c">! Computation of the dot product of two vectors using loop parallelism</span>
+<span class="k">program </span><span class="n">VectorDotProduct</span>
+<span class="w">  </span><span class="k">implicit none</span>
+<span class="k">  </span><span class="kt">integer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">n</span>
+<span class="w">  </span><span class="kt">real</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="nb">dot_product</span>
+<span class="nb">  </span><span class="kt">real</span><span class="p">,</span><span class="w"> </span><span class="k">dimension</span><span class="p">(:),</span><span class="w"> </span><span class="k">allocatable</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">vector1</span><span class="p">,</span><span class="w"> </span><span class="n">vector2</span>
+
+<span class="w">  </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10000</span><span class="w">  </span><span class="c">! Number of elements in the vectors</span>
+<span class="w">  </span><span class="k">allocate</span><span class="p">(</span><span class="n">vector1</span><span class="p">(</span><span class="n">n</span><span class="p">),</span><span class="w"> </span><span class="n">vector2</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+
+<span class="w">  </span><span class="c">! Initialize the vectors (example values)</span>
+<span class="w">  </span><span class="n">vector1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span>
+<span class="w">  </span><span class="n">vector2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2.0</span>
+
+<span class="w">  </span><span class="nb">dot_product</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span>
+
+<span class="w">  </span><span class="c">!$OMP PARALLEL DO DEFAULT(NONE) PRIVATE(i) SHARED(n, vector1, vector2, dot_product)</span>
+<span class="w">  </span><span class="k">do </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">n</span>
+<span class="w">    </span><span class="nb">dot_product</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">dot_product</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">vector1</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">vector2</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="w">  </span><span class="k">end do</span>
+<span class="w">  </span><span class="c">!$OMP END PARALLEL DO</span>
+
+<span class="w">  </span><span class="k">print</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;The dot product is:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">dot_product</span>
+
+<span class="k">end program </span><span class="n">VectorDotProduct</span>
+</pre></div>
 </div>
 <p>Similar to our C++ code, you can create a <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt1</span></code> for building FORTRAN programs:</p>
-<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span><span class="w"> </span><span class="s">3.10</span><span class="p">)</span>
-</span><span id="line-2">
-</span><span id="line-3"><span class="nb">project</span><span class="p">(</span><span class="s">Fortran-OpenMP-Examples</span><span class="p">)</span>
-</span><span id="line-4">
-</span><span id="line-5"><span class="c"># Enable Fortran</span>
-</span><span id="line-6"><span class="nb">enable_language</span><span class="p">(</span><span class="s">Fortran</span><span class="p">)</span>
-</span><span id="line-7"><span class="w">     </span>
-</span><span id="line-8"><span class="c"># Bin directory</span>
-</span><span id="line-9"><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_RUNTIME_OUTPUT_DIRECTORY</span><span class="w"> </span><span class="o">${</span><span class="nv">CMAKE_BINARY_DIR</span><span class="o">}</span><span class="s">/bin</span><span class="p">)</span>
-</span><span id="line-10">
-</span><span id="line-11"><span class="c"># Find OpenMP</span>
-</span><span id="line-12"><span class="nb">find_package</span><span class="p">(</span><span class="s">OpenMP</span><span class="w"> </span><span class="s">REQUIRED</span><span class="p">)</span>
-</span><span id="line-13">
-</span><span id="line-14"><span class="c"># Add the executable</span>
-</span><span id="line-15"><span class="nb">add_executable</span><span class="p">(</span><span class="s">aoc</span><span class="w"> </span><span class="s">aoc.f90</span><span class="p">)</span>
-</span><span id="line-16"><span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">aoc</span><span class="w"> </span><span class="s">PRIVATE</span><span class="w"> </span><span class="s">OpenMP::OpenMP_Fortran</span><span class="p">)</span>
-</span><span id="line-17">
-</span><span id="line-18"><span class="nb">add_executable</span><span class="p">(</span><span class="s">vdp</span><span class="w"> </span><span class="s">vdp.f90</span><span class="p">)</span>
-</span><span id="line-19"><span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">vdp</span><span class="w"> </span><span class="s">PRIVATE</span><span class="w"> </span><span class="s">OpenMP::OpenMP_Fortran</span><span class="p">)</span>
-</span></code></pre></div>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span><span class="w"> </span><span class="s">3.10</span><span class="p">)</span>
+
+<span class="nb">project</span><span class="p">(</span><span class="s">Fortran-OpenMP-Examples</span><span class="p">)</span>
+
+<span class="c"># Enable Fortran</span>
+<span class="nb">enable_language</span><span class="p">(</span><span class="s">Fortran</span><span class="p">)</span>
+<span class="w">     </span>
+<span class="c"># Bin directory</span>
+<span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_RUNTIME_OUTPUT_DIRECTORY</span><span class="w"> </span><span class="o">${</span><span class="nv">CMAKE_BINARY_DIR</span><span class="o">}</span><span class="s">/bin</span><span class="p">)</span>
+
+<span class="c"># Find OpenMP</span>
+<span class="nb">find_package</span><span class="p">(</span><span class="s">OpenMP</span><span class="w"> </span><span class="s">REQUIRED</span><span class="p">)</span>
+
+<span class="c"># Add the executable</span>
+<span class="nb">add_executable</span><span class="p">(</span><span class="s">aoc</span><span class="w"> </span><span class="s">aoc.f90</span><span class="p">)</span>
+<span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">aoc</span><span class="w"> </span><span class="s">PRIVATE</span><span class="w"> </span><span class="s">OpenMP::OpenMP_Fortran</span><span class="p">)</span>
+
+<span class="nb">add_executable</span><span class="p">(</span><span class="s">vdp</span><span class="w"> </span><span class="s">vdp.f90</span><span class="p">)</span>
+<span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">vdp</span><span class="w"> </span><span class="s">PRIVATE</span><span class="w"> </span><span class="s">OpenMP::OpenMP_Fortran</span><span class="p">)</span>
+</pre></div>
 </div>
 </section>
 <section id="c-and-data-parallel-c-efforts">
-<h3>C* and Data-Parallel C efforts<a class="headerlink" href="#c-and-data-parallel-c-efforts" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#c-and-data-parallel-c-efforts'">¶</a></h3>
+<h3>C* and Data-Parallel C efforts<a class="headerlink" href="#c-and-data-parallel-c-efforts" title="Link to this heading">#</a></h3>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>We’re still working on this section.</p>
@@ -275,75 +522,75 @@ The concept of connecting multiple computers together to work in parallel emerge
 </ul>
 </section>
 <section id="index-8">
-<span id="cuda"></span><span id="id1"></span><h3>CUDA<a class="headerlink" href="#index-8" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#index-8'">¶</a></h3>
+<span id="cuda"></span><span id="id1"></span><h3>CUDA<a class="headerlink" href="#index-8" title="Link to this heading">#</a></h3>
 <p>CUDA (Compute Unified Device Architecture) is a parallel computing platform and programming model developed by NVIDIA. It allows developers to harness the power of NVIDIA GPUs (Graphics Processing Units) to accelerate computationally intensive tasks. By utilizing CUDA, developers can write code that offloads parallel computations to the GPU, enabling significant speedups and performance improvements in a wide range of applications, such as scientific simulations, data analysis, machine learning, and more.</p>
 <p id="index-9">CUDA became popular due to several key factors. First, NVIDIA GPUs had already gained a significant market share in graphics rendering, providing a large user base to leverage for parallel computing. Second, CUDA offered substantial performance acceleration by harnessing the massive parallel architecture of GPUs, allowing developers to offload computationally intensive tasks and achieve significant speedups. Third, CUDA provided a developer-friendly programming model, extending the C language with directives and APIs that made it easier to express parallelism and utilize GPU resources. Fourth, NVIDIA’s support ecosystem was comprehensive, offering tools, libraries, and documentation to aid CUDA development. The diverse range of application domains, including scientific simulations, data analytics, machine learning, and image processing, further contributed to CUDA’s popularity. Lastly, the availability of NVIDIA’s powerful GPU hardware across various price points enabled wider accessibility and adoption of CUDA in different industries and research fields.</p>
 <p>Here’s the CUDA code example for computing the vector dot product:</p>
-<div class="highlight-cuda notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
-</span><span id="line-2">
-</span><span id="line-3"><span class="cp">#define SIZE 10000</span>
-</span><span id="line-4">
-</span><span id="line-5"><span class="c1">// CUDA kernel for dot product computation</span>
-</span><span id="line-6"><span class="kr">__global__</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">dotProduct</span><span class="p">(</span><span class="kt">float</span><span class="o">*</span><span class="w"> </span><span class="n">vector1</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="o">*</span><span class="w"> </span><span class="n">vector2</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="o">*</span><span class="w"> </span><span class="n">result</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">size</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-</span><span id="line-7"><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">tid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">blockIdx</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nb">blockDim</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">threadIdx</span><span class="p">.</span><span class="n">x</span><span class="p">;</span>
-</span><span id="line-8"><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">tid</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">size</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-</span><span id="line-9"><span class="w">        </span><span class="n">result</span><span class="p">[</span><span class="n">tid</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vector1</span><span class="p">[</span><span class="n">tid</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">vector2</span><span class="p">[</span><span class="n">tid</span><span class="p">];</span>
-</span><span id="line-10"><span class="w">    </span><span class="p">}</span>
-</span><span id="line-11"><span class="p">}</span>
-</span><span id="line-12">
-</span><span id="line-13"><span class="kt">int</span><span class="w"> </span><span class="n">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-</span><span id="line-14"><span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">vector1</span><span class="p">[</span><span class="n">SIZE</span><span class="p">];</span>
-</span><span id="line-15"><span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">vector2</span><span class="p">[</span><span class="n">SIZE</span><span class="p">];</span>
-</span><span id="line-16"><span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">result</span><span class="p">[</span><span class="n">SIZE</span><span class="p">];</span>
-</span><span id="line-17">
-</span><span id="line-18"><span class="w">    </span><span class="c1">// Initialize the vectors (example values)</span>
-</span><span id="line-19"><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">SIZE</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-</span><span id="line-20"><span class="w">        </span><span class="n">vector1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span><span class="p">;</span>
-</span><span id="line-21"><span class="w">        </span><span class="n">vector2</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2.0</span><span class="p">;</span>
-</span><span id="line-22"><span class="w">    </span><span class="p">}</span>
-</span><span id="line-23">
-</span><span id="line-24"><span class="w">    </span><span class="kt">float</span><span class="o">*</span><span class="w"> </span><span class="n">d_vector1</span><span class="p">;</span>
-</span><span id="line-25"><span class="w">    </span><span class="kt">float</span><span class="o">*</span><span class="w"> </span><span class="n">d_vector2</span><span class="p">;</span>
-</span><span id="line-26"><span class="w">    </span><span class="kt">float</span><span class="o">*</span><span class="w"> </span><span class="n">d_result</span><span class="p">;</span>
-</span><span id="line-27">
-</span><span id="line-28"><span class="w">    </span><span class="c1">// Allocate device memory</span>
-</span><span id="line-29"><span class="w">    </span><span class="n">cudaMalloc</span><span class="p">((</span><span class="kt">void</span><span class="o">**</span><span class="p">)</span><span class="o">&amp;</span><span class="n">d_vector1</span><span class="p">,</span><span class="w"> </span><span class="n">SIZE</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">));</span>
-</span><span id="line-30"><span class="w">    </span><span class="n">cudaMalloc</span><span class="p">((</span><span class="kt">void</span><span class="o">**</span><span class="p">)</span><span class="o">&amp;</span><span class="n">d_vector2</span><span class="p">,</span><span class="w"> </span><span class="n">SIZE</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">));</span>
-</span><span id="line-31"><span class="w">    </span><span class="n">cudaMalloc</span><span class="p">((</span><span class="kt">void</span><span class="o">**</span><span class="p">)</span><span class="o">&amp;</span><span class="n">d_result</span><span class="p">,</span><span class="w"> </span><span class="n">SIZE</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">));</span>
-</span><span id="line-32">
-</span><span id="line-33"><span class="w">    </span><span class="c1">// Copy input vectors from host to device</span>
-</span><span id="line-34"><span class="w">    </span><span class="n">cudaMemcpy</span><span class="p">(</span><span class="n">d_vector1</span><span class="p">,</span><span class="w"> </span><span class="n">vector1</span><span class="p">,</span><span class="w"> </span><span class="n">SIZE</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">),</span><span class="w"> </span><span class="n">cudaMemcpyHostToDevice</span><span class="p">);</span>
-</span><span id="line-35"><span class="w">    </span><span class="n">cudaMemcpy</span><span class="p">(</span><span class="n">d_vector2</span><span class="p">,</span><span class="w"> </span><span class="n">vector2</span><span class="p">,</span><span class="w"> </span><span class="n">SIZE</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">),</span><span class="w"> </span><span class="n">cudaMemcpyHostToDevice</span><span class="p">);</span>
-</span><span id="line-36">
-</span><span id="line-37"><span class="w">    </span><span class="c1">// Launch the dot product kernel</span>
-</span><span id="line-38"><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">blockSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">256</span><span class="p">;</span>
-</span><span id="line-39"><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">gridSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">SIZE</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">blockSize</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">blockSize</span><span class="p">;</span>
-</span><span id="line-40"><span class="w">    </span><span class="n">dotProduct</span><span class="o">&lt;&lt;&lt;</span><span class="n">gridSize</span><span class="p">,</span><span class="w"> </span><span class="n">blockSize</span><span class="o">&gt;&gt;&gt;</span><span class="p">(</span><span class="n">d_vector1</span><span class="p">,</span><span class="w"> </span><span class="n">d_vector2</span><span class="p">,</span><span class="w"> </span><span class="n">d_result</span><span class="p">,</span><span class="w"> </span><span class="n">SIZE</span><span class="p">);</span>
-</span><span id="line-41">
-</span><span id="line-42"><span class="w">    </span><span class="c1">// Copy result from device to host</span>
-</span><span id="line-43"><span class="w">    </span><span class="n">cudaMemcpy</span><span class="p">(</span><span class="n">result</span><span class="p">,</span><span class="w"> </span><span class="n">d_result</span><span class="p">,</span><span class="w"> </span><span class="n">SIZE</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">),</span><span class="w"> </span><span class="n">cudaMemcpyDeviceToHost</span><span class="p">);</span>
-</span><span id="line-44">
-</span><span id="line-45"><span class="w">    </span><span class="c1">// Compute the dot product result on the host</span>
-</span><span id="line-46"><span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">dotProductResult</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span>
-</span><span id="line-47"><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">SIZE</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-</span><span id="line-48"><span class="w">        </span><span class="n">dotProductResult</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">result</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-</span><span id="line-49"><span class="w">    </span><span class="p">}</span>
-</span><span id="line-50">
-</span><span id="line-51"><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"The dot product is: %f</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">dotProductResult</span><span class="p">);</span>
-</span><span id="line-52">
-</span><span id="line-53"><span class="w">    </span><span class="c1">// Free device memory</span>
-</span><span id="line-54"><span class="w">    </span><span class="n">cudaFree</span><span class="p">(</span><span class="n">d_vector1</span><span class="p">);</span>
-</span><span id="line-55"><span class="w">    </span><span class="n">cudaFree</span><span class="p">(</span><span class="n">d_vector2</span><span class="p">);</span>
-</span><span id="line-56"><span class="w">    </span><span class="n">cudaFree</span><span class="p">(</span><span class="n">d_result</span><span class="p">);</span>
-</span><span id="line-57">
-</span><span id="line-58"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-</span><span id="line-59"><span class="p">}</span>
-</span></code></pre></div>
+<div class="highlight-cuda notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+
+<span class="cp">#define SIZE 10000</span>
+
+<span class="c1">// CUDA kernel for dot product computation</span>
+<span class="kr">__global__</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">dotProduct</span><span class="p">(</span><span class="kt">float</span><span class="o">*</span><span class="w"> </span><span class="n">vector1</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="o">*</span><span class="w"> </span><span class="n">vector2</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="o">*</span><span class="w"> </span><span class="n">result</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">size</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">tid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">blockIdx</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nb">blockDim</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">threadIdx</span><span class="p">.</span><span class="n">x</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">tid</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">size</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">result</span><span class="p">[</span><span class="n">tid</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vector1</span><span class="p">[</span><span class="n">tid</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">vector2</span><span class="p">[</span><span class="n">tid</span><span class="p">];</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="n">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">vector1</span><span class="p">[</span><span class="n">SIZE</span><span class="p">];</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">vector2</span><span class="p">[</span><span class="n">SIZE</span><span class="p">];</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">result</span><span class="p">[</span><span class="n">SIZE</span><span class="p">];</span>
+
+<span class="w">    </span><span class="c1">// Initialize the vectors (example values)</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">SIZE</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">vector1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span><span class="p">;</span>
+<span class="w">        </span><span class="n">vector2</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2.0</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kt">float</span><span class="o">*</span><span class="w"> </span><span class="n">d_vector1</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">float</span><span class="o">*</span><span class="w"> </span><span class="n">d_vector2</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">float</span><span class="o">*</span><span class="w"> </span><span class="n">d_result</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Allocate device memory</span>
+<span class="w">    </span><span class="n">cudaMalloc</span><span class="p">((</span><span class="kt">void</span><span class="o">**</span><span class="p">)</span><span class="o">&amp;</span><span class="n">d_vector1</span><span class="p">,</span><span class="w"> </span><span class="n">SIZE</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">));</span>
+<span class="w">    </span><span class="n">cudaMalloc</span><span class="p">((</span><span class="kt">void</span><span class="o">**</span><span class="p">)</span><span class="o">&amp;</span><span class="n">d_vector2</span><span class="p">,</span><span class="w"> </span><span class="n">SIZE</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">));</span>
+<span class="w">    </span><span class="n">cudaMalloc</span><span class="p">((</span><span class="kt">void</span><span class="o">**</span><span class="p">)</span><span class="o">&amp;</span><span class="n">d_result</span><span class="p">,</span><span class="w"> </span><span class="n">SIZE</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">));</span>
+
+<span class="w">    </span><span class="c1">// Copy input vectors from host to device</span>
+<span class="w">    </span><span class="n">cudaMemcpy</span><span class="p">(</span><span class="n">d_vector1</span><span class="p">,</span><span class="w"> </span><span class="n">vector1</span><span class="p">,</span><span class="w"> </span><span class="n">SIZE</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">),</span><span class="w"> </span><span class="n">cudaMemcpyHostToDevice</span><span class="p">);</span>
+<span class="w">    </span><span class="n">cudaMemcpy</span><span class="p">(</span><span class="n">d_vector2</span><span class="p">,</span><span class="w"> </span><span class="n">vector2</span><span class="p">,</span><span class="w"> </span><span class="n">SIZE</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">),</span><span class="w"> </span><span class="n">cudaMemcpyHostToDevice</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Launch the dot product kernel</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">blockSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">256</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">gridSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">SIZE</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">blockSize</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">blockSize</span><span class="p">;</span>
+<span class="w">    </span><span class="n">dotProduct</span><span class="o">&lt;&lt;&lt;</span><span class="n">gridSize</span><span class="p">,</span><span class="w"> </span><span class="n">blockSize</span><span class="o">&gt;&gt;&gt;</span><span class="p">(</span><span class="n">d_vector1</span><span class="p">,</span><span class="w"> </span><span class="n">d_vector2</span><span class="p">,</span><span class="w"> </span><span class="n">d_result</span><span class="p">,</span><span class="w"> </span><span class="n">SIZE</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Copy result from device to host</span>
+<span class="w">    </span><span class="n">cudaMemcpy</span><span class="p">(</span><span class="n">result</span><span class="p">,</span><span class="w"> </span><span class="n">d_result</span><span class="p">,</span><span class="w"> </span><span class="n">SIZE</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">),</span><span class="w"> </span><span class="n">cudaMemcpyDeviceToHost</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Compute the dot product result on the host</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">dotProductResult</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">SIZE</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">dotProductResult</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">result</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;The dot product is: %f</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">dotProductResult</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Free device memory</span>
+<span class="w">    </span><span class="n">cudaFree</span><span class="p">(</span><span class="n">d_vector1</span><span class="p">);</span>
+<span class="w">    </span><span class="n">cudaFree</span><span class="p">(</span><span class="n">d_vector2</span><span class="p">);</span>
+<span class="w">    </span><span class="n">cudaFree</span><span class="p">(</span><span class="n">d_result</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
 </div>
 <p id="index-10">The above CUDA example demonstrates the computation of the dot product of two vectors using GPU parallelism. The code begins by initializing the input vectors with example values on the host. Then, device memory is allocated using <code class="docutils literal notranslate"><span class="pre">cudaMalloc</span></code>, and the input vectors are copied from the host to the device memory using <code class="docutils literal notranslate"><span class="pre">cudaMemcpy</span></code>. The dot product computation is performed by launching a CUDA kernel, <code class="docutils literal notranslate"><span class="pre">dotProduct</span></code>, which runs in parallel on the GPU. Each thread calculates the product of corresponding elements from the input vectors. After the kernel execution, the results are copied back to the host memory using <code class="docutils literal notranslate"><span class="pre">cudaMemcpy</span></code>, and the dot product is computed on the host. Finally, the dot product result is printed to the console. The example showcases how CUDA leverages the parallel processing capabilities of GPUs to accelerate computations, leading to improved performance compared to traditional CPU-based implementations.</p>
 </section>
 <section id="openmp">
-<h3>OpenMP<a class="headerlink" href="#openmp" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#openmp'">¶</a></h3>
+<h3>OpenMP<a class="headerlink" href="#openmp" title="Link to this heading">#</a></h3>
 <p>OpenMP (Open Multi-Processing) is a portable API (Application Programming Interface) for shared-memory parallel programming in C, C++, and Fortran. It was developed in the late 1990s by various hardware and software vendors, aiming to create a standardized and user-friendly programming model for shared-memory parallelism. The initial release, OpenMP 1.0, came out in 1997, offering basic parallelism constructs. Subsequent versions, including OpenMP 2.0 (1998) and OpenMP 3.0 (2008), introduced additional features such as task parallelism and nested parallelism. OpenMP gained widespread adoption in high-performance computing due to its simplicity, portability, and compatibility with existing codebases. OpenMP 5.0, released in 2018, brought advanced features like improved accelerator offloading, enhanced tasking capabilities, and SIMD programming support. It remains actively developed and maintained by a consortium of vendors, researchers, and users. OpenMP enables developers to leverage multi-core processors and parallel architectures for enhanced performance and scalability in their applications.</p>
 <p>C, C++, and Fortran, are the primary languages directly supported by OpenMP. OpenMP offers language extensions, compiler directives, and runtime libraries specific to each language to facilitate parallel programming and exploit shared-memory parallelism:</p>
 <ul class="simple">
@@ -352,99 +599,99 @@ The concept of connecting multiple computers together to work in parallel emerge
 <li><p>Fortran: OpenMP is natively supported in Fortran, allowing Fortran programmers to express parallelism through directives and runtime routines for efficient parallel execution.</p></li>
 </ul>
 <p>Here is an example of an OpenMP program that computes the dot product of two vectors.</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
-</span><span id="line-2"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span>
-</span><span id="line-3"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;omp.h&gt;</span>
-</span><span id="line-4">
-</span><span id="line-5"><span class="cp">#define SIZE 10000</span>
-</span><span id="line-6">
-</span><span id="line-7"><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-</span><span id="line-8"><span class="w">   </span><span class="kt">float</span><span class="w"> </span><span class="n">vector1</span><span class="p">[</span><span class="n">SIZE</span><span class="p">];</span>
-</span><span id="line-9"><span class="w">   </span><span class="kt">float</span><span class="w"> </span><span class="n">vector2</span><span class="p">[</span><span class="n">SIZE</span><span class="p">];</span>
-</span><span id="line-10"><span class="w">   </span><span class="kt">float</span><span class="w"> </span><span class="n">dotProduct</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span>
-</span><span id="line-11"><span class="w">   </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
-</span><span id="line-12">
-</span><span id="line-13"><span class="w">   </span><span class="c1">// Initialize the vectors with random numbers</span>
-</span><span id="line-14"><span class="w">   </span><span class="cp">#pragma omp parallel for</span>
-</span><span id="line-15"><span class="w">   </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">SIZE</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-</span><span id="line-16"><span class="w">      </span><span class="n">vector1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">rand</span><span class="p">()</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">RAND_MAX</span><span class="p">;</span>
-</span><span id="line-17"><span class="w">      </span><span class="n">vector2</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">rand</span><span class="p">()</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">RAND_MAX</span><span class="p">;</span>
-</span><span id="line-18"><span class="w">   </span><span class="p">}</span>
-</span><span id="line-19">
-</span><span id="line-20"><span class="w">   </span><span class="c1">// Compute the dot product using OpenMP parallelism</span>
-</span><span id="line-21"><span class="w">   </span><span class="cp">#pragma omp parallel for reduction(+:dotProduct)</span>
-</span><span id="line-22"><span class="w">   </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">SIZE</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-</span><span id="line-23"><span class="w">      </span><span class="n">dotProduct</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">vector1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">vector2</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-</span><span id="line-24"><span class="w">   </span><span class="p">}</span>
-</span><span id="line-25">
-</span><span id="line-26"><span class="w">   </span><span class="n">printf</span><span class="p">(</span><span class="s">"The dot product is: %f</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">dotProduct</span><span class="p">);</span>
-</span><span id="line-27">
-</span><span id="line-28"><span class="w">   </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-</span><span id="line-29"><span class="p">}</span>
-</span></code></pre></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;omp.h&gt;</span>
+
+<span class="cp">#define SIZE 10000</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="kt">float</span><span class="w"> </span><span class="n">vector1</span><span class="p">[</span><span class="n">SIZE</span><span class="p">];</span>
+<span class="w">   </span><span class="kt">float</span><span class="w"> </span><span class="n">vector2</span><span class="p">[</span><span class="n">SIZE</span><span class="p">];</span>
+<span class="w">   </span><span class="kt">float</span><span class="w"> </span><span class="n">dotProduct</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span>
+<span class="w">   </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+
+<span class="w">   </span><span class="c1">// Initialize the vectors with random numbers</span>
+<span class="w">   </span><span class="cp">#pragma omp parallel for</span>
+<span class="w">   </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">SIZE</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">vector1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">rand</span><span class="p">()</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">RAND_MAX</span><span class="p">;</span>
+<span class="w">      </span><span class="n">vector2</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">rand</span><span class="p">()</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">RAND_MAX</span><span class="p">;</span>
+<span class="w">   </span><span class="p">}</span>
+
+<span class="w">   </span><span class="c1">// Compute the dot product using OpenMP parallelism</span>
+<span class="w">   </span><span class="cp">#pragma omp parallel for reduction(+:dotProduct)</span>
+<span class="w">   </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">SIZE</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">dotProduct</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">vector1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">vector2</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="w">   </span><span class="p">}</span>
+
+<span class="w">   </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;The dot product is: %f</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">dotProduct</span><span class="p">);</span>
+
+<span class="w">   </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
 </div>
 <p>Here is how it would look in C++ with <code class="docutils literal notranslate"><span class="pre">std::vector</span></code>:</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
-</span><span id="line-2"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span>
-</span><span id="line-3"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstdlib&gt;</span>
-</span><span id="line-4"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;omp.h&gt;</span>
-</span><span id="line-5">
-</span><span id="line-6"><span class="cp">#define SIZE 10000</span>
-</span><span id="line-7">
-</span><span id="line-8"><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-</span><span id="line-9"><span class="w">   </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="w"> </span><span class="n">vector1</span><span class="p">(</span><span class="n">SIZE</span><span class="p">);</span>
-</span><span id="line-10"><span class="w">   </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="w"> </span><span class="n">vector2</span><span class="p">(</span><span class="n">SIZE</span><span class="p">);</span>
-</span><span id="line-11"><span class="w">   </span><span class="kt">float</span><span class="w"> </span><span class="n">dotProduct</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span>
-</span><span id="line-12">
-</span><span id="line-13"><span class="w">   </span><span class="c1">// Initialize the vectors with random numbers</span>
-</span><span id="line-14"><span class="w">   </span><span class="cp">#pragma omp parallel for</span>
-</span><span id="line-15"><span class="w">   </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">SIZE</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-</span><span id="line-16"><span class="w">      </span><span class="n">vector1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="n">rand</span><span class="p">())</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">RAND_MAX</span><span class="p">;</span>
-</span><span id="line-17"><span class="w">      </span><span class="n">vector2</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="n">rand</span><span class="p">())</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">RAND_MAX</span><span class="p">;</span>
-</span><span id="line-18"><span class="w">   </span><span class="p">}</span>
-</span><span id="line-19">
-</span><span id="line-20"><span class="w">   </span><span class="c1">// Compute the dot product using OpenMP parallelism</span>
-</span><span id="line-21"><span class="w">   </span><span class="cp">#pragma omp parallel for reduction(+:dotProduct)</span>
-</span><span id="line-22"><span class="w">   </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">SIZE</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-</span><span id="line-23"><span class="w">      </span><span class="n">dotProduct</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">vector1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">vector2</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-</span><span id="line-24"><span class="w">   </span><span class="p">}</span>
-</span><span id="line-25">
-</span><span id="line-26"><span class="w">   </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"The dot product is: "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">dotProduct</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-</span><span id="line-27">
-</span><span id="line-28"><span class="w">   </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-</span><span id="line-29"><span class="p">}</span>
-</span></code></pre></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstdlib&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;omp.h&gt;</span>
+
+<span class="cp">#define SIZE 10000</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="w"> </span><span class="n">vector1</span><span class="p">(</span><span class="n">SIZE</span><span class="p">);</span>
+<span class="w">   </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="w"> </span><span class="n">vector2</span><span class="p">(</span><span class="n">SIZE</span><span class="p">);</span>
+<span class="w">   </span><span class="kt">float</span><span class="w"> </span><span class="n">dotProduct</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span>
+
+<span class="w">   </span><span class="c1">// Initialize the vectors with random numbers</span>
+<span class="w">   </span><span class="cp">#pragma omp parallel for</span>
+<span class="w">   </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">SIZE</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">vector1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="n">rand</span><span class="p">())</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">RAND_MAX</span><span class="p">;</span>
+<span class="w">      </span><span class="n">vector2</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="n">rand</span><span class="p">())</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">RAND_MAX</span><span class="p">;</span>
+<span class="w">   </span><span class="p">}</span>
+
+<span class="w">   </span><span class="c1">// Compute the dot product using OpenMP parallelism</span>
+<span class="w">   </span><span class="cp">#pragma omp parallel for reduction(+:dotProduct)</span>
+<span class="w">   </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">SIZE</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">dotProduct</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">vector1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">vector2</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="w">   </span><span class="p">}</span>
+
+<span class="w">   </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;The dot product is: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">dotProduct</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">   </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
 </div>
 <p>And here is a FORTRAN version:</p>
-<div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="k">program </span><span class="nb">dot_product</span>
-</span><span id="line-2"><span class="nb">   </span><span class="k">use </span><span class="n">omp_lib</span>
-</span><span id="line-3"><span class="w">   </span><span class="k">implicit none</span>
-</span><span id="line-4">
-</span><span id="line-5"><span class="k">   </span><span class="kt">integer</span><span class="p">,</span><span class="w"> </span><span class="k">parameter</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">SIZE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10000</span>
-</span><span id="line-6"><span class="w">   </span><span class="kt">real</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">vector1</span><span class="p">(</span><span class="n">SIZE</span><span class="p">),</span><span class="w"> </span><span class="n">vector2</span><span class="p">(</span><span class="n">SIZE</span><span class="p">),</span><span class="w"> </span><span class="n">dotProduct</span>
-</span><span id="line-7"><span class="w">   </span><span class="kt">integer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">i</span>
-</span><span id="line-8">
-</span><span id="line-9"><span class="w">   </span><span class="c">! Initialize the vectors with random numbers</span>
-</span><span id="line-10"><span class="w">   </span><span class="c">!$OMP PARALLEL DO DEFAULT(NONE) PRIVATE(i) SHARED(vector1, vector2)</span>
-</span><span id="line-11"><span class="w">   </span><span class="k">do </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">SIZE</span>
-</span><span id="line-12"><span class="w">      </span><span class="n">vector1</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">real</span><span class="p">(</span><span class="nb">rand</span><span class="p">())</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="kt">real</span><span class="p">(</span><span class="nb">RAND</span><span class="p">())</span>
-</span><span id="line-13"><span class="w">      </span><span class="n">vector2</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">real</span><span class="p">(</span><span class="nb">rand</span><span class="p">())</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="kt">real</span><span class="p">(</span><span class="nb">RAND</span><span class="p">())</span>
-</span><span id="line-14"><span class="w">   </span><span class="k">end do</span>
-</span><span id="line-15"><span class="w">   </span><span class="c">!$OMP END PARALLEL DO</span>
-</span><span id="line-16">
-</span><span id="line-17"><span class="w">   </span><span class="n">dotProduct</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span>
-</span><span id="line-18">
-</span><span id="line-19"><span class="w">   </span><span class="c">! Compute the dot product using OpenMP parallelism</span>
-</span><span id="line-20"><span class="w">   </span><span class="c">!$OMP PARALLEL DO DEFAULT(NONE) PRIVATE(i) SHARED(vector1, vector2) REDUCTION(+:dotProduct)</span>
-</span><span id="line-21"><span class="w">   </span><span class="k">do </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">SIZE</span>
-</span><span id="line-22"><span class="w">      </span><span class="n">dotProduct</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dotProduct</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">vector1</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">vector2</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-</span><span id="line-23"><span class="w">   </span><span class="k">end do</span>
-</span><span id="line-24"><span class="w">   </span><span class="c">!$OMP END PARALLEL DO</span>
-</span><span id="line-25">
-</span><span id="line-26"><span class="w">   </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="s2">"(A, F6.2)"</span><span class="p">)</span><span class="w"> </span><span class="s2">"The dot product is:"</span><span class="p">,</span><span class="w"> </span><span class="n">dotProduct</span>
-</span><span id="line-27">
-</span><span id="line-28"><span class="k">end program </span><span class="nb">dot_product</span>
-</span></code></pre></div>
+<div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="k">program </span><span class="nb">dot_product</span>
+<span class="nb">   </span><span class="k">use </span><span class="n">omp_lib</span>
+<span class="w">   </span><span class="k">implicit none</span>
+
+<span class="k">   </span><span class="kt">integer</span><span class="p">,</span><span class="w"> </span><span class="k">parameter</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">SIZE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10000</span>
+<span class="w">   </span><span class="kt">real</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">vector1</span><span class="p">(</span><span class="n">SIZE</span><span class="p">),</span><span class="w"> </span><span class="n">vector2</span><span class="p">(</span><span class="n">SIZE</span><span class="p">),</span><span class="w"> </span><span class="n">dotProduct</span>
+<span class="w">   </span><span class="kt">integer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">i</span>
+
+<span class="w">   </span><span class="c">! Initialize the vectors with random numbers</span>
+<span class="w">   </span><span class="c">!$OMP PARALLEL DO DEFAULT(NONE) PRIVATE(i) SHARED(vector1, vector2)</span>
+<span class="w">   </span><span class="k">do </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">SIZE</span>
+<span class="w">      </span><span class="n">vector1</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">real</span><span class="p">(</span><span class="nb">rand</span><span class="p">())</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="kt">real</span><span class="p">(</span><span class="nb">RAND</span><span class="p">())</span>
+<span class="w">      </span><span class="n">vector2</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">real</span><span class="p">(</span><span class="nb">rand</span><span class="p">())</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="kt">real</span><span class="p">(</span><span class="nb">RAND</span><span class="p">())</span>
+<span class="w">   </span><span class="k">end do</span>
+<span class="w">   </span><span class="c">!$OMP END PARALLEL DO</span>
+
+<span class="w">   </span><span class="n">dotProduct</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span>
+
+<span class="w">   </span><span class="c">! Compute the dot product using OpenMP parallelism</span>
+<span class="w">   </span><span class="c">!$OMP PARALLEL DO DEFAULT(NONE) PRIVATE(i) SHARED(vector1, vector2) REDUCTION(+:dotProduct)</span>
+<span class="w">   </span><span class="k">do </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">SIZE</span>
+<span class="w">      </span><span class="n">dotProduct</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dotProduct</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">vector1</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">vector2</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="w">   </span><span class="k">end do</span>
+<span class="w">   </span><span class="c">!$OMP END PARALLEL DO</span>
+
+<span class="w">   </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;(A, F6.2)&quot;</span><span class="p">)</span><span class="w"> </span><span class="s2">&quot;The dot product is:&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">dotProduct</span>
+
+<span class="k">end program </span><span class="nb">dot_product</span>
+</pre></div>
 </div>
 <p>As you can see, a strength of OpenMP is the ability to write similar code to express parallelism in all three of the languages.
 This legacy is important to frameworks such as oneAPI/SYCL, which aim to provide a similar framework without relying on compiler pramgas.
@@ -452,19 +699,19 @@ In particular, we will discuss oneAPI in more detail <a class="reference interna
 </section>
 </section>
 <section id="parallel-concepts-for-humans">
-<h2>Parallel Concepts for Humans<a class="headerlink" href="#parallel-concepts-for-humans" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#parallel-concepts-for-humans'">¶</a></h2>
+<h2>Parallel Concepts for Humans<a class="headerlink" href="#parallel-concepts-for-humans" title="Link to this heading">#</a></h2>
 <p>In this section, we’ll discuss some of the key concepts and principles underlying parallel computing.
 The track for this material was laid in the book <a class="reference external" href="https://ecommons.luc.edu/cs_facpubs/3/">High Performance Java Platform Computing</a>.</p>
 <p><a class="reference external" href="https://ecommons.luc.edu/cs_facpubs/3/">https://ecommons.luc.edu/cs_facpubs/3/</a></p>
 <p><a class="reference external" href="https://figshare.com/articles/dataset/hpjpc/962958">https://figshare.com/articles/dataset/hpjpc/962958</a></p>
 <section id="von-neumann-machines-and-their-limits">
-<h3>von Neumann machines and their limits<a class="headerlink" href="#von-neumann-machines-and-their-limits" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#von-neumann-machines-and-their-limits'">¶</a></h3>
+<h3>von Neumann machines and their limits<a class="headerlink" href="#von-neumann-machines-and-their-limits" title="Link to this heading">#</a></h3>
 <p>A discussion of parallel computing must begin with a discussion of sequential computing and the von Neumann machine—our sequential computer. The von Neumann machine is one of the computer designs of John von Neumann. A processor fetches instructions and data from a memory, operates on the data, and writes the results back into memory. Computation is accomplished by making small incremental changes in the global memory.</p>
 <p>The problem with the von Neumann machine is that the design relies on making a sequence of small changes, a highly sequential process. Note that current programming languages are designed assuming that the von Neumann machine will be used. The assignment statement fetches data from memory on the right hand side, performs computations, and writes results back into the memory for the left-hand-side variable. The statements are executed sequentially, with control accomplished by branches. In the language, the branches are given the syntactic sugar of if statements, while statements, and so on.</p>
 <p>There is a problem in trying to speed up von Neumann machines. They are inherently sequential in principle. Attempts may be made to execute several instructions at once (super-scalar execution), but that gives only a few times the speedup. Similarly, it is difficult to gain high speedup from a program written in a von Neumann language without doing an extensive rewrite of the program.</p>
 </section>
 <section id="flynn-s-taxonomy">
-<h3>Flynn’s taxonomy<a class="headerlink" href="#flynn-s-taxonomy" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#flynn-s-taxonomy'">¶</a></h3>
+<h3>Flynn’s taxonomy<a class="headerlink" href="#flynn-s-taxonomy" title="Link to this heading">#</a></h3>
 <p>Flynn produced a taxonomy of parallel machines that is widely used. He classified computers with respect to how many different instruction streams they are fetching and executing at the same time, and by how many data sets (data streams) they are fetching and processing. His taxonomy is as follows:</p>
 <ul>
 <li><p>SISD—single instruction stream–single data stream: the familiar von Neumann machine. Fetching one sequence of instructions and fetching the data and the instructions address from one memory.</p></li>
@@ -483,7 +730,7 @@ The track for this material was laid in the book <a class="reference external" h
 <p>It is arguable that the change from shared-memory to distributed-memory machines is a radical shift (but one becoming more common); it goes to the root of how one thinks about computations. On the von Neumann machine, the most important entity is the process, the program in execution. The process fetches instructions and manipulates data, thereby embodying both control and data. On a shared-memory machine, the process is still the most important entity, although there are now multiple threads of execution within the data space. But at the global level, on a distributed-memory machine, messages convey data across the machine and the arrival of messages enables computations. At the global level of distributed-memory machines, it is the messages that embody control and data. Hence, the messages are more important than the processes that are running on the nodes.</p>
 </section>
 <section id="control-memory-taxonomy">
-<h3>Control-memory taxonomy<a class="headerlink" href="#control-memory-taxonomy" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#control-memory-taxonomy'">¶</a></h3>
+<h3>Control-memory taxonomy<a class="headerlink" href="#control-memory-taxonomy" title="Link to this heading">#</a></h3>
 <p>Flynn’s taxonomy is usually applied to machines with von Neumann processors. Further insight may be gained by considering other control mechanisms. The von Neumann machines may be characterized as “control driven”; it is the flow of control represented by the program counter that schedules operations for execution.</p>
 <p>“Data-driven” processors schedule operations for execution when their operands become available. In the paradigmatic variety of data-driven machines, scalar data values flow in
 tokens over an interconnection network to the instructions that work upon them (hence the term “data flow”). When a token arrives, the hardware checks that all operands are present and, if they are, schedules the instruction for execution. Data-flow machines are easily built distributed memory.</p>
@@ -492,7 +739,7 @@ tokens over an interconnection network to the instructions that work upon them (
 <p>A “demand-driven” processor performs computations when values are demanded. For example, when the value of a binary operator is demanded, the operator, in turn, demands the values of its operands. A common implementation of demand-driven processors is based on “reductions,” which occur when a functional program is repeatedly rewritten until the solution is computed. The rewritings include replacing an operator applied to data values with its result and replacing a function call with the function body, with the actual parameters substituted for the formal. Reductions are performed on an internal representation of the program. Two common representations are graphs and strings. Graphs consist of nodes linked together with pointers and hence work best with shared memory. Strings can be spread across a chain of processors so that an individual processor can reduce sub-expressions contained entirely in its memory and neighboring processors can shift expressions falling across their boundary into one of them.“Pattern-driven” computation is typically done without specialized hardware and is implemented atop von Neumann machines. Shared-memory, pattern-driven programming usually means parallel-logic programming. Distributed-memory, pattern-driven programming is represented in this book by Active Messages and Concurrent Aggregates.</p>
 </section>
 <section id="speedup-vs-efficiency">
-<h3>Speedup vs. Efficiency<a class="headerlink" href="#speedup-vs-efficiency" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#speedup-vs-efficiency'">¶</a></h3>
+<h3>Speedup vs. Efficiency<a class="headerlink" href="#speedup-vs-efficiency" title="Link to this heading">#</a></h3>
 <p>We want to use parallelism to compute answers more quickly. How much more quickly?</p>
 <p>We define speedup as</p>
 <div class="math notranslate nohighlight">
@@ -529,7 +776,7 @@ Therefore, <span class="math notranslate nohighlight">\(T_n\)</span> may be <spa
 <p>The efficiency would be the ratio of execution time with linear speedup to observed execution time. If speedup is no greater than linear, efficiency will be less than or equal to 1.</p>
 </section>
 <section id="amdahls-law">
-<span id="index-11"></span><h3>Amdahl’s Law<a class="headerlink" href="#amdahls-law" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#amdahls-law'">¶</a></h3>
+<span id="index-11"></span><h3>Amdahl’s Law<a class="headerlink" href="#amdahls-law" title="Link to this heading">#</a></h3>
 <p>Amdahl’s law does not really deserve the title of law. It is merely a back-of-the-envelope attempt (or conjecture) to prove that there are severe limits to the speedup that can be achieved by a parallel program. Amdahl’s law asserts that there is a serial part of any parallel program that must be executed sequentially, and the time required for this part will be a lower limit on the time the program takes to execute. Consider a serial program that executes in time T. Let’s calculate the best speedup we could achieve if a fraction f of the execution time is taken up by sequential execution. If you divide the parallel execution time into the serial and parallel parts, you get speedup with an upper bound of</p>
 <div class="math notranslate nohighlight">
 \[E = \frac{T}{f T + \frac{(1 - f)T}{n}}\]</div>
@@ -542,7 +789,7 @@ Therefore, <span class="math notranslate nohighlight">\(T_n\)</span> may be <spa
 \[\lim_{x\to\infty} S = \lim_{x\to\infty} \frac{1}{f + \frac{(1 - f)}{n}} = \frac{1}{f}\]</div>
 </section>
 <section id="scalability">
-<h3>Scalability<a class="headerlink" href="#scalability" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#scalability'">¶</a></h3>
+<h3>Scalability<a class="headerlink" href="#scalability" title="Link to this heading">#</a></h3>
 <p>A flaw in the reasoning behind Amdahl’s law is that it deals with fixed-sized problems and questions how much faster they can be run. This is not, however, the way massively paral- lel processors are used. Take the example of weather forecasting. The calculations are made by superimposing a mesh onto the atmosphere and calculating pressure, tempera- ture, humidity, etc., at each mesh point, repeatedly using the values at the surrounding points at small time intervals. The more numerous the mesh points and the smaller the time intervals, the better is the forecast. But the more calculations that are required, the
 slower the program runs. And for weather forecasting, if the calculation takes too long, it loses all value. When presented with a faster machine, weather forecasters will use more grid points and a smaller step size. They increase the problem size to the largest possible value that allows the answer to be reached in the same amount of time.</p>
 <p>Let’s rephrase the calculation, starting with a parallel program with serial fraction g that runs in time R on <code class="docutils literal notranslate"><span class="pre">n</span></code> processors. If we ran the calculation on a single processor, how long would it take? The answer is</p>
@@ -559,7 +806,7 @@ slower the program runs. And for weather forecasting, if the calculation takes t
 <p>Another aspect of this argument against Amdahl’s law is that, as the problem size increases, the serial fraction may decrease. Consider a program that reads in two N-by-N matrices, multiplies them, and writes out the result. The serial I/O time grows as <span class="math notranslate nohighlight">\(N^2\)</span>, while the multiplication, which is highly parallelizable, grows as <span class="math notranslate nohighlight">\(N^3\)</span>.</p>
 </section>
 <section id="gustafson-s-law-looking-beyond-amdahl-s-law">
-<span id="index-12"></span><h3>Gustafson’s Law: Looking Beyond Amdahl’s Law<a class="headerlink" href="#gustafson-s-law-looking-beyond-amdahl-s-law" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#gustafson-s-law-looking-beyond-amdahl-s-law'">¶</a></h3>
+<span id="index-12"></span><h3>Gustafson’s Law: Looking Beyond Amdahl’s Law<a class="headerlink" href="#gustafson-s-law-looking-beyond-amdahl-s-law" title="Link to this heading">#</a></h3>
 <p>Gustafson’s Law, proposed by John Gustafson in 1988, presents a significant
 principle in the field of parallel computing, fundamentally differing from
 Amdahl’s Law in its approach to evaluating the benefits of parallelization.
@@ -589,7 +836,7 @@ aligning more closely with practical applications and the evolving nature of
 computational tasks in parallel computing environments.</p>
 </section>
 <section id="granularity">
-<h3>Granularity<a class="headerlink" href="#granularity" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#granularity'">¶</a></h3>
+<h3>Granularity<a class="headerlink" href="#granularity" title="Link to this heading">#</a></h3>
 <p>Grain size loosely refers to the amount of computation that is done between communications or synchronizations. Too large a grain size can result in an unbalanced load. Too small a grain size can waste too much time on system overhead. Consider eight processors that are to execute 10 independent tasks, each of which takes <span class="math notranslate nohighlight">\(t\)</span> time units. Suppose the system takes <span class="math notranslate nohighlight">\(s\)</span> time units to run a task. The schedule looks like this:</p>
 <p>Six processors execute one task completing in time <span class="math notranslate nohighlight">\(t + s\)</span>.</p>
 <ul class="simple">
@@ -605,7 +852,7 @@ computational tasks in parallel computing environments.</p>
 <p>So, if s is even seven percent of t, the version with 100 tasks will be as slow as the version with 10. So how do you choose a good grain size? Folklore suggests that one millisecond of execution between communications is a reasonable amount. Other folklore suggests that processing 300–400 array elements between communications is good on some systems. What you will probably have to do is experiment for yourself to find a good grain size. By parameterizing your actual code, you can enable the possibility to experiment.</p>
 </section>
 <section id="starvation-and-deadlock">
-<h3>Starvation and deadlock<a class="headerlink" href="#starvation-and-deadlock" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#starvation-and-deadlock'">¶</a></h3>
+<h3>Starvation and deadlock<a class="headerlink" href="#starvation-and-deadlock" title="Link to this heading">#</a></h3>
 <p>Starvation results when some user computations do not get adequate processor time. Here’s an example of starvation on a distributed-memory machine: For some distributed computa- tions, it is difficult to determine if they are finished. There are some algorithms that send system probe messages around to inquire about the state of the computation. Starvation can result if the probe messages use up significant processor time, making processor time unavailable to the user computations. On shared-memory machines, processors lock and unlock resources. When a resource is unlocked, one of the processors waiting for it (if any) is allowed to proceed. If the resource allocation mechanism is unfair, some waiting pro- cesses may be long delayed, while other processes acquire the resource repeatedly.</p>
 <p>A set of processes is deadlocked if each process is waiting for resources that other pro- cesses in the set hold and none will release until the processes have been granted the other resources that they are waiting for. There are four conditions required for deadlock:
 • Mutual Exclusion: Only a process in possession of a resource may proceed.
@@ -618,7 +865,7 @@ computational tasks in parallel computing environments.</p>
 • You can try to make it impossible for deadlock to occur. The easiest prevention is to eliminate circular waits by numbering the resources and requesting resources in ascending numeric order. That is, never request a resource if you already possess one with a higher number.</p>
 </section>
 <section id="flooding-throttling">
-<h3>Flooding/Throttling<a class="headerlink" href="#flooding-throttling" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#flooding-throttling'">¶</a></h3>
+<h3>Flooding/Throttling<a class="headerlink" href="#flooding-throttling" title="Link to this heading">#</a></h3>
 <p>Strangely, one of the problems with parallelism is having too much rather than too little. For many parallel algorithms (especially divide and conquer and combinatoric search), a problem is repeatedly broken into smaller parts that can be run in parallel. Once the num- ber of parallel parts significantly exceeds the number of processors available, it is some- times detrimental to create more parallelism: All processors will be kept busy anyway, the
 time to create more parallel tasks will be wasted, and the storage for those task descrip-
 tions will tax the parallel machine’s memory.</p>
@@ -626,7 +873,7 @@ tions will tax the parallel machine’s memory.</p>
 <p>Choice of when to switch from creating more tasks to executing within tasks can be made statically, before the algorithm runs, or dynamically, in response to the system load. Dynamic switching requires additional information about the current state of the system, which is oftentimes not available or is highly imprecise.</p>
 </section>
 <section id="layout">
-<h3>Layout<a class="headerlink" href="#layout" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#layout'">¶</a></h3>
+<h3>Layout<a class="headerlink" href="#layout" title="Link to this heading">#</a></h3>
 <p>The layout of a data structure on a distributed-memory machine can make a significant dif- ference in performance. There are two interacting concerns. First, it is important to balance the load so that all nodes have approximately the same amount of work to do. Secondly, it helps to have most communication between neighboring nodes; there won’t be as many queueing delays as messages contend for communication edges along longer paths.
 Consider, though, a simulation of the cosmos: If you divide space into equally sized cubes and assign one cube to each node of a multicomputer, then communication of gravitation and movements of mass can be done between neighboring nodes on a mesh-connected computer. Unfortunately, there will be vast regions of nearly empty space mapped to some regions of nodes, while those parts of space with clusters of galaxies will be mapped into other nodes; that is, the load will be horribly imbalanced. A way to balance the load is to divide space into a larger number of regions and randomize their mapping onto the nodes, say, by hashing their coordinates to give the node number. Then you can count on the law of large numbers to balance the load, but communication between neighboring regions is no longer between neighboring nodes.
 Suppose we have N rows of an array that must be processed. How can we divide them evenly among P nodes?</p>
@@ -639,106 +886,184 @@ We can assign blocks of rows to nodes, as in (1) and (2), but guarantee that no 
 <p>Some algorithms divide arrays into regions that communicate along their edges, so mes- sages will be shorter and faster if the perimeters of regions are smaller: Square regions tend to be better than long, rectangular regions.</p>
 </section>
 <section id="latency">
-<h3>Latency<a class="headerlink" href="#latency" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#latency'">¶</a></h3>
+<h3>Latency<a class="headerlink" href="#latency" title="Link to this heading">#</a></h3>
 <p>As machines get larger, physical packaging itself requires that components get further apart. Therefore, it will take longer for information to flow between some components rather than others. This implies that the larger, shared-memory machines will be NUMA (nonuniform memory access). Data layout becomes increasingly important. Algorithms may benefit by being rewritten to fetch remote objects, operate on them locally, and then write them back, rather than just manipulating them in place.</p>
 <p>Latency is also one of the considerations in laying out tasks and data on distributed-mem- ory machines. On distributed-memory machines, one has the extra option of using asyn- chronous message passing to allow other computations to be performed while messages are being passed.</p>
 </section>
 <section id="scheduling-needed-for-understanding-q-submit">
-<h3>Scheduling [needed for understanding q.submit()]<a class="headerlink" href="#scheduling-needed-for-understanding-q-submit" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#scheduling-needed-for-understanding-q-submit'">¶</a></h3>
+<h3>Scheduling [needed for understanding q.submit()]<a class="headerlink" href="#scheduling-needed-for-understanding-q-submit" title="Link to this heading">#</a></h3>
 <p>Scheduling assigns tasks to processors to be run in a particular order or at particular times. There is a large amount of literature devoted to process scheduling, the major import of which is this: Almost any scheduling of activities on processors is an NP-hard problem. For practical purposes, the meaning of NP-hard is this: The worst-case time to run an NP- hard algorithm grows so rapidly (e.g., doubling when you add one element to the input), that you may not get a solution for a modestly sized problem before the sun burns out. Do not seek perfect solutions to NP-hard problems. Instead, look for ways to quickly get solu- tions that are reasonably good most of the time. Static scheduling of tasks on processors would be done before the tasks are run. Dynamic scheduling assigns tasks during execu- tion. Self-scheduling is a form of dynamic scheduling in which the processors themselves select which task to execute next.</p>
 <p>The techniques for partitioning rows among nodes that we saw in the discussion of layout are also applicable to processor scheduling on shared-memory machines. For technique (3), an easy way to assign process i all rows j such that j mod P = i is to handle the rows in a loop:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="k">for</span> <span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="n">my_id</span><span class="p">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span> <span class="n">j</span> <span class="o">+=</span><span class="n">P</span><span class="p">)</span> <span class="p">{</span>
-</span><span id="line-2">    <span class="n">process</span> <span class="n">row</span> <span class="n">j</span>
-</span><span id="line-3"><span class="p">}</span>
-</span><span id="line-4"><span class="n">where</span> <span class="n">the</span> <span class="n">rows</span> <span class="n">are</span> <span class="n">numbered</span> <span class="mi">0</span> <span class="n">through</span> <span class="n">N</span><span class="o">-</span><span class="mi">1</span>
-</span><span id="line-5"><span class="n">my_id</span> <span class="ow">is</span> <span class="n">the</span> <span class="n">node</span> <span class="n">number</span> <span class="ow">in</span> <span class="n">the</span> <span class="nb">range</span> <span class="mf">0.</span><span class="o">.</span><span class="n">P</span><span class="o">-</span><span class="mi">1</span>
-</span></code></pre></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="n">my_id</span><span class="p">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span> <span class="n">j</span> <span class="o">+=</span><span class="n">P</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">process</span> <span class="n">row</span> <span class="n">j</span>
+<span class="p">}</span>
+<span class="n">where</span> <span class="n">the</span> <span class="n">rows</span> <span class="n">are</span> <span class="n">numbered</span> <span class="mi">0</span> <span class="n">through</span> <span class="n">N</span><span class="o">-</span><span class="mi">1</span>
+<span class="n">my_id</span> <span class="ow">is</span> <span class="n">the</span> <span class="n">node</span> <span class="n">number</span> <span class="ow">in</span> <span class="n">the</span> <span class="nb">range</span> <span class="mf">0.</span><span class="o">.</span><span class="n">P</span><span class="o">-</span><span class="mi">1</span>
+</pre></div>
 </div>
 <p>Rather than assign entire rows or columns to processors, better load balancing can some- times be accomplished by assigning groups of elements. If there are K total elements in an array, we can assign them numbers 0 through <span class="math notranslate nohighlight">\(K - 1\)</span>, assign ranges of those numbers to processors, and convert from the element number to the array indices when necessary. For an M × N matrix A with zero origin addressing, element A[i,j] would be given the num- ber i*N+j in row major order. Similarly, the element with number q would correspond to A[i,j], where</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="n">i</span> <span class="o">=</span> <span class="n">floor</span><span class="p">(</span><span class="n">q</span><span class="o">/</span><span class="n">N</span><span class="p">)</span>
-</span><span id="line-2"><span class="n">j</span> <span class="o">=</span> <span class="n">q</span> <span class="n">mod</span> <span class="n">N</span>
-</span></code></pre></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">i</span> <span class="o">=</span> <span class="n">floor</span><span class="p">(</span><span class="n">q</span><span class="o">/</span><span class="n">N</span><span class="p">)</span>
+<span class="n">j</span> <span class="o">=</span> <span class="n">q</span> <span class="n">mod</span> <span class="n">N</span>
+</pre></div>
 </div>
 <p>A simple form of self-scheduling for K elements is to keep the index C of the next element to be processed and to allocate items by incrementing or decrementing C. The following code is illustrative:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="n">initially</span><span class="p">,</span> <span class="n">C</span> <span class="o">=</span> <span class="n">K</span><span class="o">-</span><span class="mi">1</span>
-</span><span id="line-2"><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span><span id="line-3"><span class="k">while</span> <span class="p">(</span><span class="n">i</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-</span><span id="line-4">   <span class="n">lock</span> <span class="n">C_lock</span><span class="p">;</span>
-</span><span id="line-5">   <span class="n">i</span> <span class="o">=</span> <span class="n">C</span><span class="p">;</span>
-</span><span id="line-6">   <span class="n">C</span> <span class="o">=</span> <span class="n">C</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
-</span><span id="line-7">   <span class="n">unlock</span> <span class="n">C_lock</span><span class="p">;</span>
-</span><span id="line-8">   <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="n">process</span> <span class="n">item</span> <span class="n">i</span><span class="p">;</span>
-</span><span id="line-9"><span class="p">}</span>
-</span></code></pre></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">initially</span><span class="p">,</span> <span class="n">C</span> <span class="o">=</span> <span class="n">K</span><span class="o">-</span><span class="mi">1</span>
+<span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="k">while</span> <span class="p">(</span><span class="n">i</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+   <span class="n">lock</span> <span class="n">C_lock</span><span class="p">;</span>
+   <span class="n">i</span> <span class="o">=</span> <span class="n">C</span><span class="p">;</span>
+   <span class="n">C</span> <span class="o">=</span> <span class="n">C</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+   <span class="n">unlock</span> <span class="n">C_lock</span><span class="p">;</span>
+   <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="n">process</span> <span class="n">item</span> <span class="n">i</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
 </div>
 <p>However, if the processing of a single element takes little time, the grain size is too small. Of course the processor could allocate some constant number of elements greater than one at a time. This is clearly better for grain size, but may still have load balance problems. An improved self-scheduling algorithm has each of the P processors allocate ceiling(C/P) elements (i.e., allocate 1/P of the remaining elements):</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="n">initially</span><span class="p">,</span> <span class="n">C</span> <span class="o">=</span> <span class="n">K</span>
-</span><span id="line-2"><span class="n">low</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span><span id="line-3"><span class="k">while</span> <span class="p">(</span><span class="n">low</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-</span><span id="line-4">   <span class="n">lock</span> <span class="n">C_lock</span><span class="p">;</span>
-</span><span id="line-5">   <span class="n">t</span> <span class="o">=</span> <span class="n">ceiling</span><span class="p">(</span><span class="n">C</span><span class="o">/</span><span class="n">P</span><span class="p">);</span>
-</span><span id="line-6">   <span class="k">if</span> <span class="p">(</span><span class="n">t</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
-</span><span id="line-7">      <span class="n">low</span><span class="o">=-</span><span class="mi">1</span><span class="p">;</span>
-</span><span id="line-8">   <span class="k">else</span> <span class="p">{</span>
-</span><span id="line-9">   <span class="n">high</span> <span class="o">=</span> <span class="n">C</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
-</span><span id="line-10">   <span class="n">low</span> <span class="o">=</span> <span class="n">C</span> <span class="o">=</span> <span class="n">C</span><span class="o">-</span><span class="n">t</span><span class="p">;</span> <span class="p">}</span>
-</span><span id="line-11">   <span class="n">unlock</span> <span class="n">C_lock</span><span class="p">;</span>
-</span><span id="line-12">   <span class="k">if</span> <span class="p">(</span><span class="n">low</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">)</span>
-</span><span id="line-13">       <span class="n">process</span> <span class="n">items</span> <span class="n">low</span> <span class="n">through</span> <span class="n">high</span> <span class="n">inclusive</span><span class="p">;</span>
-</span><span id="line-14"><span class="p">}</span>
-</span></code></pre></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">initially</span><span class="p">,</span> <span class="n">C</span> <span class="o">=</span> <span class="n">K</span>
+<span class="n">low</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="k">while</span> <span class="p">(</span><span class="n">low</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+   <span class="n">lock</span> <span class="n">C_lock</span><span class="p">;</span>
+   <span class="n">t</span> <span class="o">=</span> <span class="n">ceiling</span><span class="p">(</span><span class="n">C</span><span class="o">/</span><span class="n">P</span><span class="p">);</span>
+   <span class="k">if</span> <span class="p">(</span><span class="n">t</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+      <span class="n">low</span><span class="o">=-</span><span class="mi">1</span><span class="p">;</span>
+   <span class="k">else</span> <span class="p">{</span>
+   <span class="n">high</span> <span class="o">=</span> <span class="n">C</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+   <span class="n">low</span> <span class="o">=</span> <span class="n">C</span> <span class="o">=</span> <span class="n">C</span><span class="o">-</span><span class="n">t</span><span class="p">;</span> <span class="p">}</span>
+   <span class="n">unlock</span> <span class="n">C_lock</span><span class="p">;</span>
+   <span class="k">if</span> <span class="p">(</span><span class="n">low</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">)</span>
+       <span class="n">process</span> <span class="n">items</span> <span class="n">low</span> <span class="n">through</span> <span class="n">high</span> <span class="n">inclusive</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
 </div>
 </section>
 </section>
 </section>
-</div></div><aside class="hidden text-sm xl:block" id="right-sidebar">
-<div class="sticky top-16 -mt-10 max-h-[calc(100vh-5rem)] overflow-y-auto pt-6 space-y-2"><p class="font-medium">On this page</p>
-<ul>
-<li><a :data-current="activeSection === '#notable-early-parallel-computing-systems'" class="reference internal" href="#notable-early-parallel-computing-systems">Notable Early Parallel Computing Systems</a><ul>
-<li><a :data-current="activeSection === '#cluster-computing'" class="reference internal" href="#cluster-computing">Cluster Computing</a></li>
-<li><a :data-current="activeSection === '#accelerators'" class="reference internal" href="#accelerators">Accelerators</a></li>
-<li><a :data-current="activeSection === '#vector-machines-cray'" class="reference internal" href="#vector-machines-cray">Vector machines (Cray)</a></li>
-<li><a :data-current="activeSection === '#connection-machine-thinking-machines'" class="reference internal" href="#connection-machine-thinking-machines">Connection Machine (Thinking Machines)</a></li>
-<li><a :data-current="activeSection === '#systolic-architectures'" class="reference internal" href="#systolic-architectures">Systolic architectures</a></li>
-<li><a :data-current="activeSection === '#loop-parallelism-in-fortran'" class="reference internal" href="#loop-parallelism-in-fortran">Loop parallelism in FORTRAN</a></li>
-<li><a :data-current="activeSection === '#c-and-data-parallel-c-efforts'" class="reference internal" href="#c-and-data-parallel-c-efforts">C* and Data-Parallel C efforts</a></li>
-<li><a :data-current="activeSection === '#index-8'" class="reference internal" href="#index-8">CUDA</a></li>
-<li><a :data-current="activeSection === '#openmp'" class="reference internal" href="#openmp">OpenMP</a></li>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../00-preliminaries/preliminaries.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">About the Book</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../10-software-engineering/software-engineering.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Introduction to Software Engineering</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notable-early-parallel-computing-systems">Notable Early Parallel Computing Systems</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cluster-computing">Cluster Computing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accelerators">Accelerators</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vector-machines-cray">Vector machines (Cray)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#connection-machine-thinking-machines">Connection Machine (Thinking Machines)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#systolic-architectures">Systolic architectures</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#loop-parallelism-in-fortran">Loop parallelism in FORTRAN</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-and-data-parallel-c-efforts">C* and Data-Parallel C efforts</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#index-8">CUDA</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#openmp">OpenMP</a></li>
 </ul>
 </li>
-<li><a :data-current="activeSection === '#parallel-concepts-for-humans'" class="reference internal" href="#parallel-concepts-for-humans">Parallel Concepts for Humans</a><ul>
-<li><a :data-current="activeSection === '#von-neumann-machines-and-their-limits'" class="reference internal" href="#von-neumann-machines-and-their-limits">von Neumann machines and their limits</a></li>
-<li><a :data-current="activeSection === '#flynn-s-taxonomy'" class="reference internal" href="#flynn-s-taxonomy">Flynn’s taxonomy</a></li>
-<li><a :data-current="activeSection === '#control-memory-taxonomy'" class="reference internal" href="#control-memory-taxonomy">Control-memory taxonomy</a></li>
-<li><a :data-current="activeSection === '#speedup-vs-efficiency'" class="reference internal" href="#speedup-vs-efficiency">Speedup vs. Efficiency</a></li>
-<li><a :data-current="activeSection === '#amdahls-law'" class="reference internal" href="#amdahls-law">Amdahl’s Law</a></li>
-<li><a :data-current="activeSection === '#scalability'" class="reference internal" href="#scalability">Scalability</a></li>
-<li><a :data-current="activeSection === '#gustafson-s-law-looking-beyond-amdahl-s-law'" class="reference internal" href="#gustafson-s-law-looking-beyond-amdahl-s-law">Gustafson’s Law: Looking Beyond Amdahl’s Law</a></li>
-<li><a :data-current="activeSection === '#granularity'" class="reference internal" href="#granularity">Granularity</a></li>
-<li><a :data-current="activeSection === '#starvation-and-deadlock'" class="reference internal" href="#starvation-and-deadlock">Starvation and deadlock</a></li>
-<li><a :data-current="activeSection === '#flooding-throttling'" class="reference internal" href="#flooding-throttling">Flooding/Throttling</a></li>
-<li><a :data-current="activeSection === '#layout'" class="reference internal" href="#layout">Layout</a></li>
-<li><a :data-current="activeSection === '#latency'" class="reference internal" href="#latency">Latency</a></li>
-<li><a :data-current="activeSection === '#scheduling-needed-for-understanding-q-submit'" class="reference internal" href="#scheduling-needed-for-understanding-q-submit">Scheduling [needed for understanding q.submit()]</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parallel-concepts-for-humans">Parallel Concepts for Humans</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#von-neumann-machines-and-their-limits">von Neumann machines and their limits</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#flynn-s-taxonomy">Flynn’s taxonomy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#control-memory-taxonomy">Control-memory taxonomy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#speedup-vs-efficiency">Speedup vs. Efficiency</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#amdahls-law">Amdahl’s Law</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scalability">Scalability</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gustafson-s-law-looking-beyond-amdahl-s-law">Gustafson’s Law: Looking Beyond Amdahl’s Law</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#granularity">Granularity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#starvation-and-deadlock">Starvation and deadlock</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#flooding-throttling">Flooding/Throttling</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#layout">Layout</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#latency">Latency</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scheduling-needed-for-understanding-q-submit">Scheduling [needed for understanding q.submit()]</a></li>
 </ul>
 </li>
 </ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Author name not set
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023-Present, George K. Thiruvathukal and Konstantin Läufer.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
 </div>
-</aside>
-</main>
-</div>
-</div><footer class="py-6 border-t border-border md:py-0">
-<div class="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
-<div class="flex flex-col items-center gap-4 px-8 md:flex-row md:gap-2 md:px-0">
-<p class="text-sm leading-loose text-center text-muted-foreground md:text-left">© 2023-Present, George K. Thiruvathukal and Konstantin Läufer Built with <a class="font-medium underline underline-offset-4" href="https://www.sphinx-doc.org" rel="noreferrer">Sphinx 8.2.3</a></p>
-</div>
-</div>
-</footer>
-</div>
-<script src="../_static/documentation_options.js?v=ff44e7b3"></script>
-<script src="../_static/doctools.js?v=9bcbadda"></script>
-<script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-<script defer="defer" src="../_static/theme.js?v=073f68d9"></script>
-<script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-</body>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
 </html>

@@ -1,81 +1,163 @@
+
 <!DOCTYPE html>
 
-<html :class="{'dark': darkMode === 'dark' || (darkMode === 'system' &amp;&amp; window.matchMedia('(prefers-color-scheme: dark)').matches)}" class="scroll-smooth" data-content_root="../" lang="en" x-data="{ darkMode: localStorage.getItem('darkMode') || localStorage.setItem('darkMode', 'system'), activeSection: '' }" x-init="$watch('darkMode', val =&gt; localStorage.setItem('darkMode', val))">
-<head>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<meta charset="utf-8"/>
-<meta content="white" media="(prefers-color-scheme: light)" name="theme-color"/>
-<meta content="black" media="(prefers-color-scheme: dark)" name="theme-color"/>
-<meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>Data-Parallel C++ with oneAPI/SYCL | UnoAPI: Modern Parallel C++ Programming with SYCL and oneAPI v0.6</title>
-<meta content="Data-Parallel C++ with oneAPI/SYCL | UnoAPI: Modern Parallel C++ Programming with SYCL and oneAPI v0.6" property="og:title"/>
-<meta content="Data-Parallel C++ with oneAPI/SYCL | UnoAPI: Modern Parallel C++ Programming with SYCL and oneAPI v0.6" name="twitter:title"/>
-<link href="../_static/pygments.css?v=03e43079" rel="stylesheet" type="text/css"/>
-<link href="../_static/theme.css?v=42baaae4" rel="stylesheet" type="text/css"/>
-<link href="../search.html" rel="search" title="Search"/>
-<link href="../genindex.html" rel="index" title="Index"/>
-<link href="../20-quant-finance/qfi.html" rel="next" title="Quantitative Finance"/>
-<link href="../15-modern-cpp/modern-cpp.html" rel="prev" title="Modern C++ as a Better C (and C++)"/>
-<script>
-    <!-- Prevent Flash of wrong theme -->
-      const userPreference = localStorage.getItem('darkMode');
-      let mode;
-      if (userPreference === 'dark' || window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        mode = 'dark';
-        document.documentElement.classList.add('dark');
-      } else {
-        mode = 'light';
-      }
-      if (!userPreference) {localStorage.setItem('darkMode', mode)}
-    </script>
-</head>
-<body :class="{ 'overflow-hidden': showSidebar }" class="min-h-screen font-sans antialiased bg-background text-foreground" x-data="{ showSidebar: false, showScrollTop: false }">
-<div @click.self="showSidebar = false" class="fixed inset-0 z-50 overflow-hidden bg-background/80 backdrop-blur-sm md:hidden" x-cloak="" x-show="showSidebar"></div><div class="relative flex flex-col min-h-screen" id="page"><a class="absolute top-0 left-0 z-[100] block bg-background p-4 text-xl transition -translate-x-full opacity-0 focus:translate-x-0 focus:opacity-100" href="#content">
-      Skip to content
-    </a>
-<header class="sticky top-0 z-40 w-full border-b shadow-sm border-border supports-backdrop-blur:bg-background/60 bg-background/95 backdrop-blur"><div class="container flex items-center h-14">
-<div class="hidden mr-4 md:flex">
-<a class="flex items-center mr-6" href="../index.html"><span class="hidden font-bold sm:inline-block text-clip whitespace-nowrap">UnoAPI: Modern Parallel C++ Programming with SYCL and oneAPI v0.6</span>
-</a></div><button @click="showSidebar = true" class="inline-flex items-center justify-center h-10 px-0 py-2 mr-2 text-base font-medium transition-colors rounded-md hover:text-accent-foreground hover:bg-transparent md:hidden" type="button">
-<svg aria-hidden="true" fill="currentColor" height="24" viewbox="0 96 960 960" width="24" xmlns="http://www.w3.org/2000/svg">
-<path d="M152.587 825.087q-19.152 0-32.326-13.174t-13.174-32.326q0-19.152 13.174-32.326t32.326-13.174h440q19.152 0 32.326 13.174t13.174 32.326q0 19.152-13.174 32.326t-32.326 13.174h-440Zm0-203.587q-19.152 0-32.326-13.174T107.087 576q0-19.152 13.174-32.326t32.326-13.174h320q19.152 0 32.326 13.174T518.087 576q0 19.152-13.174 32.326T472.587 621.5h-320Zm0-203.587q-19.152 0-32.326-13.174t-13.174-32.326q0-19.152 13.174-32.326t32.326-13.174h440q19.152 0 32.326 13.174t13.174 32.326q0 19.152-13.174 32.326t-32.326 13.174h-440ZM708.913 576l112.174 112.174q12.674 12.674 12.674 31.826t-12.674 31.826Q808.413 764.5 789.261 764.5t-31.826-12.674l-144-144Q600 594.391 600 576t13.435-31.826l144-144q12.674-12.674 31.826-12.674t31.826 12.674q12.674 12.674 12.674 31.826t-12.674 31.826L708.913 576Z"></path>
-</svg>
-<span class="sr-only">Toggle navigation menu</span>
-</button>
-<div class="flex items-center justify-between flex-1 space-x-2 sm:space-x-4 md:justify-end">
-<div class="flex-1 w-full md:w-auto md:flex-none"><form @keydown.k.window.meta="$refs.search.focus()" action="../search.html" class="relative flex items-center group" id="searchbox" method="get">
-<input aria-label="Search the docs" class="inline-flex items-center font-medium transition-colors bg-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background border border-input hover:bg-accent focus:bg-accent hover:text-accent-foreground focus:text-accent-foreground hover:placeholder-accent-foreground py-2 px-4 relative h-9 w-full justify-start rounded-[0.5rem] text-sm text-muted-foreground sm:pr-12 md:w-40 lg:w-64" id="search-input" name="q" placeholder="Search ..." type="search" x-ref="search"/>
-<kbd class="pointer-events-none absolute right-1.5 top-2 hidden h-5 select-none text-muted-foreground items-center gap-1 rounded border border-border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex group-hover:bg-accent group-hover:text-accent-foreground">
-<span class="text-xs">⌘</span>
-    K
-  </kbd>
-</form>
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Data-Parallel C++ with oneAPI/SYCL &#8212; UnoAPI: Modern Parallel C++ Programming with SYCL and oneAPI v0.6</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=466cad66"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '18-dpcpp/dpcpp';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Quantitative Finance" href="../20-quant-finance/qfi.html" />
+    <link rel="prev" title="Modern C++ as a Better C (and C++)" href="../15-modern-cpp/modern-cpp.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
 </div>
-<nav class="flex items-center space-x-1">
-<button @click="darkMode = darkMode === 'light' ? 'dark' : 'light'" aria-label="Color theme switcher" class="relative inline-flex items-center justify-center px-0 text-sm font-medium transition-colors rounded-md hover:bg-accent hover:text-accent-foreground h-9 w-9" type="button">
-<svg class="absolute transition-all scale-100 rotate-0 dark:-rotate-90 dark:scale-0" fill="currentColor" height="24" viewbox="0 96 960 960" width="24" xmlns="http://www.w3.org/2000/svg">
-<path d="M480 685q45.456 0 77.228-31.772Q589 621.456 589 576q0-45.456-31.772-77.228Q525.456 467 480 467q-45.456 0-77.228 31.772Q371 530.544 371 576q0 45.456 31.772 77.228Q434.544 685 480 685Zm0 91q-83 0-141.5-58.5T280 576q0-83 58.5-141.5T480 376q83 0 141.5 58.5T680 576q0 83-58.5 141.5T480 776ZM80 621.5q-19.152 0-32.326-13.174T34.5 576q0-19.152 13.174-32.326T80 530.5h80q19.152 0 32.326 13.174T205.5 576q0 19.152-13.174 32.326T160 621.5H80Zm720 0q-19.152 0-32.326-13.174T754.5 576q0-19.152 13.174-32.326T800 530.5h80q19.152 0 32.326 13.174T925.5 576q0 19.152-13.174 32.326T880 621.5h-80Zm-320-320q-19.152 0-32.326-13.174T434.5 256v-80q0-19.152 13.174-32.326T480 130.5q19.152 0 32.326 13.174T525.5 176v80q0 19.152-13.174 32.326T480 301.5Zm0 720q-19.152 0-32.326-13.17Q434.5 995.152 434.5 976v-80q0-19.152 13.174-32.326T480 850.5q19.152 0 32.326 13.174T525.5 896v80q0 19.152-13.174 32.33-13.174 13.17-32.326 13.17ZM222.174 382.065l-43-42Q165.5 327.391 166 308.239t13.174-33.065q13.435-13.674 32.587-13.674t32.065 13.674l42.239 43q12.674 13.435 12.555 31.706-.12 18.272-12.555 31.946-12.674 13.674-31.445 13.413-18.772-.261-32.446-13.174Zm494 494.761-42.239-43q-12.674-13.435-12.674-32.087t12.674-31.565Q686.609 756.5 705.38 757q18.772.5 32.446 13.174l43 41.761Q794.5 824.609 794 843.761t-13.174 33.065Q767.391 890.5 748.239 890.5t-32.065-13.674Zm-42-494.761Q660.5 369.391 661 350.62q.5-18.772 13.174-32.446l41.761-43Q728.609 261.5 747.761 262t33.065 13.174q13.674 13.435 13.674 32.587t-13.674 32.065l-43 42.239q-13.435 12.674-31.706 12.555-18.272-.12-31.946-12.555Zm-495 494.761Q165.5 863.391 165.5 844.239t13.674-32.065l43-42.239q13.435-12.674 32.087-12.674t31.565 12.674Q299.5 782.609 299 801.38q-.5 18.772-13.174 32.446l-41.761 43Q231.391 890.5 212.239 890t-33.065-13.174ZM480 576Z"></path>
-</svg>
-<svg class="absolute transition-all scale-0 rotate-90 dark:rotate-0 dark:scale-100" fill="currentColor" height="24" viewbox="0 96 960 960" width="24" xmlns="http://www.w3.org/2000/svg">
-<path d="M480 936q-151 0-255.5-104.5T120 576q0-138 90-239.5T440 218q25-3 39 18t-1 44q-17 26-25.5 55t-8.5 61q0 90 63 153t153 63q31 0 61.5-9t54.5-25q21-14 43-1.5t19 39.5q-14 138-117.5 229T480 936Zm0-80q88 0 158-48.5T740 681q-20 5-40 8t-40 3q-123 0-209.5-86.5T364 396q0-20 3-40t8-40q-78 32-126.5 102T200 576q0 116 82 198t198 82Zm-10-270Z"></path>
-</svg>
-</button>
-</nav>
-</div>
-</div>
-</header>
-<div class="flex-1"><div class="container flex-1 items-start md:grid md:grid-cols-[220px_minmax(0,1fr)] md:gap-6 lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-10"><aside :aria-hidden="!showSidebar" :class="{ 'translate-x-0': showSidebar }" class="fixed inset-y-0 left-0 md:top-14 z-50 md:z-30 bg-background md:bg-transparent transition-all duration-100 -translate-x-full md:translate-x-0 ml-0 p-6 md:p-0 md:-ml-2 md:h-[calc(100vh-3.5rem)] w-5/6 md:w-full shrink-0 overflow-y-auto border-r border-border md:sticky" id="left-sidebar">
-<a class="!justify-start text-sm md:!hidden bg-background" href="../index.html"><span class="font-bold text-clip whitespace-nowrap">UnoAPI: Modern Parallel C++ Programming with SYCL and oneAPI v0.6</span>
-</a>
-<div class="relative overflow-hidden md:overflow-auto my-4 md:my-0 h-[calc(100vh-8rem)] md:h-auto">
-<div class="overflow-y-auto h-full w-full relative pr-6"><nav class="table w-full min-w-full my-6 lg:my-8">
-<p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
-<ul class="current">
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">UnoAPI: Modern Parallel C++ Programming with SYCL and oneAPI v0.6</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../00-preliminaries/preliminaries.html">About the Book</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../05-parallel/parallel.html">Introduction to Parallel Programming</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../10-software-engineering/software-engineering.html">Introduction to Software Engineering</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../15-modern-cpp/modern-cpp.html">Modern C++ as a Better C (and C++)</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Data-Parallel C++ with oneAPI/SYCL</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Data-Parallel C++ with oneAPI/SYCL</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../20-quant-finance/qfi.html">Quantitative Finance</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../30-performance/performance.html">Performance Essentials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../80-running/running.html">Compiling and Running oneAPI programs</a></li>
@@ -85,168 +167,315 @@
 <li class="toctree-l1"><a class="reference internal" href="../93-electron-density/electron-density.html">Electron Density Case Study</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../99-chapter-template/chapter-title.html">Chapter Title</a></li>
 </ul>
-</nav>
-</div>
-</div>
-<button @click="showSidebar = false" class="absolute md:hidden right-4 top-4 rounded-sm opacity-70 transition-opacity hover:opacity-100" type="button">
-<svg class="h-4 w-4" fill="currentColor" height="24" stroke="none" viewbox="0 96 960 960" width="24" xmlns="http://www.w3.org/2000/svg">
-<path d="M480 632 284 828q-11 11-28 11t-28-11q-11-11-11-28t11-28l196-196-196-196q-11-11-11-28t11-28q11-11 28-11t28 11l196 196 196-196q11-11 28-11t28 11q11 11 11 28t-11 28L536 576l196 196q11 11 11 28t-11 28q-11 11-28 11t-28-11L480 632Z"></path>
-</svg>
-</button>
-</aside>
-<main class="relative py-6 lg:gap-10 lg:py-8 xl:grid xl:grid-cols-[1fr_300px]">
-<div class="w-full min-w-0 mx-auto">
-<nav aria-label="breadcrumbs" class="flex items-center mb-4 space-x-1 text-sm text-muted-foreground">
-<a class="overflow-hidden text-ellipsis whitespace-nowrap hover:text-foreground" href="../index.html">
-<span class="hidden md:inline">UnoAPI: Modern Parallel C++ Programming with SYCL and oneAPI v0.6</span>
-<svg aria-label="Home" class="md:hidden" fill="currentColor" height="18" stroke="none" viewbox="0 96 960 960" width="18" xmlns="http://www.w3.org/2000/svg">
-<path d="M240 856h120V616h240v240h120V496L480 316 240 496v360Zm-80 80V456l320-240 320 240v480H520V696h-80v240H160Zm320-350Z"></path>
-</svg>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/18-dpcpp/dpcpp.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
 </a>
-<div class="mr-1">/</div><span aria-current="page" class="font-medium text-foreground overflow-hidden text-ellipsis whitespace-nowrap">Data-Parallel C++ with oneAPI/SYCL</span>
-</nav>
-<div id="content" role="main">
-<section id="data-parallel-c-with-oneapi-sycl">
-<h1>Data-Parallel C++ with oneAPI/SYCL<a class="headerlink" href="#data-parallel-c-with-oneapi-sycl" title="Link to this heading">¶</a></h1>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Data-Parallel C++ with oneAPI/SYCL</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-example-trapezoidal-integration">Running Example: Trapezoidal Integration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-parallel-c-implementation">Data-Parallel C++ Implementation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-platform-intel-oneapi-khronos-sycl">The Platform: Intel oneAPI/Khronos SYCL</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#device-selection-and-task-queues">Device Selection and Task Queues</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#buffers-shared-between-host-and-device">Buffers Shared Between Host and Device</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parallel-for-construct">parallel_for() Construct</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#separate-compilation-and-external-functions">Separate Compilation and External Functions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#another-example-calulating-pi-using-the-monte-carlo-method">Another Example: Calulating Pi using the Monte Carlo Method</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="data-parallel-c-with-oneapi-sycl">
+<h1>Data-Parallel C++ with oneAPI/SYCL<a class="headerlink" href="#data-parallel-c-with-oneapi-sycl" title="Link to this heading">#</a></h1>
 <p>A growing challenge for the HPC community has been <a class="reference external" href="https://performanceportability.org">performance portability</a> , i.e., the ability to maintain consistent application performance in the context of increasing complexity and heterogeneity of hardware, as well as the additional need to maintain developer productivity and computational precision.
 The intersection of performance, portability, and productivity goals (P3) has also been the focus of an annual workshop at the Supercomputing Conference (SC) for several years.</p>
 <p>One of the key frameworks to emerge in response to the P3 challenge is oneAPI, which promises to be a single application programming interface (API) that can be used to program all available architectures.
 Programming is done using a modern dialect of C/C++, known as Data-Parallel C++ and SYCL, a standard for higher-level abstractions for parallelism and concurrency.
 While oneAPI is not the only alternative, the ability to write largely device-independent programs is a promising direction with great potential to exploit parallelism as the world moves toward more “on chip” heterogeneity and clusters thereof.</p>
 <section id="running-example-trapezoidal-integration">
-<h2>Running Example: Trapezoidal Integration<a class="headerlink" href="#running-example-trapezoidal-integration" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#running-example-trapezoidal-integration'">¶</a></h2>
+<h2>Running Example: Trapezoidal Integration<a class="headerlink" href="#running-example-trapezoidal-integration" title="Link to this heading">#</a></h2>
 <p>Sometimes, a program needs to integrate a function (i.e., calculate the area under a curve).
 We might be able to use a formula for the integral, but this isn’t always possible.
 An easy alternative approach, suitable for numeric integration, is to approximate the curve with straight line segments and calculate an estimate of the area from them.</p>
 <figure class="align-default">
-<img alt="../_images/trapezoidal.png" src="../_images/trapezoidal.png"/>
+<img alt="../_images/trapezoidal.png" src="../_images/trapezoidal.png" />
 </figure>
 <p>Concretely, to find the area under the curve from a to b, we approximate the function by dividing the domain from a to b into g equally sized segments.
 Each segment is (b – a) / g long. Let the boundaries of these segments be x0 = a, x1, x2, … , xg = b.
 The polyline approximating the curve will have coordinates (x0, f(x0)), (x1, f(x1)), (x2, f(x2)), …, (xg, f(xg)).
 This allows us to approximate the area under the curve as the sum of g trapezoids.</p>
 <p>For the interested reader, you can see the code to produce this figure using Python’s remarkable matplotlib package!  See also <a class="reference external" href="https://colab.research.google.com/drive/1vrFkJnuIk1jxIrPN1dpJ95onhWRbwMlj">Trapezoidal Plot on Google Colab</a>.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
-</span><span id="line-2"><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-</span><span id="line-3"><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-</span><span id="line-4"><span class="kn">import</span><span class="w"> </span><span class="nn">sympy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sp</span>
-</span><span id="line-5"><span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
-</span><span id="line-6">
-</span><span id="line-7"><span class="c1"># Define the symbolic function</span>
-</span><span id="line-8"><span class="n">x</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Symbol</span><span class="p">(</span><span class="s1">'x'</span><span class="p">)</span>
-</span><span id="line-9"><span class="n">f_sym</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="mi">50</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="mi">80</span><span class="p">)</span> <span class="o">+</span> <span class="mi">15000</span>
-</span><span id="line-10"><span class="n">f_lambda</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">lambdify</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f_sym</span><span class="p">,</span> <span class="s1">'numpy'</span><span class="p">)</span>
-</span><span id="line-11">
-</span><span id="line-12"><span class="c1"># Convert the symbolic expression to a sanitized string for filename</span>
-</span><span id="line-13"><span class="n">filename_data</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">'[\*\^\(\)/\+\-\s]'</span><span class="p">,</span> <span class="s1">'_'</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">f_sym</span><span class="p">))</span> <span class="o">+</span> <span class="s2">"_trapezoids.csv"</span>
-</span><span id="line-14"><span class="n">filename_base_plot</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">'[\*\^\(\)/\+\-\s]'</span><span class="p">,</span> <span class="s1">'_'</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">f_sym</span><span class="p">))</span> <span class="o">+</span> <span class="s2">"_trapezoidal_integration"</span>
-</span><span id="line-15">
-</span><span id="line-16"><span class="c1"># Define the range</span>
-</span><span id="line-17"><span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">100</span>
-</span><span id="line-18"><span class="n">n</span> <span class="o">=</span> <span class="mi">8</span>  <span class="c1"># number of trapezoids</span>
-</span><span id="line-19"><span class="n">h</span> <span class="o">=</span> <span class="p">(</span><span class="n">b</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span> <span class="o">/</span> <span class="n">n</span>
-</span><span id="line-20"><span class="n">x_intervals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
-</span><span id="line-21">
-</span><span id="line-22"><span class="c1"># Populate DataFrame for Trapezoids</span>
-</span><span id="line-23"><span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
-</span><span id="line-24">    <span class="s1">'x_left'</span><span class="p">:</span> <span class="n">x_intervals</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
-</span><span id="line-25">    <span class="s1">'x_right'</span><span class="p">:</span> <span class="n">x_intervals</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span>
-</span><span id="line-26"><span class="p">}</span>
-</span><span id="line-27"><span class="n">data</span><span class="p">[</span><span class="s1">'y_left'</span><span class="p">]</span> <span class="o">=</span> <span class="n">f_lambda</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">'x_left'</span><span class="p">])</span>
-</span><span id="line-28"><span class="n">data</span><span class="p">[</span><span class="s1">'y_right'</span><span class="p">]</span> <span class="o">=</span> <span class="n">f_lambda</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">'x_right'</span><span class="p">])</span>
-</span><span id="line-29"><span class="n">data</span><span class="p">[</span><span class="s1">'area'</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">h</span> <span class="o">*</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">'y_left'</span><span class="p">]</span> <span class="o">+</span> <span class="n">data</span><span class="p">[</span><span class="s1">'y_right'</span><span class="p">])</span>
-</span><span id="line-30">
-</span><span id="line-31"><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-</span><span id="line-32">
-</span><span id="line-33"><span class="c1"># Save DataFrame to CSV</span>
-</span><span id="line-34"><span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">filename_data</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-</span><span id="line-35">
-</span><span id="line-36"><span class="c1"># Plotting</span>
-</span><span id="line-37"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
-</span><span id="line-38"><span class="n">x_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
-</span><span id="line-39"><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_vals</span><span class="p">,</span> <span class="n">f_lambda</span><span class="p">(</span><span class="n">x_vals</span><span class="p">),</span> <span class="s1">'b-'</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">'$f(x) = </span><span class="si">{</span><span class="n">sp</span><span class="o">.</span><span class="n">latex</span><span class="p">(</span><span class="n">f_sym</span><span class="p">)</span><span class="si">}</span><span class="s1">$'</span><span class="p">)</span>
-</span><span id="line-40">
-</span><span id="line-41"><span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
-</span><span id="line-42">    <span class="n">x0</span><span class="p">,</span> <span class="n">x1</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">'x_left'</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="s1">'x_right'</span><span class="p">]</span>
-</span><span id="line-43">    <span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="s1">'y_left'</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="s1">'y_right'</span><span class="p">]]</span>
-</span><span id="line-44">    <span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">([</span><span class="n">x0</span><span class="p">,</span> <span class="n">x1</span><span class="p">],</span> <span class="n">y</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'skyblue'</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
-</span><span id="line-45">    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">x0</span><span class="p">,</span> <span class="n">x1</span><span class="p">],</span> <span class="n">y</span><span class="p">,</span> <span class="s1">'r-'</span><span class="p">)</span>
-</span><span id="line-46">    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">x0</span><span class="p">,</span> <span class="n">x0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">row</span><span class="p">[</span><span class="s1">'y_left'</span><span class="p">]],</span> <span class="s1">'r-'</span><span class="p">)</span>
-</span><span id="line-47">    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">x1</span><span class="p">,</span> <span class="n">x1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">row</span><span class="p">[</span><span class="s1">'y_right'</span><span class="p">]],</span> <span class="s1">'r-'</span><span class="p">)</span>
-</span><span id="line-48">
-</span><span id="line-49"><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">'Trapezoidal Integration of $f(x) = </span><span class="si">{</span><span class="n">sp</span><span class="o">.</span><span class="n">latex</span><span class="p">(</span><span class="n">f_sym</span><span class="p">)</span><span class="si">}</span><span class="s1">$'</span><span class="p">)</span>
-</span><span id="line-50"><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">'x'</span><span class="p">)</span>
-</span><span id="line-51"><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'f(x)'</span><span class="p">)</span>
-</span><span id="line-52"><span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-</span><span id="line-53"><span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
-</span><span id="line-54">
-</span><span id="line-55"><span class="c1"># Save to both PDF and PNG</span>
-</span><span id="line-56"><span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">filename_base_plot</span> <span class="o">+</span> <span class="s2">".pdf"</span><span class="p">)</span>
-</span><span id="line-57"><span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">filename_base_plot</span> <span class="o">+</span> <span class="s2">".png"</span><span class="p">)</span>
-</span><span id="line-58">
-</span><span id="line-59"><span class="c1"># Show the plot</span>
-</span><span id="line-60"><span class="c1">#plt.show()</span>
-</span><span id="line-61">
-</span><span id="line-62"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Data saved to </span><span class="si">{</span><span class="n">filename_data</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-</span><span id="line-63"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Plots saved to </span><span class="si">{</span><span class="n">filename_base_plot</span><span class="si">}</span><span class="s2">.pdf and </span><span class="si">{</span><span class="n">filename_base_plot</span><span class="si">}</span><span class="s2">.png"</span><span class="p">)</span>
-</span><span id="line-64">
-</span></code></pre></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sympy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sp</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+
+<span class="c1"># Define the symbolic function</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">f_sym</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="mi">50</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="mi">80</span><span class="p">)</span> <span class="o">+</span> <span class="mi">15000</span>
+<span class="n">f_lambda</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">lambdify</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f_sym</span><span class="p">,</span> <span class="s1">&#39;numpy&#39;</span><span class="p">)</span>
+
+<span class="c1"># Convert the symbolic expression to a sanitized string for filename</span>
+<span class="n">filename_data</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;[\*\^\(\)/\+\-\s]&#39;</span><span class="p">,</span> <span class="s1">&#39;_&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">f_sym</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot;_trapezoids.csv&quot;</span>
+<span class="n">filename_base_plot</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;[\*\^\(\)/\+\-\s]&#39;</span><span class="p">,</span> <span class="s1">&#39;_&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">f_sym</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot;_trapezoidal_integration&quot;</span>
+
+<span class="c1"># Define the range</span>
+<span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">100</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">8</span>  <span class="c1"># number of trapezoids</span>
+<span class="n">h</span> <span class="o">=</span> <span class="p">(</span><span class="n">b</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span> <span class="o">/</span> <span class="n">n</span>
+<span class="n">x_intervals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Populate DataFrame for Trapezoids</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;x_left&#39;</span><span class="p">:</span> <span class="n">x_intervals</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+    <span class="s1">&#39;x_right&#39;</span><span class="p">:</span> <span class="n">x_intervals</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span>
+<span class="p">}</span>
+<span class="n">data</span><span class="p">[</span><span class="s1">&#39;y_left&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">f_lambda</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;x_left&#39;</span><span class="p">])</span>
+<span class="n">data</span><span class="p">[</span><span class="s1">&#39;y_right&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">f_lambda</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;x_right&#39;</span><span class="p">])</span>
+<span class="n">data</span><span class="p">[</span><span class="s1">&#39;area&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">h</span> <span class="o">*</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;y_left&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;y_right&#39;</span><span class="p">])</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+<span class="c1"># Save DataFrame to CSV</span>
+<span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">filename_data</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Plotting</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">x_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_vals</span><span class="p">,</span> <span class="n">f_lambda</span><span class="p">(</span><span class="n">x_vals</span><span class="p">),</span> <span class="s1">&#39;b-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;$f(x) = </span><span class="si">{</span><span class="n">sp</span><span class="o">.</span><span class="n">latex</span><span class="p">(</span><span class="n">f_sym</span><span class="p">)</span><span class="si">}</span><span class="s1">$&#39;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="n">x0</span><span class="p">,</span> <span class="n">x1</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;x_left&#39;</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;x_right&#39;</span><span class="p">]</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;y_left&#39;</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;y_right&#39;</span><span class="p">]]</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">([</span><span class="n">x0</span><span class="p">,</span> <span class="n">x1</span><span class="p">],</span> <span class="n">y</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;skyblue&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">x0</span><span class="p">,</span> <span class="n">x1</span><span class="p">],</span> <span class="n">y</span><span class="p">,</span> <span class="s1">&#39;r-&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">x0</span><span class="p">,</span> <span class="n">x0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;y_left&#39;</span><span class="p">]],</span> <span class="s1">&#39;r-&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">x1</span><span class="p">,</span> <span class="n">x1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;y_right&#39;</span><span class="p">]],</span> <span class="s1">&#39;r-&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Trapezoidal Integration of $f(x) = </span><span class="si">{</span><span class="n">sp</span><span class="o">.</span><span class="n">latex</span><span class="p">(</span><span class="n">f_sym</span><span class="p">)</span><span class="si">}</span><span class="s1">$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;f(x)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Save to both PDF and PNG</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">filename_base_plot</span> <span class="o">+</span> <span class="s2">&quot;.pdf&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">filename_base_plot</span> <span class="o">+</span> <span class="s2">&quot;.png&quot;</span><span class="p">)</span>
+
+<span class="c1"># Show the plot</span>
+<span class="c1">#plt.show()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Data saved to </span><span class="si">{</span><span class="n">filename_data</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Plots saved to </span><span class="si">{</span><span class="n">filename_base_plot</span><span class="si">}</span><span class="s2">.pdf and </span><span class="si">{</span><span class="n">filename_base_plot</span><span class="si">}</span><span class="s2">.png&quot;</span><span class="p">)</span>
+
+</pre></div>
 </div>
 </section>
 <section id="data-parallel-c-implementation">
-<h2>Data-Parallel C++ Implementation<a class="headerlink" href="#data-parallel-c-implementation" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#data-parallel-c-implementation'">¶</a></h2>
+<h2>Data-Parallel C++ Implementation<a class="headerlink" href="#data-parallel-c-implementation" title="Link to this heading">#</a></h2>
 <p>Our <a class="reference external" href="https://github.com/LoyolaChicagoCode/unoapi-dpcpp-examples/tree/main/integration">trapezoidal integration exemplar</a> example demonstrates various key aspects of data-parallel C++ programming using Intel’s <a class="reference external" href="https://www.intel.com/content/www/us/en/developer/tools/oneapi/overview.html">oneAPI platform</a>, which is based on the <a class="reference external" href="https://www.khronos.org/sycl">SYCL</a> cross-platform standard for heterogeneous accelerator-based computing.
 Although the example is embarrassingly parallel, it nevertheless exhibits various non-trivial challenges that we will discuss in detail.</p>
 <p>The exemplar’s sequential version illustrates the underlying fused-loop map-reduce algorithm, which maps each adjacent pair of function values to a trapezoid area and, in the same loop body, reduces (adds) the area to the cumulative result.</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">run_sequentially</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-</span><span id="line-2"><span class="w">    </span><span class="n">device_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"sequential"</span><span class="p">;</span>
-</span><span id="line-3"><span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="w"> </span><span class="nf">values</span><span class="p">(</span><span class="n">size</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">);</span>
-</span><span id="line-4"><span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">result</span><span class="p">{</span><span class="mf">0.0</span><span class="p">};</span>
-</span><span id="line-5">
-</span><span id="line-6"><span class="w">    </span><span class="n">mark_time</span><span class="p">(</span><span class="n">timestamps</span><span class="p">,</span><span class="s">"Memory allocation"</span><span class="p">);</span>
-</span><span id="line-7"><span class="w">    </span><span class="n">spdlog</span><span class="o">::</span><span class="n">info</span><span class="p">(</span><span class="s">"starting sequential integration"</span><span class="p">);</span>
-</span><span id="line-8">
-</span><span id="line-9"><span class="w">    </span><span class="c1">// populate vector with function values and add trapezoid area to result</span>
-</span><span id="line-10"><span class="w">    </span><span class="c1">// the inner loop performs a finer-grained calculation</span>
-</span><span id="line-11"><span class="w">    </span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="n">x_min</span><span class="p">);</span>
-</span><span id="line-12"><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="n">i</span><span class="p">{</span><span class="mi">0UL</span><span class="p">};</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">number_of_trapezoids</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-</span><span id="line-13"><span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">x_pos</span><span class="p">{</span><span class="n">x_min</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">dx</span><span class="p">};</span>
-</span><span id="line-14"><span class="w">        </span><span class="n">result</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">outer_trapezoid</span><span class="p">(</span><span class="n">grain_size</span><span class="p">,</span><span class="w"> </span><span class="n">x_pos</span><span class="p">,</span><span class="w"> </span><span class="n">dx_inner</span><span class="p">,</span><span class="w"> </span><span class="n">half_dx_inner</span><span class="p">);</span>
-</span><span id="line-15"><span class="w">        </span><span class="n">values</span><span class="p">[</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="n">x_pos</span><span class="p">);</span>
-</span><span id="line-16"><span class="w">    </span><span class="p">}</span>
-</span><span id="line-17">
-</span><span id="line-18"><span class="w">    </span><span class="n">mark_time</span><span class="p">(</span><span class="n">timestamps</span><span class="p">,</span><span class="w"> </span><span class="s">"Integration"</span><span class="p">);</span>
-</span><span id="line-19"><span class="w">    </span><span class="n">spdlog</span><span class="o">::</span><span class="n">info</span><span class="p">(</span><span class="s">"result should be available now"</span><span class="p">);</span>
-</span><span id="line-20"><span class="w">    </span><span class="n">fmt</span><span class="o">::</span><span class="n">print</span><span class="p">(</span><span class="s">"result = {}</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="p">);</span>
-</span><span id="line-21">
-</span><span id="line-22"><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">show_function_values</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-</span><span id="line-23"><span class="w">        </span><span class="n">spdlog</span><span class="o">::</span><span class="n">info</span><span class="p">(</span><span class="s">"showing function values"</span><span class="p">);</span>
-</span><span id="line-24"><span class="w">        </span><span class="n">print_function_values</span><span class="p">(</span><span class="n">values</span><span class="p">,</span><span class="w"> </span><span class="n">x_min</span><span class="p">,</span><span class="w"> </span><span class="n">dx</span><span class="p">,</span><span class="w"> </span><span class="n">x_precision</span><span class="p">,</span><span class="w"> </span><span class="n">y_precision</span><span class="p">);</span>
-</span><span id="line-25"><span class="w">        </span><span class="n">mark_time</span><span class="p">(</span><span class="n">timestamps</span><span class="p">,</span><span class="w"> </span><span class="s">"Output"</span><span class="p">);</span>
-</span><span id="line-26"><span class="w">    </span><span class="p">}</span>
-</span><span id="line-27"><span class="p">}</span>
-</span></code></pre></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">run_sequentially</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">device_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;sequential&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="w"> </span><span class="nf">values</span><span class="p">(</span><span class="n">size</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">);</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">result</span><span class="p">{</span><span class="mf">0.0</span><span class="p">};</span>
+
+<span class="w">    </span><span class="n">mark_time</span><span class="p">(</span><span class="n">timestamps</span><span class="p">,</span><span class="s">&quot;Memory allocation&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">spdlog</span><span class="o">::</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;starting sequential integration&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// populate vector with function values and add trapezoid area to result</span>
+<span class="w">    </span><span class="c1">// the inner loop performs a finer-grained calculation</span>
+<span class="w">    </span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="n">x_min</span><span class="p">);</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="n">i</span><span class="p">{</span><span class="mi">0UL</span><span class="p">};</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">number_of_trapezoids</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">x_pos</span><span class="p">{</span><span class="n">x_min</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">dx</span><span class="p">};</span>
+<span class="w">        </span><span class="n">result</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">outer_trapezoid</span><span class="p">(</span><span class="n">grain_size</span><span class="p">,</span><span class="w"> </span><span class="n">x_pos</span><span class="p">,</span><span class="w"> </span><span class="n">dx_inner</span><span class="p">,</span><span class="w"> </span><span class="n">half_dx_inner</span><span class="p">);</span>
+<span class="w">        </span><span class="n">values</span><span class="p">[</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="n">x_pos</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">mark_time</span><span class="p">(</span><span class="n">timestamps</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Integration&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">spdlog</span><span class="o">::</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;result should be available now&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">fmt</span><span class="o">::</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;result = {}</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">show_function_values</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">spdlog</span><span class="o">::</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;showing function values&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">print_function_values</span><span class="p">(</span><span class="n">values</span><span class="p">,</span><span class="w"> </span><span class="n">x_min</span><span class="p">,</span><span class="w"> </span><span class="n">dx</span><span class="p">,</span><span class="w"> </span><span class="n">x_precision</span><span class="p">,</span><span class="w"> </span><span class="n">y_precision</span><span class="p">);</span>
+<span class="w">        </span><span class="n">mark_time</span><span class="p">(</span><span class="n">timestamps</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Output&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
 </div>
 <p>We’ll see shortly how to write the data-parallel version of this algorithm in DPC++.</p>
 </section>
 <section id="the-platform-intel-oneapi-khronos-sycl">
-<h2>The Platform: Intel oneAPI/Khronos SYCL<a class="headerlink" href="#the-platform-intel-oneapi-khronos-sycl" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#the-platform-intel-oneapi-khronos-sycl'">¶</a></h2>
+<h2>The Platform: Intel oneAPI/Khronos SYCL<a class="headerlink" href="#the-platform-intel-oneapi-khronos-sycl" title="Link to this heading">#</a></h2>
 <p>The <a class="reference external" href="https://www.khronos.org/sycl">SYCL standard</a> defines high-level abstractions for parallel computing using modern C++, in an effort by Khronos to influence the ISO C standard to support heterogeneous computing.
 <a class="reference external" href="https://spec.oneapi.io/versions/1.1-rev-1/elements/dpcpp/source/index.html">Data-Parallel C++ (DPC++)</a>, a part of Intel’s oneAPI standard, is an implementation of SYCL.
 Intel provides remote access to various types of accelerator hardware, including GPUs and FPGAs, through its <a class="reference external" href="https://www.intel.com/content/www/us/en/developer/tools/Dev-Cloud/overview.html">DevCloud program</a>.</p>
 <section id="device-selection-and-task-queues">
-<h3>Device Selection and Task Queues<a class="headerlink" href="#device-selection-and-task-queues" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#device-selection-and-task-queues'">¶</a></h3>
+<h3>Device Selection and Task Queues<a class="headerlink" href="#device-selection-and-task-queues" title="Link to this heading">#</a></h3>
 <p>A typical DPC++ program starts with the selection of one or more accelerator devices based on criteria of varying specificity.
 In our exemplar, the user can choose between running the code on the host CPU and an available accelerator:</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="n">sycl</span><span class="o">::</span><span class="n">device</span><span class="w"> </span><span class="n">device</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">run_cpuonly</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">sycl</span><span class="o">::</span><span class="n">cpu_selector_v</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">sycl</span><span class="o">::</span><span class="n">default_selector_v</span><span class="w"> </span><span class="p">};</span>
-</span></code></pre></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">sycl</span><span class="o">::</span><span class="n">device</span><span class="w"> </span><span class="n">device</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">run_cpuonly</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">sycl</span><span class="o">::</span><span class="n">cpu_selector_v</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">sycl</span><span class="o">::</span><span class="n">default_selector_v</span><span class="w"> </span><span class="p">};</span>
+</pre></div>
 </div>
 <p>The interface between the programmer and the chosen device is a <em>queue</em>, to which we can later submit <em>commands</em> for execution on the device.</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="n">sycl</span><span class="o">::</span><span class="n">queue</span><span class="w"> </span><span class="n">q</span><span class="p">{</span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">dpc_common</span><span class="o">::</span><span class="n">exception_handler</span><span class="p">};</span>
-</span><span id="line-2"><span class="n">mark_time</span><span class="p">(</span><span class="n">timestamps</span><span class="p">,</span><span class="s">"Queue creation"</span><span class="p">);</span>
-</span><span id="line-3"><span class="n">device_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">q</span><span class="p">.</span><span class="n">get_device</span><span class="p">().</span><span class="n">get_info</span><span class="o">&lt;</span><span class="n">sycl</span><span class="o">::</span><span class="n">info</span><span class="o">::</span><span class="n">device</span><span class="o">::</span><span class="n">name</span><span class="o">&gt;</span><span class="p">();</span>
-</span><span id="line-4"><span class="n">spdlog</span><span class="o">::</span><span class="n">info</span><span class="p">(</span><span class="s">"Device: {}"</span><span class="p">,</span><span class="w"> </span><span class="n">device_name</span><span class="p">);</span>
-</span></code></pre></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">sycl</span><span class="o">::</span><span class="n">queue</span><span class="w"> </span><span class="n">q</span><span class="p">{</span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">dpc_common</span><span class="o">::</span><span class="n">exception_handler</span><span class="p">};</span>
+<span class="n">mark_time</span><span class="p">(</span><span class="n">timestamps</span><span class="p">,</span><span class="s">&quot;Queue creation&quot;</span><span class="p">);</span>
+<span class="n">device_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">q</span><span class="p">.</span><span class="n">get_device</span><span class="p">().</span><span class="n">get_info</span><span class="o">&lt;</span><span class="n">sycl</span><span class="o">::</span><span class="n">info</span><span class="o">::</span><span class="n">device</span><span class="o">::</span><span class="n">name</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="n">spdlog</span><span class="o">::</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;Device: {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">device_name</span><span class="p">);</span>
+</pre></div>
 </div>
 <p>If we do not explicitly specify a device when creating our queue, the queue will automatically select the most suitable available device on the current hardware.
 Also, we can choose between a simple in-order queue or, as we have done here, we can have the queue figure out the best order for executing the submitted commands without deadlocking.</p>
@@ -254,178 +483,256 @@ Also, we can choose between a simple in-order queue or, as we have done here, we
 the section <a class="reference internal" href="../80-running/running.html#running-on-nvidia"><span class="std std-ref">Running on hardware with NVIDIA GPUs</span></a> shows an example of this mechanism.</p>
 </section>
 <section id="buffers-shared-between-host-and-device">
-<h3>Buffers Shared Between Host and Device<a class="headerlink" href="#buffers-shared-between-host-and-device" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#buffers-shared-between-host-and-device'">¶</a></h3>
+<h3>Buffers Shared Between Host and Device<a class="headerlink" href="#buffers-shared-between-host-and-device" title="Link to this heading">#</a></h3>
 <p>Data-parallel computing typically involves some form of data sharing between the host and the device.
 SYCL allows several choices for this with varying degrees of control where the data should reside and how it is shared between host and device.
 E.g., we could allocate a standard vector on the host and use universal shared memory (USM) to share it with the device executing the data-parallel instructions.
 This might require copying substantial amounts of data between host and device and thereby impair performance.</p>
 <p>Instead, a <em>buffer</em> is a higher-level data container that allows SYCL to determine where best to allocate the corresponding memory; a <em>range</em> represents a 1, 2, or 3-dimensional index range for a buffer.
 By not explicitly backing a buffer by a host-allocated standard vector, the data can remain on the device for faster access during kernel execution—until we may need to access it on the host later.</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="n">sycl</span><span class="o">::</span><span class="n">buffer</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">v_buf</span><span class="p">{</span><span class="n">sycl</span><span class="o">::</span><span class="n">range</span><span class="o">&lt;</span><span class="mi">1</span><span class="o">&gt;</span><span class="p">{</span><span class="n">size</span><span class="p">}};</span>
-</span><span id="line-2"><span class="n">sycl</span><span class="o">::</span><span class="n">buffer</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">t_buf</span><span class="p">{</span><span class="n">sycl</span><span class="o">::</span><span class="n">range</span><span class="o">&lt;</span><span class="mi">1</span><span class="o">&gt;</span><span class="p">{</span><span class="n">number_of_trapezoids</span><span class="p">}};</span>
-</span><span id="line-3"><span class="n">sycl</span><span class="o">::</span><span class="n">buffer</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">r_buf</span><span class="p">{</span><span class="n">sycl</span><span class="o">::</span><span class="n">range</span><span class="o">&lt;</span><span class="mi">1</span><span class="o">&gt;</span><span class="p">{</span><span class="mi">1</span><span class="p">}};</span>
-</span></code></pre></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">sycl</span><span class="o">::</span><span class="n">buffer</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">v_buf</span><span class="p">{</span><span class="n">sycl</span><span class="o">::</span><span class="n">range</span><span class="o">&lt;</span><span class="mi">1</span><span class="o">&gt;</span><span class="p">{</span><span class="n">size</span><span class="p">}};</span>
+<span class="n">sycl</span><span class="o">::</span><span class="n">buffer</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">t_buf</span><span class="p">{</span><span class="n">sycl</span><span class="o">::</span><span class="n">range</span><span class="o">&lt;</span><span class="mi">1</span><span class="o">&gt;</span><span class="p">{</span><span class="n">number_of_trapezoids</span><span class="p">}};</span>
+<span class="n">sycl</span><span class="o">::</span><span class="n">buffer</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">r_buf</span><span class="p">{</span><span class="n">sycl</span><span class="o">::</span><span class="n">range</span><span class="o">&lt;</span><span class="mi">1</span><span class="o">&gt;</span><span class="p">{</span><span class="mi">1</span><span class="p">}};</span>
+</pre></div>
 </div>
 </section>
 <section id="parallel-for-construct">
-<h3>parallel_for() Construct<a class="headerlink" href="#parallel-for-construct" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#parallel-for-construct'">¶</a></h3>
+<h3>parallel_for() Construct<a class="headerlink" href="#parallel-for-construct" title="Link to this heading">#</a></h3>
 <p>At the heart of SYCL’s support for data parallelism lies the <code class="docutils literal notranslate"><span class="pre">parallel_for()</span></code> construct, which allows us to express the instructions that should execute in parallel.
 While also providing varying degrees of control over splitting up the workload and assigning it to the accelerator device, SYCL is able to come up with a suitable assignment that maximizes parallelism based on the capabilities of the device.</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="n">q</span><span class="p">.</span><span class="n">submit</span><span class="p">([</span><span class="o">&amp;</span><span class="p">](</span><span class="k">auto</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">h</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-</span><span id="line-2"><span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">sycl</span><span class="o">::</span><span class="n">accessor</span><span class="w"> </span><span class="n">t</span><span class="p">{</span><span class="n">t_buf</span><span class="p">,</span><span class="w"> </span><span class="n">h</span><span class="p">};</span>
-</span><span id="line-3"><span class="w">    </span><span class="n">h</span><span class="p">.</span><span class="n">parallel_for</span><span class="p">(</span><span class="n">size</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="o">=</span><span class="p">](</span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">index</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-</span><span id="line-4"><span class="w">        </span><span class="n">t</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">outer_trapezoid</span><span class="p">(</span><span class="n">grain_size</span><span class="p">,</span><span class="w"> </span><span class="n">x_min</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">dx</span><span class="p">,</span><span class="w"> </span><span class="n">dx_inner</span><span class="p">,</span><span class="w"> </span><span class="n">half_dx_inner</span><span class="p">);</span>
-</span><span id="line-5"><span class="w">    </span><span class="p">});</span>
-</span><span id="line-6"><span class="p">});</span><span class="w"> </span><span class="c1">// end of command group</span>
-</span></code></pre></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">q</span><span class="p">.</span><span class="n">submit</span><span class="p">([</span><span class="o">&amp;</span><span class="p">](</span><span class="k">auto</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">h</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">sycl</span><span class="o">::</span><span class="n">accessor</span><span class="w"> </span><span class="n">t</span><span class="p">{</span><span class="n">t_buf</span><span class="p">,</span><span class="w"> </span><span class="n">h</span><span class="p">};</span>
+<span class="w">    </span><span class="n">h</span><span class="p">.</span><span class="n">parallel_for</span><span class="p">(</span><span class="n">size</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="o">=</span><span class="p">](</span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">index</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">t</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">outer_trapezoid</span><span class="p">(</span><span class="n">grain_size</span><span class="p">,</span><span class="w"> </span><span class="n">x_min</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">dx</span><span class="p">,</span><span class="w"> </span><span class="n">dx_inner</span><span class="p">,</span><span class="w"> </span><span class="n">half_dx_inner</span><span class="p">);</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="p">});</span><span class="w"> </span><span class="c1">// end of command group</span>
+</pre></div>
 </div>
 <p>In this example, <code class="docutils literal notranslate"><span class="pre">f()</span></code> represents the computation we perform in parallel on each data item.
 As shown below, separating <code class="docutils literal notranslate"><span class="pre">f</span></code> into its own compilation unit enables us to unit-test it, as well as choose a specific implementation of <code class="docutils literal notranslate"><span class="pre">f</span></code> at build time.</p>
 <p>To combine the trapezoids’ areas into a single result, while allowing SYCL to maximize parallelism, we can use <code class="docutils literal notranslate"><span class="pre">parallel_for()</span></code> along with a suitable reduction operation, i.e., <code class="docutils literal notranslate"><span class="pre">sycl::plus&lt;&gt;()</span></code>.</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="n">q</span><span class="p">.</span><span class="n">submit</span><span class="p">([</span><span class="o">&amp;</span><span class="p">](</span><span class="k">auto</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">h</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-</span><span id="line-2"><span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">sycl</span><span class="o">::</span><span class="n">accessor</span><span class="w"> </span><span class="n">t</span><span class="p">{</span><span class="n">t_buf</span><span class="p">,</span><span class="w"> </span><span class="n">h</span><span class="p">};</span>
-</span><span id="line-3"><span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">sum_reduction</span><span class="p">{</span><span class="n">sycl</span><span class="o">::</span><span class="n">reduction</span><span class="p">(</span><span class="n">r_buf</span><span class="p">,</span><span class="w"> </span><span class="n">h</span><span class="p">,</span><span class="w"> </span><span class="n">sycl</span><span class="o">::</span><span class="n">plus</span><span class="o">&lt;&gt;</span><span class="p">())};</span>
-</span><span id="line-4"><span class="w">    </span><span class="n">h</span><span class="p">.</span><span class="n">parallel_for</span><span class="p">(</span><span class="n">sycl</span><span class="o">::</span><span class="n">range</span><span class="o">&lt;</span><span class="mi">1</span><span class="o">&gt;</span><span class="p">{</span><span class="n">number_of_trapezoids</span><span class="p">},</span><span class="w"> </span><span class="n">sum_reduction</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="o">=</span><span class="p">](</span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">index</span><span class="p">,</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">sum</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-</span><span id="line-5"><span class="w">        </span><span class="n">sum</span><span class="p">.</span><span class="n">combine</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">index</span><span class="p">]);</span>
-</span><span id="line-6"><span class="w">    </span><span class="p">});</span>
-</span><span id="line-7"><span class="p">});</span><span class="w"> </span><span class="c1">// end of command group</span>
-</span></code></pre></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">q</span><span class="p">.</span><span class="n">submit</span><span class="p">([</span><span class="o">&amp;</span><span class="p">](</span><span class="k">auto</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">h</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">sycl</span><span class="o">::</span><span class="n">accessor</span><span class="w"> </span><span class="n">t</span><span class="p">{</span><span class="n">t_buf</span><span class="p">,</span><span class="w"> </span><span class="n">h</span><span class="p">};</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">sum_reduction</span><span class="p">{</span><span class="n">sycl</span><span class="o">::</span><span class="n">reduction</span><span class="p">(</span><span class="n">r_buf</span><span class="p">,</span><span class="w"> </span><span class="n">h</span><span class="p">,</span><span class="w"> </span><span class="n">sycl</span><span class="o">::</span><span class="n">plus</span><span class="o">&lt;&gt;</span><span class="p">())};</span>
+<span class="w">    </span><span class="n">h</span><span class="p">.</span><span class="n">parallel_for</span><span class="p">(</span><span class="n">sycl</span><span class="o">::</span><span class="n">range</span><span class="o">&lt;</span><span class="mi">1</span><span class="o">&gt;</span><span class="p">{</span><span class="n">number_of_trapezoids</span><span class="p">},</span><span class="w"> </span><span class="n">sum_reduction</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="o">=</span><span class="p">](</span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">index</span><span class="p">,</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">sum</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">sum</span><span class="p">.</span><span class="n">combine</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">index</span><span class="p">]);</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="p">});</span><span class="w"> </span><span class="c1">// end of command group</span>
+</pre></div>
 </div>
 </section>
 <section id="separate-compilation-and-external-functions">
-<h3>Separate Compilation and External Functions<a class="headerlink" href="#separate-compilation-and-external-functions" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#separate-compilation-and-external-functions'">¶</a></h3>
+<h3>Separate Compilation and External Functions<a class="headerlink" href="#separate-compilation-and-external-functions" title="Link to this heading">#</a></h3>
 <p>Separate compilation of source files helps us decompose a software system into smaller modules.
 This has multiple benefits, including separation of concerns, unit testing, easier collaborative development, and the ability to defer certain decisions (e.g., what function we’re integrating) until build time.</p>
 <p>In our exemplar, we’ll want to unit-test the integrand <code class="docutils literal notranslate"><span class="pre">f</span></code> and defer choosing a specific implementation of that function until build time.
 To be able to separately compile the function and call it inside a DPC++ kernel, we declare it in this SYCL-specific way:</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;sycl/sycl.hpp&gt;</span>
-</span><span id="line-2">
-</span><span id="line-3"><span class="n">SYCL_EXTERNAL</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="p">);</span>
-</span></code></pre></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;sycl/sycl.hpp&gt;</span>
+
+<span class="n">SYCL_EXTERNAL</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="p">);</span>
+</pre></div>
 </div>
 <p>The following cube function is the specific integrand we use in our performance experiments:</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="kt">double</span><span class="w"> </span><span class="nf">f</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-</span><span id="line-2"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">pow</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
-</span><span id="line-3"><span class="p">}</span>
-</span></code></pre></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">double</span><span class="w"> </span><span class="nf">f</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">pow</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
 </div>
 <p>In addition, for testability, we have modularized the functions for computing a single trapezoid and an outer trapezoid (corresponding to the parallel grain size).
 Conceptually, the <code class="docutils literal notranslate"><span class="pre">outer_trapezoid</span></code> function is parametric in the integrand <code class="docutils literal notranslate"><span class="pre">f</span></code>.
 Because SYCL does not support passing a function pointer to a kernel task, however, this parametricity is implicit based on the build-time choice of a specific implementation of <code class="docutils literal notranslate"><span class="pre">f</span></code>.
 The corresponding header file looks like this, with <code class="docutils literal notranslate"><span class="pre">f</span></code> not appearing as a formal argument to <code class="docutils literal notranslate"><span class="pre">outer_trapezoid</span></code>.</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="cp">#ifndef INTEGRATION_H_</span>
-</span><span id="line-2"><span class="cp">#define INTEGRATION_H_</span>
-</span><span id="line-3">
-</span><span id="line-4"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;sycl/sycl.hpp&gt;</span>
-</span><span id="line-5">
-</span><span id="line-6"><span class="c1">// {{UnoAPI:trapezoid-interface:begin}}</span>
-</span><span id="line-7"><span class="n">SYCL_EXTERNAL</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">single_trapezoid</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">f1</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">f2</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">dx</span><span class="p">);</span>
-</span><span id="line-8"><span class="c1">// {{UnoAPI:trapezoid-interface:end}}</span>
-</span><span id="line-9">
-</span><span id="line-10"><span class="n">SYCL_EXTERNAL</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">outer_trapezoid</span><span class="p">(</span>
-</span><span id="line-11"><span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">grain_size</span><span class="p">,</span>
-</span><span id="line-12"><span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">x_pos</span><span class="p">,</span>
-</span><span id="line-13"><span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">dx_inner</span><span class="p">,</span>
-</span><span id="line-14"><span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">half_dx_inner</span>
-</span><span id="line-15"><span class="p">);</span>
-</span><span id="line-16">
-</span><span id="line-17"><span class="cp">#endif </span><span class="c1">// INTEGRATION_H_</span>
-</span></code></pre></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#ifndef INTEGRATION_H_</span>
+<span class="cp">#define INTEGRATION_H_</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;sycl/sycl.hpp&gt;</span>
+
+<span class="c1">// {{UnoAPI:trapezoid-interface:begin}}</span>
+<span class="n">SYCL_EXTERNAL</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">single_trapezoid</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">f1</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">f2</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">dx</span><span class="p">);</span>
+<span class="c1">// {{UnoAPI:trapezoid-interface:end}}</span>
+
+<span class="n">SYCL_EXTERNAL</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">outer_trapezoid</span><span class="p">(</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">grain_size</span><span class="p">,</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">x_pos</span><span class="p">,</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">dx_inner</span><span class="p">,</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">half_dx_inner</span>
+<span class="p">);</span>
+
+<span class="cp">#endif </span><span class="c1">// INTEGRATION_H_</span>
+</pre></div>
 </div>
 <p>We show the implementation of these functions in the chapter on performance below; it is also available <a class="reference external" href="https://github.com/LoyolaChicagoCode/unoapi-dpcpp-examples/blob/main/integration/trapezoid.cpp">here</a>.</p>
 </section>
 </section>
 <section id="another-example-calulating-pi-using-the-monte-carlo-method">
-<h2>Another Example: Calulating Pi using the Monte Carlo Method<a class="headerlink" href="#another-example-calulating-pi-using-the-monte-carlo-method" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#another-example-calulating-pi-using-the-monte-carlo-method'">¶</a></h2>
+<h2>Another Example: Calulating Pi using the Monte Carlo Method<a class="headerlink" href="#another-example-calulating-pi-using-the-monte-carlo-method" title="Link to this heading">#</a></h2>
 <p>This example follows a similar pattern as the trapezoidal integration one.
 Conceptually, each player throws a given number of darts, where those that fall within the quarter circle are counted toward the calculation of <span class="math notranslate nohighlight">\(\pi\)</span>.
 The various players operates in parallel with and independently of all other players
 To improve randomization, each player’s random number generator instance starts with a differen seed offset.</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="n">q</span><span class="p">.</span><span class="n">submit</span><span class="p">([</span><span class="o">&amp;</span><span class="p">](</span><span class="k">auto</span><span class="w"> </span><span class="o">&amp;</span><span class="n">h</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-</span><span id="line-2"><span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">c_buf</span><span class="p">.</span><span class="n">get_access</span><span class="o">&lt;</span><span class="n">sycl</span><span class="o">::</span><span class="n">access_mode</span><span class="o">::</span><span class="n">write</span><span class="o">&gt;</span><span class="p">(</span><span class="n">h</span><span class="p">);</span>
-</span><span id="line-3">
-</span><span id="line-4"><span class="w">    </span><span class="n">h</span><span class="p">.</span><span class="n">parallel_for</span><span class="p">(</span><span class="n">number_of_players</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="o">=</span><span class="p">](</span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">index</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-</span><span id="line-5"><span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">offset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">37</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">index</span><span class="p">.</span><span class="n">get_linear_id</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">13</span><span class="p">;</span>
-</span><span id="line-6"><span class="w">        </span><span class="n">oneapi</span><span class="o">::</span><span class="n">dpl</span><span class="o">::</span><span class="n">minstd_rand</span><span class="w"> </span><span class="nf">minstd</span><span class="p">(</span><span class="n">seed</span><span class="p">,</span><span class="w"> </span><span class="n">offset</span><span class="p">);</span>
-</span><span id="line-7"><span class="w">        </span><span class="n">oneapi</span><span class="o">::</span><span class="n">dpl</span><span class="o">::</span><span class="n">ranlux48</span><span class="w"> </span><span class="nf">ranlux</span><span class="p">(</span><span class="n">seed</span><span class="p">,</span><span class="w"> </span><span class="n">offset</span><span class="p">);</span>
-</span><span id="line-8">
-</span><span id="line-9"><span class="w">        </span><span class="c1">//constexpr double R{1.0};</span>
-</span><span id="line-10"><span class="w">        </span><span class="c1">//oneapi::dpl::uniform_real_distribution&lt;double&gt; distr(0.0, R);</span>
-</span><span id="line-11"><span class="w">        </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">uint64_t</span><span class="w"> </span><span class="n">R</span><span class="p">{</span><span class="mi">3037000493UL</span><span class="p">};</span><span class="w"> </span><span class="c1">// largest prime &lt;= sqrt(ULONG_MAX / 2)</span>
-</span><span id="line-12"><span class="w">        </span><span class="n">oneapi</span><span class="o">::</span><span class="n">dpl</span><span class="o">::</span><span class="n">uniform_int_distribution</span><span class="o">&lt;</span><span class="kt">uint64_t</span><span class="o">&gt;</span><span class="w"> </span><span class="n">distr</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">R</span><span class="p">);</span>
-</span><span id="line-13"><span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">r_square</span><span class="p">{</span><span class="n">R</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">R</span><span class="p">};</span>
-</span><span id="line-14">
-</span><span id="line-15"><span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">darts_within_circle</span><span class="p">{</span><span class="mi">0UL</span><span class="p">};</span>
-</span><span id="line-16"><span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="n">i</span><span class="p">{</span><span class="mi">0UL</span><span class="p">};</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">number_of_darts</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-</span><span id="line-17"><span class="w">            </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">x</span><span class="p">{</span><span class="n">use_ranlux</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">distr</span><span class="p">(</span><span class="n">ranlux</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">distr</span><span class="p">(</span><span class="n">minstd</span><span class="p">)};</span>
-</span><span id="line-18"><span class="w">            </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">y</span><span class="p">{</span><span class="n">use_ranlux</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">distr</span><span class="p">(</span><span class="n">ranlux</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">distr</span><span class="p">(</span><span class="n">minstd</span><span class="p">)};</span>
-</span><span id="line-19"><span class="w">            </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">d_square</span><span class="p">{</span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">y</span><span class="p">};</span>
-</span><span id="line-20"><span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">d_square</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">r_square</span><span class="p">)</span>
-</span><span id="line-21"><span class="w">                </span><span class="n">darts_within_circle</span><span class="o">++</span><span class="p">;</span>
-</span><span id="line-22"><span class="w">        </span><span class="p">}</span>
-</span><span id="line-23"><span class="w">        </span><span class="n">c</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">darts_within_circle</span><span class="p">;</span>
-</span><span id="line-24"><span class="w">    </span><span class="p">});</span>
-</span><span id="line-25"><span class="p">});</span>
-</span></code></pre></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">q</span><span class="p">.</span><span class="n">submit</span><span class="p">([</span><span class="o">&amp;</span><span class="p">](</span><span class="k">auto</span><span class="w"> </span><span class="o">&amp;</span><span class="n">h</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">c_buf</span><span class="p">.</span><span class="n">get_access</span><span class="o">&lt;</span><span class="n">sycl</span><span class="o">::</span><span class="n">access_mode</span><span class="o">::</span><span class="n">write</span><span class="o">&gt;</span><span class="p">(</span><span class="n">h</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">h</span><span class="p">.</span><span class="n">parallel_for</span><span class="p">(</span><span class="n">number_of_players</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="o">=</span><span class="p">](</span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">index</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">offset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">37</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">index</span><span class="p">.</span><span class="n">get_linear_id</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">13</span><span class="p">;</span>
+<span class="w">        </span><span class="n">oneapi</span><span class="o">::</span><span class="n">dpl</span><span class="o">::</span><span class="n">minstd_rand</span><span class="w"> </span><span class="nf">minstd</span><span class="p">(</span><span class="n">seed</span><span class="p">,</span><span class="w"> </span><span class="n">offset</span><span class="p">);</span>
+<span class="w">        </span><span class="n">oneapi</span><span class="o">::</span><span class="n">dpl</span><span class="o">::</span><span class="n">ranlux48</span><span class="w"> </span><span class="nf">ranlux</span><span class="p">(</span><span class="n">seed</span><span class="p">,</span><span class="w"> </span><span class="n">offset</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">//constexpr double R{1.0};</span>
+<span class="w">        </span><span class="c1">//oneapi::dpl::uniform_real_distribution&lt;double&gt; distr(0.0, R);</span>
+<span class="w">        </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">uint64_t</span><span class="w"> </span><span class="n">R</span><span class="p">{</span><span class="mi">3037000493UL</span><span class="p">};</span><span class="w"> </span><span class="c1">// largest prime &lt;= sqrt(ULONG_MAX / 2)</span>
+<span class="w">        </span><span class="n">oneapi</span><span class="o">::</span><span class="n">dpl</span><span class="o">::</span><span class="n">uniform_int_distribution</span><span class="o">&lt;</span><span class="kt">uint64_t</span><span class="o">&gt;</span><span class="w"> </span><span class="n">distr</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">R</span><span class="p">);</span>
+<span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">r_square</span><span class="p">{</span><span class="n">R</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">R</span><span class="p">};</span>
+
+<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">darts_within_circle</span><span class="p">{</span><span class="mi">0UL</span><span class="p">};</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="n">i</span><span class="p">{</span><span class="mi">0UL</span><span class="p">};</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">number_of_darts</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">x</span><span class="p">{</span><span class="n">use_ranlux</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">distr</span><span class="p">(</span><span class="n">ranlux</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">distr</span><span class="p">(</span><span class="n">minstd</span><span class="p">)};</span>
+<span class="w">            </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">y</span><span class="p">{</span><span class="n">use_ranlux</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">distr</span><span class="p">(</span><span class="n">ranlux</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">distr</span><span class="p">(</span><span class="n">minstd</span><span class="p">)};</span>
+<span class="w">            </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">d_square</span><span class="p">{</span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">y</span><span class="p">};</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">d_square</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">r_square</span><span class="p">)</span>
+<span class="w">                </span><span class="n">darts_within_circle</span><span class="o">++</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">c</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">darts_within_circle</span><span class="p">;</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="p">});</span>
+</pre></div>
 </div>
 <p>After all the players are done, we perform a reduction to combine the number of darts within the quarter circle.</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="n">q</span><span class="p">.</span><span class="n">submit</span><span class="p">([</span><span class="o">&amp;</span><span class="p">](</span><span class="k">auto</span><span class="w"> </span><span class="o">&amp;</span><span class="n">h</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-</span><span id="line-2"><span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">c</span><span class="p">{</span><span class="n">c_buf</span><span class="p">.</span><span class="n">get_access</span><span class="o">&lt;</span><span class="n">sycl</span><span class="o">::</span><span class="n">access_mode</span><span class="o">::</span><span class="n">read</span><span class="o">&gt;</span><span class="p">(</span><span class="n">h</span><span class="p">)};</span>
-</span><span id="line-3"><span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">sum_reduction</span><span class="p">{</span><span class="n">sycl</span><span class="o">::</span><span class="n">reduction</span><span class="p">(</span><span class="n">s_buf</span><span class="p">,</span><span class="w"> </span><span class="n">h</span><span class="p">,</span><span class="w"> </span><span class="n">sycl</span><span class="o">::</span><span class="n">plus</span><span class="o">&lt;&gt;</span><span class="p">())};</span>
-</span><span id="line-4">
-</span><span id="line-5"><span class="w">    </span><span class="n">h</span><span class="p">.</span><span class="n">parallel_for</span><span class="p">(</span><span class="n">sycl</span><span class="o">::</span><span class="n">range</span><span class="o">&lt;</span><span class="mi">1</span><span class="o">&gt;</span><span class="p">{</span><span class="n">number_of_players</span><span class="p">},</span><span class="w"> </span><span class="n">sum_reduction</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="o">=</span><span class="p">](</span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">index</span><span class="p">,</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="o">&amp;</span><span class="n">sum</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-</span><span id="line-6"><span class="w">        </span><span class="n">sum</span><span class="p">.</span><span class="n">combine</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="n">index</span><span class="p">]);</span>
-</span><span id="line-7"><span class="w">    </span><span class="p">});</span>
-</span><span id="line-8"><span class="p">});</span>
-</span></code></pre></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">q</span><span class="p">.</span><span class="n">submit</span><span class="p">([</span><span class="o">&amp;</span><span class="p">](</span><span class="k">auto</span><span class="w"> </span><span class="o">&amp;</span><span class="n">h</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">c</span><span class="p">{</span><span class="n">c_buf</span><span class="p">.</span><span class="n">get_access</span><span class="o">&lt;</span><span class="n">sycl</span><span class="o">::</span><span class="n">access_mode</span><span class="o">::</span><span class="n">read</span><span class="o">&gt;</span><span class="p">(</span><span class="n">h</span><span class="p">)};</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">sum_reduction</span><span class="p">{</span><span class="n">sycl</span><span class="o">::</span><span class="n">reduction</span><span class="p">(</span><span class="n">s_buf</span><span class="p">,</span><span class="w"> </span><span class="n">h</span><span class="p">,</span><span class="w"> </span><span class="n">sycl</span><span class="o">::</span><span class="n">plus</span><span class="o">&lt;&gt;</span><span class="p">())};</span>
+
+<span class="w">    </span><span class="n">h</span><span class="p">.</span><span class="n">parallel_for</span><span class="p">(</span><span class="n">sycl</span><span class="o">::</span><span class="n">range</span><span class="o">&lt;</span><span class="mi">1</span><span class="o">&gt;</span><span class="p">{</span><span class="n">number_of_players</span><span class="p">},</span><span class="w"> </span><span class="n">sum_reduction</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="o">=</span><span class="p">](</span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">index</span><span class="p">,</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="o">&amp;</span><span class="n">sum</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">sum</span><span class="p">.</span><span class="n">combine</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="n">index</span><span class="p">]);</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="p">});</span>
+</pre></div>
 </div>
 <p>A sample run looks like this:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">[2023-10-09 20:12:49.704] [info] 4 players are going to throw 1000000 darts each
-</span><span id="line-2">[2023-10-09 20:12:49.704] [info] using minstd engine with real distribution
-</span><span id="line-3">[2023-10-09 20:12:49.704] [info] randomization is off
-</span><span id="line-4">[2023-10-09 20:12:49.763] [info] Device: Intel(R) Core(TM) i5-1030NG7 CPU @ 1.10GHz
-</span><span id="line-5">[2023-10-09 20:12:49.763] [info] Max workgroup size: 8192
-</span><span id="line-6">[2023-10-09 20:12:50.474] [info] done submitting to queue...waiting for results
-</span><span id="line-7">[2023-10-09 20:12:50.474] [info] result[0] = 786512
-</span><span id="line-8">[2023-10-09 20:12:50.474] [info] result[1] = 786064
-</span><span id="line-9">[2023-10-09 20:12:50.474] [info] result[2] = 786509
-</span><span id="line-10">[2023-10-09 20:12:50.474] [info] result[3] = 786054
-</span><span id="line-11">[2023-10-09 20:12:50.474] [info] sum = 3145139
-</span><span id="line-12">pi = 3.145139
-</span></code></pre></div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[2023-10-09 20:12:49.704] [info] 4 players are going to throw 1000000 darts each
+[2023-10-09 20:12:49.704] [info] using minstd engine with real distribution
+[2023-10-09 20:12:49.704] [info] randomization is off
+[2023-10-09 20:12:49.763] [info] Device: Intel(R) Core(TM) i5-1030NG7 CPU @ 1.10GHz
+[2023-10-09 20:12:49.763] [info] Max workgroup size: 8192
+[2023-10-09 20:12:50.474] [info] done submitting to queue...waiting for results
+[2023-10-09 20:12:50.474] [info] result[0] = 786512
+[2023-10-09 20:12:50.474] [info] result[1] = 786064
+[2023-10-09 20:12:50.474] [info] result[2] = 786509
+[2023-10-09 20:12:50.474] [info] result[3] = 786054
+[2023-10-09 20:12:50.474] [info] sum = 3145139
+pi = 3.145139
+</pre></div>
 </div>
 </section>
 </section>
-</div></div><aside class="hidden text-sm xl:block" id="right-sidebar">
-<div class="sticky top-16 -mt-10 max-h-[calc(100vh-5rem)] overflow-y-auto pt-6 space-y-2"><p class="font-medium">On this page</p>
-<ul>
-<li><a :data-current="activeSection === '#running-example-trapezoidal-integration'" class="reference internal" href="#running-example-trapezoidal-integration">Running Example: Trapezoidal Integration</a></li>
-<li><a :data-current="activeSection === '#data-parallel-c-implementation'" class="reference internal" href="#data-parallel-c-implementation">Data-Parallel C++ Implementation</a></li>
-<li><a :data-current="activeSection === '#the-platform-intel-oneapi-khronos-sycl'" class="reference internal" href="#the-platform-intel-oneapi-khronos-sycl">The Platform: Intel oneAPI/Khronos SYCL</a><ul>
-<li><a :data-current="activeSection === '#device-selection-and-task-queues'" class="reference internal" href="#device-selection-and-task-queues">Device Selection and Task Queues</a></li>
-<li><a :data-current="activeSection === '#buffers-shared-between-host-and-device'" class="reference internal" href="#buffers-shared-between-host-and-device">Buffers Shared Between Host and Device</a></li>
-<li><a :data-current="activeSection === '#parallel-for-construct'" class="reference internal" href="#parallel-for-construct">parallel_for() Construct</a></li>
-<li><a :data-current="activeSection === '#separate-compilation-and-external-functions'" class="reference internal" href="#separate-compilation-and-external-functions">Separate Compilation and External Functions</a></li>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../15-modern-cpp/modern-cpp.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Modern C++ as a Better C (and C++)</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../20-quant-finance/qfi.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Quantitative Finance</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-example-trapezoidal-integration">Running Example: Trapezoidal Integration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-parallel-c-implementation">Data-Parallel C++ Implementation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-platform-intel-oneapi-khronos-sycl">The Platform: Intel oneAPI/Khronos SYCL</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#device-selection-and-task-queues">Device Selection and Task Queues</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#buffers-shared-between-host-and-device">Buffers Shared Between Host and Device</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parallel-for-construct">parallel_for() Construct</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#separate-compilation-and-external-functions">Separate Compilation and External Functions</a></li>
 </ul>
 </li>
-<li><a :data-current="activeSection === '#another-example-calulating-pi-using-the-monte-carlo-method'" class="reference internal" href="#another-example-calulating-pi-using-the-monte-carlo-method">Another Example: Calulating Pi using the Monte Carlo Method</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#another-example-calulating-pi-using-the-monte-carlo-method">Another Example: Calulating Pi using the Monte Carlo Method</a></li>
 </ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Author name not set
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023-Present, George K. Thiruvathukal and Konstantin Läufer.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
 </div>
-</aside>
-</main>
-</div>
-</div><footer class="py-6 border-t border-border md:py-0">
-<div class="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
-<div class="flex flex-col items-center gap-4 px-8 md:flex-row md:gap-2 md:px-0">
-<p class="text-sm leading-loose text-center text-muted-foreground md:text-left">© 2023-Present, George K. Thiruvathukal and Konstantin Läufer Built with <a class="font-medium underline underline-offset-4" href="https://www.sphinx-doc.org" rel="noreferrer">Sphinx 8.2.3</a></p>
-</div>
-</div>
-</footer>
-</div>
-<script src="../_static/documentation_options.js?v=ff44e7b3"></script>
-<script src="../_static/doctools.js?v=9bcbadda"></script>
-<script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-<script defer="defer" src="../_static/theme.js?v=073f68d9"></script>
-<script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-</body>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
 </html>

@@ -1,83 +1,164 @@
+
 <!DOCTYPE html>
 
-<html :class="{'dark': darkMode === 'dark' || (darkMode === 'system' &amp;&amp; window.matchMedia('(prefers-color-scheme: dark)').matches)}" class="scroll-smooth" data-content_root="../" lang="en" x-data="{ darkMode: localStorage.getItem('darkMode') || localStorage.setItem('darkMode', 'system'), activeSection: '' }" x-init="$watch('darkMode', val =&gt; localStorage.setItem('darkMode', val))">
-<head>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<meta charset="utf-8"/>
-<meta content="white" media="(prefers-color-scheme: light)" name="theme-color"/>
-<meta content="black" media="(prefers-color-scheme: dark)" name="theme-color"/>
-<meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>Performance Essentials | UnoAPI: Modern Parallel C++ Programming with SYCL and oneAPI v0.6</title>
-<meta content="Performance Essentials | UnoAPI: Modern Parallel C++ Programming with SYCL and oneAPI v0.6" property="og:title"/>
-<meta content="Performance Essentials | UnoAPI: Modern Parallel C++ Programming with SYCL and oneAPI v0.6" name="twitter:title"/>
-<link href="../_static/pygments.css?v=03e43079" rel="stylesheet" type="text/css"/>
-<link href="../_static/theme.css?v=42baaae4" rel="stylesheet" type="text/css"/>
-<link href="../search.html" rel="search" title="Search"/>
-<link href="../genindex.html" rel="index" title="Index"/>
-<link href="../80-running/running.html" rel="next" title="Compiling and Running oneAPI programs"/>
-<link href="../20-quant-finance/qfi.html" rel="prev" title="Quantitative Finance"/>
-<script>
-    <!-- Prevent Flash of wrong theme -->
-      const userPreference = localStorage.getItem('darkMode');
-      let mode;
-      if (userPreference === 'dark' || window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        mode = 'dark';
-        document.documentElement.classList.add('dark');
-      } else {
-        mode = 'light';
-      }
-      if (!userPreference) {localStorage.setItem('darkMode', mode)}
-    </script>
-</head>
-<body :class="{ 'overflow-hidden': showSidebar }" class="min-h-screen font-sans antialiased bg-background text-foreground" x-data="{ showSidebar: false, showScrollTop: false }">
-<div @click.self="showSidebar = false" class="fixed inset-0 z-50 overflow-hidden bg-background/80 backdrop-blur-sm md:hidden" x-cloak="" x-show="showSidebar"></div><div class="relative flex flex-col min-h-screen" id="page"><a class="absolute top-0 left-0 z-[100] block bg-background p-4 text-xl transition -translate-x-full opacity-0 focus:translate-x-0 focus:opacity-100" href="#content">
-      Skip to content
-    </a>
-<header class="sticky top-0 z-40 w-full border-b shadow-sm border-border supports-backdrop-blur:bg-background/60 bg-background/95 backdrop-blur"><div class="container flex items-center h-14">
-<div class="hidden mr-4 md:flex">
-<a class="flex items-center mr-6" href="../index.html"><span class="hidden font-bold sm:inline-block text-clip whitespace-nowrap">UnoAPI: Modern Parallel C++ Programming with SYCL and oneAPI v0.6</span>
-</a></div><button @click="showSidebar = true" class="inline-flex items-center justify-center h-10 px-0 py-2 mr-2 text-base font-medium transition-colors rounded-md hover:text-accent-foreground hover:bg-transparent md:hidden" type="button">
-<svg aria-hidden="true" fill="currentColor" height="24" viewbox="0 96 960 960" width="24" xmlns="http://www.w3.org/2000/svg">
-<path d="M152.587 825.087q-19.152 0-32.326-13.174t-13.174-32.326q0-19.152 13.174-32.326t32.326-13.174h440q19.152 0 32.326 13.174t13.174 32.326q0 19.152-13.174 32.326t-32.326 13.174h-440Zm0-203.587q-19.152 0-32.326-13.174T107.087 576q0-19.152 13.174-32.326t32.326-13.174h320q19.152 0 32.326 13.174T518.087 576q0 19.152-13.174 32.326T472.587 621.5h-320Zm0-203.587q-19.152 0-32.326-13.174t-13.174-32.326q0-19.152 13.174-32.326t32.326-13.174h440q19.152 0 32.326 13.174t13.174 32.326q0 19.152-13.174 32.326t-32.326 13.174h-440ZM708.913 576l112.174 112.174q12.674 12.674 12.674 31.826t-12.674 31.826Q808.413 764.5 789.261 764.5t-31.826-12.674l-144-144Q600 594.391 600 576t13.435-31.826l144-144q12.674-12.674 31.826-12.674t31.826 12.674q12.674 12.674 12.674 31.826t-12.674 31.826L708.913 576Z"></path>
-</svg>
-<span class="sr-only">Toggle navigation menu</span>
-</button>
-<div class="flex items-center justify-between flex-1 space-x-2 sm:space-x-4 md:justify-end">
-<div class="flex-1 w-full md:w-auto md:flex-none"><form @keydown.k.window.meta="$refs.search.focus()" action="../search.html" class="relative flex items-center group" id="searchbox" method="get">
-<input aria-label="Search the docs" class="inline-flex items-center font-medium transition-colors bg-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background border border-input hover:bg-accent focus:bg-accent hover:text-accent-foreground focus:text-accent-foreground hover:placeholder-accent-foreground py-2 px-4 relative h-9 w-full justify-start rounded-[0.5rem] text-sm text-muted-foreground sm:pr-12 md:w-40 lg:w-64" id="search-input" name="q" placeholder="Search ..." type="search" x-ref="search"/>
-<kbd class="pointer-events-none absolute right-1.5 top-2 hidden h-5 select-none text-muted-foreground items-center gap-1 rounded border border-border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex group-hover:bg-accent group-hover:text-accent-foreground">
-<span class="text-xs">⌘</span>
-    K
-  </kbd>
-</form>
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Performance Essentials &#8212; UnoAPI: Modern Parallel C++ Programming with SYCL and oneAPI v0.6</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=466cad66"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '30-performance/performance';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Compiling and Running oneAPI programs" href="../80-running/running.html" />
+    <link rel="prev" title="Quantitative Finance" href="../20-quant-finance/qfi.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
 </div>
-<nav class="flex items-center space-x-1">
-<button @click="darkMode = darkMode === 'light' ? 'dark' : 'light'" aria-label="Color theme switcher" class="relative inline-flex items-center justify-center px-0 text-sm font-medium transition-colors rounded-md hover:bg-accent hover:text-accent-foreground h-9 w-9" type="button">
-<svg class="absolute transition-all scale-100 rotate-0 dark:-rotate-90 dark:scale-0" fill="currentColor" height="24" viewbox="0 96 960 960" width="24" xmlns="http://www.w3.org/2000/svg">
-<path d="M480 685q45.456 0 77.228-31.772Q589 621.456 589 576q0-45.456-31.772-77.228Q525.456 467 480 467q-45.456 0-77.228 31.772Q371 530.544 371 576q0 45.456 31.772 77.228Q434.544 685 480 685Zm0 91q-83 0-141.5-58.5T280 576q0-83 58.5-141.5T480 376q83 0 141.5 58.5T680 576q0 83-58.5 141.5T480 776ZM80 621.5q-19.152 0-32.326-13.174T34.5 576q0-19.152 13.174-32.326T80 530.5h80q19.152 0 32.326 13.174T205.5 576q0 19.152-13.174 32.326T160 621.5H80Zm720 0q-19.152 0-32.326-13.174T754.5 576q0-19.152 13.174-32.326T800 530.5h80q19.152 0 32.326 13.174T925.5 576q0 19.152-13.174 32.326T880 621.5h-80Zm-320-320q-19.152 0-32.326-13.174T434.5 256v-80q0-19.152 13.174-32.326T480 130.5q19.152 0 32.326 13.174T525.5 176v80q0 19.152-13.174 32.326T480 301.5Zm0 720q-19.152 0-32.326-13.17Q434.5 995.152 434.5 976v-80q0-19.152 13.174-32.326T480 850.5q19.152 0 32.326 13.174T525.5 896v80q0 19.152-13.174 32.33-13.174 13.17-32.326 13.17ZM222.174 382.065l-43-42Q165.5 327.391 166 308.239t13.174-33.065q13.435-13.674 32.587-13.674t32.065 13.674l42.239 43q12.674 13.435 12.555 31.706-.12 18.272-12.555 31.946-12.674 13.674-31.445 13.413-18.772-.261-32.446-13.174Zm494 494.761-42.239-43q-12.674-13.435-12.674-32.087t12.674-31.565Q686.609 756.5 705.38 757q18.772.5 32.446 13.174l43 41.761Q794.5 824.609 794 843.761t-13.174 33.065Q767.391 890.5 748.239 890.5t-32.065-13.674Zm-42-494.761Q660.5 369.391 661 350.62q.5-18.772 13.174-32.446l41.761-43Q728.609 261.5 747.761 262t33.065 13.174q13.674 13.435 13.674 32.587t-13.674 32.065l-43 42.239q-13.435 12.674-31.706 12.555-18.272-.12-31.946-12.555Zm-495 494.761Q165.5 863.391 165.5 844.239t13.674-32.065l43-42.239q13.435-12.674 32.087-12.674t31.565 12.674Q299.5 782.609 299 801.38q-.5 18.772-13.174 32.446l-41.761 43Q231.391 890.5 212.239 890t-33.065-13.174ZM480 576Z"></path>
-</svg>
-<svg class="absolute transition-all scale-0 rotate-90 dark:rotate-0 dark:scale-100" fill="currentColor" height="24" viewbox="0 96 960 960" width="24" xmlns="http://www.w3.org/2000/svg">
-<path d="M480 936q-151 0-255.5-104.5T120 576q0-138 90-239.5T440 218q25-3 39 18t-1 44q-17 26-25.5 55t-8.5 61q0 90 63 153t153 63q31 0 61.5-9t54.5-25q21-14 43-1.5t19 39.5q-14 138-117.5 229T480 936Zm0-80q88 0 158-48.5T740 681q-20 5-40 8t-40 3q-123 0-209.5-86.5T364 396q0-20 3-40t8-40q-78 32-126.5 102T200 576q0 116 82 198t198 82Zm-10-270Z"></path>
-</svg>
-</button>
-</nav>
-</div>
-</div>
-</header>
-<div class="flex-1"><div class="container flex-1 items-start md:grid md:grid-cols-[220px_minmax(0,1fr)] md:gap-6 lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-10"><aside :aria-hidden="!showSidebar" :class="{ 'translate-x-0': showSidebar }" class="fixed inset-y-0 left-0 md:top-14 z-50 md:z-30 bg-background md:bg-transparent transition-all duration-100 -translate-x-full md:translate-x-0 ml-0 p-6 md:p-0 md:-ml-2 md:h-[calc(100vh-3.5rem)] w-5/6 md:w-full shrink-0 overflow-y-auto border-r border-border md:sticky" id="left-sidebar">
-<a class="!justify-start text-sm md:!hidden bg-background" href="../index.html"><span class="font-bold text-clip whitespace-nowrap">UnoAPI: Modern Parallel C++ Programming with SYCL and oneAPI v0.6</span>
-</a>
-<div class="relative overflow-hidden md:overflow-auto my-4 md:my-0 h-[calc(100vh-8rem)] md:h-auto">
-<div class="overflow-y-auto h-full w-full relative pr-6"><nav class="table w-full min-w-full my-6 lg:my-8">
-<p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
-<ul class="current">
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">UnoAPI: Modern Parallel C++ Programming with SYCL and oneAPI v0.6</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../00-preliminaries/preliminaries.html">About the Book</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../05-parallel/parallel.html">Introduction to Parallel Programming</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../10-software-engineering/software-engineering.html">Introduction to Software Engineering</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../15-modern-cpp/modern-cpp.html">Modern C++ as a Better C (and C++)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../18-dpcpp/dpcpp.html">Data-Parallel C++ with oneAPI/SYCL</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../20-quant-finance/qfi.html">Quantitative Finance</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Performance Essentials</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Performance Essentials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../80-running/running.html">Compiling and Running oneAPI programs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../90-contributions/contributions.html">Contribution Guildelines</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../91-coc/code-of-conduct.html">Code of Conduct</a></li>
@@ -85,37 +166,182 @@
 <li class="toctree-l1"><a class="reference internal" href="../93-electron-density/electron-density.html">Electron Density Case Study</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../99-chapter-template/chapter-title.html">Chapter Title</a></li>
 </ul>
-</nav>
-</div>
-</div>
-<button @click="showSidebar = false" class="absolute md:hidden right-4 top-4 rounded-sm opacity-70 transition-opacity hover:opacity-100" type="button">
-<svg class="h-4 w-4" fill="currentColor" height="24" stroke="none" viewbox="0 96 960 960" width="24" xmlns="http://www.w3.org/2000/svg">
-<path d="M480 632 284 828q-11 11-28 11t-28-11q-11-11-11-28t11-28l196-196-196-196q-11-11-11-28t11-28q11-11 28-11t28 11l196 196 196-196q11-11 28-11t28 11q11 11 11 28t-11 28L536 576l196 196q11 11 11 28t-11 28q-11 11-28 11t-28-11L480 632Z"></path>
-</svg>
-</button>
-</aside>
-<main class="relative py-6 lg:gap-10 lg:py-8 xl:grid xl:grid-cols-[1fr_300px]">
-<div class="w-full min-w-0 mx-auto">
-<nav aria-label="breadcrumbs" class="flex items-center mb-4 space-x-1 text-sm text-muted-foreground">
-<a class="overflow-hidden text-ellipsis whitespace-nowrap hover:text-foreground" href="../index.html">
-<span class="hidden md:inline">UnoAPI: Modern Parallel C++ Programming with SYCL and oneAPI v0.6</span>
-<svg aria-label="Home" class="md:hidden" fill="currentColor" height="18" stroke="none" viewbox="0 96 960 960" width="18" xmlns="http://www.w3.org/2000/svg">
-<path d="M240 856h120V616h240v240h120V496L480 316 240 496v360Zm-80 80V456l320-240 320 240v480H520V696h-80v240H160Zm320-350Z"></path>
-</svg>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/30-performance/performance.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
 </a>
-<div class="mr-1">/</div><span aria-current="page" class="font-medium text-foreground overflow-hidden text-ellipsis whitespace-nowrap">Performance Essentials</span>
-</nav>
-<div id="content" role="main">
-<section id="performance-essentials">
-<h1>Performance Essentials<a class="headerlink" href="#performance-essentials" title="Link to this heading">¶</a></h1>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Performance Essentials</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#measuring-time-performance">Measuring time performance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-achieve-speedup">How to achieve speedup</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sequential-execution">Sequential execution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parallel-execution-on-an-accelerator">Parallel execution on an accelerator</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parallel-execution-on-a-multicore-cpu">Parallel execution on a multicore CPU</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#observed-scaling">Observed scaling</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="performance-essentials">
+<h1>Performance Essentials<a class="headerlink" href="#performance-essentials" title="Link to this heading">#</a></h1>
 <p>In this section, we discuss various aspects of performance of data-parallel C++ code, including how we can measure time performance in terms of elapsed “wall clock” time, and how we can achieve and observe a speedup when leveraging data parallelism.</p>
 <section id="measuring-time-performance">
-<h2>Measuring time performance<a class="headerlink" href="#measuring-time-performance" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#measuring-time-performance'">¶</a></h2>
+<h2>Measuring time performance<a class="headerlink" href="#measuring-time-performance" title="Link to this heading">#</a></h2>
 <p>We can use the <code class="docutils literal notranslate"><span class="pre">chrono</span></code> section of the C++ Standard Library for measuring performance at various points during program execution.</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="kt">void</span><span class="w"> </span><span class="nf">mark_time</span><span class="p">(</span><span class="n">ts_vector</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">timestamps</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string_view</span><span class="w"> </span><span class="n">label</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-</span><span id="line-2"><span class="w">    </span><span class="n">timestamps</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="p">(</span><span class="n">label</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">steady_clock</span><span class="o">::</span><span class="n">now</span><span class="p">()));</span>
-</span><span id="line-3"><span class="p">}</span>
-</span></code></pre></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">mark_time</span><span class="p">(</span><span class="n">ts_vector</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">timestamps</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string_view</span><span class="w"> </span><span class="n">label</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">timestamps</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="p">(</span><span class="n">label</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">steady_clock</span><span class="o">::</span><span class="n">now</span><span class="p">()));</span>
+<span class="p">}</span>
+</pre></div>
 </div>
 <p>Every time we want to add a timestamp, we invoke <code class="docutils literal notranslate"><span class="pre">mark_time</span></code> with a suitable string label for each phase whose performance we are measuring:</p>
 <ul class="simple">
@@ -128,36 +354,36 @@
 <p>At the end, we use the <code class="docutils literal notranslate"><span class="pre">print_timestamps</span></code> function to print the collected measurements in comma-separated-values (CSV) format, as shown in the sample runs below.</p>
 </section>
 <section id="how-to-achieve-speedup">
-<h2>How to achieve speedup<a class="headerlink" href="#how-to-achieve-speedup" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#how-to-achieve-speedup'">¶</a></h2>
+<h2>How to achieve speedup<a class="headerlink" href="#how-to-achieve-speedup" title="Link to this heading">#</a></h2>
 <p>As discussed in the previous chapter, at the core of data parallelism lies the ability to perform many operations on similar data in parallel at the hardware level.
 Beyond Amdah’s law, there is a tradeoff between the speedup gained through parallelization and the additional overhead of shipping data back and forth between the host computer and the accelerator.
 To understand this tradeoff, we are separately measuring the various phases of program execution as shown above.</p>
 <p>For the following experiments, we are going use the following integrand (function to be integrated):</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="kt">double</span><span class="w"> </span><span class="nf">f</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-</span><span id="line-2"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">pow</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
-</span><span id="line-3"><span class="p">}</span>
-</span></code></pre></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">double</span><span class="w"> </span><span class="nf">f</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">pow</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
 </div>
 <p>In addition, we have factored out the following function to compute (sequentially) a single outer trapezoid from as many inner trapezoids as the grain size, which we can specify as a command-line argument.
 We invoke this common function from both the outer sequential loop and the outer vectorized <code class="docutils literal notranslate"><span class="pre">parallel_for</span></code> construct.</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><code><span id="line-1"><span class="c1">// common function to compute a single outer trapezoid</span>
-</span><span id="line-2"><span class="c1">// from as many inner trapezoids as the grain size</span>
-</span><span id="line-3"><span class="kt">double</span><span class="w"> </span><span class="nf">outer_trapezoid</span><span class="p">(</span>
-</span><span id="line-4"><span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">grain_size</span><span class="p">,</span>
-</span><span id="line-5"><span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">x_pos</span><span class="p">,</span>
-</span><span id="line-6"><span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">dx_inner</span><span class="p">,</span>
-</span><span id="line-7"><span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">half_dx_inner</span>
-</span><span id="line-8"><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-</span><span id="line-9"><span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">area</span><span class="p">{</span><span class="mf">0.0</span><span class="p">};</span>
-</span><span id="line-10"><span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">y_left</span><span class="p">{</span><span class="n">f</span><span class="p">(</span><span class="n">x_pos</span><span class="p">)};</span>
-</span><span id="line-11"><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="n">j</span><span class="p">{</span><span class="mi">0UL</span><span class="p">};</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">grain_size</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-</span><span id="line-12"><span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">y_right</span><span class="p">{</span><span class="n">f</span><span class="p">(</span><span class="n">x_pos</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">j</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">dx_inner</span><span class="p">)};</span>
-</span><span id="line-13"><span class="w">        </span><span class="n">area</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">single_trapezoid</span><span class="p">(</span><span class="n">y_left</span><span class="p">,</span><span class="w"> </span><span class="n">y_right</span><span class="p">,</span><span class="w"> </span><span class="n">half_dx_inner</span><span class="p">);</span>
-</span><span id="line-14"><span class="w">        </span><span class="n">y_left</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y_right</span><span class="p">;</span>
-</span><span id="line-15"><span class="w">    </span><span class="p">}</span>
-</span><span id="line-16"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">area</span><span class="p">;</span>
-</span><span id="line-17"><span class="p">}</span>
-</span></code></pre></div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// common function to compute a single outer trapezoid</span>
+<span class="c1">// from as many inner trapezoids as the grain size</span>
+<span class="kt">double</span><span class="w"> </span><span class="nf">outer_trapezoid</span><span class="p">(</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">grain_size</span><span class="p">,</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">x_pos</span><span class="p">,</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">dx_inner</span><span class="p">,</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">half_dx_inner</span>
+<span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">area</span><span class="p">{</span><span class="mf">0.0</span><span class="p">};</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">y_left</span><span class="p">{</span><span class="n">f</span><span class="p">(</span><span class="n">x_pos</span><span class="p">)};</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="n">j</span><span class="p">{</span><span class="mi">0UL</span><span class="p">};</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">grain_size</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">y_right</span><span class="p">{</span><span class="n">f</span><span class="p">(</span><span class="n">x_pos</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">j</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">dx_inner</span><span class="p">)};</span>
+<span class="w">        </span><span class="n">area</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">single_trapezoid</span><span class="p">(</span><span class="n">y_left</span><span class="p">,</span><span class="w"> </span><span class="n">y_right</span><span class="p">,</span><span class="w"> </span><span class="n">half_dx_inner</span><span class="p">);</span>
+<span class="w">        </span><span class="n">y_left</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y_right</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">area</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
 </div>
 <p>In this way, the actual effort becomes significantly greater than the overhead from setup, so we are likely to observe a greater benefit from parallelization.</p>
 <p>We will now compare wall clock execution times on our academic department’s compute server with the following characteristics:</p>
@@ -166,43 +392,43 @@ We invoke this common function from both the outer sequential loop and the outer
 <li><p>six NVIDIA RTX A6000 GPUs (though we will be using only one at a time for now)</p></li>
 </ul>
 <section id="sequential-execution">
-<h3>Sequential execution<a class="headerlink" href="#sequential-execution" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#sequential-execution'">¶</a></h3>
+<h3>Sequential execution<a class="headerlink" href="#sequential-execution" title="Link to this heading">#</a></h3>
 <p>We start with strictly sequential execution on the node’s CPU using the <cite>-s</cite> option of our integration example.</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">&gt; ./build/bin/integration -n 100000000000 -g 100 -s
-</span><span id="line-2">[2023-12-02 09:53:18.563] [info] integrating function from 0 to 1 using 100000000000 trapezoid(s) with grain size 100, dx = 1e-09
-</span><span id="line-3">[2023-12-02 09:53:20.463] [info] starting sequential integration
-</span><span id="line-4">[2023-12-02 09:58:46.057] [info] result should be available now
-</span><span id="line-5">result = 1.0000000000000597
-</span><span id="line-6">[2023-12-02 09:58:46.202] [info] all done for now
-</span><span id="line-7">TIME,DELTA,UNIT,DEVICE,PHASE
-</span><span id="line-8">68410926133405,0,ns,sequential,Start
-</span><span id="line-9">68412826265635,1900132230,ns,sequential,Memory allocation
-</span><span id="line-10">68738419748223,325593482588,ns,sequential,Integration
-</span><span id="line-11">68738565342993,145594770,ns,sequential,DONE
-</span><span id="line-12">68738565342993,327639209588,ns,sequential,TOTAL
-</span></code></pre></div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&gt; ./build/bin/integration -n 100000000000 -g 100 -s
+[2023-12-02 09:53:18.563] [info] integrating function from 0 to 1 using 100000000000 trapezoid(s) with grain size 100, dx = 1e-09
+[2023-12-02 09:53:20.463] [info] starting sequential integration
+[2023-12-02 09:58:46.057] [info] result should be available now
+result = 1.0000000000000597
+[2023-12-02 09:58:46.202] [info] all done for now
+TIME,DELTA,UNIT,DEVICE,PHASE
+68410926133405,0,ns,sequential,Start
+68412826265635,1900132230,ns,sequential,Memory allocation
+68738419748223,325593482588,ns,sequential,Integration
+68738565342993,145594770,ns,sequential,DONE
+68738565342993,327639209588,ns,sequential,TOTAL
+</pre></div>
 </div>
 <p>The total wall time for this sequential run was about 328 seconds.</p>
 </section>
 <section id="parallel-execution-on-an-accelerator">
-<h3>Parallel execution on an accelerator<a class="headerlink" href="#parallel-execution-on-an-accelerator" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#parallel-execution-on-an-accelerator'">¶</a></h3>
+<h3>Parallel execution on an accelerator<a class="headerlink" href="#parallel-execution-on-an-accelerator" title="Link to this heading">#</a></h3>
 <p>Next, we allow our integration code to select and utilize the available accelerator.</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">&gt; ./build-nvidia/bin/integration -n 100000000000 -g 100
-</span><span id="line-2">[2023-12-02 00:42:30.267] [info] integrating function from 0 to 1 using 100000000000 trapezoid(s) with grain size 100, dx = 1e-09
-</span><span id="line-3">[2023-12-02 00:42:30.267] [info] preparing for vectorized integration
-</span><span id="line-4">[2023-12-02 00:42:30.832] [info] Device: NVIDIA RTX A6000
-</span><span id="line-5">[2023-12-02 00:42:30.837] [info] done submitting to queue...waiting for results
-</span><span id="line-6">[2023-12-02 00:43:03.964] [info] result should be available now
-</span><span id="line-7">result = 1.0000000000000002
-</span><span id="line-8">[2023-12-02 00:43:03.971] [info] all done for now
-</span><span id="line-9">TIME,DELTA,UNIT,DEVICE,PHASE
-</span><span id="line-10">35362630446292,0,ns,NVIDIA RTX A6000,Start
-</span><span id="line-11">35362630466323,20031,ns,NVIDIA RTX A6000,Memory allocation
-</span><span id="line-12">35363195459619,564993296,ns,NVIDIA RTX A6000,Queue creation
-</span><span id="line-13">35396327471267,33132011648,ns,NVIDIA RTX A6000,Integration
-</span><span id="line-14">35396333911606,6440339,ns,NVIDIA RTX A6000,DONE
-</span><span id="line-15">35396333911606,33703465314,ns,NVIDIA RTX A6000,TOTAL
-</span></code></pre></div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&gt; ./build-nvidia/bin/integration -n 100000000000 -g 100
+[2023-12-02 00:42:30.267] [info] integrating function from 0 to 1 using 100000000000 trapezoid(s) with grain size 100, dx = 1e-09
+[2023-12-02 00:42:30.267] [info] preparing for vectorized integration
+[2023-12-02 00:42:30.832] [info] Device: NVIDIA RTX A6000
+[2023-12-02 00:42:30.837] [info] done submitting to queue...waiting for results
+[2023-12-02 00:43:03.964] [info] result should be available now
+result = 1.0000000000000002
+[2023-12-02 00:43:03.971] [info] all done for now
+TIME,DELTA,UNIT,DEVICE,PHASE
+35362630446292,0,ns,NVIDIA RTX A6000,Start
+35362630466323,20031,ns,NVIDIA RTX A6000,Memory allocation
+35363195459619,564993296,ns,NVIDIA RTX A6000,Queue creation
+35396327471267,33132011648,ns,NVIDIA RTX A6000,Integration
+35396333911606,6440339,ns,NVIDIA RTX A6000,DONE
+35396333911606,33703465314,ns,NVIDIA RTX A6000,TOTAL
+</pre></div>
 </div>
 <p>The total wall time for this run was about 33.7 seconds, including the overhead for preparing the task queue and shipping any required data back and forth.
 This corresponds to a speedup of about 10 compared to sequential execution.</p>
@@ -213,32 +439,32 @@ This corresponds to a speedup of about 10 compared to sequential execution.</p>
 </ul>
 </section>
 <section id="parallel-execution-on-a-multicore-cpu">
-<h3>Parallel execution on a multicore CPU<a class="headerlink" href="#parallel-execution-on-a-multicore-cpu" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#parallel-execution-on-a-multicore-cpu'">¶</a></h3>
+<h3>Parallel execution on a multicore CPU<a class="headerlink" href="#parallel-execution-on-a-multicore-cpu" title="Link to this heading">#</a></h3>
 <p>Our examples also support a <cite>-c</cite> option for executing data-parallel code on the host CPU itself.
 This is reasonable when the CPU already has multiple cores.</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span><code><span id="line-1">&gt; ./build/bin/integration -n 100000000000 -g 100 -c
-</span><span id="line-2">[2023-12-03 22:34:05.010] [info] integrating function from 0 to 1 using 100000000000 trapezoid(s) with grain size 100, dx = 1e-09
-</span><span id="line-3">[2023-12-03 22:34:05.010] [info] preparing for vectorized integration
-</span><span id="line-4">[2023-12-03 22:34:05.582] [info] Device: AMD EPYC 9354 32-Core Processor
-</span><span id="line-5">[2023-12-03 22:34:05.803] [info] done submitting to queue...waiting for results
-</span><span id="line-6">[2023-12-03 22:34:06.578] [info] result should be available now
-</span><span id="line-7">result = 1.0000000000000009
-</span><span id="line-8">[2023-12-03 22:34:06.967] [info] all done for now
-</span><span id="line-9">TIME,DELTA,UNIT,DEVICE,PHASE
-</span><span id="line-10">200457373084707,0,ns,AMD EPYC 9354 32-Core Processor,Start
-</span><span id="line-11">200457373102067,17360,ns,AMD EPYC 9354 32-Core Processor,Memory allocation
-</span><span id="line-12">200457945058810,571956743,ns,AMD EPYC 9354 32-Core Processor,Queue creation
-</span><span id="line-13">200458940879950,995821140,ns,AMD EPYC 9354 32-Core Processor,Integration
-</span><span id="line-14">200459329758480,388878530,ns,AMD EPYC 9354 32-Core Processor,DONE
-</span><span id="line-15">200459329758480,1956673773,ns,AMD EPYC 9354 32-Core Processor,TOTAL
-</span></code></pre></div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&gt; ./build/bin/integration -n 100000000000 -g 100 -c
+[2023-12-03 22:34:05.010] [info] integrating function from 0 to 1 using 100000000000 trapezoid(s) with grain size 100, dx = 1e-09
+[2023-12-03 22:34:05.010] [info] preparing for vectorized integration
+[2023-12-03 22:34:05.582] [info] Device: AMD EPYC 9354 32-Core Processor
+[2023-12-03 22:34:05.803] [info] done submitting to queue...waiting for results
+[2023-12-03 22:34:06.578] [info] result should be available now
+result = 1.0000000000000009
+[2023-12-03 22:34:06.967] [info] all done for now
+TIME,DELTA,UNIT,DEVICE,PHASE
+200457373084707,0,ns,AMD EPYC 9354 32-Core Processor,Start
+200457373102067,17360,ns,AMD EPYC 9354 32-Core Processor,Memory allocation
+200457945058810,571956743,ns,AMD EPYC 9354 32-Core Processor,Queue creation
+200458940879950,995821140,ns,AMD EPYC 9354 32-Core Processor,Integration
+200459329758480,388878530,ns,AMD EPYC 9354 32-Core Processor,DONE
+200459329758480,1956673773,ns,AMD EPYC 9354 32-Core Processor,TOTAL
+</pre></div>
 </div>
 <p>The total wall time for this run was about 1.96 seconds, including the overhead for preparing the task queue on the host CPU.
 This corresponds to a speedup of about 165 compared to sequential execution or a speedup of about 17 compared to execution on the GPU, possibly because of the better support for 64-bit floating point arithmetic on the CPU.</p>
 </section>
 </section>
 <section id="observed-scaling">
-<h2>Observed scaling<a class="headerlink" href="#observed-scaling" title="Link to this heading" x-intersect.margin.0%.0%.-70%.0%="activeSection = '#observed-scaling'">¶</a></h2>
+<h2>Observed scaling<a class="headerlink" href="#observed-scaling" title="Link to this heading">#</a></h2>
 <p>In this section, we’ll share our high-level observations of scaling in terms of the total workload (number of trapezoids) n and the grain size (number of inner, always sequential trapezoids) g, for our three execution modes:</p>
 <ul class="simple">
 <li><p>sequential execution</p></li>
@@ -249,51 +475,130 @@ This corresponds to a speedup of about 165 compared to sequential execution or a
 The x-axis shows grain size, and the y-axis shows wall time in seconds.
 Axis ranges and series colors are consistent across charts, thereby allowing a direct comparison of measurements for a given workload and grain size.</p>
 <figure class="align-default">
-<img alt="../_images/walltime-seq.png" src="../_images/walltime-seq.png"/>
+<img alt="../_images/walltime-seq.png" src="../_images/walltime-seq.png" />
 </figure>
 <p>As expected, for sequential execution, wall time is proportional to total workload and independent of grain size.
 (We discontinued the experiment for the highest workload only to save some time.)</p>
 <figure class="align-default">
-<img alt="../_images/walltime-gpu.png" src="../_images/walltime-gpu.png"/>
+<img alt="../_images/walltime-gpu.png" src="../_images/walltime-gpu.png" />
 </figure>
 <p>For parallel execution on the GPU, we are achieving a speedup of about 10 (one full order of magnitude).
 Otherwise, wall time is still proportional to total workload and mostly independent of grain size; excessive grain size, however, appears to overload GPU cores and can even result in a slowdown relative to sequential execution.
 In this and the next chart, the missing data points for smaller grain sizes are caused by the resulting range of the <code class="docutils literal notranslate"><span class="pre">parallel_for</span></code> becoming larger than <code class="docutils literal notranslate"><span class="pre">INT_MAX</span></code>.</p>
 <figure class="align-default">
-<img alt="../_images/walltime-cpu.png" src="../_images/walltime-cpu.png"/>
+<img alt="../_images/walltime-cpu.png" src="../_images/walltime-cpu.png" />
 </figure>
 <p>For parallel execution on the CPU, we are achieving of almost three orders of magnitude relative to sequential execution, and almost two orders of magnitude relative to parallel execution on the GPU.
 Otherwise, wall time proportional (slightly sublinear) to total workload and mostly independent of grain size, except for a certain overhead for small grain sizes that put an insufficient load on each processor core.</p>
 <p>In addition, our raw performance data are <a class="reference external" href="https://docs.google.com/spreadsheets/d/1NUD_yqfwgUr9XYucRgMykKDrgUAETmvC4mzOMVDxDZY">available in this spreadsheet</a>.</p>
 </section>
 </section>
-</div></div><aside class="hidden text-sm xl:block" id="right-sidebar">
-<div class="sticky top-16 -mt-10 max-h-[calc(100vh-5rem)] overflow-y-auto pt-6 space-y-2"><p class="font-medium">On this page</p>
-<ul>
-<li><a :data-current="activeSection === '#measuring-time-performance'" class="reference internal" href="#measuring-time-performance">Measuring time performance</a></li>
-<li><a :data-current="activeSection === '#how-to-achieve-speedup'" class="reference internal" href="#how-to-achieve-speedup">How to achieve speedup</a><ul>
-<li><a :data-current="activeSection === '#sequential-execution'" class="reference internal" href="#sequential-execution">Sequential execution</a></li>
-<li><a :data-current="activeSection === '#parallel-execution-on-an-accelerator'" class="reference internal" href="#parallel-execution-on-an-accelerator">Parallel execution on an accelerator</a></li>
-<li><a :data-current="activeSection === '#parallel-execution-on-a-multicore-cpu'" class="reference internal" href="#parallel-execution-on-a-multicore-cpu">Parallel execution on a multicore CPU</a></li>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../20-quant-finance/qfi.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Quantitative Finance</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../80-running/running.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Compiling and Running oneAPI programs</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#measuring-time-performance">Measuring time performance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-achieve-speedup">How to achieve speedup</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sequential-execution">Sequential execution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parallel-execution-on-an-accelerator">Parallel execution on an accelerator</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parallel-execution-on-a-multicore-cpu">Parallel execution on a multicore CPU</a></li>
 </ul>
 </li>
-<li><a :data-current="activeSection === '#observed-scaling'" class="reference internal" href="#observed-scaling">Observed scaling</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#observed-scaling">Observed scaling</a></li>
 </ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Author name not set
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023-Present, George K. Thiruvathukal and Konstantin Läufer.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
 </div>
-</aside>
-</main>
-</div>
-</div><footer class="py-6 border-t border-border md:py-0">
-<div class="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
-<div class="flex flex-col items-center gap-4 px-8 md:flex-row md:gap-2 md:px-0">
-<p class="text-sm leading-loose text-center text-muted-foreground md:text-left">© 2023-Present, George K. Thiruvathukal and Konstantin Läufer Built with <a class="font-medium underline underline-offset-4" href="https://www.sphinx-doc.org" rel="noreferrer">Sphinx 8.2.3</a></p>
-</div>
-</div>
-</footer>
-</div>
-<script src="../_static/documentation_options.js?v=ff44e7b3"></script>
-<script src="../_static/doctools.js?v=9bcbadda"></script>
-<script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-<script defer="defer" src="../_static/theme.js?v=073f68d9"></script>
-</body>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
 </html>
